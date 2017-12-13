@@ -32,7 +32,7 @@ typedef void(^XMPPManagerLoginBlock) (id response, LTError *error);
 //@property (nonatomic, strong) NSMutableDictionary *rosterPresence;
 //@property (nonatomic, strong) NSMutableDictionary *rosterHeadPicture;
 //@property (nonatomic, strong)XMPPvCardTempModule *vCard;//电子名片
-//@property (nonatomic, strong)XMPPRosterCoreDataStorage *xmppRosterCoreDataStorage;//花名册数据存储
+@property (nonatomic, strong)XMPPRosterCoreDataStorage *xmppRosterCoreDataStorage;//花名册数据存储
 //@property (nonatomic, strong)id<XMPPServerDelegate> delegate;
 //@property (nonatomic, strong)id<XMPPMessageReceiverDelegate> msgReceiverdelegate;
 //@property (nonatomic, strong)id<XMPPManagerReconnetDelegate> xmppManagerReconnetDelegate;
@@ -66,24 +66,24 @@ typedef void(^XMPPManagerLoginBlock) (id response, LTError *error);
 
 
 
-//切换在线状态
-- (void)online;
-//切换忙碌状态
-//- (void)busy;
-//驻留，进入后台
-- (void)reside;
-//注销，退出
-- (void)offline;
-//清理（退出）
-- (void)clear;
-//获取个人消息
-- (void)getPersonJid:(NSString *)personJid;
-//获取个人消息
-- (void)getGroupMemberJid:(NSString *)groupMemberJid;
-//上传头像
-- (void)uploadHeadImageByJid:(NSString *)myJid withPhotoHash:(NSString *)photoHash;
-//获取服务器当前时间时间戳
-- (long long)getServerCurrentTimestamp;
+////切换在线状态
+//- (void)online;
+////切换忙碌状态
+////- (void)busy;
+////驻留，进入后台
+//- (void)reside;
+////注销，退出
+//- (void)offline;
+////清理（退出）
+//- (void)clear;
+////获取个人消息
+//- (void)getPersonJid:(NSString *)personJid;
+////获取个人消息
+//- (void)getGroupMemberJid:(NSString *)groupMemberJid;
+////上传头像
+//- (void)uploadHeadImageByJid:(NSString *)myJid withPhotoHash:(NSString *)photoHash;
+////获取服务器当前时间时间戳
+//- (long long)getServerCurrentTimestamp;
 
 
 

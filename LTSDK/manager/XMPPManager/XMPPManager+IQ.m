@@ -28,10 +28,10 @@
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq
 {
     /**用户名或密码输入有误**/
-    BOOL isIqError = [[[iq attributeForName:kStringXMPPIQType] stringValue] isEqualToString:kStringXMPPIQTypeError];
-    if ( isIqError ) {
-        [self xmppIqLoginCheck:iq];
-    }
+//    BOOL isIqError = [[[iq attributeForName:kStringXMPPIQType] stringValue] isEqualToString:kStringXMPPIQTypeError];
+//    if ( isIqError ) {
+//        [self xmppIqLoginCheck:iq];
+//    }
 
     // 服务器时间
 //    NSXMLElement *query = [iq elementForName:@"query" xmlns:@"jabber:iq:time"];
@@ -599,6 +599,7 @@
 
 
 
+/*
 
 #pragma mark -================= Private
 // 登录iq检测
@@ -642,7 +643,7 @@
 }
 
 
-
+*/
 
 
 @end

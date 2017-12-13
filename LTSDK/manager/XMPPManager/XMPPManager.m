@@ -30,9 +30,9 @@
 
 @interface XMPPManager () <XMPPStreamDelegate>
 {
-//    XMPPRoster *xmppRoster;
-//    XMPPReconnect *xmppReconnet;
-//    XMPPAutoPing *_xmppAutoPing;
+    XMPPRoster *xmppRoster;
+    XMPPReconnect *xmppReconnet;
+    XMPPAutoPing *_xmppAutoPing;
 //    CompleteBlock _completeBlock;
 //    BOOL _isRegister;
     BOOL _enableLDAP;   // 是否需要LDAP校验
@@ -56,7 +56,7 @@
     static XMPPManager *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[self alloc] init];
+        instance = [[XMPPManager alloc] init];
     });
     return instance;
 }
@@ -81,19 +81,19 @@
         [_xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
 
         // 2.初始化XMPP花名册
-//        _xmppRosterCoreDataStorage = [[XMPPRosterCoreDataStorage alloc] init];
-//        xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:_xmppRosterCoreDataStorage];
-//        [xmppRoster activate:_xmppStream];
+        _xmppRosterCoreDataStorage = [[XMPPRosterCoreDataStorage alloc] init];
+        xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:_xmppRosterCoreDataStorage];
+        [xmppRoster activate:_xmppStream];
 //
 //        // 3.断线自动重连
-//        xmppReconnet = [[XMPPReconnect alloc] init];
-//        [xmppReconnet activate:_xmppStream]; // 激活重连机制
+        xmppReconnet = [[XMPPReconnect alloc] init];
+        [xmppReconnet activate:_xmppStream]; // 激活重连机制
 
         //(1)心跳监听类
-//        _xmppAutoPing = [[XMPPAutoPing alloc] init];
-//        _xmppAutoPing.pingInterval = 20.f; // 心跳包间隔
-//        [_xmppAutoPing activate:_xmppStream];
-//        [_xmppAutoPing addDelegate:self delegateQueue:dispatch_get_main_queue()];
+        _xmppAutoPing = [[XMPPAutoPing alloc] init];
+        _xmppAutoPing.pingInterval = 20.f; // 心跳包间隔
+        [_xmppAutoPing activate:_xmppStream];
+        [_xmppAutoPing addDelegate:self delegateQueue:dispatch_get_main_queue()];
 
         [_xmppStream setKeepAliveInterval:45-2];  //心跳包时间
         [_xmppStream registerCustomElementNames:[NSSet setWithObject:@"extmsg"]];  // 注册自定义消息
@@ -165,7 +165,7 @@
     if ( [sender.myJID.domain isEqualToString:@"auth-server"] ) {
         [self sendAuthIqWithUserName:_username
                             password:_password
-                            serverIP:sender.hostName
+                            serverIP:sender.hostName  /**带有resource**/
                           enableLDAP:_enableLDAP];
     }else {
         //[_xmppStream authenticateWithPassword:_userModel.password error:nil];

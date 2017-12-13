@@ -13,7 +13,8 @@
 //#import "SoapRequest.h"
 #import "Encrypt_Decipher.h"
 //#import "UserManager.h"
-#import "XMPPManager.h"
+//#import "XMPPManager.h"
+#import "LTXMPPManager.h"
 //#import "XMPPManager+IQ.h"
 //#import "XMPPManager+Presence.h"
 //#import "OrgManager.h"
@@ -130,6 +131,14 @@ static LoginManager *helper = nil;
     BOOL enableLDAP = loginType == LoginType_LDAP;
     NSString *ip = _imServerIp ? _imServerIp :_serverIP;
     
+    [LTXMPPManager.share loginWithaIP:_serverIP
+                                 port:_port
+                             username:_username
+                             password:_password
+                           enableLDAP:NO
+                            completed:^(id response, LTError *error) {
+                                
+                            }];
     
 //    [XMPPManager.share loginWithaIP:_serverIP
 //                               port:_port
@@ -138,15 +147,15 @@ static LoginManager *helper = nil;
 //                         enableLDAP:NO
 //                          completed:^(id response, LTError *error) {
 //
-//                              if(error)
-//                              {
-//                                  if(_loginCompleteHandler){
-//                                      _loginCompleteHandler(error);
-//                                  }
-//                              }else{
-//
-//
-//                              }
+////                              if(error)
+////                              {
+////                                  if(_loginCompleteHandler){
+////                                      _loginCompleteHandler(error);
+////                                  }
+////                              }else{
+////
+////
+////                              }
 //                          }];
     
                               
