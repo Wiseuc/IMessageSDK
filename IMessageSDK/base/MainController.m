@@ -10,6 +10,9 @@
 #import "GuideController.h"
 #import "TabbarController.h"
 #import "LoginController.h"
+#import "LTSDKFull.h"
+#import "AppUtility.h"
+#import "UIViewController+child.h"
 
 
 @interface MainController ()
@@ -32,10 +35,38 @@
     self.tabBarController = [[TabbarController alloc] init];
     
     //是否首次登录
-    
-    
-    
-    
+    BOOL ret = [AppUtility queryIsFirstLaunching];
+    if (ret)
+    {
+        __weak typeof(self) weakself = self;
+        [self showGuideController];
+        [self.guideController setEnterBlock:^(BOOL ret) {
+            if (ret) {
+                [AppUtility updateIsFirstLaunching:NO];
+                [weakself showLoginController];
+            }
+        }];
+        
+    }else{
+        [self showLoginController];
+    }
 }
+
+
+- (void)showLoginController {
+    [self jianghai_removeAllChildController];
+    [self jianghai_addChildController:self.loginController];
+}
+- (void)showGuideController {
+    [self jianghai_removeAllChildController];
+    [self jianghai_addChildController:self.guideController];
+}
+- (void)showTabBarController {
+    [self jianghai_removeAllChildController];
+    [self jianghai_addChildController:self.tabBarController];
+}
+
+
+
 
 @end

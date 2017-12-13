@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "MainController.h"
+
 
 
 @implementation AppDelegate
@@ -17,8 +17,8 @@
     // Override point for customization after application launch.
     
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    MainController *mainvc = [[MainController alloc] init];
-    self.window.rootViewController = mainvc;
+    self.mainvc = [[MainController alloc] init];
+    self.window.rootViewController = self.mainvc;
     [self.window makeKeyAndVisible];
     
     return YES;

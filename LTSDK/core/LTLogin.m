@@ -70,12 +70,32 @@
     }
     
     __weak typeof(self) weakself = self;
-    [[LoginManager shareHelper] loginWithServerIP:aIP
-                                             port:aPort
-                                         username:aUsername
-                                         password:aPassword
-                                  completeHandler:^(LTError *error) {
-                                      if (error)
+//    [[LoginManager shareHelper] loginWithServerIP:aIP
+//                                             port:aPort
+//                                         username:aUsername
+//                                         password:aPassword
+//                                  completeHandler:^(LTError *error) {
+//                                      if (error)
+//                                      {
+//                                          _loginBlock(error);
+//                                          [weakself updateLoginState:NO];
+//                                      }else {
+//                                          _loginBlock(nil);
+//                                          [weakself loginSuccessAction];
+//                                          [weakself updateLoginState:YES];
+//                                          [weakself updateLastLoginUserWithUsername:aUsername
+//                                                                           password:aPassword
+//                                                                                 ip:aIP
+//                                                                               port:aPort];
+//                                      }
+//                                 }];
+    
+    [LoginManager.shareHelper loginWithServerIP:aIP
+                                           port:aPort
+                                       username:aUsername
+                                       password:aPassword
+                                completeHandler:^(LTError *error) {
+                                    if (error)
                                       {
                                           _loginBlock(error);
                                           [weakself updateLoginState:NO];
@@ -88,8 +108,9 @@
                                                                                  ip:aIP
                                                                                port:aPort];
                                       }
-                                 }];
-    
+                                    
+                                    
+                                }];
     
 }
 

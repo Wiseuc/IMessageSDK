@@ -14,6 +14,11 @@ typedef void(^AppManagerDownloadINFBlock)(NSDictionary *infDict, LTError *error)
 
 
 @interface AppManager : NSObject
+@property (nonatomic, strong) AppManagerDownloadINFBlock downloadINFBlock;
+
+
++ (instancetype)share;
+
 #pragma mark - 获取本地 IP 地址
 + (NSString *)deviceIPAdress;
 #pragma mark - 获取应用版本
@@ -42,7 +47,7 @@ typedef void(^AppManagerDownloadINFBlock)(NSDictionary *infDict, LTError *error)
 //文件大小
 + (long long)fileSizeAtPath:(NSString *)filePath;
 // 下载 IMServerCfg 配置文件
-+ (void)downloadIMServerCfgWithServerIP:(NSString *)ServerIP
+- (void)downloadIMServerCfgWithServerIP:(NSString *)ServerIP
                                complete:(AppManagerDownloadINFBlock)downloadINFBlock;
 //解析 ini 文件
 + (NSDictionary *)parseIniFile:(NSString *)iniFilePath

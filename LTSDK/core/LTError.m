@@ -17,10 +17,10 @@
     return self;
 }
 
-//+ (instancetype)errorWithDescription:(NSString *)aDescription code:(LTErrorCode)aCode
-//{
-//    return [[self alloc] initWithDescription:aDescription code:aCode];
-//}
++ (instancetype)errorWithDescription:(NSString *)aDescription code:(LTErrorCode)aCode
+{
+    return [[self alloc] initWithDescription:aDescription code:aCode];
+}
 
 + (NSString *)errorDescriptionForErrorCode:(LTErrorCode)aCode
 {

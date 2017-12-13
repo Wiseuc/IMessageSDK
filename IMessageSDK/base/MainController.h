@@ -10,4 +10,10 @@
 
 @interface MainController : UIViewController
 
+
+- (void)showLoginController;
+- (void)showGuideController;
+- (void)showTabBarController;
+    
+    
 @end

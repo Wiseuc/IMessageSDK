@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void (^GuideControllerEnterBlock)(BOOL ret);
+
+
+
+
 
 @interface GuideController : UIViewController
-
+@property (nonatomic, strong) GuideControllerEnterBlock enterBlock;
+-(void)setEnterBlock:(GuideControllerEnterBlock)enterBlock;
 @end

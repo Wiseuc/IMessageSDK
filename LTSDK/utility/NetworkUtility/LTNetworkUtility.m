@@ -51,6 +51,7 @@
     
     @try {
         phot = gethostbyname(hostN);
+        
         if ( !phot ) {
             return nil;
         }

@@ -13,13 +13,23 @@
 #include <arpa/inet.h>
 #import "LTHttpTool.h"
 //#import "UserManager.h"
-#import "LTIniHelper.h"
+//#import "LTIniHelper.h"
 #import "LTNetworkUtility.h"
 #import "LT_Macros.h"
 
 
 
 @implementation AppManager
+
++ (instancetype)share {
+    static dispatch_once_t onceToken;
+    static AppManager *helper = nil;
+    dispatch_once(&onceToken, ^{
+        helper = [[AppManager alloc] init];
+    });
+    return helper;
+}
+
 #pragma mark - public
 + (NSString *)deviceIPAdress {
     NSString *address = @"an error occurred when obtaining ip address";
@@ -141,15 +151,15 @@
  **/
 
 
-+(void)downloadIMServerCfgWithServerIP:(NSString *)ServerIP
-                              complete:(AppManagerDownloadINFBlock)downloadINFBlock {
+- (void)downloadIMServerCfgWithServerIP:(NSString *)ServerIP
+                               complete:(AppManagerDownloadINFBlock)downloadINFBlock {
+    _downloadINFBlock = downloadINFBlock;
     
     // 外网登录配置文件地址
     // 内网登录配置文件地址
     NSString *extraIp = [NSString stringWithFormat:@"http://%@:14132/update/IMServerCfgWlan.inf",ServerIP];
     NSString *innerIp = [NSString stringWithFormat:@"http://%@:14132/update/IMServerCfg.inf",ServerIP];
     NSString *savePath = [kFtpConfigFile stringByAppendingPathComponent:@"IMServerCfg.inf"];
-    
 
     NSString *ftpCfgFilePath = nil;
     JHNetworkType networkType = [NetworkUtility checkIpValid:ServerIP];
@@ -158,7 +168,8 @@
         {
             NSLog(@"网络环境：未知");
             LTError *error = [LTError errorWithDescription:@"网络环境：未知" code:(LTErrorNetworkUnknow)];
-            downloadINFBlock(nil,error);
+            _downloadINFBlock(nil,error);
+            
         }
             break;
             
@@ -178,26 +189,26 @@
     }
     
     
-    
-        HttpTool *httpTool = [[HttpTool alloc] init];
-        [[NSFileManager defaultManager] removeItemAtPath:savePath error:nil];
-        [httpTool downLoadFromURL:[NSURL URLWithString:ftpCfgFilePath]
-                         savePath:savePath
-                    progressBlock:nil
-                       completion:^(id data, NSError *error) {
-                           if ( data ) {
-                               /// 解析INF文件
-                               NSDictionary *IMServerCfgDict = [self parseIniFile:savePath pragram:nil];
-                               if (IMServerCfgDict != nil) {
-                                   NSLog(@"解析INF文件===%@",IMServerCfgDict);
-                                   //TempBlock(IMServerCfgDict);
-                                   return;
-                               }
-                           } else {
-                               
-                           }
-                       }];
-    
+//
+//        HttpTool *httpTool = [[HttpTool alloc] init];
+//        [[NSFileManager defaultManager] removeItemAtPath:savePath error:nil];
+//        [httpTool downLoadFromURL:[NSURL URLWithString:ftpCfgFilePath]
+//                         savePath:savePath
+//                    progressBlock:nil
+//                       completion:^(id data, NSError *error) {
+//                           if ( data ) {
+//                               /// 解析INF文件
+//                               NSDictionary *IMServerCfgDict = [self parseIniFile:savePath pragram:nil];
+//                               if (IMServerCfgDict != nil) {
+//                                   NSLog(@"解析INF文件===%@",IMServerCfgDict);
+//                                   _downloadINFBlock(IMServerCfgDict,nil);
+//                                   return;
+//                               }
+//                           } else {
+//
+//                           }
+//                       }];
+//
     
     
 }
@@ -205,9 +216,9 @@
 
 
 
-+ (NSDictionary *)parseIniFile:(NSString *)iniFilePath pragram:(NSDictionary *)pragram {
-    return [IniHelper parseIniFile:iniFilePath pragram:pragram];
-}
+//- (NSDictionary *)parseIniFile:(NSString *)iniFilePath pragram:(NSDictionary *)pragram {
+//    return [IniHelper parseIniFile:iniFilePath pragram:pragram];
+//}
 + (long long)fileSizeAtPath:(NSString *)filePath{
     NSFileManager* manager = [NSFileManager defaultManager];
     if ([manager fileExistsAtPath:filePath]){

@@ -8,11 +8,12 @@
 
 #import "LoginManager.h"
 #import "AppManager.h"
-//#import "IniHelper.h"
+#import "INFManager.h"
+#import "LTIniHelper.h"
 //#import "SoapRequest.h"
-//#import "Encrypt_Decipher.h"
+#import "Encrypt_Decipher.h"
 //#import "UserManager.h"
-//#import "XMPPManager.h"
+#import "XMPPManager.h"
 //#import "XMPPManager+IQ.h"
 //#import "XMPPManager+Presence.h"
 //#import "OrgManager.h"
@@ -79,138 +80,121 @@ static LoginManager *helper = nil;
                                     repeats:NO];
     
     
-    /// 下载inf配置文件
-//    [AppManager downloadIMServerCfgWithServerIP:serverIP
-//                                       complete:^(NSDictionary *IMServerCfgDict) {
-//                                             if ( !IMServerCfgDict ) {
-//                                                 if ( _loginCompleteHandler ) {
-//                                                     LTError *error =
-//                                                     [LTError errorWithDescription:@"INF文件下载失败" code:(LTErrorLogin_InfDownloadFailure)];
-//                                                     _loginCompleteHandler(error);
-//                                                 }
-//                                                 [[LoginManager shareHelper].loginTimeoutTimer invalidate];
-//                                                 [LoginManager shareHelper].loginTimeoutTimer = nil;
-//                                                 return;
-//                                             }
-//
-//                                             BOOL LDAPEnable = [IMServerCfgDict[kLDAPAuthEnable] boolValue];
-//                                             BOOL MD5Enable  = [IMServerCfgDict[kMD5Enable] boolValue];
-//                                             _imServerIp = IMServerCfgDict[@"ACCESSAuthServer1"];
-//
-//                                             LoginType loginType = LoginType_Normal;
-//                                             if ( LDAPEnable ) {
-//                                                 loginType = LoginType_LDAP;
-//                                             }else if ( MD5Enable ) {
-//                                                 loginType = LoginType_MD5;
-//                                             }
-//                                             [self loginByLoginType:loginType];
-//                                         }];
+    [INFManager.share downloadINFWithIP:serverIP
+                              completed:^(NSDictionary *infDict, LTError *error) {
+                                  if (error)
+                                  {
+                                      _loginCompleteHandler(error);
+                                  }else{
+                                       BOOL LDAPEnable = [infDict[kLDAPAuthEnable] boolValue];
+                                       BOOL MD5Enable  = [infDict[kMD5Enable] boolValue];
+
+                                       LoginType loginType = LoginType_Normal;
+                                       if ( LDAPEnable ) {
+                                           loginType = LoginType_LDAP;
+                                       }else if ( MD5Enable ) {
+                                           loginType = LoginType_MD5;
+                                       }
+                                       [self loginByLoginType:loginType];
+                                  }
+                              }];
 }
 
 - (void)loginByLoginType:(LoginType)loginType {
-//    NSString *password = [NSString stringWithString:_password];
-//
-//    switch ( loginType ) {
-//        case LoginType_Normal: {
-//            [self loginWithPassword:password withLoginType:LoginType_Normal];
-//        }
-//            break;
-//
-//        case LoginType_MD5: {
-//            [self loginWithPassword:[password md5] withLoginType:LoginType_MD5];
-//        }
-//            break;
-//
-//        case LoginType_LDAP: {
-//            NSString *serverIP = _serverIP;
-//            NSString *username = _username;
-//            NSString *key = [[NSString stringWithFormat:@"wise%@%@",username,password] md5];
-//
-//            NSDictionary *dict = @{@"user":@{@"ticketMode":@"1"},
-//                                   @"data":@{@"pwd":password,
-//                                             @"key":key,//@"2493e89e56596d9ad82f32876c014817",
-//                                             @"user":username}};
-//            // soap请求操作方法
-//            NSString *opString = @"checkLdapUser";
-//            NSArray *operateArray = @[@"faces",@"method",opString,@"param"];
-//            // url
-//            NSString *urlString = [NSString stringWithFormat:@"http://%@:14132/httpface/index?wsdl",serverIP];
-//            // soap请求类型
-//            NSString *soapType = @"op";
-//            SoapRequest *soapReq = [[SoapRequest alloc] init];
-//            [soapReq soapRequestByURL:urlString params:dict operate:operateArray soapType:soapType success:^(id model) {
-//                if (model) {
-//                    [self loginWithPassword:password withLoginType:LoginType_LDAP];
-//                }
-//            } failed:^(id error) {
-//                ;
-//            }];
-//        }
-//            break;
-//
-//        default:
-//            break;
-//    }
+    NSString *password = [NSString stringWithString:_password];
+
+    switch ( loginType ) {
+        case LoginType_Normal: {
+            [self loginWithPassword:password withLoginType:LoginType_Normal];
+        }
+            break;
+
+        case LoginType_MD5: {
+            [self loginWithPassword:[password md5] withLoginType:LoginType_MD5];
+        }
+            break;
+
+        case LoginType_LDAP: {
+            
+        }
+            break;
+
+        default:
+            break;
+    }
 }
 
 
 - (void)loginWithPassword:(NSString *)password withLoginType:(LoginType)loginType {
     
-//    BOOL enableLDAP = loginType == LoginType_LDAP;
-//    NSString *ip = _imServerIp ? _imServerIp :_serverIP;
-//    //异步登陆账号
-//    [[XMPPManager shareXMPPManager] authServerFromServerIP:ip
-//                                                      port:_port
-//                                                  username:_username
-//                                                  password:password
-//                                                enableLDAP:enableLDAP
-//                                                  complete:^(id info, NSError *error) {
+    BOOL enableLDAP = loginType == LoginType_LDAP;
+    NSString *ip = _imServerIp ? _imServerIp :_serverIP;
+    
+    
+//    [XMPPManager.share loginWithaIP:_serverIP
+//                               port:_port
+//                           username:_username
+//                           password:_password
+//                         enableLDAP:NO
+//                          completed:^(id response, LTError *error) {
 //
-//                                                      if ( info ) {
-//
-//                                                          /**保存用户信息*用于回填登录界面用户名密码框**/
-//                                                          [LoginManager saveLastLoginUsername:_username
-//                                                                                     password:_password
-//                                                                                     serverIP:_serverIP
-//                                                                                         port:_port];
-//                                                          UserModel *userModel = (UserModel *)info;
-//                                                          [UserManager shareInstance].noDisturbingForSound = YES;
-//                                                          [UserManager shareInstance].currentUser = [[IUserInfo alloc] init];
-//
-//                                                          /**除掉 ‘/IphoneIM’**/
-//                                                          NSString *jid = [[[NSString stringWithFormat:@"%@",
-//                                                                             [XMPPManager shareXMPPManager].xmppStream.myJID] componentsSeparatedByString:@"/"] objectAtIndex:0];
-//                                                          NSDictionary *dict = @{
-//                                                                                @"jid":jid,
-//                                                                                @"username":_username,
-//                                                                                @"loginType":@(loginType),
-//                                                                                @"password":_password,
-//                                                                                @"serverIP":_serverIP,
-//                                                                                @"serverPort":_port,          //LoginManager的数据
-//                                                                                @"pid":userModel.PID,
-//                                                                                @"AccoutID":userModel.AccountID,
-//                                                                                @"orgName":userModel.AccountName
-//                                                                                };
-//
-//                                                          /**实际上dict是 LTUser 和 LTLogin 的合集**/
-//                                                          /**UserManager shareInstance].currentUser 则是包括组织架构中的信息，用LTOrg替代**/
+//                              if(error)
+//                              {
+//                                  if(_loginCompleteHandler){
+//                                      _loginCompleteHandler(error);
+//                                  }
+//                              }else{
 //
 //
-//                                                          /**储存用户信息: 到UserManager**/
-//                                                          [[UserManager shareInstance].currentUser setValuesForKeysWithDictionary:dict];
-//
-//                                                          /**上线**/
-//                                                          NSString *presenceJID =
-//                                                          [NSString stringWithFormat:@"%@/IphoneIM",[UserManager shareInstance].currentUser.jid];
-//                                                          [XMPPManager jid:presenceJID changePresenceStatuTo:PresenceType_Online];
-//
-//                                                          [self loginSuccess];
-//                                                          [self downloadOrgFileAndReloadData];
-//                                                          [XMPPManager requestHeaderIconURLWithJID:[UserManager shareInstance].currentUser.jid];
-//                                                      }else {
-//                                                          [self loginFailedByError:error];
-//                                                      }
-//                                                  }];
+//                              }
+//                          }];
+    
+                              
+                              //                              if ( info ) {
+                              //
+                              //                                /**保存用户信息*用于回填登录界面用户名密码框**/
+                              //                                [LoginManager saveLastLoginUsername:_username
+                              //                                                           password:_password
+                              //                                                           serverIP:_serverIP
+                              //                                                               port:_port];
+                              //                                UserModel *userModel = (UserModel *)info;
+                              //                                [UserManager shareInstance].noDisturbingForSound = YES;
+                              //                                [UserManager shareInstance].currentUser = [[IUserInfo alloc] init];
+                              //
+                              //                                /**除掉 ‘/IphoneIM’**/
+                              //                                NSString *jid = [[[NSString stringWithFormat:@"%@",
+                              //                                                   [XMPPManager shareXMPPManager].xmppStream.myJID] componentsSeparatedByString:@"/"] objectAtIndex:0];
+                              //                                NSDictionary *dict = @{
+                              //                                                      @"jid":jid,
+                              //                                                      @"username":_username,
+                              //                                                      @"loginType":@(loginType),
+                              //                                                      @"password":_password,
+                              //                                                      @"serverIP":_serverIP,
+                              //                                                      @"serverPort":_port,          //LoginManager的数据
+                              //                                                      @"pid":userModel.PID,
+                              //                                                      @"AccoutID":userModel.AccountID,
+                              //                                                      @"orgName":userModel.AccountName
+                              //                                                      };
+                              //
+                              //                                /**实际上dict是 LTUser 和 LTLogin 的合集**/
+                              //                                /**UserManager shareInstance].currentUser 则是包括组织架构中的信息，用LTOrg替代**/
+                              //
+                              //
+                              //                                /**储存用户信息: 到UserManager**/
+                              //                                [[UserManager shareInstance].currentUser setValuesForKeysWithDictionary:dict];
+                              //
+                              //                                /**上线**/
+                              //                                NSString *presenceJID =
+                              //                                [NSString stringWithFormat:@"%@/IphoneIM",[UserManager shareInstance].currentUser.jid];
+                              //                                [XMPPManager jid:presenceJID changePresenceStatuTo:PresenceType_Online];
+                              //
+                              //                                [self loginSuccess];
+                              //                                [self downloadOrgFileAndReloadData];
+                              //                                [XMPPManager requestHeaderIconURLWithJID:[UserManager shareInstance].currentUser.jid];
+                              //                            }else {
+                              //                                [self loginFailedByError:error];
+                              //                            }
+                              //                          }];
 }
 
 - (void)loginSuccess {
@@ -239,13 +223,11 @@ static LoginManager *helper = nil;
 
 /**登录超时**/
 - (void)loginTimeout {
-    if ( [LoginManager shareHelper].haveLogined && [LoginManager shareHelper].loginTimeoutTimer ) {
-        [[LoginManager shareHelper].loginTimeoutTimer invalidate];
-        [LoginManager shareHelper].loginTimeoutTimer = nil;
-        if ( _loginCompleteHandler ) {
-            LTError *err = [LTError errorWithDescription:@"登录超时" code:(LTErrorLogin_loginTimeOut)];
-            _loginCompleteHandler(err);
-        }
+    [[LoginManager shareHelper].loginTimeoutTimer invalidate];
+    [LoginManager shareHelper].loginTimeoutTimer = nil;
+    if ( _loginCompleteHandler ) {
+        LTError *err = [LTError errorWithDescription:@"登录超时" code:(LTErrorLogin_loginTimeOut)];
+        _loginCompleteHandler(err);
     }
 }
 

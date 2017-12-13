@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F91761B41FE0B3FA00906CBB /* AppUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = F91761B31FE0B3FA00906CBB /* AppUtility.m */; };
+		F91761BE1FE0D48000906CBB /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F91761B91FE0D48000906CBB /* SVIndefiniteAnimatedView.m */; };
+		F91761BF1FE0D48000906CBB /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F91761BB1FE0D48000906CBB /* SVProgressHUD.bundle */; };
+		F91761C01FE0D48000906CBB /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F91761BD1FE0D48000906CBB /* SVProgressHUD.m */; };
+		F91761C51FE0EB4200906CBB /* INFManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F91761C31FE0EB4200906CBB /* INFManager.h */; };
+		F91761C61FE0EB4200906CBB /* INFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F91761C41FE0EB4200906CBB /* INFManager.m */; };
 		F9194C781FDFD2C300CCFB32 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9194C771FDFD2C300CCFB32 /* AppDelegate.m */; };
 		F9194C7B1FDFD2C400CCFB32 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9194C7A1FDFD2C400CCFB32 /* ViewController.m */; };
 		F9194C7E1FDFD2C400CCFB32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9194C7C1FDFD2C400CCFB32 /* Main.storyboard */; };
@@ -21,7 +27,7 @@
 		F9194CC31FDFD94000CCFB32 /* GuideController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9194CC21FDFD94000CCFB32 /* GuideController.m */; };
 		F9194CC71FDFDA1600CCFB32 /* UIViewController+child.m in Sources */ = {isa = PBXBuildFile; fileRef = F9194CC61FDFDA1600CCFB32 /* UIViewController+child.m */; };
 		F9194CD01FDFDCE500CCFB32 /* LTSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = F9194CCF1FDFDCE500CCFB32 /* LTSDK.m */; };
-		F9194CD11FDFDCE500CCFB32 /* LTSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9194CCE1FDFDCE500CCFB32 /* LTSDK.h */; };
+		F9194CD11FDFDCE500CCFB32 /* LTSDK.h in Copy Files */ = {isa = PBXBuildFile; fileRef = F9194CCE1FDFDCE500CCFB32 /* LTSDK.h */; };
 		F9194EB01FDFE11C00CCFB32 /* LTSVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9194CDC1FDFE11B00CCFB32 /* LTSVIndefiniteAnimatedView.m */; };
 		F9194EB11FDFE11C00CCFB32 /* LTSVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F9194CDF1FDFE11B00CCFB32 /* LTSVProgressHUD.m */; };
 		F9194EB21FDFE11C00CCFB32 /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F9194CE51FDFE11B00CCFB32 /* CLIColor.m */; };
@@ -216,6 +222,13 @@
 		F9194F9C1FDFE1CB00CCFB32 /* LTLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = F9194F961FDFE1CA00CCFB32 /* LTLogin.m */; };
 		F9194F9D1FDFE1CB00CCFB32 /* LTError.m in Sources */ = {isa = PBXBuildFile; fileRef = F9194F971FDFE1CB00CCFB32 /* LTError.m */; };
 		F9194F9E1FDFE1CB00CCFB32 /* LTINF.m in Sources */ = {isa = PBXBuildFile; fileRef = F9194F9B1FDFE1CB00CCFB32 /* LTINF.m */; };
+		F97E33D91FE10423001CBFA8 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E33D81FE1039B001CBFA8 /* libstdc++.6.tbd */; };
+		F97E33DA1FE1042B001CBFA8 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E33D71FE1038B001CBFA8 /* libstdc++.tbd */; };
+		F97E33DB1FE1042E001CBFA8 /* libLTSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9194CCC1FDFDCE500CCFB32 /* libLTSDK.a */; };
+		F97E34091FE10920001CBFA8 /* XMPPManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F97E33F11FE10920001CBFA8 /* XMPPManager.h */; };
+		F97E340A1FE10920001CBFA8 /* XMPPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F97E33F21FE10920001CBFA8 /* XMPPManager.m */; };
+		F97E34191FE11A82001CBFA8 /* XMPPStream+secure.h in Headers */ = {isa = PBXBuildFile; fileRef = F97E34171FE11A81001CBFA8 /* XMPPStream+secure.h */; };
+		F97E341A1FE11A82001CBFA8 /* XMPPStream+secure.m in Sources */ = {isa = PBXBuildFile; fileRef = F97E34181FE11A81001CBFA8 /* XMPPStream+secure.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -236,19 +249,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		F9194CCA1FDFDCE500CCFB32 /* CopyFiles */ = {
+		F9194CCA1FDFDCE500CCFB32 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				F9194CD11FDFDCE500CCFB32 /* LTSDK.h in CopyFiles */,
+				F9194CD11FDFDCE500CCFB32 /* LTSDK.h in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F91761B21FE0B3FA00906CBB /* AppUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppUtility.h; sourceTree = "<group>"; };
+		F91761B31FE0B3FA00906CBB /* AppUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppUtility.m; sourceTree = "<group>"; };
+		F91761B61FE0BCEE00906CBB /* UIConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIConfig.h; sourceTree = "<group>"; };
+		F91761B81FE0D48000906CBB /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		F91761B91FE0D48000906CBB /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		F91761BA1FE0D48000906CBB /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		F91761BB1FE0D48000906CBB /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		F91761BC1FE0D48000906CBB /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		F91761BD1FE0D48000906CBB /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		F91761C31FE0EB4200906CBB /* INFManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INFManager.h; sourceTree = "<group>"; };
+		F91761C41FE0EB4200906CBB /* INFManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = INFManager.m; sourceTree = "<group>"; };
 		F9194C731FDFD2C300CCFB32 /* IMessageSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IMessageSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9194C761FDFD2C300CCFB32 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F9194C771FDFD2C300CCFB32 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -696,6 +721,12 @@
 		F9194F9A1FDFE1CB00CCFB32 /* LTLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTLogin.h; sourceTree = "<group>"; };
 		F9194F9B1FDFE1CB00CCFB32 /* LTINF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTINF.m; sourceTree = "<group>"; };
 		F9194F9F1FDFE29000CCFB32 /* LTSDKFull.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LTSDKFull.h; sourceTree = "<group>"; };
+		F97E33D71FE1038B001CBFA8 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		F97E33D81FE1039B001CBFA8 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
+		F97E33F11FE10920001CBFA8 /* XMPPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPManager.h; sourceTree = "<group>"; };
+		F97E33F21FE10920001CBFA8 /* XMPPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPManager.m; sourceTree = "<group>"; };
+		F97E34171FE11A81001CBFA8 /* XMPPStream+secure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XMPPStream+secure.h"; sourceTree = "<group>"; };
+		F97E34181FE11A81001CBFA8 /* XMPPStream+secure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XMPPStream+secure.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -703,6 +734,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F97E33DB1FE1042E001CBFA8 /* libLTSDK.a in Frameworks */,
+				F97E33DA1FE1042B001CBFA8 /* libstdc++.tbd in Frameworks */,
+				F97E33D91FE10423001CBFA8 /* libstdc++.6.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,6 +765,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F91761AF1FE0B2C100906CBB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F97E33D81FE1039B001CBFA8 /* libstdc++.6.tbd */,
+				F97E33D71FE1038B001CBFA8 /* libstdc++.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F91761B11FE0B3E400906CBB /* AppUtility */ = {
+			isa = PBXGroup;
+			children = (
+				F91761B21FE0B3FA00906CBB /* AppUtility.h */,
+				F91761B31FE0B3FA00906CBB /* AppUtility.m */,
+			);
+			path = AppUtility;
+			sourceTree = "<group>";
+		};
+		F91761B71FE0D48000906CBB /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				F91761B81FE0D48000906CBB /* SVIndefiniteAnimatedView.h */,
+				F91761B91FE0D48000906CBB /* SVIndefiniteAnimatedView.m */,
+				F91761BA1FE0D48000906CBB /* SVProgressHUD-Prefix.pch */,
+				F91761BB1FE0D48000906CBB /* SVProgressHUD.bundle */,
+				F91761BC1FE0D48000906CBB /* SVProgressHUD.h */,
+				F91761BD1FE0D48000906CBB /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		F91761C21FE0EB3500906CBB /* INFManager */ = {
+			isa = PBXGroup;
+			children = (
+				F91761C31FE0EB4200906CBB /* INFManager.h */,
+				F91761C41FE0EB4200906CBB /* INFManager.m */,
+			);
+			path = INFManager;
+			sourceTree = "<group>";
+		};
 		F9194C6A1FDFD2C300CCFB32 = {
 			isa = PBXGroup;
 			children = (
@@ -739,6 +813,7 @@
 				F9194C991FDFD2C400CCFB32 /* IMessageSDKUITests */,
 				F9194CCD1FDFDCE500CCFB32 /* LTSDK */,
 				F9194C741FDFD2C300CCFB32 /* Products */,
+				F91761AF1FE0B2C100906CBB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -818,6 +893,7 @@
 		F9194CAB1FDFD39400CCFB32 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				F91761B71FE0D48000906CBB /* SVProgressHUD */,
 			);
 			path = 3rd;
 			sourceTree = "<group>";
@@ -825,6 +901,7 @@
 		F9194CAC1FDFD39400CCFB32 /* utility */ = {
 			isa = PBXGroup;
 			children = (
+				F91761B11FE0B3E400906CBB /* AppUtility */,
 			);
 			path = utility;
 			sourceTree = "<group>";
@@ -853,6 +930,7 @@
 		F9194CAF1FDFD3E500CCFB32 /* config */ = {
 			isa = PBXGroup;
 			children = (
+				F91761B61FE0BCEE00906CBB /* UIConfig.h */,
 			);
 			path = config;
 			sourceTree = "<group>";
@@ -941,6 +1019,8 @@
 		F9194CD61FDFE0CE00CCFB32 /* manager */ = {
 			isa = PBXGroup;
 			children = (
+				F97E33DC1FE10920001CBFA8 /* XMPPManager */,
+				F91761C21FE0EB3500906CBB /* INFManager */,
 				F9194F8B1FDFE1AA00CCFB32 /* AppManager */,
 				F9194F8E1FDFE1AA00CCFB32 /* LoginManager */,
 			);
@@ -2128,7 +2208,31 @@
 			path = defines;
 			sourceTree = "<group>";
 		};
+		F97E33DC1FE10920001CBFA8 /* XMPPManager */ = {
+			isa = PBXGroup;
+			children = (
+				F97E34171FE11A81001CBFA8 /* XMPPStream+secure.h */,
+				F97E34181FE11A81001CBFA8 /* XMPPStream+secure.m */,
+				F97E33F11FE10920001CBFA8 /* XMPPManager.h */,
+				F97E33F21FE10920001CBFA8 /* XMPPManager.m */,
+			);
+			path = XMPPManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		F91761C11FE0DAD600906CBB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F97E34091FE10920001CBFA8 /* XMPPManager.h in Headers */,
+				F91761C51FE0EB4200906CBB /* INFManager.h in Headers */,
+				F97E34191FE11A82001CBFA8 /* XMPPStream+secure.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		F9194C721FDFD2C300CCFB32 /* IMessageSDK */ = {
@@ -2190,7 +2294,8 @@
 			buildPhases = (
 				F9194CC81FDFDCE500CCFB32 /* Sources */,
 				F9194CC91FDFDCE500CCFB32 /* Frameworks */,
-				F9194CCA1FDFDCE500CCFB32 /* CopyFiles */,
+				F9194CCA1FDFDCE500CCFB32 /* Copy Files */,
+				F91761C11FE0DAD600906CBB /* Headers */,
 			);
 			buildRules = (
 			);
@@ -2259,6 +2364,7 @@
 				F9194C831FDFD2C400CCFB32 /* LaunchScreen.storyboard in Resources */,
 				F9194C801FDFD2C400CCFB32 /* Assets.xcassets in Resources */,
 				F9194C7E1FDFD2C400CCFB32 /* Main.storyboard in Resources */,
+				F91761BF1FE0D48000906CBB /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2286,10 +2392,13 @@
 				F9194C7B1FDFD2C400CCFB32 /* ViewController.m in Sources */,
 				F9194CB91FDFD64D00CCFB32 /* TabbarController.m in Sources */,
 				F9194C861FDFD2C400CCFB32 /* main.m in Sources */,
+				F91761B41FE0B3FA00906CBB /* AppUtility.m in Sources */,
 				F9194CC31FDFD94000CCFB32 /* GuideController.m in Sources */,
+				F91761BE1FE0D48000906CBB /* SVIndefiniteAnimatedView.m in Sources */,
 				F9194CBC1FDFD72500CCFB32 /* MainController.m in Sources */,
 				F9194C781FDFD2C300CCFB32 /* AppDelegate.m in Sources */,
 				F9194CC01FDFD90600CCFB32 /* LoginController.m in Sources */,
+				F91761C01FE0D48000906CBB /* SVProgressHUD.m in Sources */,
 				F9194CC71FDFDA1600CCFB32 /* UIViewController+child.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2329,6 +2438,7 @@
 				F9194EDA1FDFE11C00CCFB32 /* XMPPFileTransfer.m in Sources */,
 				F9194EF51FDFE11C00CCFB32 /* XMPPIQ+LastActivity.m in Sources */,
 				F9194EE61FDFE11C00CCFB32 /* XMPPProcessOne.m in Sources */,
+				F97E341A1FE11A82001CBFA8 /* XMPPStream+secure.m in Sources */,
 				F9194EC31FDFE11C00CCFB32 /* DDXMLNode.m in Sources */,
 				F9194EE01FDFE11C00CCFB32 /* OMEMOKeyData.m in Sources */,
 				F9194EB41FDFE11C00CCFB32 /* DDASLLogCapture.m in Sources */,
@@ -2414,6 +2524,7 @@
 				F9194ED71FDFE11C00CCFB32 /* XMPPStream.m in Sources */,
 				F9194F491FDFE11C00CCFB32 /* XMPPRoomLight.xcdatamodel in Sources */,
 				F9194F741FDFE14100CCFB32 /* LTUploadFile2.m in Sources */,
+				F91761C61FE0EB4200906CBB /* INFManager.m in Sources */,
 				F9194F2E1FDFE11C00CCFB32 /* XMPPPresence+XEP_0172.m in Sources */,
 				F9194F1D1FDFE11C00CCFB32 /* XMPPMessage+XEP_0085.m in Sources */,
 				F9194F041FDFE11C00CCFB32 /* XMPPMUC.m in Sources */,
@@ -2482,6 +2593,7 @@
 				F9194EEB1FDFE11C00CCFB32 /* XMPPRosterCoreDataStorage.m in Sources */,
 				F9194F8A1FDFE18F00CCFB32 /* LTAFURLSessionManager.m in Sources */,
 				F9194F351FDFE11C00CCFB32 /* XMPPAutoPing.m in Sources */,
+				F97E340A1FE10920001CBFA8 /* XMPPManager.m in Sources */,
 				F9194F111FDFE11C00CCFB32 /* XMPPvCardTempModule.m in Sources */,
 				F9194EDC1FDFE11C00CCFB32 /* XMPPOutgoingFileTransfer.m in Sources */,
 				F9194F081FDFE11C00CCFB32 /* XMPPvCardCoreDataStorage.m in Sources */,
@@ -2657,8 +2769,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VG9DJHT235;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = IMessageSDK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lito.IMessageSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2672,8 +2786,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VG9DJHT235;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = IMessageSDK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lito.IMessageSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2753,6 +2869,7 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lxml2",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2775,6 +2892,7 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lxml2",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
