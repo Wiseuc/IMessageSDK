@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "XMPPMessage.h"
-
+void runCategoryForFramework17();
 
 @interface XMPPMessage (XEP_0085)
 

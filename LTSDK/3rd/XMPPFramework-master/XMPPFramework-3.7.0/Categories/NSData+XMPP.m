@@ -1,6 +1,6 @@
 #import "NSData+XMPP.h"
 #import <CommonCrypto/CommonDigest.h>
-
+void runCategoryForFramework6(){}
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
@@ -17,6 +17,7 @@ static char encodingTable[64] = {
 
 - (NSData *)xmpp_md5Digest
 {
+    
 	unsigned char result[CC_MD5_DIGEST_LENGTH];
     
     CC_MD5([self bytes], (CC_LONG)[self length], result);

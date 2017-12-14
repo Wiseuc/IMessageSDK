@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "XMPPIQ.h"
-
+void runCategoryForFramework13();
 #define XMLNS_PUBSUB                   @"http://jabber.org/protocol/pubsub"
 #define XMLNS_PUBSUB_OWNER             @"http://jabber.org/protocol/pubsub#owner"
 #define XMLNS_PUBSUB_EVENT             @"http://jabber.org/protocol/pubsub#event"

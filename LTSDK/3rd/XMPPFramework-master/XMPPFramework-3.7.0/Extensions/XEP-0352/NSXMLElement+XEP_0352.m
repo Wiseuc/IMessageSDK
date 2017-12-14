@@ -1,6 +1,6 @@
 
 #import "NSXMLElement+XEP_0352.h"
-
+void runCategoryForFramework30(){}
 #define XMLNS_XMPP_CLIENT_STATE_INDICATION @"urn:xmpp:csi:0"
 
 @implementation NSXMLElement (XEP0352)

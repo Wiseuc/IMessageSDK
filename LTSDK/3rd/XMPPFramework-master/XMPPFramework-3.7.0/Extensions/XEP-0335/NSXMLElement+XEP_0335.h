@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "KissXML.h"
-
+void runCategoryForFramework29();
 @interface NSXMLElement (XEP_0335)
 
 - (NSXMLElement *)JSONContainer;

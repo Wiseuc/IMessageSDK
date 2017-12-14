@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-
+void runCategoryForFramework5();
 @class DDXMLDocument;
 
 /**

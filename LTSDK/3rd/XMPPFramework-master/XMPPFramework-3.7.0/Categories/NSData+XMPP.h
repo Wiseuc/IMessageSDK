@@ -1,4 +1,6 @@
 #import <Foundation/Foundation.h>
+void runCategoryForFramework6();
+
 
 @interface NSData (XMPP)
 

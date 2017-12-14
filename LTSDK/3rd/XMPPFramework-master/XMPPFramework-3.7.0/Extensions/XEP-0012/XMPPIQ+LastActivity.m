@@ -6,7 +6,7 @@
 //
 
 #import "XMPPIQ+LastActivity.h"
-
+void runCategoryForFramework10(){}
 #import "XMPP.h"
 
 #if ! __has_feature(objc_arc)

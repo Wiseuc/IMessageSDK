@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
-
-
+#define TT_FIX_CATEGORY_BUG(name) @interfaceTT_FIX_CATEGORY_BUG_##name @end@implementatio TT_FIX_CATEGORY_BUG_##name @end
+void runCategoryForFramework32();
 @interface NSNumber (XMPP)
 
 + (NSNumber *)xmpp_numberWithPtr:(const void *)ptr;

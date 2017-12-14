@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "DDXMLElement.h"
 #import "DDXMLNode.h"
-
+void runCategoryForFramework3();
 /**
  * Welcome to KissXML.
  * 

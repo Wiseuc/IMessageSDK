@@ -32,6 +32,7 @@
     self.usernameTF.frame = CGRectMake(20, 200, kScreenWidth-40, 40);
     [self.view addSubview:self.usernameTF];
     self.usernameTF.placeholder = @"username";
+    self.usernameTF.text = @"江海";
     self.usernameTF.layer.borderWidth = 1.0;
     self.usernameTF.layer.borderColor =
     [[UIColor grayColor] colorWithAlphaComponent:0.8].CGColor;
@@ -42,6 +43,7 @@
     self.passwordTF.frame = CGRectMake(20, 250, kScreenWidth-40, 40);
     [self.view addSubview:self.passwordTF];
     self.passwordTF.placeholder = @"password";
+    self.passwordTF.text = @"666666";
     self.passwordTF.layer.borderWidth = 1.0;
     self.passwordTF.layer.borderColor =
     [[UIColor grayColor] colorWithAlphaComponent:0.8].CGColor;
@@ -55,8 +57,11 @@
     [self.loginBTN setTitle:@"login" forState:(UIControlStateNormal)];
     self.loginBTN.layer.cornerRadius = 20;
     self.loginBTN.layer.masksToBounds = YES;
-    [self.loginBTN setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-    [self.loginBTN addTarget:self action:@selector(buttonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.loginBTN setTitleColor:[UIColor whiteColor]
+                        forState:(UIControlStateNormal)];
+    [self.loginBTN addTarget:self
+                      action:@selector(buttonClick:)
+            forControlEvents:(UIControlEventTouchUpInside)];
 }
 /**键盘监听**/
 - (void)settingKeyBoardNotification

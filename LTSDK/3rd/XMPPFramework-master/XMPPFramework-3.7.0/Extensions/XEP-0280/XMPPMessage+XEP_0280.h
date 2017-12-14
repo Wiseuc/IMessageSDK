@@ -1,6 +1,6 @@
 #import "XMPPMessage.h"
 @class XMPPJID;
-
+void runCategoryForFramework24();
 @interface XMPPMessage (XEP_0280)
 
 - (NSXMLElement *)receivedMessageCarbon;

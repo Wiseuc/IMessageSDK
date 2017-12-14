@@ -1,5 +1,5 @@
 #import "XMPPIQ.h"
-
+void runCategoryForFramework14();
 @interface XMPPIQ (XEP_0066)
 
 + (XMPPIQ *)outOfBandDataRequestTo:(XMPPJID *)jid

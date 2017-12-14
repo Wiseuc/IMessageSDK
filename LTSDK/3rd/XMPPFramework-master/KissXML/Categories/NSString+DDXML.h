@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-
+void runCategoryForFramework2();
 // We redefine xmlChar to avoid a non-modular include
 typedef unsigned char xmlChar;
 

@@ -1,6 +1,6 @@
 #import "XMPPMessage+XEP_0085.h"
 #import "NSXMLElement+XMPP.h"
-
+void runCategoryForFramework17(){}
 
 static NSString *const xmlns_chatstates = @"http://jabber.org/protocol/chatstates";
 

@@ -1,6 +1,6 @@
 #import "XMPPPresence+XEP_0172.h"
 #import "NSXMLElement+XMPP.h"
-
+void runCategoryForFramework20(){}
 #define XMLNS_NICK @"http://jabber.org/protocol/nick"
 
 @implementation XMPPPresence (XEP_0172)

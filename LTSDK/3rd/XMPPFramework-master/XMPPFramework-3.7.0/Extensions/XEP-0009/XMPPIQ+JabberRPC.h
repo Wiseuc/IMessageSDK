@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 #import "XMPPIQ.h"
-
+void runCategoryForFramework8();
 
 @interface XMPPIQ(JabberRPC)
 

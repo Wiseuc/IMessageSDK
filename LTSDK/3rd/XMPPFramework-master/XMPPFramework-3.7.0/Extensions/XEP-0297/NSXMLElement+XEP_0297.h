@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 #import "KissXML.h"
-
+void runCategoryForFramework25();
 @class XMPPIQ;
 @class XMPPMessage;
 @class XMPPPresence;

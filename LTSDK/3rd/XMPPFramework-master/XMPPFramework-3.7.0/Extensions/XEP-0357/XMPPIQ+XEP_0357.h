@@ -6,6 +6,7 @@
 //
 
 #import "XMPPIQ.h"
+void runCategoryForFramework31();
 @class XMPPJID;
 
 /**

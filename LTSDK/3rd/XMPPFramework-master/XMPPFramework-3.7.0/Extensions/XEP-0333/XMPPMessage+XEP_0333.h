@@ -1,5 +1,5 @@
 #import "XMPPMessage.h"
-
+void runCategoryForFramework27();
 @interface XMPPMessage (XEP_0333)
 
 - (BOOL)hasChatMarker;

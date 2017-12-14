@@ -7,7 +7,7 @@
 //
 
 #import "XMPPMessage.h"
-
+void runCategoryForFramework28();
 typedef NS_ENUM(NSInteger, XMPPMessageStorage) {
     /** 
      Unknown storage hint. Attempting to add this is a no-op. 

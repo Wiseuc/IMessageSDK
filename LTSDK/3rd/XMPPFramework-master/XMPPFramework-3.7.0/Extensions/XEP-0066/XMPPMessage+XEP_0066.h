@@ -1,5 +1,5 @@
 #import "XMPPMessage.h"
-
+void runCategoryForFramework15();
 @interface XMPPMessage (XEP_0066)
 
 - (void)addOutOfBandURL:(NSURL *)URL desc:(NSString *)desc;

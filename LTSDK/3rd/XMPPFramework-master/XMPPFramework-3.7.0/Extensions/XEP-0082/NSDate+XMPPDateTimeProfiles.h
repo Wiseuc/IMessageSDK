@@ -9,7 +9,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+void runCategoryForFramework16();
 @interface NSDate(XMPPDateTimeProfiles)
 
 

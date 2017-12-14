@@ -6,7 +6,7 @@
 //
 
 #import "XMPPIQ.h"
-
+void runCategoryForFramework9();
 typedef enum {
     JabberRPCElementTypeArray,
     JabberRPCElementTypeDictionary,

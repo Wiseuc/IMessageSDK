@@ -95,11 +95,67 @@
         [_xmppAutoPing activate:_xmppStream];
         [_xmppAutoPing addDelegate:self delegateQueue:dispatch_get_main_queue()];
 
-        [_xmppStream setKeepAliveInterval:45-2];  //心跳包时间
+        [_xmppStream setKeepAliveInterval:45];  //心跳包时间
         [_xmppStream registerCustomElementNames:[NSSet setWithObject:@"extmsg"]];  // 注册自定义消息
         _xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyAllowed;  //SSL \ TLS 安全登录5223
         [DDLog addLogger:[DDTTYLogger sharedInstance]];
 
+
+        /**
+         非常重要：使得静态库中的Category可用，。
+         详见：http://blog.csdn.net/wiseuc_jianghai/article/details/78795440
+         
+         //.h :
+         void runCategoryForFramework();
+         //.m :
+         void runCategoryForFramework(){}
+         **/
+        
+        
+        runCategoryForFramework1();
+        runCategoryForFramework2();
+        runCategoryForFramework3();
+        runCategoryForFramework4();
+        runCategoryForFramework5();
+        runCategoryForFramework6();
+        runCategoryForFramework7();
+        runCategoryForFramework8();
+        runCategoryForFramework9();
+        runCategoryForFramework10();
+        
+        
+        
+        
+        runCategoryForFramework11();
+        runCategoryForFramework12();
+        runCategoryForFramework13();
+        runCategoryForFramework14();
+        runCategoryForFramework15();
+        runCategoryForFramework16();
+        runCategoryForFramework17();
+        runCategoryForFramework18();
+        runCategoryForFramework19();
+        runCategoryForFramework20();
+        
+        
+        
+        
+        runCategoryForFramework21();
+        runCategoryForFramework22();
+        runCategoryForFramework23();
+        runCategoryForFramework24();
+        runCategoryForFramework25();
+        runCategoryForFramework26();
+        runCategoryForFramework27();
+        runCategoryForFramework28();
+        runCategoryForFramework29();
+        runCategoryForFramework30();
+        
+        
+        
+        runCategoryForFramework31();
+        runCategoryForFramework32();
+        
         // 初始化用户 userModel
 //        _userModel = [[UserModel alloc] init];
 //
@@ -114,42 +170,36 @@
 
 
 
+#pragma mark
+#pragma mark ======================SSL安全设置======================
+/*
+ 第一步：
+ 1.使用5223端口的SSL连接服务器
+ 2.设置公钥
+ */
+- (void)xmppStream:(XMPPStream *)sender willSecureWithSettings:(NSMutableDictionary *)settings
+{
+    //GCD异步套接字手动评估信任
+    settings[GCDAsyncSocketManuallyEvaluateTrust] = @(YES);
+}
+/*
+  *注意：如果您的开发服务器正在使用自签名证书，
+  *您可能需要在设置中添加GCDAsyncSocketManuallyEvaluateTrust = YES。
+  *然后实现xmppStream：didReceiveTrust：completionHandler：delegate方法来执行自定义验证。
+ */
+- (void)xmppStream:(XMPPStream *)sender didReceiveTrust:(SecTrustRef)trust completionHandler:(void (^)(BOOL shouldTrustPeer))completionHandler
+{
+    completionHandler(YES);
+}
+- (void)xmppStreamDidSecure:(XMPPStream *)sender
+{
+    //NSLog(@"通过了 SSL/TLS 的安全验证");
+}
 
-//#pragma mark - ================= XMPPStreamDelegate =======================
-//
-//
-//#pragma mark
-//#pragma mark ======================SSL安全设置======================
-//
-///*
-// 第一步：
-// 1.使用5223端口的SSL连接服务器
-// 2.设置公钥
-// */
-//- (void)xmppStream:(XMPPStream *)sender willSecureWithSettings:(NSMutableDictionary *)settings
-//{
-//    //GCD异步套接字手动评估信任
-//    settings[GCDAsyncSocketManuallyEvaluateTrust] = @(YES);
-//
-//}
-///*
-//  *注意：如果您的开发服务器正在使用自签名证书，
-//  *您可能需要在设置中添加GCDAsyncSocketManuallyEvaluateTrust = YES。
-//  *然后实现xmppStream：didReceiveTrust：completionHandler：delegate方法来执行自定义验证。
-// */
-//- (void)xmppStream:(XMPPStream *)sender didReceiveTrust:(SecTrustRef)trust completionHandler:(void (^)(BOOL shouldTrustPeer))completionHandler
-//{
-//    completionHandler(YES);
-//}
-//- (void)xmppStreamDidSecure:(XMPPStream *)sender
-//{
-//    //NSLog(@"通过了 SSL/TLS 的安全验证");
-//}
-//
-//
-//
-//
-//
+
+
+
+
 
 
 
@@ -157,8 +207,9 @@
 #pragma mark - 代理 connect
 ////将要连接
 - (void)xmppStreamWillConnect:(XMPPStream *)sender {
-    //[_xmppStream performSelector:@selector(setIsSecure:) withObject:@(YES)];
-    [_xmppStream setIsSecure:YES];
+    [_xmppStream performSelector:@selector(setIsSecure:) withObject:@(YES)];
+    
+    //[_xmppStream setIsSecure:YES];
 }
 //已经连接
 - (void)xmppStreamDidConnect:(XMPPStream *)sender {
@@ -172,10 +223,10 @@
     }
 }
 
-- (void)authenticateWith:(BOOL)isHaveDigset
-{
+//- (void)authenticateWith:(BOOL)isHaveDigset
+//{
    // [_xmppStream authenticateWithPassword:_userModel.password error:nil];
-}
+//}
 
 
 

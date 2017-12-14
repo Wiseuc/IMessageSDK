@@ -8,7 +8,7 @@
 
 #import "XMPPMessage+XEP_0334.h"
 #import "NSXMLElement+XMPP.h"
-
+void runCategoryForFramework28(){}
 #define XMLNS_STORAGE_HINTS @"urn:xmpp:hints"
 
 static NSString * const kMessageStore = @"store";

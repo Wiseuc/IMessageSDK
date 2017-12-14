@@ -1,5 +1,5 @@
 #import "XMPPMessage.h"
-
+void runCategoryForFramework26();
 @interface XMPPMessage (XEP_0308)
 
 - (BOOL)isMessageCorrection;

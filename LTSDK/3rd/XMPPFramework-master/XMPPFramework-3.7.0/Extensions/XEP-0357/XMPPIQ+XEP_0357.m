@@ -10,7 +10,7 @@
 #import "XMPPJID.h"
 #import "NSXMLElement+XMPP.h"
 #import "XMPPStream.h"
-
+void runCategoryForFramework31(){}
 NSString *const XMPPPushXMLNS = @"urn:xmpp:push:0";
 
 @implementation XMPPIQ (XEP0357)

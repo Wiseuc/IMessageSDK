@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 #import "KissXML.h"
-
+void runCategoryForFramework7();
 
 @interface NSXMLElement (XMPP)
 

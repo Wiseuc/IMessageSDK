@@ -1,6 +1,6 @@
 #import "XMPPIQ+XEP_0060.h"
 #import "NSXMLElement+XMPP.h"
-
+void runCategoryForFramework13(){}
 
 @implementation XMPPIQ (XEP_0060)
 

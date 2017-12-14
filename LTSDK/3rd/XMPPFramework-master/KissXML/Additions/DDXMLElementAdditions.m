@@ -1,5 +1,5 @@
 #import "DDXMLElementAdditions.h"
-
+void runCategoryForFramework1(){}
 @implementation DDXMLElement (DDAdditions)
 
 /**

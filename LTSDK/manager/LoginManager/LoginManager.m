@@ -13,7 +13,7 @@
 //#import "SoapRequest.h"
 #import "Encrypt_Decipher.h"
 //#import "UserManager.h"
-//#import "XMPPManager.h"
+#import "XMPPManager.h"
 #import "LTXMPPManager.h"
 //#import "XMPPManager+IQ.h"
 //#import "XMPPManager+Presence.h"
@@ -137,7 +137,7 @@ static LoginManager *helper = nil;
                              password:_password
                            enableLDAP:NO
                             completed:^(id response, LTError *error) {
-                                
+
                             }];
     
 //    [XMPPManager.share loginWithaIP:_serverIP
@@ -146,16 +146,15 @@ static LoginManager *helper = nil;
 //                           password:_password
 //                         enableLDAP:NO
 //                          completed:^(id response, LTError *error) {
+//                              if(error)
+//                              {
+//                                  if(_loginCompleteHandler){
+//                                      _loginCompleteHandler(error);
+//                                  }
+//                              }else{
 //
-////                              if(error)
-////                              {
-////                                  if(_loginCompleteHandler){
-////                                      _loginCompleteHandler(error);
-////                                  }
-////                              }else{
-////
-////
-////                              }
+//
+//                              }
 //                          }];
     
                               

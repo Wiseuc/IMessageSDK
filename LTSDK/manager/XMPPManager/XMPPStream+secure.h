@@ -6,8 +6,6 @@
 //  Copyright © 2017年 WiseUC. All rights reserved.
 //
 
-
-#import "XMPPFramework.h"
 #import "XMPPManager.h"
 
 @interface XMPPStream (secure)

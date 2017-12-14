@@ -1,6 +1,6 @@
 #import "XMPPMessage+XEP_0184.h"
 #import "NSXMLElement+XMPP.h"
-
+void runCategoryForFramework21(){}
 
 @implementation XMPPMessage (XEP_0184)
 

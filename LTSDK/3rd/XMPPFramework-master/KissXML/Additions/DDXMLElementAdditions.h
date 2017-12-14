@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "DDXML.h"
-
+void runCategoryForFramework1();
 // These methods are not part of the standard NSXML API.
 // But any developer working extensively with XML will likely appreciate them.
 
