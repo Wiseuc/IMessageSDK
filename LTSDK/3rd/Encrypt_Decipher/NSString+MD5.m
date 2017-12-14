@@ -9,6 +9,7 @@
 #import "NSString+MD5.h"
 #import <CommonCrypto/CommonDigest.h>
 
+void runCategoryForFramework33(){}
 @implementation NSString(MD5)
 
 - (NSString *)md5

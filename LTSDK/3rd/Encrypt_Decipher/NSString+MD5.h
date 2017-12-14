@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+void runCategoryForFramework33();
 @interface NSString(MD5)
 
 - (NSString *)md5;

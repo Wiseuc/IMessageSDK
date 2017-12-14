@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LTSDK/manager/XMPPManager/XMPPManager+IQ.m"
-            timestampString = "534851211.688835"
+            timestampString = "534915550.354468"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LTSDK/manager/XMPPManager/LTXMPPManager.m"
-            timestampString = "534906615.443328"
+            timestampString = "534917158.367235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "-xmppStreamDidSecure:"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "-xmppStream:didNotAuthenticate:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,29 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LTSDK/manager/XMPPManager/LTXMPPManager.m"
-            timestampString = "534906615.443624"
+            filePath = "LTSDK/manager/XMPPManager/LTXMPPManager+iq.m"
+            timestampString = "534917158.367728"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "-xmppStreamWillConnect:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LTSDK/manager/XMPPManager/LTXMPPManager.m"
-            timestampString = "534906615.443916"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
-            landmarkName = "-xmppStreamDidConnect:"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "-xmppIqLoginCheck:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

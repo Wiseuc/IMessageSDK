@@ -24,13 +24,12 @@
 //#import "AppDelegate+JPush.h"
 //#import "SVProgressHUD+Custom.h"
 //#define KLoginSuccess @"登录成功"
-
-
-
 #define KLoginFailed_NetWorkingError @"网络异常"
 #define KLoginFailed_FetchOrgFileError @"组织架构获取失败"
 #define KLoginFailed_FetchLoginConfigError @"登录配置获取失败，请检查网络是否畅通！"
 #define KLoginFailed_TimeOut @"登录超时"
+
+
 
 
 
@@ -46,18 +45,17 @@
 @end
 
 
-static LoginManager *helper = nil;
-@implementation LoginManager
-+ (instancetype)shareHelper
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        helper = [[LoginManager alloc] init];
-    });
-    return helper;
-}
 
-#pragma mark – 登录操作
+
+
+
+
+@implementation LoginManager
+
+
+
+
+#pragma mark - Public
 
 - (void)loginWithServerIP:(NSString *)serverIP
                      port:(NSString *)port
@@ -70,8 +68,6 @@ static LoginManager *helper = nil;
     _port = port;
     _username = username;
     _password = password;
-    
-    
     // 登录计时器
     [LoginManager shareHelper].loginTimeoutTimer =
     [NSTimer scheduledTimerWithTimeInterval:15
@@ -79,7 +75,6 @@ static LoginManager *helper = nil;
                                    selector:@selector(loginTimeout)
                                    userInfo:nil
                                     repeats:NO];
-    
     
     [INFManager.share downloadINFWithIP:serverIP
                               completed:^(NSDictionary *infDict, LTError *error) {
@@ -109,113 +104,68 @@ static LoginManager *helper = nil;
             [self loginWithPassword:password withLoginType:LoginType_Normal];
         }
             break;
-
         case LoginType_MD5: {
             [self loginWithPassword:[password md5] withLoginType:LoginType_MD5];
         }
             break;
-
         case LoginType_LDAP: {
             
         }
             break;
-
         default:
             break;
     }
 }
 
-
-- (void)loginWithPassword:(NSString *)password withLoginType:(LoginType)loginType {
+- (void)loginWithPassword:(NSString *)password
+            withLoginType:(LoginType)loginType {
     
     BOOL enableLDAP = loginType == LoginType_LDAP;
     NSString *ip = _imServerIp ? _imServerIp :_serverIP;
-    
+    __weak typeof(self) weakself = self;
     [LTXMPPManager.share loginWithaIP:_serverIP
                                  port:_port
                              username:_username
                              password:_password
                            enableLDAP:NO
-                            completed:^(id response, LTError *error) {
-
+                            completed:^(LTError *error) {
+                                if (error)
+                                {
+                                    _loginCompleteHandler(error);
+                                    [weakself loginFailure];
+                                }else{
+                                    [weakself loginSuccess];
+                                }
                             }];
-    
-//    [XMPPManager.share loginWithaIP:_serverIP
-//                               port:_port
-//                           username:_username
-//                           password:_password
-//                         enableLDAP:NO
-//                          completed:^(id response, LTError *error) {
-//                              if(error)
-//                              {
-//                                  if(_loginCompleteHandler){
-//                                      _loginCompleteHandler(error);
-//                                  }
-//                              }else{
-//
-//
-//                              }
-//                          }];
-    
-                              
-                              //                              if ( info ) {
-                              //
-                              //                                /**保存用户信息*用于回填登录界面用户名密码框**/
-                              //                                [LoginManager saveLastLoginUsername:_username
-                              //                                                           password:_password
-                              //                                                           serverIP:_serverIP
-                              //                                                               port:_port];
-                              //                                UserModel *userModel = (UserModel *)info;
-                              //                                [UserManager shareInstance].noDisturbingForSound = YES;
-                              //                                [UserManager shareInstance].currentUser = [[IUserInfo alloc] init];
-                              //
-                              //                                /**除掉 ‘/IphoneIM’**/
-                              //                                NSString *jid = [[[NSString stringWithFormat:@"%@",
-                              //                                                   [XMPPManager shareXMPPManager].xmppStream.myJID] componentsSeparatedByString:@"/"] objectAtIndex:0];
-                              //                                NSDictionary *dict = @{
-                              //                                                      @"jid":jid,
-                              //                                                      @"username":_username,
-                              //                                                      @"loginType":@(loginType),
-                              //                                                      @"password":_password,
-                              //                                                      @"serverIP":_serverIP,
-                              //                                                      @"serverPort":_port,          //LoginManager的数据
-                              //                                                      @"pid":userModel.PID,
-                              //                                                      @"AccoutID":userModel.AccountID,
-                              //                                                      @"orgName":userModel.AccountName
-                              //                                                      };
-                              //
-                              //                                /**实际上dict是 LTUser 和 LTLogin 的合集**/
-                              //                                /**UserManager shareInstance].currentUser 则是包括组织架构中的信息，用LTOrg替代**/
-                              //
-                              //
-                              //                                /**储存用户信息: 到UserManager**/
-                              //                                [[UserManager shareInstance].currentUser setValuesForKeysWithDictionary:dict];
-                              //
-                              //                                /**上线**/
-                              //                                NSString *presenceJID =
-                              //                                [NSString stringWithFormat:@"%@/IphoneIM",[UserManager shareInstance].currentUser.jid];
-                              //                                [XMPPManager jid:presenceJID changePresenceStatuTo:PresenceType_Online];
-                              //
-                              //                                [self loginSuccess];
-                              //                                [self downloadOrgFileAndReloadData];
-                              //                                [XMPPManager requestHeaderIconURLWithJID:[UserManager shareInstance].currentUser.jid];
-                              //                            }else {
-                              //                                [self loginFailedByError:error];
-                              //                            }
-                              //                          }];
 }
 
+
+
+
+
+
+
+
+
+
+
+#pragma mark - Private
+
 - (void)loginSuccess {
-    [[LoginManager shareHelper].loginTimeoutTimer invalidate];
-    [LoginManager shareHelper].loginTimeoutTimer = nil;
+    /**销毁定时器**/
+    [self destoryTimer];
+    
+    /**上线**/
+    [self changePresenceStatuToOnline];
+    
+    /**下载组织架构**/
+    
+    
 //    [XMPPManager getAllSingleChatterPhotoHash];
-//
 //    /**极光推送-设置别名**/
 //    [AppDelegateInstance JPush_setAlias];
-//
 //    /**保存pid**/
 //    AppDelegateInstance.pidToken = UserManager.shareInstance.currentUser.pid;
-    
     /**发送登录成功的通知**/
 //    [[NSNotificationCenter defaultCenter]
 //     postNotificationName:Wiseuc_Notification_LoginSuccess object:nil];
@@ -223,49 +173,42 @@ static LoginManager *helper = nil;
     if ( _loginCompleteHandler ) {
         _loginCompleteHandler(nil);
     }
-    
-    
 }
-
-
 
 /**登录超时**/
 - (void)loginTimeout {
-    [[LoginManager shareHelper].loginTimeoutTimer invalidate];
-    [LoginManager shareHelper].loginTimeoutTimer = nil;
+    [self destoryTimer];
     if ( _loginCompleteHandler ) {
         LTError *err = [LTError errorWithDescription:@"登录超时" code:(LTErrorLogin_loginTimeOut)];
         _loginCompleteHandler(err);
     }
 }
 
-
-
-
-- (void)loginFailedByError:(NSError *)error {
-//    [[LoginManager shareHelper].loginTimeoutTimer invalidate];
-//    [LoginManager shareHelper].loginTimeoutTimer = nil;
-//
-//    NSString *err = @"登录失败005";
-//    if ( [error.userInfo[@"NSLocalizedDescription"] isEqualToString:@"Connection refused"] )
-//    {
-//        if ( _loginCompleteHandler ) {
-//            LTError *err = [LTError errorWithDescription:@"服务器地址错误" code:(LTErrorLogin_InvalidIp)];
-//            _loginCompleteHandler(err);
-//        }
-//    }
-//    else if ( error.userInfo[kStringXMPPIQAccessAuth] )
-//    {
-//        err = error.userInfo[kStringXMPPIQAccessAuth];
-//
-//        if ( _loginCompleteHandler ) {
-//            LTError *error = [LTError errorWithDescription:err code:(LTErrorLogin_loginGeneralFailure)];
-//            _loginCompleteHandler(error);
-//        }
-//    }
+/**登录失败**/
+-(void)loginFailure {
+    [self destoryTimer];
 }
 
-// 先下载组织架构
+/**销毁定时器**/
+- (void)destoryTimer {
+    [self.loginTimeoutTimer invalidate];
+    self.loginTimeoutTimer = nil;
+}
+
+/**上线**/
+- (void)changePresenceStatuToOnline {
+    
+    NSDictionary  *userDict = [LTUser.share queryUser];
+    NSString *UserName = userDict[@"UserName"];
+    NSString *JID = userDict[@"JID"];
+    NSString *IMPwd = userDict[@"IMPwd"];
+    
+    
+    [XMPPManager jid:JID changePresenceStatuTo:PresenceType_Online];
+//    [XMPPManager requestHeaderIconURLWithJID:[UserManager shareInstance].currentUser.jid];
+}
+
+/**下载组织架构**/
 - (void)downloadOrgFileAndReloadData
 {
 //    NSString *orgFilePath = [kOrgFilePath stringByAppendingPathComponent:@"Organize.xml"];
@@ -387,5 +330,25 @@ static LoginManager *helper = nil;
 //             @"serverIP":account.serverIP,
 //             @"port":account.port};
 //}
+
+
+
+
+
+
+
+
+#pragma mark - Init
+
++ (instancetype)shareHelper {
+    static dispatch_once_t onceToken;
+    static LoginManager *helper = nil;
+    dispatch_once(&onceToken, ^{
+        helper = [[LoginManager alloc] init];
+    });
+    return helper;
+}
+
+
 
 @end

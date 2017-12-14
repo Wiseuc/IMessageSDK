@@ -50,11 +50,4 @@ typedef void(^LoginCompleteHandler)(LTError *error);
                  password:(NSString *)password
           completeHandler:(LoginCompleteHandler)complete;
 
-
-
-#pragma mark – 登录历史
-+ (NSArray *)loginHistory;
-//+ (LoginHistoryModel *)lastLoginHistoryModel;
-//+ (void)saveLoginAccount:(LoginHistoryModel *)account;
-//+ (void)deleteLoginAccount:(LoginHistoryModel *)account;
 @end

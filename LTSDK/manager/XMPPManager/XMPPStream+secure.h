@@ -7,7 +7,7 @@
 //
 
 #import "XMPPManager.h"
-
+void runCategoryForFramework35();
 @interface XMPPStream (secure)
 
 - (void)setIsSecure:(BOOL)flag;

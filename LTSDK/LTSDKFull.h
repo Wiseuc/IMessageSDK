@@ -18,6 +18,7 @@
 #import "LTLoginDef.h"
 
 #import "LTINF.h"
+#import "LTUser.h"
 
 
 #endif /* LTSDKFull_h */

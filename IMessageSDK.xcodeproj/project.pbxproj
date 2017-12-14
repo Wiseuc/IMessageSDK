@@ -229,12 +229,16 @@
 		F97E340A1FE10920001CBFA8 /* XMPPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F97E33F21FE10920001CBFA8 /* XMPPManager.m */; };
 		F97E34191FE11A82001CBFA8 /* XMPPStream+secure.h in Headers */ = {isa = PBXBuildFile; fileRef = F97E34171FE11A81001CBFA8 /* XMPPStream+secure.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F97E341A1FE11A82001CBFA8 /* XMPPStream+secure.m in Sources */ = {isa = PBXBuildFile; fileRef = F97E34181FE11A81001CBFA8 /* XMPPStream+secure.m */; };
-		F97E341D1FE11B7D001CBFA8 /* XMPPManager+IQ.h in Headers */ = {isa = PBXBuildFile; fileRef = F97E341B1FE11B7C001CBFA8 /* XMPPManager+IQ.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F97E341E1FE11B7D001CBFA8 /* XMPPManager+IQ.m in Sources */ = {isa = PBXBuildFile; fileRef = F97E341C1FE11B7C001CBFA8 /* XMPPManager+IQ.m */; };
 		F97E34211FE11D98001CBFA8 /* LTXMPPManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F97E341F1FE11D98001CBFA8 /* LTXMPPManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F97E34221FE11D98001CBFA8 /* LTXMPPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F97E34201FE11D98001CBFA8 /* LTXMPPManager.m */; };
 		F97E34241FE121CC001CBFA8 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E34231FE121CC001CBFA8 /* libresolv.tbd */; };
 		F97E34261FE121D5001CBFA8 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E34251FE121D5001CBFA8 /* libxml2.tbd */; };
+		F9C557F31FE20D5200539EAB /* LTXMPPManager+iq.h in Headers */ = {isa = PBXBuildFile; fileRef = F9C557F11FE20D5200539EAB /* LTXMPPManager+iq.h */; };
+		F9C557F41FE20D5200539EAB /* LTXMPPManager+iq.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C557F21FE20D5200539EAB /* LTXMPPManager+iq.m */; };
+		F9C557F81FE2128A00539EAB /* LTUser.h in Headers */ = {isa = PBXBuildFile; fileRef = F9C557F61FE2128900539EAB /* LTUser.h */; };
+		F9C557F91FE2128A00539EAB /* LTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C557F71FE2128A00539EAB /* LTUser.m */; };
+		F9C558041FE23B8400539EAB /* LTXMPPManager+presence.h in Headers */ = {isa = PBXBuildFile; fileRef = F9C558021FE23B8400539EAB /* LTXMPPManager+presence.h */; };
+		F9C558051FE23B8400539EAB /* LTXMPPManager+presence.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C558031FE23B8400539EAB /* LTXMPPManager+presence.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -733,12 +737,16 @@
 		F97E33F21FE10920001CBFA8 /* XMPPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPManager.m; sourceTree = "<group>"; };
 		F97E34171FE11A81001CBFA8 /* XMPPStream+secure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XMPPStream+secure.h"; sourceTree = "<group>"; };
 		F97E34181FE11A81001CBFA8 /* XMPPStream+secure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XMPPStream+secure.m"; sourceTree = "<group>"; };
-		F97E341B1FE11B7C001CBFA8 /* XMPPManager+IQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XMPPManager+IQ.h"; sourceTree = "<group>"; };
-		F97E341C1FE11B7C001CBFA8 /* XMPPManager+IQ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XMPPManager+IQ.m"; sourceTree = "<group>"; };
 		F97E341F1FE11D98001CBFA8 /* LTXMPPManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LTXMPPManager.h; sourceTree = "<group>"; };
 		F97E34201FE11D98001CBFA8 /* LTXMPPManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LTXMPPManager.m; sourceTree = "<group>"; };
 		F97E34231FE121CC001CBFA8 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		F97E34251FE121D5001CBFA8 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		F9C557F11FE20D5200539EAB /* LTXMPPManager+iq.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LTXMPPManager+iq.h"; sourceTree = "<group>"; };
+		F9C557F21FE20D5200539EAB /* LTXMPPManager+iq.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LTXMPPManager+iq.m"; sourceTree = "<group>"; };
+		F9C557F61FE2128900539EAB /* LTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTUser.h; sourceTree = "<group>"; };
+		F9C557F71FE2128A00539EAB /* LTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTUser.m; sourceTree = "<group>"; };
+		F9C558021FE23B8400539EAB /* LTXMPPManager+presence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LTXMPPManager+presence.h"; sourceTree = "<group>"; };
+		F9C558031FE23B8400539EAB /* LTXMPPManager+presence.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LTXMPPManager+presence.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1006,6 +1014,7 @@
 		F9194CCD1FDFDCE500CCFB32 /* LTSDK */ = {
 			isa = PBXGroup;
 			children = (
+				F9C557F51FE2122800539EAB /* model */,
 				F9194CD91FDFE0CE00CCFB32 /* 3rd */,
 				F9194CD71FDFE0CE00CCFB32 /* config */,
 				F9194CD51FDFE0CE00CCFB32 /* core */,
@@ -1021,6 +1030,8 @@
 		F9194CD51FDFE0CE00CCFB32 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				F9C557F61FE2128900539EAB /* LTUser.h */,
+				F9C557F71FE2128A00539EAB /* LTUser.m */,
 				F9194F931FDFE1CA00CCFB32 /* defines */,
 				F9194F981FDFE1CB00CCFB32 /* LTError.h */,
 				F9194F971FDFE1CB00CCFB32 /* LTError.m */,
@@ -2227,16 +2238,25 @@
 		F97E33DC1FE10920001CBFA8 /* XMPPManager */ = {
 			isa = PBXGroup;
 			children = (
-				F97E341B1FE11B7C001CBFA8 /* XMPPManager+IQ.h */,
-				F97E341C1FE11B7C001CBFA8 /* XMPPManager+IQ.m */,
 				F97E34171FE11A81001CBFA8 /* XMPPStream+secure.h */,
 				F97E34181FE11A81001CBFA8 /* XMPPStream+secure.m */,
 				F97E33F11FE10920001CBFA8 /* XMPPManager.h */,
 				F97E33F21FE10920001CBFA8 /* XMPPManager.m */,
 				F97E341F1FE11D98001CBFA8 /* LTXMPPManager.h */,
 				F97E34201FE11D98001CBFA8 /* LTXMPPManager.m */,
+				F9C557F11FE20D5200539EAB /* LTXMPPManager+iq.h */,
+				F9C557F21FE20D5200539EAB /* LTXMPPManager+iq.m */,
+				F9C558021FE23B8400539EAB /* LTXMPPManager+presence.h */,
+				F9C558031FE23B8400539EAB /* LTXMPPManager+presence.m */,
 			);
 			path = XMPPManager;
+			sourceTree = "<group>";
+		};
+		F9C557F51FE2122800539EAB /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2247,10 +2267,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F97E34091FE10920001CBFA8 /* XMPPManager.h in Headers */,
+				F9C558041FE23B8400539EAB /* LTXMPPManager+presence.h in Headers */,
 				F91761C51FE0EB4200906CBB /* INFManager.h in Headers */,
 				F97E34191FE11A82001CBFA8 /* XMPPStream+secure.h in Headers */,
 				F97E34211FE11D98001CBFA8 /* LTXMPPManager.h in Headers */,
-				F97E341D1FE11B7D001CBFA8 /* XMPPManager+IQ.h in Headers */,
+				F9C557F31FE20D5200539EAB /* LTXMPPManager+iq.h in Headers */,
+				F9C557F81FE2128A00539EAB /* LTUser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2458,6 +2480,7 @@
 				F9194EF11FDFE11C00CCFB32 /* XMPPSystemInputActivityMonitor.m in Sources */,
 				F9194ED61FDFE11C00CCFB32 /* XMPPPresence.m in Sources */,
 				F9194EDA1FDFE11C00CCFB32 /* XMPPFileTransfer.m in Sources */,
+				F9C558051FE23B8400539EAB /* LTXMPPManager+presence.m in Sources */,
 				F9194EF51FDFE11C00CCFB32 /* XMPPIQ+LastActivity.m in Sources */,
 				F9194EE61FDFE11C00CCFB32 /* XMPPProcessOne.m in Sources */,
 				F97E341A1FE11A82001CBFA8 /* XMPPStream+secure.m in Sources */,
@@ -2534,7 +2557,6 @@
 				F9194EB71FDFE11C00CCFB32 /* DDLog.m in Sources */,
 				F9194EE71FDFE11C00CCFB32 /* XMPPReconnect.m in Sources */,
 				F9194ECC1FDFE11C00CCFB32 /* NSData+XMPP.m in Sources */,
-				F97E341E1FE11B7D001CBFA8 /* XMPPManager+IQ.m in Sources */,
 				F9194F211FDFE11C00CCFB32 /* XMPPCapabilities.xcdatamodel in Sources */,
 				F9194F711FDFE14100CCFB32 /* LTConvertUTF.c in Sources */,
 				F9194EB81FDFE11C00CCFB32 /* DDOSLogger.m in Sources */,
@@ -2631,6 +2653,7 @@
 				F9194ECB1FDFE11C00CCFB32 /* XMPPXOAuth2Google.m in Sources */,
 				F9194F551FDFE11D00CCFB32 /* Base64.m in Sources */,
 				F9194F311FDFE11C00CCFB32 /* XMPPBlocking.m in Sources */,
+				F9C557F41FE20D5200539EAB /* LTXMPPManager+iq.m in Sources */,
 				F9194EF41FDFE11C00CCFB32 /* XMPPJabberRPCModule.m in Sources */,
 				F9194F061FDFE11C00CCFB32 /* XMPPvCard.xcdatamodeld in Sources */,
 				F9194ECE1FDFE11C00CCFB32 /* NSXMLElement+XMPP.m in Sources */,
@@ -2643,6 +2666,7 @@
 				F9194EE21FDFE11C00CCFB32 /* OMEMOPreKey.m in Sources */,
 				F9194F9C1FDFE1CB00CCFB32 /* LTLogin.m in Sources */,
 				F9194F411FDFE11C00CCFB32 /* XMPPMessageArchiveManagement.m in Sources */,
+				F9C557F91FE2128A00539EAB /* LTUser.m in Sources */,
 				F9194F2F1FDFE11C00CCFB32 /* XMPPMessage+XEP_0184.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -4534,12 +4534,13 @@ enum XMPPStreamConfig
     // FIXME:Digest
     //获取Digest，内部实现发送send
     NSString *type =  [[element attributeStringValueForName:@"type"] lowercaseString];
-    
-    if ( [type isEqualToString:@"result"] ) {
-        NSXMLElement *query = [element elementForName:@"query" xmlns:@"jabber:iq:auth"];
-        
+    if ( [type isEqualToString:@"result"] )
+    {
+        NSXMLElement *query =
+        [element elementForName:@"query" xmlns:@"jabber:iq:auth"];
         if (query) {
-            [multicastDelegate xmppStream:self didReceiveIQ:[XMPPIQ iqFromElement:element]];
+            [multicastDelegate xmppStream:self
+                             didReceiveIQ:[XMPPIQ iqFromElement:element]];
         }
     }
     
