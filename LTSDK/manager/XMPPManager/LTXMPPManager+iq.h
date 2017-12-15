@@ -18,6 +18,12 @@ void runCategoryForFramework34();
                       serverIP:(NSString *)serverIP
                     enableLDAP:(BOOL)enableLDAP;
 
+/**发送请求服务器时间iq**/
+- (void)sendRequestServerTimeIq;
+
+/**发送请求头像**/
+- (void)sendRequestHeaderIconURLWithJID:(NSString *)jid;
+
 
 /**登录错误**/
 - (void)xmppIqLoginCheck:(XMPPIQ *)iq;

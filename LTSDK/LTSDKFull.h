@@ -19,6 +19,8 @@
 
 #import "LTINF.h"
 #import "LTUser.h"
+#import "LTFriend.h"
+#import "LTGroup.h"
 
 
 #endif /* LTSDKFull_h */

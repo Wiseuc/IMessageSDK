@@ -49,7 +49,7 @@ void runCategoryForFramework34(){}
              NSArray *errorArr = [iq elementsForName:kStringXMPPIQTypeError];
              if ( errorArr.count > 0 ) {
                  NSXMLElement * errorElement = errorArr[0];
-                 NSString *errorInfo = [errorElement stringValue];
+                 //NSString *errorInfo = [errorElement stringValue];
                  LTError *error =
                  [LTError errorWithDescription:@"errorInfo"
                                           code:(LTErrorLogin_loginGeneralFailure)];
@@ -82,12 +82,11 @@ void runCategoryForFramework34(){}
                     }
                 }
             }
-            
-          
-            
         }
     }
 }
+
+
 
 
 
@@ -106,16 +105,16 @@ void runCategoryForFramework34(){}
     
     
     /**获取服务器时间**/
-    //    NSXMLElement *query = [iq elementForName:@"query" xmlns:@"jabber:iq:time"];
-    //    if ( query ) {
-    //        NSString *utc_Str = [[query elementForName:@"utc"] stringValue];
-    //        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    //        dateFormatter.dateFormat = @"yyyyMMdd'T'HH:mm:ss";
-    //        NSDate *serverDate = [dateFormatter dateFromString:utc_Str];
-    //        NSDate *localTime = [NSDate date];
-    //        long long timeOffset = (long long)[localTime timeIntervalSinceDate:serverDate];
-    //        _timeOffset_localLeadToServer = timeOffset;
-    //    }
+    NSXMLElement *query = [iq elementForName:@"query" xmlns:@"jabber:iq:time"];
+    if ( query ) {
+        NSString *utc_Str = [[query elementForName:@"utc"] stringValue];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yyyyMMdd'T'HH:mm:ss";
+        NSDate *serverDate = [dateFormatter dateFromString:utc_Str];
+        NSDate *localTime = [NSDate date];
+        long long timeOffset = (long long)[localTime timeIntervalSinceDate:serverDate];
+        self.timeOffset_localAndServer = timeOffset;
+    }
     
     
     
@@ -202,7 +201,7 @@ void runCategoryForFramework34(){}
         if (query) {
             NSDictionary  *userDict = [LTUser.share queryUser];
             NSString *UserName = userDict[@"UserName"];
-            NSString *JID = userDict[@"JID"];
+            //NSString *JID = userDict[@"JID"];
             NSString *IMPwd = userDict[@"IMPwd"];
             [self.aXMPPStream setLoginname:UserName];
             [self.aXMPPStream setPassword:IMPwd];
@@ -211,6 +210,591 @@ void runCategoryForFramework34(){}
         }
     }
 
+    
+    //获取头像
+    if ( [iq isResultIQ] ) {
+        NSString *elementId = [iq elementID];
+        if ([elementId isEqualToString:kStringXMPPElementIDGetPhotoHash]) {
+            
+            /**
+             http://im.lituosoft.cn:14131/headpicture/eba28ceaa7326eacfcaaf3882ceba6e1f5653ded.jpg
+             
+             
+             <vCard xmlns="vcard-temp" ver="0"><PHOTO><type>image/png</type><PHOTOHASH>11</PHOTOHASH></PHOTO></vCard>
+             
+             <vCard xmlns="vcard-temp" ver="0"><PHOTO><type>image/jpeg</type><PHOTOHASH>eba28ceaa7326eacfcaaf3882ceba6e1f5653ded</PHOTOHASH></PHOTO></vCard>
+             **/
+            NSXMLElement *vCard = [iq elementForName:@"vCard"];
+            NSXMLElement *PHOTO = [vCard elementForName:@"PHOTO"];
+            NSString *from = [[[iq attributeForName:@"from"] stringValue] componentsSeparatedByString:@"/"][0];
+            if (vCard)
+            {
+                //[XMPPManager parseIQ_PhotoHash:vCard withJID:from];
+                return YES;
+            }else{
+                //[XMPPManager saveDefaultHeadImageByJID:from];
+                return YES;
+            }
+        }
+    }
+    
+    
+    if ([iq isResultIQ])
+    {
+        NSError *error = nil;
+        NSString *elementId = [iq elementID];
+        NSDictionary *result = [XMLReader dictionaryForXMLString:[iq XMLString] error:&error];
+        NSDictionary *info = [NSObject objectForKey:@"iq"  inDictionary:result  espectedType:[NSDictionary class]];
+        
+        /**获取好友列表**/
+        /**
+         RECV:
+         <iq xmlns="jabber:client" type="result" id="rosters" from="江海@duowin-server/IphoneIM">
+         <query xmlns="jabber:iq:roster" ver="162">
+         
+         <item jid="刘明@duowin-server" name="刘明" subscription="both" vcardver="38"><group>我的同事</group></item>
+         <item jid="刘杰@duowin-server" name="刘杰" subscription="both" vcardver="6"><group>我的同事</group></item>
+         <item jid="饶芳玮@duowin-server" name="饶芳玮" subscription="both" vcardver="9"><group>我的同事</group></item>
+         <item jid="李晴@duowin-server" name="李晴" subscription="from" ask="subscribe" vcardver="70"><group>我的同事</group></item>
+         <item jid="张代伍@duowin-server" name="张代伍" subscription="both" vcardver="3"><group>我的同事</group></item>
+         
+         </query>
+         </iq>
+         
+         **/
+        if ([elementId isEqualToString:@"rosters"])
+        {
+            NSDictionary *query = [NSObject objectForKey:kStringXMPPIQQuery inDictionary:info espectedType:[NSDictionary class]];
+            id _items = [NSObject objectForKey:kStringXMPPRosterItem inDictionary:query];
+            NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:10];
+            if([_items isKindOfClass:[NSDictionary class]])
+            {
+                [items addObject:[self copiedSomeone:_items]];
+            } else if([_items isKindOfClass:[NSArray class]]) {
+                for(NSDictionary *_item in _items)
+                {
+                    [items addObject:[self copiedSomeone:_item]];
+                }
+            }
+            NSString *version = [NSObject objectForKey:kStringXMPPVersion inDictionary:query];
+            self.friend_queryRostersBlock(items, version);
+        }
+        
+        
+        /**
+         获取群组列表
+         
+         <iq xmlns="jabber:client" type="result" to="江海@duowin-server/IphoneIM" id="groups" var="self" from="conference.duowin-server/IphoneIM">
+         <item xmlns="jabber:iq:browse" category="conference" type="public" jid="conference" name="Public Chatrooms" totalnum="15">
+         
+         <item category="conference" jid="c1c97d0ba53a4328a49da40399d03f18@conference.duowin-server" name="技术中心" password="0" introduction="" subject="企业版交流区" owner="test@duowin-server" type="public" conferencetype="1"><admin>刘明@duowin-server</admin></item>
+         </item>
+         </iq>
+         **/
+        if ([elementId isEqualToString:@"groups"])
+        {
+            NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:10];
+            id _itms = [NSObject objectForKey:kStringXMPPRosterItem inDictionary:info];
+            if([_itms isKindOfClass:[NSDictionary class]])
+            {
+                NSMutableDictionary *item = [[NSMutableDictionary alloc] initWithCapacity:5];
+                NSString *name = [NSObject objectForKey:kStringXMPPRosterName inDictionary:_itms];
+                NSString *xmlns = [NSObject objectForKey:kStringXMPPRosterXmlns inDictionary:_itms];
+                NSString *jid = [NSObject objectForKey:kStringXMPPRosterJabberId inDictionary:_itms];
+                NSString *category = [NSObject objectForKey:kStringXMPPRosterCategory inDictionary:_itms];
+                [item setObject:name forKey:kStringXMPPRosterNameFull];
+                [item setObject:name forKey:kStringXMPPRosterName];
+                [item setObject:xmlns forKey:kStringXMPPRosterXmlns];
+                [item setObject:jid forKey:kStringXMPPRosterJabberId];
+                [item setObject:category forKey:kStringXMPPRosterCategory];
+                
+                NSMutableArray *subItems = [[NSMutableArray alloc] initWithCapacity:5];
+                id _subitms = [NSObject objectForKey:kStringXMPPRosterItem inDictionary:_itms];
+                if([_subitms isKindOfClass:[NSDictionary class]])
+                {
+                    NSMutableDictionary *subItem = [self copiedMutableDictionaryFrom:_subitms];
+                    [subItem setObject:[NSObject objectForKey:kStringXMPPRosterName inDictionary:subItem] forKey:kStringXMPPRosterNameFull];
+                    [subItems addObject:subItem];
+                }
+                else if([_subitms isKindOfClass:[NSArray class]])
+                {
+                    for(NSDictionary *_subitm in _subitms) {
+                        NSMutableDictionary *subItem = [self copiedMutableDictionaryFrom:_subitm];
+                        [subItem setObject:[NSObject objectForKey:kStringXMPPRosterName inDictionary:subItem] forKey:kStringXMPPRosterNameFull];
+                        [subItems addObject:subItem];
+                    }
+                }
+                [item setObject:subItems forKey:kStringXMPPRosterItem];
+                [items addObject:item];
+            }
+            else if([_itms isKindOfClass:[NSArray class]])
+            {
+                NSMutableArray *subItems = [[NSMutableArray alloc] initWithCapacity:5];
+                id _subitms = [NSObject objectForKey:kStringXMPPRosterItem inDictionary:_itms];
+                if([_subitms isKindOfClass:[NSDictionary class]])
+                {
+                    NSMutableDictionary *subItem = [[NSMutableDictionary alloc] initWithDictionary:_subitms];
+                    [subItems addObject:subItem];
+                }else if([_subitms isKindOfClass:[NSArray class]]){
+                    [subItems addObjectsFromArray:_subitms];
+                }
+                [items addObjectsFromArray:subItems];
+            }
+            self.friend_queryGroupsBlock(items, nil);
+        }
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+//
+//    //NSLog(@"XMPP服务接收到IQ数据:\n%@", [iq XMLString]);
+//    NSError *error = nil;
+//    NSDictionary *result = [XMLReader dictionaryForXMLString:[iq XMLString] error:&error];
+//    //NSDictionary *info = [NSObject objectForKey:@"iq"  inDictionary:result  espectedType:[NSDictionary class]];
+//
+//    NSString *elementId = [iq elementID];
+//    NSString *type = [iq type];
+//
+//    if ([kStringXMPPIQTypeResult isEqualToString:type]) {
+//
+//        //        if ( [elementId rangeOfString:kStringXMPPElementIDRoster4One].location != NSNotFound )
+//        //        {
+//        //            if([[info allKeys] containsObject:kStringXMPPIQVCard])  //个人信息
+//        //            {
+//        //                NSDictionary *card = [NSObject objectForKey:kStringXMPPIQVCard inDictionary:info espectedType:[NSDictionary class]];
+//        //                [XMPPManager parseVCardForPhotoHash:card withJID:info[@"from"]];
+//        //            }
+//        //        }
+//
+//        if (_delegate != nil) {
+//
+//            // if ([elementId rangeOfString:kStringXMPPElementIDGroups options:NSCaseInsensitiveSearch].length>0)//如果获取到的是群组信息
+//            /// 获取群组列表
+//            if ([elementId isEqualToString:kStringXMPPElementIDGroups])
+//            {
+//
+//                NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:10];
+//                id _itms = [NSObject objectForKey:kStringXMPPRosterItem inDictionary:info];
+//                if([_itms isKindOfClass:[NSDictionary class]])
+//                {
+//                    NSMutableDictionary *item = [[NSMutableDictionary alloc] initWithCapacity:5];
+//                    NSString *name = [NSObject objectForKey:kStringXMPPRosterName inDictionary:_itms];
+//                    NSString *xmlns = [NSObject objectForKey:kStringXMPPRosterXmlns inDictionary:_itms];
+//                    NSString *jid = [NSObject objectForKey:kStringXMPPRosterJabberId inDictionary:_itms];
+//                    NSString *category = [NSObject objectForKey:kStringXMPPRosterCategory inDictionary:_itms];
+//                    [item setObject:name forKey:kStringXMPPRosterNameFull];
+//                    [item setObject:name forKey:kStringXMPPRosterName];
+//                    [item setObject:xmlns forKey:kStringXMPPRosterXmlns];
+//                    [item setObject:jid forKey:kStringXMPPRosterJabberId];
+//                    [item setObject:category forKey:kStringXMPPRosterCategory];
+//
+//                    NSMutableArray *subItems = [[NSMutableArray alloc] initWithCapacity:5];
+//                    id _subitms = [NSObject objectForKey:kStringXMPPRosterItem inDictionary:_itms];
+//                    if([_subitms isKindOfClass:[NSDictionary class]])
+//                    {
+//                        NSMutableDictionary *subItem = [self copiedMutableDictionaryFrom:_subitms];
+//                        [subItem setObject:[NSObject objectForKey:kStringXMPPRosterName inDictionary:subItem] forKey:kStringXMPPRosterNameFull];
+//
+//                        [subItems addObject:subItem];
+//                    }
+//                    else if([_subitms isKindOfClass:[NSArray class]])
+//                    {
+//                        for(NSDictionary *_subitm in _subitms)
+//                        {
+//                            NSMutableDictionary *subItem = [self copiedMutableDictionaryFrom:_subitm];
+//                            [subItem setObject:[NSObject objectForKey:kStringXMPPRosterName inDictionary:subItem] forKey:kStringXMPPRosterNameFull];
+//
+//                            [subItems addObject:subItem];
+//                        }
+//                    }
+//
+//                    [item setObject:subItems forKey:kStringXMPPRosterItem];
+//
+//                    [items addObject:item];
+//                }
+//                else if([_itms isKindOfClass:[NSArray class]])
+//                {
+//                    NSMutableArray *subItems = [[NSMutableArray alloc] initWithCapacity:5];
+//
+//                    id _subitms = [NSObject objectForKey:kStringXMPPRosterItem inDictionary:_itms];
+//                    if([_subitms isKindOfClass:[NSDictionary class]])
+//                    {
+//                        NSMutableDictionary *subItem = [[NSMutableDictionary alloc] initWithDictionary:_subitms];
+//                        [subItems addObject:subItem];
+//                    }
+//                    else if([_subitms isKindOfClass:[NSArray class]])
+//                    {
+//                        [subItems addObjectsFromArray:_subitms];
+//                    }
+//
+//                    [items addObjectsFromArray:subItems];
+//                }
+//
+//                if ( _delegate && [_delegate respondsToSelector:@selector(XMPPServer:didReceiveGroups:)] ) {
+//                    [_delegate XMPPServer:self didReceiveGroups:items];
+//                }
+//
+//            }
+//            /// 获取好友列表
+//            else if ([elementId rangeOfString:kStringXMPPElementIDRoster options:NSCaseInsensitiveSearch].length > 0)
+//            {
+//                NSDictionary *query = [NSObject objectForKey:kStringXMPPIQQuery inDictionary:info espectedType:[NSDictionary class]];
+//                id _items = [NSObject objectForKey:kStringXMPPRosterItem inDictionary:query];
+//                NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:10];
+//                if([_items isKindOfClass:[NSDictionary class]])
+//                {
+//                    [items addObject:[self copiedSomeone:_items]];
+//                }
+//                else if([_items isKindOfClass:[NSArray class]])
+//                {
+//                    for(NSDictionary *_item in _items)
+//                    {
+//                        [items addObject:[self copiedSomeone:_item]];
+//                    }
+//                }
+//
+//                NSString *version = [NSObject objectForKey:kStringXMPPVersion inDictionary:query];
+//
+//                [self setUserFriends:items];
+//
+//
+//                if ( _delegate && [_delegate respondsToSelector:@selector(XMPPServer:didReceiveRoster:withVersion:)] ) {
+//                    [_delegate XMPPServer:self didReceiveRoster:items withVersion:version];
+//
+//                }
+//            }
+//            /// 获取个人信息
+//            else if ([elementId rangeOfString:kStringXMPPElementIDRoster4One options:NSCaseInsensitiveSearch].length>0)
+//            {
+//                if([[info allKeys] containsObject:kStringXMPPIQVCard])  //个人信息
+//                {
+//                    NSDictionary *card = [NSObject objectForKey:kStringXMPPIQVCard inDictionary:info espectedType:[NSDictionary class]];
+//
+//                    //如果不含有新版本的信息，那么vCard里只有两个元素xmlns和ver
+//                    if(![NSObject isEmpty:card] && [card allKeys].count>2)        //vCard为空表示已经是最新版本，不需要更新
+//                    {
+//
+//                        NSMutableDictionary *someone = [[NSMutableDictionary alloc] initWithCapacity:10];
+//
+//                        //版本号
+//                        [someone setObject:[NSObject objectForKey:kStringXMPPVersion inDictionary:card] forKey:kStringXMPPRosterVCardVersion];
+//
+//                        NSMutableString *from = [[NSMutableString alloc] initWithString:[self valueForKey:kStringXMPPFrom inDictionary:info]];
+//                        [from remainBeforeString:@"/"];
+//                        [someone setObject:from forKey:kStringXMPPRosterJabberId];
+//
+//                        //性别
+//                        NSString *sex = [self valueForKey:kStringXMPPRosterSex inDictionary:card];
+//                        [someone setObject:sex forKey:kStringXMPPRosterSex];
+//
+//                        NSString *portrait = [self valueForKey:kStringXMPPRosterPortrait inDictionary:card];
+//                        if([sex rangeOfString:@"男" options:NSCaseInsensitiveSearch].length>0)
+//                        {
+//                            portrait = [NSString stringWithFormat:@"male%@", portrait];
+//                        }
+//                        else if([sex rangeOfString:@"女" options:NSCaseInsensitiveSearch].length>0)
+//                        {
+//                            portrait = [NSString stringWithFormat:@"female%@", portrait];;
+//                        }
+//
+//                        //                            如果本地有，那么不管
+//                        //                            if(![[NSFileManager defaultManager] fileExistsAtPath:[[NSBundle mainBundle] pathForResource:portrait ofType:@"png"]])
+//                        //                            {
+//                        //                                if(![NSObject isEmpty:portrait])
+//                        //                                {
+//                        //                                    portrait = [[NSMutableString alloc] initWithFormat:@"http://%@:%@/headpicture/%@.jpg",[XMPPManager shareXMPPManager].xmppStream.hostName,@"14131",[self valueForKey:kStringXMPPRosterPortrait inDictionary:card]
+//                        //                                                ];
+//                        //                                };
+//                        //                            }
+//                        //                            [someone setObject:portrait forKey:kStringXMPPRosterPortrait];
+//                        //登录名
+//                        [someone setObject:[self valueForKey:kStringXMPPRosterNameLogin inDictionary:card] forKey:kStringXMPPRosterNameLogin];
+//                        //全名
+//                        NSString *fullName = [self valueForKey:kStringXMPPRosterNameFull inDictionary:card];
+//                        [someone setObject:fullName forKey:kStringXMPPRosterNameFull];
+//                        [someone setObject:fullName forKey:kStringXMPPRosterName];
+//                        [someone setObject:[self transferToPinYin:fullName] forKey:kStringXMPPRosterNamePinYin];
+//                        //                            [someone setObject:[POAPinyin convert:fullName] forKey:kStringXMPPRosterNameQuanPin];
+//                        //昵称
+//                        [someone setObject:[self valueForKey:kStringXMPPRosterNameNick inDictionary:card] forKey:kStringXMPPRosterNameNick];
+//                        //电子邮箱
+//                        [someone setObject:[self valueForKey:kStringXMPPRosterEmail inDictionary:card] forKey:kStringXMPPRosterEmail];
+//                        //个人主页
+//                        [someone setObject:[self valueForKey:kStringXMPPRosterWebpage4Personal inDictionary:card] forKey:kStringXMPPRosterWebpage4Personal];
+//                        //生日
+//                        [someone setObject:[self valueForKey:kStringXMPPRosterBirthday inDictionary:card] forKey:kStringXMPPRosterBirthday];
+//                        //岗位
+//                        [someone setObject:[self valueForKey:kStringXMPPRosterJobTitle inDictionary:card] forKey:kStringXMPPRosterJobTitle];
+//                        //岗位描述
+//                        [someone setObject:[self valueForKey:kStringXMPPRosterJobDescription inDictionary:card] forKey:kStringXMPPRosterJobDescription];
+//                        //企业网址
+//                        [someone setObject:[self valueForKey:kStringXMPPRosterWebpage4Organization inDictionary:card] forKey:kStringXMPPRosterWebpage4Organization];
+//                        //企业
+//                        {
+//                            NSDictionary *dOrg = [NSObject objectForKey:kStringXMPPRosterOrganization inDictionary:card espectedType:[NSDictionary class]];
+//                            [someone setObject:[self copiedMutableDictionaryFrom:dOrg] forKey:kStringXMPPRosterOrganization];
+//                        }
+//                        //地址
+//                        {
+//                            NSMutableArray *addresses = [[NSMutableArray alloc] initWithCapacity:10];
+//
+//                            id _addrs = [NSObject objectForKey:kStringXMPPRosterAddresses inDictionary:card];
+//                            if([_addrs isKindOfClass:[NSDictionary class]])
+//                            {
+//                                [addresses addObject:[self copiedMutableDictionaryFrom:_addrs]];
+//                            }
+//                            else if([_addrs isKindOfClass:[NSArray class]])
+//                            {
+//                                for(NSDictionary *a in _addrs)
+//                                {
+//                                    [addresses addObject:[self copiedMutableDictionaryFrom:a]];
+//                                }
+//                            }
+//                            //[someone setObject:addresses forKey:kStringXMPPRosterAddresses];
+//                            for(NSDictionary *a in addresses)
+//                            {
+//                                NSArray *keys = [a allKeys];
+//                                if([keys containsObject:kStringXMPPRosterAddressTypeOrganization])
+//                                {
+//                                    for(NSString *key in keys)
+//                                    {
+//                                        [someone setObject:[self valueForKey:key inDictionary:a] forKey:key];
+//                                    }
+//                                }
+//                            }
+//                        }
+//
+//                        //联系方式
+//                        {
+//                            NSMutableArray *telephones = [[NSMutableArray alloc] initWithCapacity:5];
+//
+//                            id _tlp = [NSObject objectForKey:kStringXMPPRosterTelephones inDictionary:card];
+//                            if([_tlp isKindOfClass:[NSDictionary class]])
+//                            {
+//                                [telephones addObject:[self copiedMutableDictionaryFrom:_tlp]];
+//                            }
+//                            else if([_tlp isKindOfClass:[NSArray class]])
+//                            {
+//                                for(NSDictionary *t in _tlp)
+//                                {
+//                                    [telephones addObject:[self copiedMutableDictionaryFrom:t]];
+//                                }
+//                            }
+//                            for(NSDictionary *t in telephones)
+//                            {
+//                                NSArray *keys = [t allKeys];
+//
+//                                if([keys containsObject:kStringXMPPRosterTelephoneTypeWork])
+//                                {
+//                                    NSString *number = [self valueForKey:kStringXMPPRosterTelephoneNumber inDictionary:t];
+//
+//                                    for(NSString *key in keys)
+//                                    {
+//                                        if([kStringXMPPRosterMobile isEqualToString:key])
+//                                        {
+//                                            [someone setObject:number forKey:kStringXMPPRosterMobile];
+//                                        }
+//                                        else if([kStringXMPPRosterTelephone isEqualToString:key])
+//                                        {
+//                                            [someone setObject:number forKey:kStringXMPPRosterTelephone];
+//                                        }
+//                                        else if([kStringXMPPRosterFax isEqualToString:key])
+//                                        {
+//                                            [someone setObject:number forKey:kStringXMPPRosterFax];
+//                                        }
+//
+//                                    }
+//                                }
+//                            }
+//                        }
+//
+//                        //短号
+//                        [someone setObject:[self valueForKey:kStringXMPPRosterMobileExt inDictionary:card] forKey:kStringXMPPRosterMobileExt];
+//
+//                        if ( _delegate && [_delegate respondsToSelector:@selector(XMPPServer:didReceiveInformationForSomeone:)]) {
+//                            [_delegate XMPPServer:self didReceiveInformationForSomeone:someone];
+//                        }
+//                    }
+//
+//                }
+//                else if ([[info allKeys] containsObject:kStringXMPPIQQuery])  //群组信息
+//                {
+//                    NSDictionary *query = [NSObject objectForKey:kStringXMPPIQQuery inDictionary:info espectedType:[NSDictionary class]];
+//                    NSString *xmlns = [NSObject objectForKey:kStringXMPPXmlns inDictionary:query];
+//                    if([kStringXMPPXmlnsGroup isEqualToString:xmlns])   //检查xmlns是否是群组相关的请求域
+//                    {
+//                        {
+//                            //应用需要的群组信息
+//                            NSMutableDictionary *group = [[NSMutableDictionary alloc] initWithCapacity:10];
+//                            [group setObject:[NSObject objectForKey:kStringXMPPFrom inDictionary:info] forKey:kStringXMPPRosterJabberId];
+//
+//                            //群组名称
+//                            NSDictionary *identity = [NSObject objectForKey:kStringXMPPRosterGroupIdentity inDictionary:query espectedType:[NSDictionary class]];
+//
+//                            NSString *fullName = [NSObject objectForKey:kStringXMPPRosterGroupName inDictionary:identity];
+//                            [group setObject:fullName forKey:kStringXMPPRosterNameFull];
+//                            [group setObject:[self transferToPinYin:fullName] forKey:kStringXMPPRosterNamePinYin];
+//                            //                            [group setObject:[POAPinyin convert:fullName] forKey:kStringXMPPRosterNameQuanPin];
+//
+//                            //群组其它字段
+//                            //x和identity平级
+//                            NSDictionary *x = [NSObject  objectForKey:kStringXMPPX inDictionary:query espectedType:[NSDictionary class]];
+//
+//                            id f = [NSObject objectForKey:kStringXMPPRosterGroupField inDictionary:x];
+//
+//                            NSMutableArray *fields = [NSMutableArray arrayWithCapacity:10];
+//                            if([f isKindOfClass:[NSDictionary class]])
+//                            {
+//                                [fields addObject:f];
+//                            }
+//                            else if([f isKindOfClass:[NSArray class]])
+//                            {
+//                                [fields addObjectsFromArray:f];
+//                            }
+//
+//                            for(NSDictionary *field in fields)
+//                            {
+//                                NSString *k = [NSObject objectForKey:kStringXMPPRosterGroupFieldLabel inDictionary:field];
+//                                if(![NSObject isEmpty:k])
+//                                {
+//                                    NSString *v = [self valueForKey:kStringXMPPRosterGroupFieldValue inDictionary:field];
+//
+//                                    //复制字段，群简介
+//                                    if([kStringXMPPRosterGroupDescription isEqualToString:k])
+//                                    {
+//                                        [group setObject:v forKey:kStringXMPPRosterDescription];
+//                                    }
+//
+//                                    //群公告
+//                                    if([kStringXMPPRosterBulletin isEqualToString:k])
+//                                    {
+//                                        [group setObject:v forKey:kStringXMPPRosterBulletin];
+//                                    }
+//
+//                                    if([kStringXMPPRosterCreatedTime isEqualToString:k])
+//                                    {
+//                                        if(![NSObject isEmpty:v])
+//                                        {
+//                                            NSDate *date = [NSDate dateWithTimeIntervalSince1970:[v doubleValue]];
+//                                            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//                                            dateFormatter.dateFormat = @"yyyy-M-d";
+//                                            v = [dateFormatter stringFromDate:date];
+//                                        }
+//                                    }
+//
+//                                    [group setObject:v forKey:k];
+//                                }
+//                            }
+//
+//                            if ( _delegate && [_delegate respondsToSelector:@selector(XMPPServer:didReceiveGroup:)]) {
+//                                [_delegate XMPPServer:self didReceiveGroup:group];
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            else if ([kStringXMPPElementIDMembers isEqualToString:elementId])
+//            {
+//                NSString *group = [NSObject objectForKey:kStringXMPPFrom inDictionary:info];
+//                // 解析群组成员信息组成列表
+//                NSMutableArray *members = [[NSMutableArray alloc] initWithCapacity:10];
+//
+//                //query节点
+//                NSDictionary *query = [NSObject objectForKey:kStringXMPPIQQuery inDictionary:info espectedType:[NSDictionary class]];
+//
+//                //query以下的就是成员列表
+//                id _itmz = [NSObject objectForKey:kStringXMPPIQItem inDictionary:query];
+//                if([_itmz isKindOfClass:[NSDictionary class]])
+//                {
+//                    [members addObject:_itmz];
+//                }
+//                else if([_itmz isKindOfClass:[NSArray class]])
+//                {
+//                    [members addObjectsFromArray:_itmz];
+//                }
+//                if ( _delegate && [_delegate respondsToSelector:@selector(XMPPServer:didReceiveMembers:forGroup:)] ) {
+//                    [_delegate XMPPServer:self didReceiveMembers:members forGroup:group];
+//                }
+//            }
+//            //获取到的搜索所求群组信息
+//            else if ([elementId isEqualToString:kStringXMPPElementIDSearchAllGroups])
+//            {
+//                NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:10];
+//                id _itms = [NSObject objectForKey:kStringXMPPRosterItem inDictionary:info];
+//                if([_itms isKindOfClass:[NSDictionary class]])
+//                {
+//                    NSMutableDictionary *item = [[NSMutableDictionary alloc] initWithCapacity:5];
+//                    NSString *name = [NSObject objectForKey:kStringXMPPRosterName inDictionary:_itms];
+//                    NSString *xmlns = [NSObject objectForKey:kStringXMPPRosterXmlns inDictionary:_itms];
+//                    NSString *jid = [NSObject objectForKey:kStringXMPPRosterJabberId inDictionary:_itms];
+//                    NSString *category = [NSObject objectForKey:kStringXMPPRosterCategory inDictionary:_itms];
+//                    [item setObject:name forKey:kStringXMPPRosterNameFull];
+//                    [item setObject:name forKey:kStringXMPPRosterName];
+//                    [item setObject:xmlns forKey:kStringXMPPRosterXmlns];
+//                    [item setObject:jid forKey:kStringXMPPRosterJabberId];
+//                    [item setObject:category forKey:kStringXMPPRosterCategory];
+//
+//                    NSMutableArray *subItems = [[NSMutableArray alloc] initWithCapacity:5];
+//                    id _subitms = [NSObject objectForKey:kStringXMPPRosterItem inDictionary:_itms];
+//                    if([_subitms isKindOfClass:[NSDictionary class]])
+//                    {
+//                        //  NSMutableDictionary *subItem = [self copiedMutableDictionaryFrom:_subitms];
+//                        //  [subItem setObject:[NSObject objectForKey:kStringXMPPRosterName inDictionary:subItem] forKey:kStringXMPPRosterNameFull];
+//                        NSMutableDictionary *subItem = (NSMutableDictionary *)_subitms;
+//                        [subItem setObject:[NSObject objectForKey:kStringXMPPRosterName inDictionary:_subitms] forKey:kStringXMPPRosterNameFull];
+//                        [subItems addObject:subItem];
+//                    }
+//                    else if([_subitms isKindOfClass:[NSArray class]])
+//                    {
+//                        for(NSDictionary *_subitm in _subitms)
+//                        {
+//                            // NSMutableDictionary *subItem = [self copiedMutableDictionaryFrom:_subitm];
+//                            //   [subItem setObject:[NSObject objectForKey:kStringXMPPRosterName inDictionary:subItem] forKey:kStringXMPPRosterNameFull];
+//                            NSMutableDictionary *subItem = (NSMutableDictionary *)_subitm;
+//                            [subItem setObject:[NSObject objectForKey:kStringXMPPRosterName inDictionary:_subitm] forKey:kStringXMPPRosterNameFull];
+//                            [subItems addObject:subItem];
+//                        }
+//                    }
+//
+//                    [item setObject:subItems forKey:kStringXMPPRosterItem];
+//
+//                    [items addObject:item];
+//                }
+//                else if([_itms isKindOfClass:[NSArray class]])
+//                {
+//                    NSMutableArray *subItems = [[NSMutableArray alloc] initWithCapacity:5];
+//
+//                    id _subitms = [NSObject objectForKey:kStringXMPPRosterItem inDictionary:_itms];
+//                    if([_subitms isKindOfClass:[NSDictionary class]])
+//                    {
+//                        NSMutableDictionary *subItem = [[NSMutableDictionary alloc] initWithDictionary:_subitms];
+//                        [subItems addObject:subItem];
+//                    }
+//                    else if([_subitms isKindOfClass:[NSArray class]])
+//                    {
+//                        [subItems addObjectsFromArray:_subitms];
+//                    }
+//
+//                    [items addObjectsFromArray:subItems];
+//                }
+//
+//                if ( _delegate && [_delegate respondsToSelector:@selector(XMPPServer:didReceiveAllGroupsBySearch:)] ) {
+//                    [_delegate XMPPServer:self didReceiveAllGroupsBySearch:items];
+//                }
+//            }
+//        }
+//    }
+    
+    
+    
+    
+    
+    
     
     
     
@@ -280,6 +864,116 @@ void runCategoryForFramework34(){}
     NSLog(@"%@",self.aXMPPStream.myJID);
     [self.aXMPPStream sendElement:iq];
 }
+
+
+/**获取服务器时间**/
+- (void)sendRequestServerTimeIq
+{
+    XMPPJID *to =  [XMPPJID jidWithString:self.aXMPPStream.myJID.domain];
+    NSString *elementID = [self.aXMPPStream generateUUID];
+    XMPPIQ *iq = [XMPPIQ iqWithType:@"get" to:to elementID:elementID];
+    NSXMLElement *query = [NSXMLElement elementWithName:@"query" xmlns:@"jabber:iq:time"];
+    [iq addChild:query];
+    [self.aXMPPStream sendElement:iq];
+}
+
+/**请求头像**/
+- (void)sendRequestHeaderIconURLWithJID:(NSString *)jid {
+    XMPPJID *to = [XMPPJID jidWithString:jid];
+    XMPPIQ *iq = [XMPPIQ iqWithType:@"get" to:to elementID:kStringXMPPElementIDGetPhotoHash];
+    NSXMLElement *vCard = [NSXMLElement elementWithName:@"vCard" xmlns:@"vcard-temp"];
+    [vCard addAttributeWithName:@"ver" intValue:0];
+    NSXMLElement *PHOTO = [NSXMLElement elementWithName:@"PHOTO"];
+    [vCard addChild:PHOTO];
+    [iq addChild:vCard];
+    [self.aXMPPStream sendElement:iq];
+}
+
+
+
+
+#pragma mark - Private
+
+- (NSMutableDictionary *)copiedMutableDictionaryFrom:(NSDictionary *)source {
+    NSMutableDictionary *target = [[NSMutableDictionary alloc] initWithCapacity:10];
+    for(NSString *key in [source allKeys])
+    {
+        [target setObject:[self valueForKey:key inDictionary:source] forKey:key];
+    }
+    return target;
+}
+
+- (NSMutableDictionary *)copiedSomeone:(NSDictionary *)from {
+    //先存下来组别信息
+    NSString *group = [self valueForKey: @"group" inDictionary:from];
+    //复制一份在线状态，并去掉原有的组别信息字典
+    NSMutableDictionary *item = [[NSMutableDictionary alloc] initWithDictionary:from copyItems:YES];
+    NSString *fullName = [NSObject objectForKey:@"name" inDictionary:from];
+//    if([NSObject isEmpty:fullName]) //如果名字为空，那么从组织架构里取，如果组织架构里没有，再截jabberId的@之前的部分，即为名字
+//    {
+//        if(_delegate!=nil && [_delegate respondsToSelector:@selector(XMPPServer:valueFromCachesByProperty:jabberId:withRequestId:)])
+//        {
+//            fullName = [_delegate XMPPServer:self
+//                   valueFromCachesByProperty:@"name"
+//                                    jabberId:[NSObject objectForKey:@"jid" inDictionary:from]
+//                               withRequestId: @"rosters"];
+//        }
+//    }
+    [item setObject:fullName forKey:@"FN" ];
+    [item setObject:[self transferToPinYin:fullName] forKey:@"pinYin"];
+    [item removeObjectForKey:kXMLReaderTextNodeKey];
+    //再把级别字符串添加进去
+    [item setObject:group forKey:@"group"];
+    return item;
+}
+- (NSString *)transferToPinYin:(NSString *)name
+{
+    NSMutableString *_pinYin = [NSMutableString stringWithCapacity:1];
+    
+    for(int j=0; j<name.length; j++)
+    {
+        int character = [name characterAtIndex:j];
+        if(character==32)
+            continue;
+        
+        if(character>=65 && character<=128)
+        {
+            if(j>0) //取首字母
+            {
+                int lastCharacter = [name characterAtIndex:j-1];
+                if(lastCharacter==32) {
+                    [_pinYin appendString:[[name substringWithRange:NSMakeRange(j, 1)] uppercaseString]];
+                }
+            } else {
+                [_pinYin appendString:[[NSString stringWithFormat:@"%c", character] uppercaseString]];
+            }
+        }else{
+            [_pinYin appendString:[[NSString stringWithFormat:@"%c", pinyinFirstLetter(character)] uppercaseString]];
+        }
+    }
+    return _pinYin;
+}
+
+- (NSString *)valueForKey:(NSString *)key inDictionary:(NSDictionary *)dictionary
+{
+    id value = [NSObject objectForKey:key inDictionary:dictionary];
+    if([value isKindOfClass:[NSDictionary class]])
+    {
+        NSDictionary *dValue = [NSObject objectForKey:key inDictionary:dictionary];
+        value = [NSObject objectForKey:kXMLReaderTextNodeKey inDictionary:dValue];
+    }
+    else if(![value isKindOfClass:[NSString class]])
+    {
+        value = [value description];
+    }
+    return value;
+}
+
+
+
+
+
+
 
 
 @end

@@ -45,6 +45,7 @@
     self.passwordTF.placeholder = @"password";
     self.passwordTF.text = @"666666";
     self.passwordTF.layer.borderWidth = 1.0;
+    self.passwordTF.secureTextEntry = YES;
     self.passwordTF.layer.borderColor =
     [[UIColor grayColor] colorWithAlphaComponent:0.8].CGColor;
     self.passwordTF.delegate = self;
@@ -186,7 +187,7 @@
                                 }];
 }
 - (void)loginSuccessAction {
-//    UIViewController *vc = kAppDelegate.mainvc;
+    [kMainVC showTabBarController];
 }
 - (void)loginFailureAction {
     [SVProgressHUD showErrorWithStatus:@"登录失败"];

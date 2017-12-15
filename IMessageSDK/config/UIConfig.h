@@ -7,6 +7,8 @@
 //
 
 
+#import "AppDelegate.h"
+
 //全局唯一的window
 #define KEY_WINDOW  [[UIApplication sharedApplication] keyWindow]
 //动态获取设备高度
@@ -37,7 +39,7 @@
 //导航栏主题颜色
 #define navbarColor  [UIColor colorWithRed:51/255.f green:51/255.f blue:51/255.f alpha:0.9f]
 //主题颜色
-#define kTintColor  HEXCOLOR(0xF2F2F2)
+#define kTintColor  HEXCOLOR(0x00d00d)
 /**浅灰色背景颜色**/
 #define kBackgroundColor  [UIColor colorWithRed:235/255.f green:235/255.f blue:235/255.f alpha:1]
 
@@ -92,14 +94,8 @@
 
 
 
-
 // 应用程序托管
-#define kAppDelegate     ((AppDelegate *)([UIApplication sharedApplication].delegate))
-
-
-
-
-
-
+#define kAppDelegate   ((AppDelegate*)([UIApplication sharedApplication].delegate))
+#define kMainVC        (kAppDelegate.mainvc)
 
 

@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LTSDK/manager/XMPPManager/LTXMPPManager.m"
-            timestampString = "534917158.367235"
+            filePath = "LTSDK/manager/XMPPManager/LTXMPPManager+iq.m"
+            timestampString = "535022117.799133"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "-xmppStream:didNotAuthenticate:"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "-xmppIqLoginCheck:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LTSDK/manager/XMPPManager/LTXMPPManager+iq.m"
-            timestampString = "534917158.367728"
+            timestampString = "535022117.799222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "-xmppIqLoginCheck:"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
+            landmarkName = "-xmppStream:didReceiveIQ:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

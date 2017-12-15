@@ -13,13 +13,12 @@
 //#import "SoapRequest.h"
 #import "Encrypt_Decipher.h"
 //#import "UserManager.h"
-#import "XMPPManager.h"
 #import "LTXMPPManager.h"
-//#import "XMPPManager+IQ.h"
+#import "LTXMPPManager+iq.h"
 //#import "XMPPManager+Presence.h"
-//#import "OrgManager.h"
+#import "OrgManager.h"
 //#import "GetGroupsDataModel.h"
-//#import "XMLParserManager.h"
+#import "XMLParserManager.h"
 //#import "DownloadOrganizationsController.h"
 //#import "AppDelegate+JPush.h"
 //#import "SVProgressHUD+Custom.h"
@@ -159,6 +158,10 @@
     [self changePresenceStatuToOnline];
     
     /**下载组织架构**/
+    [self downloadOrg];
+    
+    /**更新最后的登录用户**/
+    [self updateLastLoginUser];
     
     
 //    [XMPPManager getAllSingleChatterPhotoHash];
@@ -204,15 +207,25 @@
     NSString *IMPwd = userDict[@"IMPwd"];
     
     
-    [XMPPManager jid:JID changePresenceStatuTo:PresenceType_Online];
+    //[XMPPManager jid:JID changePresenceStatuTo:PresenceType_Online];
 //    [XMPPManager requestHeaderIconURLWithJID:[UserManager shareInstance].currentUser.jid];
 }
 
+
+/**登录历史**/
+- (void)updateLastLoginUser {
+    [LTLogin.share updateLastLoginUserWithUsername:_username
+                                          password:_password
+                                                ip:_serverIP
+                                              port:_port];
+}
+
 /**下载组织架构**/
-- (void)downloadOrgFileAndReloadData
+- (void)downloadOrg
 {
 //    NSString *orgFilePath = [kOrgFilePath stringByAppendingPathComponent:@"Organize.xml"];
 //    [UserManager shareInstance].currentUser.filePath = orgFilePath;
+//
 //    [OrgManager downloadAndParserOrgZipWithLocalOrgVersion:NO completeHandler:^(BOOL complete) {
 //        if ( complete ) {
 //            OrgModel *orgModel = [XMLParserManager getPersonInfoByJid:[UserManager shareInstance].currentUser.jid];
@@ -237,10 +250,51 @@
 //            }];
 //        }
 //    }];
-//    //获取群组信息
+    
+    
+    [OrgManager downloadOrgWithlocalVersion:NO completed:^(LTError *error) {
+        if (error)
+        {
+            LTError *error = [LTError errorWithDescription:@"下载组织架构失败" code:(LTErrorLogin_OrgDownloadFailure)];
+        }else{
+            /**组织架构下载成功**/
+            NSDictionary  *userDict = [LTUser.share queryUser];
+            NSString *UserName = userDict[@"UserName"];
+            NSString *JID = userDict[@"JID"];
+            NSString *IMPwd = userDict[@"IMPwd"];
+            
+            OrgModel *orgModel = [XMLParserManager getPersonInfoByJid:JID];
+            NSLog(@"%@",orgModel.NAME);
+            NSLog(@"%@",orgModel.position);
+            NSLog(@"%@",orgModel.JID);
+            NSLog(@"%@",orgModel.PID);
+            NSLog(@"%@",orgModel.LoginName);
+            NSLog(@"%@",orgModel.pinyin);
+
+            //获取头像
+            [LTXMPPManager.share sendRequestHeaderIconURLWithJID:JID];
+        }
+    }];
+    
+    
+    
+    
+    
+    
+    
+    
+    //获取群组信息
 //    GetGroupsDataModel *getGroupsDataModel = [[GetGroupsDataModel alloc] init];
 //    [getGroupsDataModel getGroupsDataDictionary];
 }
+
+
+
+
+
+
+
+
 //
 //#pragma mark – 登录历史
 //

@@ -86,6 +86,11 @@ typedef void(^LTLogin_LogoutBlock)(LTError *error);
  */
 - (NSDictionary *)queryLastLoginUser;
 - (void)deleteLastLoginUser;
+- (void)updateLastLoginUserWithUsername:(NSString *)aUsername
+                               password:(NSString *)aPassword
+                                     ip:(NSString *)aIP
+                                   port:(NSString *)aPort;
+
 
 
 

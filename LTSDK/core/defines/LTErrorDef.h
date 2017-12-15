@@ -85,11 +85,12 @@ typedef enum{
     LTErrorLogin_InfDownloadFailure,  /**inf文件下载失败**/
     LTErrorLogin_loginTimeOut,        /**登录超时**/
     LTErrorLogin_connectFailure,      /**连接失败**/
+    LTErrorLogin_connectRefused,      /**连接被拒绝**/
     LTErrorLogin_InvalidUsername,     /**用户名错误**/
     LTErrorLogin_InvalidPassword,     /**密码错误**/
     LTErrorLogin_InvalidIp,           /**服务器地址错误**/
     LTErrorLogin_InvalidPort,         /**服务器地址错误**/
-    
+    LTErrorLogin_OrgDownloadFailure,  /**组织架构下载失败**/
     
     
     

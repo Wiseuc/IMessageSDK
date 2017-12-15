@@ -14,8 +14,15 @@
 #import "XMPPStream+secure.h"
 #import "Encrypt_Decipher.h"
 #import "LT_Macros.h"
-typedef void(^LTXMPPManagerLoginBlock)(LTError *error);
+#import "LT_XMLReader.h"
+#import "LT_NSObject+Additions.h"
+#import "LT_NSMutableString+ReplacingOccurencesOfString.h"
+#import "LT_POAPinyin.h"
 
+
+typedef void(^LTXMPPManagerLoginBlock)(LTError *error);
+typedef void(^LTXMPPManager_friend_queryRostersBlock)(NSMutableArray *arrM, NSString *rosterVersion);
+typedef void(^LTXMPPManager_friend_queryGroupsBlock)(NSMutableArray *arrM, NSString *groupVersion);
 
 
 @interface LTXMPPManager : NSObject
@@ -26,12 +33,24 @@ typedef void(^LTXMPPManagerLoginBlock)(LTError *error);
     NSString *_username;
     NSString *_password;
 }
-@property (nonatomic, strong) LTXMPPManagerLoginBlock aXMPPManagerLoginBlock;
 @property (nonatomic, strong) XMPPStream    *aXMPPStream;
 @property (nonatomic, strong) XMPPRoster    *aXMPPRoster;
 @property (nonatomic, strong) XMPPReconnect *aXMPPReconnect;
 @property (nonatomic, strong) XMPPAutoPing  *aXMPPAutoPing;
 @property (nonatomic, strong) XMPPRosterCoreDataStorage  *aXMPPRosterCoreDataStorage;
+@property (nonatomic, assign) long long     timeOffset_localAndServer;  /**本地时间和服务器时间差值 本地>服务器**/
+
+//回调
+@property (nonatomic, strong) LTXMPPManagerLoginBlock aXMPPManagerLoginBlock;
+//好友
+@property (nonatomic, strong) LTXMPPManager_friend_queryRostersBlock friend_queryRostersBlock;  /**请求好友列表回调**/
+@property (nonatomic, strong) LTXMPPManager_friend_queryGroupsBlock friend_queryGroupsBlock;  /**请求群组列表回调**/
+
+
+
+
+
+
 
 
 /*!
@@ -80,6 +99,21 @@ typedef void(^LTXMPPManagerLoginBlock)(LTError *error);
  @discussion null
  */
 -(void)loginAuthWithPassword:(NSString *)aPassword;
+
+
+
+/*!
+ @method
+ @abstract 获取当前时间戳
+ @discussion 服务器时间 = 系统时间 - 差值
+ @result  时间戳
+ */
+- (long long)queryServerTimeStamp;
+
+
+
+
+
 
 
 @end

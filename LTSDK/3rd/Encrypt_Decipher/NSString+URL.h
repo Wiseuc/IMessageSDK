@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
+void runCategoryForFramework37();
+//void runCategoryForFramework(){}
 @interface NSString (URL)
 
 - (NSString *)URLEncode;

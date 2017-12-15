@@ -8,6 +8,11 @@
 
 #import "LTXMPPManager.h"
 #import "LTXMPPManager+iq.h"
+#import "LTXMPPManager+presence.h"
+#import "LTXMPPManager+friend.h"
+#import "LTXMPPManager+group.h"
+
+
 
 @interface LTXMPPManager ()<XMPPStreamDelegate>
 
@@ -85,6 +90,12 @@
     }
 }
 
+/**获取时间戳**/
+- (long long)queryServerTimeStamp {
+    NSTimeInterval timestap =
+    [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970] - self.timeOffset_localAndServer;
+    return (long long)(timestap * 1000 + 1);
+}
 
 
 
@@ -113,6 +124,14 @@
         //[_xmppStream authenticateWithPassword:_userModel.password error:nil];
     }
 }
+- (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
+    LTError *error2 = [LTError errorWithDescription:@"连接服务器被拒" code:(LTErrorLogin_connectRefused)];
+    if ( _aXMPPManagerLoginBlock) {
+        _aXMPPManagerLoginBlock(error2);
+    }
+}
+
+
 
 
 
@@ -136,21 +155,35 @@ willSecureWithSettings:(NSMutableDictionary *)settings{
 #pragma mark - 代理：Auth
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
-//    // 申请上线
-//    [self online];
-//
-//    // 获取服务器时间
-//    [self getServerTime];
-
-    NSLog(@"登录授权成功");
-    _aXMPPManagerLoginBlock(nil);
-}
-//获取授权失败
-- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(DDXMLElement *)error {
-    //  登陆失败
-    NSError *myError = [NSError errorWithDomain:error.description code:-1 userInfo:nil];
+    /**发送在线**/
+    [self sendPresenceAvailable];
     
+    /**请求服务器时间**/
+    [self sendRequestServerTimeIq];
+    
+    
+    
+    
+    if (_aXMPPManagerLoginBlock) {
+        _aXMPPManagerLoginBlock(nil);
+    }
 }
+
+- (void)xmppStream:(XMPPStream *)sender
+didNotAuthenticate:(DDXMLElement *)error {
+    
+    //NSError *myError =
+    [NSError errorWithDomain:error.description code:-1
+                    userInfo:nil];
+    if (_aXMPPManagerLoginBlock) {
+        LTError *error =
+        [LTError errorWithDescription:@"授权失败"
+                                 code:(LTErrorLogin_loginGeneralFailure)];
+        _aXMPPManagerLoginBlock(error);
+    }
+}
+
+
 
 
 
@@ -256,12 +289,24 @@ willSecureWithSettings:(NSMutableDictionary *)settings{
         runCategoryForFramework33();
         runCategoryForFramework34();
         runCategoryForFramework35();
-        
         runCategoryForFramework36();
+        runCategoryForFramework37();
+        runCategoryForFramework38();
+        runCategoryForFramework39();
+        runCategoryForFramework40();
+        
+        
+        
+        runCategoryForFramework41();
 //        runCategoryForFramework32();
 //        runCategoryForFramework33();
 //        runCategoryForFramework34();
 //        runCategoryForFramework35();
+//        runCategoryForFramework36();
+//        runCategoryForFramework37();
+//        runCategoryForFramework38();
+//        runCategoryForFramework39();
+//        runCategoryForFramework40();
         
         
         

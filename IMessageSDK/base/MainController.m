@@ -48,7 +48,43 @@
         }];
         
     }else{
-        [self showLoginController];
+        /**是否有登录历史**/
+        
+        if ([LTLogin.share queryLastLoginUser])
+        {
+            [self showTabBarController];
+            [LTLogin.share loginCheck:^(MyLoginState aLoginState) {
+                
+                switch (aLoginState) {
+                    case MyLoginState_Login:
+                    {
+                        /**返回的是字典aUsername\ aPassword\ aIP\ aPort**/
+                        NSDictionary  *userDict = [LTLogin.share queryLastLoginUser];
+                        NSString *aUsername = userDict[@"aUsername"];
+                        NSString *aPassword = userDict[@"aPassword"];
+                        NSString *aIP = userDict[@"aIP"];
+                        NSString *aPort = userDict[@"aPort"];
+                        
+                        [LTLogin.share asyncLoginWithUsername:aUsername
+                                                     password:aPassword
+                                                     serverIP:aIP
+                                                         port:aPort
+                                                    completed:^(LTError *error) {
+                                                        
+                                                    }];
+                    }
+                        break;
+                    default:
+                        [self showLoginController];
+                        break;
+                }
+                
+            }];
+            
+        }else{
+            
+            [self showLoginController];
+        }
     }
 }
 

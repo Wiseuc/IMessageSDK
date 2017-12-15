@@ -40,27 +40,24 @@ typedef enum {
 
 @interface LTXMPPManager (presence)
 
-//在线状态描述
-//+ (NSString *)presenceTypeDescription:(PresenceType)presenceType;
 //通过在线类型获取在线状态显示图片名
-//+ (NSString *)presenceTypeImageName:(PresenceType)presenceType;
++ (NSString *)presenceTypeImageName:(LTPresenceType)presenceType;
 //通过JID获取在线类型
-//+ (PresenceType)presenceStatuForJID:(NSString *)chatterJID;
-//当前登录用户在线类型
-//+ (PresenceType)presenceStatuForIPhonePlatform_JID:(NSString *)IPhonePlatform_JID;
++ (LTPresenceType)presenceStatuForJID:(NSString *)chatterJID;
 //更新JID的在线类型
-//- (void)changePresenceStatuWithJID:(NSString *)aJID To:(LTPresenceType)aPresence;
+- (void)changePresenceStatuWithJID:(NSString *)aJID To:(LTPresenceType)aPresence;
 //创建群主之间发送的消息
-//+ (void)sendPresenceToRoomID:(NSString *)roomID domain:(NSString *)domain resource:(NSString *)resource;
++ (void)sendPresenceToRoomID:(NSString *)roomID domain:(NSString *)domain resource:(NSString *)resource;
 
 
 /**发送在线**/
 -(void)sendPresenceAvailable;
 /**发送离线**/
 -(void)sendPresenceUNAvailable;
-
-
-
+/**发送忙碌**/
+- (void)sendPresenceBusy;
+/**发送后台**/
+- (void)sendPresenceReside;
 
 
 

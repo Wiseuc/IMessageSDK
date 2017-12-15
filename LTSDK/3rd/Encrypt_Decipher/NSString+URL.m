@@ -7,6 +7,8 @@
 //
 
 #import "NSString+URL.h"
+//void runCategoryForFramework();
+void runCategoryForFramework37(){}
 
 @implementation NSString (URL)
 
