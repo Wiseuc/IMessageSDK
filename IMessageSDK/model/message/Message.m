@@ -1,14 +1,18 @@
 //
-//  LT_Message.m
-//  LTSDK
+//  Message.m
+//  IMessageSDK
 //
-//  Created by JH on 2017/12/20.
+//  Created by JH on 2017/12/21.
 //  Copyright © 2017年 JiangHai. All rights reserved.
 //
 
-#import "LT_Message.h"
+#import "Message.h"
+#define kBG_TableName @"kBG_TableName"  /**数据库表名**/
+@implementation Message
 
-@implementation LT_Message
+
+
+
 
 /** 设置唯一约束**/
 //+(NSArray *)bg_uniqueKeys{
@@ -43,11 +47,11 @@
     [self bg_delete:kBG_TableName where:where];
 }
 +(void)jh_clear {
-    [self bg_clear:kBG_TableName];
+    //[self bg_clear:kBG_TableName];
 }
 
 +(void)jh_drop {
-    [self bg_drop:kBG_TableName];
+    //[self bg_drop:kBG_TableName];
 }
 
 
@@ -61,7 +65,6 @@
 +(NSArray *)jh_queryAll{
     return [self bg_findAll:kBG_TableName];
 }
-
 +(NSArray *)jh_queryByCurentOtherJID:(NSString *)aOtherJID {
     NSString* where =
     [NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"currentOtherJID"),bg_sqlValue(aOtherJID)];
@@ -69,21 +72,21 @@
     return arr;
 }
 +(NSArray *)jh_queryByDistinctCurrentOtherJID {
-    
     //NSArray* arr = bg_executeSql(@"select * from yy", kBG_TableName, [People class]);
-    
-//    NSArray  *arr03 = bg_executeSql(@"select * from kBG_TableName where BG_currentOtherJID = 50", kBG_TableName, [LT_Message class]);
-//    select * from Test2 where ID in (select min(ID) from Test2 group by A,B)
-    
+    //    NSArray  *arr03 = bg_executeSql(@"select * from kBG_TableName where BG_currentOtherJID = 50", kBG_TableName, [LT_Message class]);
+    //    select * from Test2 where ID in (select min(ID) from Test2 group by A,B)
     NSArray  *arr03 =
-    bg_executeSql(@"select distinct BG_currentOtherJID,BG_conversationName,BG_type from kBG_TableName", kBG_TableName, [LT_Message class]);
+    bg_executeSql(@"select distinct BG_conversationName from kBG_TableName", kBG_TableName, [self class]);
     return arr03;
 }
-
-
-
-
-
++(NSArray *)jh_queryByConversationName:(NSString *)aConversationName {
+    
+    NSString *sql = [NSString stringWithFormat:@"select * From kBG_TableName WHERE BG_conversationName = '%@' ORDER BY BG_stamp DESC;",aConversationName ];
+    
+    NSArray  *arr03 = bg_executeSql(sql, kBG_TableName, [self class]);
+    
+    return arr03;
+}
 
 
 

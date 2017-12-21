@@ -313,7 +313,6 @@
 		F963FDC11FE279680073D490 /* LT_NSMutableString+ReplacingOccurencesOfString.h in Headers */ = {isa = PBXBuildFile; fileRef = F963FDBF1FE279680073D490 /* LT_NSMutableString+ReplacingOccurencesOfString.h */; };
 		F963FDC21FE279680073D490 /* LT_NSMutableString+ReplacingOccurencesOfString.m in Sources */ = {isa = PBXBuildFile; fileRef = F963FDC01FE279680073D490 /* LT_NSMutableString+ReplacingOccurencesOfString.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F97D69181FE9F09C00E19477 /* InformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D69171FE9F09C00E19477 /* InformationCell.m */; };
-		F97D691F1FE9FF1F00E19477 /* ChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D691E1FE9FF1F00E19477 /* ChatListController.m */; };
 		F97D69241FEA0A4B00E19477 /* LTMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = F97D69221FEA0A4B00E19477 /* LTMessage.h */; };
 		F97D69251FEA0A4B00E19477 /* LTMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D69231FEA0A4B00E19477 /* LTMessage.m */; };
 		F97D69281FEA0BD400E19477 /* LTXMPPManager+message.h in Headers */ = {isa = PBXBuildFile; fileRef = F97D69261FEA0BD400E19477 /* LTXMPPManager+message.h */; };
@@ -330,17 +329,19 @@
 		F97E34221FE11D98001CBFA8 /* LTXMPPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F97E34201FE11D98001CBFA8 /* LTXMPPManager.m */; };
 		F97E34241FE121CC001CBFA8 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E34231FE121CC001CBFA8 /* libresolv.tbd */; };
 		F97E34261FE121D5001CBFA8 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E34251FE121D5001CBFA8 /* libxml2.tbd */; };
-		F98FDB6C1FEB874D00618C82 /* BGDB.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB541FEB874C00618C82 /* BGDB.m */; };
-		F98FDB6D1FEB874D00618C82 /* BGModelInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB581FEB874C00618C82 /* BGModelInfo.m */; };
-		F98FDB6E1FEB874D00618C82 /* BGTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB5A1FEB874C00618C82 /* BGTool.m */; };
-		F98FDB6F1FEB874D00618C82 /* NSCache+BGCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB5C1FEB874C00618C82 /* NSCache+BGCache.m */; };
-		F98FDB701FEB874D00618C82 /* NSObject+BGModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB5E1FEB874C00618C82 /* NSObject+BGModel.m */; };
-		F98FDB711FEB874D00618C82 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB611FEB874C00618C82 /* FMDatabase.m */; };
-		F98FDB721FEB874D00618C82 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB631FEB874C00618C82 /* FMDatabaseAdditions.m */; };
-		F98FDB731FEB874D00618C82 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB651FEB874C00618C82 /* FMDatabasePool.m */; };
-		F98FDB741FEB874D00618C82 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB671FEB874C00618C82 /* FMDatabaseQueue.m */; };
-		F98FDB751FEB874D00618C82 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB6A1FEB874C00618C82 /* FMResultSet.m */; };
-		F98FDB761FEB874D00618C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F98FDB6B1FEB874C00618C82 /* Info.plist */; };
+		F98FDB7A1FEB8AF400618C82 /* ChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB791FEB8AF300618C82 /* ChatListController.m */; };
+		F98FDB811FEB8BDD00618C82 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB801FEB8BDD00618C82 /* Message.m */; };
+		F98FDB9D1FEB8DB200618C82 /* BGDB.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB851FEB8DB100618C82 /* BGDB.m */; };
+		F98FDB9E1FEB8DB200618C82 /* BGModelInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB891FEB8DB100618C82 /* BGModelInfo.m */; };
+		F98FDB9F1FEB8DB200618C82 /* BGTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB8B1FEB8DB100618C82 /* BGTool.m */; };
+		F98FDBA01FEB8DB200618C82 /* NSCache+BGCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB8D1FEB8DB100618C82 /* NSCache+BGCache.m */; };
+		F98FDBA11FEB8DB200618C82 /* NSObject+BGModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB8F1FEB8DB100618C82 /* NSObject+BGModel.m */; };
+		F98FDBA21FEB8DB200618C82 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB921FEB8DB100618C82 /* FMDatabase.m */; };
+		F98FDBA31FEB8DB200618C82 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB941FEB8DB100618C82 /* FMDatabaseAdditions.m */; };
+		F98FDBA41FEB8DB200618C82 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB961FEB8DB100618C82 /* FMDatabasePool.m */; };
+		F98FDBA51FEB8DB200618C82 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB981FEB8DB100618C82 /* FMDatabaseQueue.m */; };
+		F98FDBA61FEB8DB200618C82 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB9B1FEB8DB100618C82 /* FMResultSet.m */; };
+		F98FDBA71FEB8DB200618C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F98FDB9C1FEB8DB100618C82 /* Info.plist */; };
 		F99AADAD1FE3BEF900D87B35 /* LTXMPPManager+group.m in Sources */ = {isa = PBXBuildFile; fileRef = F99AADAB1FE3BEF800D87B35 /* LTXMPPManager+group.m */; };
 		F99AADAE1FE3BEF900D87B35 /* LTXMPPManager+group.h in Headers */ = {isa = PBXBuildFile; fileRef = F99AADAC1FE3BEF800D87B35 /* LTXMPPManager+group.h */; };
 		F99AADB11FE3C3F000D87B35 /* GroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F99AADB01FE3C3F000D87B35 /* GroupModel.m */; };
@@ -986,8 +987,6 @@
 		F963FDC01FE279680073D490 /* LT_NSMutableString+ReplacingOccurencesOfString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LT_NSMutableString+ReplacingOccurencesOfString.m"; sourceTree = "<group>"; };
 		F97D69161FE9F09C00E19477 /* InformationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InformationCell.h; sourceTree = "<group>"; };
 		F97D69171FE9F09C00E19477 /* InformationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InformationCell.m; sourceTree = "<group>"; };
-		F97D691D1FE9FF1F00E19477 /* ChatListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatListController.h; sourceTree = "<group>"; };
-		F97D691E1FE9FF1F00E19477 /* ChatListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatListController.m; sourceTree = "<group>"; };
 		F97D69221FEA0A4B00E19477 /* LTMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LTMessage.h; sourceTree = "<group>"; };
 		F97D69231FEA0A4B00E19477 /* LTMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LTMessage.m; sourceTree = "<group>"; };
 		F97D69261FEA0BD400E19477 /* LTXMPPManager+message.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LTXMPPManager+message.h"; sourceTree = "<group>"; };
@@ -1004,30 +1003,34 @@
 		F97E34201FE11D98001CBFA8 /* LTXMPPManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LTXMPPManager.m; sourceTree = "<group>"; };
 		F97E34231FE121CC001CBFA8 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		F97E34251FE121D5001CBFA8 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
-		F98FDB531FEB874C00618C82 /* BGDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGDB.h; sourceTree = "<group>"; };
-		F98FDB541FEB874C00618C82 /* BGDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGDB.m; sourceTree = "<group>"; };
-		F98FDB551FEB874C00618C82 /* BGFMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGFMDB.h; sourceTree = "<group>"; };
-		F98FDB561FEB874C00618C82 /* BGFMDBConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGFMDBConfig.h; sourceTree = "<group>"; };
-		F98FDB571FEB874C00618C82 /* BGModelInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGModelInfo.h; sourceTree = "<group>"; };
-		F98FDB581FEB874C00618C82 /* BGModelInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGModelInfo.m; sourceTree = "<group>"; };
-		F98FDB591FEB874C00618C82 /* BGTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGTool.h; sourceTree = "<group>"; };
-		F98FDB5A1FEB874C00618C82 /* BGTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGTool.m; sourceTree = "<group>"; };
-		F98FDB5B1FEB874C00618C82 /* NSCache+BGCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCache+BGCache.h"; sourceTree = "<group>"; };
-		F98FDB5C1FEB874C00618C82 /* NSCache+BGCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCache+BGCache.m"; sourceTree = "<group>"; };
-		F98FDB5D1FEB874C00618C82 /* NSObject+BGModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BGModel.h"; sourceTree = "<group>"; };
-		F98FDB5E1FEB874C00618C82 /* NSObject+BGModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BGModel.m"; sourceTree = "<group>"; };
-		F98FDB601FEB874C00618C82 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		F98FDB611FEB874C00618C82 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		F98FDB621FEB874C00618C82 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		F98FDB631FEB874C00618C82 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		F98FDB641FEB874C00618C82 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
-		F98FDB651FEB874C00618C82 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
-		F98FDB661FEB874C00618C82 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
-		F98FDB671FEB874C00618C82 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
-		F98FDB681FEB874C00618C82 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
-		F98FDB691FEB874C00618C82 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		F98FDB6A1FEB874C00618C82 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		F98FDB6B1FEB874C00618C82 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F98FDB781FEB8AF300618C82 /* ChatListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListController.h; sourceTree = "<group>"; };
+		F98FDB791FEB8AF300618C82 /* ChatListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListController.m; sourceTree = "<group>"; };
+		F98FDB7F1FEB8BDD00618C82 /* Message.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		F98FDB801FEB8BDD00618C82 /* Message.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		F98FDB841FEB8DB100618C82 /* BGDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGDB.h; sourceTree = "<group>"; };
+		F98FDB851FEB8DB100618C82 /* BGDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGDB.m; sourceTree = "<group>"; };
+		F98FDB861FEB8DB100618C82 /* BGFMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGFMDB.h; sourceTree = "<group>"; };
+		F98FDB871FEB8DB100618C82 /* BGFMDBConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGFMDBConfig.h; sourceTree = "<group>"; };
+		F98FDB881FEB8DB100618C82 /* BGModelInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGModelInfo.h; sourceTree = "<group>"; };
+		F98FDB891FEB8DB100618C82 /* BGModelInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGModelInfo.m; sourceTree = "<group>"; };
+		F98FDB8A1FEB8DB100618C82 /* BGTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGTool.h; sourceTree = "<group>"; };
+		F98FDB8B1FEB8DB100618C82 /* BGTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGTool.m; sourceTree = "<group>"; };
+		F98FDB8C1FEB8DB100618C82 /* NSCache+BGCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCache+BGCache.h"; sourceTree = "<group>"; };
+		F98FDB8D1FEB8DB100618C82 /* NSCache+BGCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCache+BGCache.m"; sourceTree = "<group>"; };
+		F98FDB8E1FEB8DB100618C82 /* NSObject+BGModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BGModel.h"; sourceTree = "<group>"; };
+		F98FDB8F1FEB8DB100618C82 /* NSObject+BGModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BGModel.m"; sourceTree = "<group>"; };
+		F98FDB911FEB8DB100618C82 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		F98FDB921FEB8DB100618C82 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		F98FDB931FEB8DB100618C82 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		F98FDB941FEB8DB100618C82 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		F98FDB951FEB8DB100618C82 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		F98FDB961FEB8DB100618C82 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		F98FDB971FEB8DB100618C82 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		F98FDB981FEB8DB100618C82 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		F98FDB991FEB8DB100618C82 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		F98FDB9A1FEB8DB100618C82 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		F98FDB9B1FEB8DB100618C82 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		F98FDB9C1FEB8DB100618C82 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F99AADAB1FE3BEF800D87B35 /* LTXMPPManager+group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LTXMPPManager+group.m"; sourceTree = "<group>"; };
 		F99AADAC1FE3BEF800D87B35 /* LTXMPPManager+group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LTXMPPManager+group.h"; sourceTree = "<group>"; };
 		F99AADAF1FE3C3F000D87B35 /* GroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupModel.h; sourceTree = "<group>"; };
@@ -1192,6 +1195,7 @@
 		F9194CA81FDFD37B00CCFB32 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				F98FDB7B1FEB8BB400618C82 /* message */,
 				F97D69211FEA03E400E19477 /* chat */,
 				F93496D61FE8AD1500E8D8A3 /* OrgModel */,
 				F9558CDA1FE3800100D13CD0 /* RosterModel.h */,
@@ -1223,6 +1227,7 @@
 				F963FD681FE257300073D490 /* office */,
 				F963FD671FE2571F0073D490 /* mine */,
 				F963FD661FE257040073D490 /* chat */,
+				F98FDB771FEB8AF300618C82 /* chatList */,
 				F9194CBD1FDFD8FB00CCFB32 /* login */,
 			);
 			path = controller;
@@ -1231,7 +1236,7 @@
 		F9194CAB1FDFD39400CCFB32 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
-				F98FDB511FEB874C00618C82 /* BGFMDB */,
+				F98FDB821FEB8DB100618C82 /* BGFMDB */,
 				F9558D201FE399CA00D13CD0 /* MJRefresh */,
 				F9558CC71FE35BF900D13CD0 /* CHTCollectionViewWaterfallLayout */,
 				F91761B71FE0D48000906CBB /* SVProgressHUD */,
@@ -2908,8 +2913,6 @@
 			children = (
 				F963FD6C1FE257570073D490 /* ChatController.h */,
 				F963FD6D1FE257570073D490 /* ChatController.m */,
-				F97D691D1FE9FF1F00E19477 /* ChatListController.h */,
-				F97D691E1FE9FF1F00E19477 /* ChatListController.m */,
 			);
 			path = chat;
 			sourceTree = "<group>";
@@ -3057,49 +3060,67 @@
 			path = XMPPManager;
 			sourceTree = "<group>";
 		};
-		F98FDB511FEB874C00618C82 /* BGFMDB */ = {
+		F98FDB771FEB8AF300618C82 /* chatList */ = {
 			isa = PBXGroup;
 			children = (
-				F98FDB521FEB874C00618C82 /* BG */,
-				F98FDB5F1FEB874C00618C82 /* FMDB */,
+				F98FDB781FEB8AF300618C82 /* ChatListController.h */,
+				F98FDB791FEB8AF300618C82 /* ChatListController.m */,
+			);
+			path = chatList;
+			sourceTree = "<group>";
+		};
+		F98FDB7B1FEB8BB400618C82 /* message */ = {
+			isa = PBXGroup;
+			children = (
+				F98FDB7F1FEB8BDD00618C82 /* Message.h */,
+				F98FDB801FEB8BDD00618C82 /* Message.m */,
+			);
+			path = message;
+			sourceTree = "<group>";
+		};
+		F98FDB821FEB8DB100618C82 /* BGFMDB */ = {
+			isa = PBXGroup;
+			children = (
+				F98FDB831FEB8DB100618C82 /* BG */,
+				F98FDB901FEB8DB100618C82 /* FMDB */,
 			);
 			path = BGFMDB;
 			sourceTree = "<group>";
 		};
-		F98FDB521FEB874C00618C82 /* BG */ = {
+		F98FDB831FEB8DB100618C82 /* BG */ = {
 			isa = PBXGroup;
 			children = (
-				F98FDB531FEB874C00618C82 /* BGDB.h */,
-				F98FDB541FEB874C00618C82 /* BGDB.m */,
-				F98FDB551FEB874C00618C82 /* BGFMDB.h */,
-				F98FDB561FEB874C00618C82 /* BGFMDBConfig.h */,
-				F98FDB571FEB874C00618C82 /* BGModelInfo.h */,
-				F98FDB581FEB874C00618C82 /* BGModelInfo.m */,
-				F98FDB591FEB874C00618C82 /* BGTool.h */,
-				F98FDB5A1FEB874C00618C82 /* BGTool.m */,
-				F98FDB5B1FEB874C00618C82 /* NSCache+BGCache.h */,
-				F98FDB5C1FEB874C00618C82 /* NSCache+BGCache.m */,
-				F98FDB5D1FEB874C00618C82 /* NSObject+BGModel.h */,
-				F98FDB5E1FEB874C00618C82 /* NSObject+BGModel.m */,
+				F98FDB841FEB8DB100618C82 /* BGDB.h */,
+				F98FDB851FEB8DB100618C82 /* BGDB.m */,
+				F98FDB861FEB8DB100618C82 /* BGFMDB.h */,
+				F98FDB871FEB8DB100618C82 /* BGFMDBConfig.h */,
+				F98FDB881FEB8DB100618C82 /* BGModelInfo.h */,
+				F98FDB891FEB8DB100618C82 /* BGModelInfo.m */,
+				F98FDB8A1FEB8DB100618C82 /* BGTool.h */,
+				F98FDB8B1FEB8DB100618C82 /* BGTool.m */,
+				F98FDB8C1FEB8DB100618C82 /* NSCache+BGCache.h */,
+				F98FDB8D1FEB8DB100618C82 /* NSCache+BGCache.m */,
+				F98FDB8E1FEB8DB100618C82 /* NSObject+BGModel.h */,
+				F98FDB8F1FEB8DB100618C82 /* NSObject+BGModel.m */,
 			);
 			path = BG;
 			sourceTree = "<group>";
 		};
-		F98FDB5F1FEB874C00618C82 /* FMDB */ = {
+		F98FDB901FEB8DB100618C82 /* FMDB */ = {
 			isa = PBXGroup;
 			children = (
-				F98FDB601FEB874C00618C82 /* FMDatabase.h */,
-				F98FDB611FEB874C00618C82 /* FMDatabase.m */,
-				F98FDB621FEB874C00618C82 /* FMDatabaseAdditions.h */,
-				F98FDB631FEB874C00618C82 /* FMDatabaseAdditions.m */,
-				F98FDB641FEB874C00618C82 /* FMDatabasePool.h */,
-				F98FDB651FEB874C00618C82 /* FMDatabasePool.m */,
-				F98FDB661FEB874C00618C82 /* FMDatabaseQueue.h */,
-				F98FDB671FEB874C00618C82 /* FMDatabaseQueue.m */,
-				F98FDB681FEB874C00618C82 /* FMDB.h */,
-				F98FDB691FEB874C00618C82 /* FMResultSet.h */,
-				F98FDB6A1FEB874C00618C82 /* FMResultSet.m */,
-				F98FDB6B1FEB874C00618C82 /* Info.plist */,
+				F98FDB911FEB8DB100618C82 /* FMDatabase.h */,
+				F98FDB921FEB8DB100618C82 /* FMDatabase.m */,
+				F98FDB931FEB8DB100618C82 /* FMDatabaseAdditions.h */,
+				F98FDB941FEB8DB100618C82 /* FMDatabaseAdditions.m */,
+				F98FDB951FEB8DB100618C82 /* FMDatabasePool.h */,
+				F98FDB961FEB8DB100618C82 /* FMDatabasePool.m */,
+				F98FDB971FEB8DB100618C82 /* FMDatabaseQueue.h */,
+				F98FDB981FEB8DB100618C82 /* FMDatabaseQueue.m */,
+				F98FDB991FEB8DB100618C82 /* FMDB.h */,
+				F98FDB9A1FEB8DB100618C82 /* FMResultSet.h */,
+				F98FDB9B1FEB8DB100618C82 /* FMResultSet.m */,
+				F98FDB9C1FEB8DB100618C82 /* Info.plist */,
 			);
 			path = FMDB;
 			sourceTree = "<group>";
@@ -3288,7 +3309,7 @@
 				F9194C7E1FDFD2C400CCFB32 /* Main.storyboard in Resources */,
 				F9558D741FE399CA00D13CD0 /* Info.plist in Resources */,
 				F91761BF1FE0D48000906CBB /* SVProgressHUD.bundle in Resources */,
-				F98FDB761FEB874D00618C82 /* Info.plist in Resources */,
+				F98FDBA71FEB8DB200618C82 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3321,12 +3342,14 @@
 				F93496E41FE8D2B400E8D8A3 /* OrgCell.m in Sources */,
 				F9558CCD1FE3622C00D13CD0 /* GroupController.m in Sources */,
 				F93496DD1FE8BCE500E8D8A3 /* OrgModel.m in Sources */,
-				F98FDB701FEB874D00618C82 /* NSObject+BGModel.m in Sources */,
+				F98FDBA11FEB8DB200618C82 /* NSObject+BGModel.m in Sources */,
+				F98FDB7A1FEB8AF400618C82 /* ChatListController.m in Sources */,
+				F98FDB811FEB8BDD00618C82 /* Message.m in Sources */,
 				F9558D701FE399CA00D13CD0 /* MJRefreshBackStateFooter.m in Sources */,
 				F9558D8E1FE3ABF600D13CD0 /* CompanyController.m in Sources */,
+				F98FDB9D1FEB8DB200618C82 /* BGDB.m in Sources */,
 				F9194CB91FDFD64D00CCFB32 /* TabbarController.m in Sources */,
 				F9558D941FE3AF9C00D13CD0 /* RosterHeaderButton.m in Sources */,
-				F98FDB6C1FEB874D00618C82 /* BGDB.m in Sources */,
 				F9194C861FDFD2C400CCFB32 /* main.m in Sources */,
 				F93496F21FE901D600E8D8A3 /* MineCell01.m in Sources */,
 				F9558D841FE399CA00D13CD0 /* UIView+MJExtension.m in Sources */,
@@ -3343,18 +3366,18 @@
 				F9558D661FE399CA00D13CD0 /* MJRefreshAutoFooter.m in Sources */,
 				F9558D831FE399CA00D13CD0 /* UIScrollView+MJRefresh.m in Sources */,
 				F93496EE1FE8E8B800E8D8A3 /* LTStack.m in Sources */,
+				F98FDBA01FEB8DB200618C82 /* NSCache+BGCache.m in Sources */,
 				F9558D791FE399CA00D13CD0 /* MJPropertyType.m in Sources */,
 				F9194CBC1FDFD72500CCFB32 /* MainController.m in Sources */,
-				F98FDB6F1FEB874D00618C82 /* NSCache+BGCache.m in Sources */,
+				F98FDBA51FEB8DB200618C82 /* FMDatabaseQueue.m in Sources */,
 				F9558D6E1FE399CA00D13CD0 /* MJRefreshBackGifFooter.m in Sources */,
 				F93496F51FE9041300E8D8A3 /* MineCell02.m in Sources */,
-				F98FDB741FEB874D00618C82 /* FMDatabaseQueue.m in Sources */,
+				F98FDBA31FEB8DB200618C82 /* FMDatabaseAdditions.m in Sources */,
 				F93496EB1FE8E52000E8D8A3 /* StackView.m in Sources */,
 				F93496F91FE90DE800E8D8A3 /* InformationController.m in Sources */,
-				F98FDB721FEB874D00618C82 /* FMDatabaseAdditions.m in Sources */,
+				F98FDBA21FEB8DB200618C82 /* FMDatabase.m in Sources */,
 				F9558D6A1FE399CA00D13CD0 /* MJRefreshHeader.m in Sources */,
 				F9558D7D1FE399CA00D13CD0 /* NSObject+MJProperty.m in Sources */,
-				F98FDB711FEB874D00618C82 /* FMDatabase.m in Sources */,
 				F9194C781FDFD2C300CCFB32 /* AppDelegate.m in Sources */,
 				F9558D7B1FE399CA00D13CD0 /* NSObject+MJCoding.m in Sources */,
 				F9558D711FE399CA00D13CD0 /* MJRefreshGifHeader.m in Sources */,
@@ -3366,15 +3389,14 @@
 				F9637E2C1FE7D2E800B1250C /* DocManager.m in Sources */,
 				F9558D6C1FE399CA00D13CD0 /* MJRefreshAutoNormalFooter.m in Sources */,
 				F99AADB71FE3C85A00D87B35 /* GroupButton.m in Sources */,
+				F98FDB9F1FEB8DB200618C82 /* BGTool.m in Sources */,
 				F9558CD11FE3655000D13CD0 /* RosterController.m in Sources */,
-				F97D691F1FE9FF1F00E19477 /* ChatListController.m in Sources */,
-				F98FDB6E1FEB874D00618C82 /* BGTool.m in Sources */,
 				F9558D8A1FE39F8400D13CD0 /* RosterReuseableHeader.m in Sources */,
 				F9558CCA1FE35BF900D13CD0 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				F97D69181FE9F09C00E19477 /* InformationCell.m in Sources */,
-				F98FDB6D1FEB874D00618C82 /* BGModelInfo.m in Sources */,
+				F98FDB9E1FEB8DB200618C82 /* BGModelInfo.m in Sources */,
 				F99AADB41FE3C74C00D87B35 /* GroupCell.m in Sources */,
-				F98FDB751FEB874D00618C82 /* FMResultSet.m in Sources */,
+				F98FDBA61FEB8DB200618C82 /* FMResultSet.m in Sources */,
 				F91761C01FE0D48000906CBB /* SVProgressHUD.m in Sources */,
 				F963FD6E1FE257570073D490 /* ChatController.m in Sources */,
 				F9194CC71FDFDA1600CCFB32 /* UIViewController+child.m in Sources */,
@@ -3387,7 +3409,7 @@
 				F9558D671FE399CA00D13CD0 /* MJRefreshBackFooter.m in Sources */,
 				F9558CC31FE35A6600D13CD0 /* OrgController.m in Sources */,
 				F9558D761FE399CA00D13CD0 /* MJFoundation.m in Sources */,
-				F98FDB731FEB874D00618C82 /* FMDatabasePool.m in Sources */,
+				F98FDBA41FEB8DB200618C82 /* FMDatabasePool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -44,8 +44,8 @@
     if ([type isEqualToString:@"chat"])
     {
         //通过jid组织架构获取信息
-        NSDictionary *dict = [LT_OrgManager queryInformationByJid:from];
-        [dict setValue:dict[@"NAME"] forKey:@"conversationName"];
+        NSDictionary *dict02 = [LT_OrgManager queryInformationByJid:from];
+        [dict setValue:dict02[@"NAME"] forKey:@"conversationName"];
     }
     /**群聊**/
     else if ([type isEqualToString:@"groupchat"])
@@ -82,16 +82,26 @@
     
     // 如果是离线消息，那么需要加上时间，以防止系统自已生成时间
     /**时间戳**/
-    DDXMLElement *_x = [xmlMessage elementForName:@"x"];
-    if([xmlMessage wasDelayed])
-    {
-        [xmlMessage delayedDeliveryDate];
-        NSString *stamp = [_x attributeForName:@"stamp"].stringValue;
-        long long timestamp = [self formatOfflineTimeStampWithTimeString:stamp];
-        [dict setValue:@(timestamp) forKey:@"stamp"];
-    }else{
-        [dict setValue:@([LTXMPPManager.share queryServerTimeStamp]) forKey:@"stamp"];
-    }
+//    DDXMLElement *_x = [xmlMessage elementForName:@"x"];
+//    if([xmlMessage wasDelayed])
+//    {
+//        [xmlMessage delayedDeliveryDate];
+//        NSString *stamp = [_x attributeForName:@"stamp"].stringValue;
+//        long long timestamp = [self formatOfflineTimeStampWithTimeString:stamp];
+//        [dict setValue:@(timestamp) forKey:@"stamp"];
+//    }else{
+//        [dict setValue:@([LTXMPPManager.share queryServerTimeStamp]) forKey:@"stamp"];
+//    }
+    NSDate *date = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+    NSString *dateTime = [formatter stringFromDate:date];
+    [dict setValue:dateTime forKey:@"stamp"];
+    
+    
+    
     
     return dict;
 }

@@ -11,6 +11,7 @@
 #import "ChatController.h"
 #import "ChatListCell.h"
 #import "LTSDKFull.h"
+#import "Message.h"
 
 
 @interface ChatListController ()
@@ -38,24 +39,45 @@ UITableViewDelegate
 }
 - (void)setDatas
 {
+    [self refreshData];
+    
     __weak typeof(self) weakself = self;
     [LTMessage.share queryMesageCompleted:^(NSDictionary *dict) {
         [weakself dealData:dict];
     }];
-    
-    
-    //[self.tableView reloadData];
 }
 -(void)dealData:(NSDictionary *)dict {
-    
-
-    
-    
-    
-    
-    
-    
-    
+    Message *msg = [[Message alloc] init];
+    msg.currentMyJID = dict[@"currentMyJID"];
+    msg.currentOtherJID = dict[@"currentOtherJID"];
+    msg.conversationName = dict[@"conversationName"];
+    msg.stamp = dict[@"stamp"];
+    msg.body = dict[@"body"];
+    msg.bodyType = dict[@"bodyType"];
+    msg.from = dict[@"from"];
+    msg.to = dict[@"to"];
+    msg.type = dict[@"type"];
+    msg.UID = dict[@"UID"];
+    msg.SenderJID = dict[@"SenderJID"];
+    [msg jh_saveOrUpdate];
+     [self refreshData];
+}
+-(void)refreshData {
+    NSMutableArray *arrM = [NSMutableArray array];
+    NSArray *arr = [Message jh_queryByDistinctCurrentOtherJID];
+    for (Message *msg in arr) {
+        NSString *conversationName = msg.conversationName;
+        //NSLog(@"== %@",conversationName);
+        
+        //通过conversationName查找聊天信息,并排序
+        NSArray *arr02 = [Message jh_queryByConversationName:conversationName];
+        NSLog(@"%li",arr02.count);
+        
+        Message *message =arr02.firstObject;
+        [arrM addObject:message];
+    }
+    self.dataSource = arrM;
+    [self.tableView reloadData];
 }
 
 
@@ -111,7 +133,7 @@ UITableViewDelegate
     return 60;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 100;
+    return self.dataSource.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0.01f;
@@ -122,6 +144,7 @@ UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ChatListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatListCell"];
     //cell.textLabel.text = @"name";
+    cell.model = self.dataSource[indexPath.row];
     return cell;
 }
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

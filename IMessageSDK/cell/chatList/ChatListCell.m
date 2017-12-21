@@ -66,15 +66,22 @@
     
     self.iconIMGV.frame = CGRectMake(10, 8, (KHEIGHT-16), (KHEIGHT-16));
     
-    self.nameLAB.frame = CGRectMake(10+(KHEIGHT-16)+10, 8, 200, 20);
+    self.nameLAB.frame = CGRectMake(10+(KHEIGHT-16)+10, 8, 150, 20);
     
     self.messageLAB.frame = CGRectMake(10+(KHEIGHT-16)+10, 28+2, 300, 20);
     
-    self.timeLAB.frame = CGRectMake((KWIDTH-80), 8, 70, 20);
+    self.timeLAB.frame = CGRectMake((KWIDTH-140), 8, 130, 20);
     
 }
 
 
 
+-(void)setModel:(Message *)model {
+    _model = model;
+    
+    self.nameLAB.text = model.conversationName;
+    self.messageLAB.text = model.body;
+    self.timeLAB.text = model.stamp;
+}
 
 @end

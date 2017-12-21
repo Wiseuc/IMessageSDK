@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Message.h"
 @interface ChatListCell : UITableViewCell
+
+
+
+@property (nonatomic, strong) Message *model;
 
 @end
