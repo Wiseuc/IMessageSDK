@@ -10,6 +10,9 @@
 #import "GroupButton.h"
 @interface GroupCell ()
 @property (nonatomic, strong) GroupButton *groupButton;
+
+@property (nonatomic, strong) UIImageView *iconIMGV;
+@property (nonatomic, strong) UILabel *nameLAB;
 @end
 
 
@@ -22,8 +25,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.contentView.backgroundColor = [UIColor whiteColor];
-        self.groupButton = [GroupButton buttonWithType:(UIButtonTypeSystem)];
-        [self.contentView addSubview:self.groupButton];
+        
+        self.iconIMGV = [[UIImageView alloc] init];
+        [self.contentView addSubview:self.iconIMGV];
+        self.iconIMGV.image = [UIImage imageNamed:@"wode_xuanzhong"];
+        
+        self.nameLAB = [[UILabel alloc] init];
+        [self.contentView addSubview:self.nameLAB];
+        self.nameLAB.text = @"name";
     }
     return self;
 }
@@ -31,14 +40,19 @@
 
 -(void)layoutSubviews {
     [super layoutSubviews];
-    self.groupButton.frame = self.bounds;
+    CGFloat KWIDTH  = self.frame.size.width;
+    CGFloat KHEIGHT = self.frame.size.height;
+    
+    self.iconIMGV.frame = CGRectMake(20, (KHEIGHT-20)/2, 20, 20);
+    self.nameLAB.frame = CGRectMake(50, (KHEIGHT-20)/2, 200, 20);
 }
 
 
 
 -(void)setModel:(GroupModel *)model {
     _model = model;
-    [self.groupButton setTitle:model.FN forState:(UIControlStateNormal)];
+    
+    self.nameLAB.text = model.name;
 }
 
 @end

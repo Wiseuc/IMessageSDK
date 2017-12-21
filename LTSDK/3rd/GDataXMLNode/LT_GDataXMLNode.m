@@ -651,34 +651,34 @@ static xmlChar *SplitQNameReverse(const xmlChar *qname, xmlChar **prefix) {
   return nil;
 }
 
-- (GDataXMLNodeKind)kind {
+- (LT_GDataXMLNodeKind)kind {
   if (xmlNode_ != NULL) {
     xmlElementType nodeType = xmlNode_->type;
     switch (nodeType) {
-      case XML_ELEMENT_NODE:         return GDataXMLElementKind;
-      case XML_ATTRIBUTE_NODE:       return GDataXMLAttributeKind;
-      case XML_TEXT_NODE:            return GDataXMLTextKind;
-      case XML_CDATA_SECTION_NODE:   return GDataXMLTextKind;
-      case XML_ENTITY_REF_NODE:      return GDataXMLEntityDeclarationKind;
-      case XML_ENTITY_NODE:          return GDataXMLEntityDeclarationKind;
-      case XML_PI_NODE:              return GDataXMLProcessingInstructionKind;
-      case XML_COMMENT_NODE:         return GDataXMLCommentKind;
-      case XML_DOCUMENT_NODE:        return GDataXMLDocumentKind;
-      case XML_DOCUMENT_TYPE_NODE:   return GDataXMLDocumentKind;
-      case XML_DOCUMENT_FRAG_NODE:   return GDataXMLDocumentKind;
-      case XML_NOTATION_NODE:        return GDataXMLNotationDeclarationKind;
-      case XML_HTML_DOCUMENT_NODE:   return GDataXMLDocumentKind;
-      case XML_DTD_NODE:             return GDataXMLDTDKind;
-      case XML_ELEMENT_DECL:         return GDataXMLElementDeclarationKind;
-      case XML_ATTRIBUTE_DECL:       return GDataXMLAttributeDeclarationKind;
-      case XML_ENTITY_DECL:          return GDataXMLEntityDeclarationKind;
-      case XML_NAMESPACE_DECL:       return GDataXMLNamespaceKind;
-      case XML_XINCLUDE_START:       return GDataXMLProcessingInstructionKind;
-      case XML_XINCLUDE_END:         return GDataXMLProcessingInstructionKind;
-      case XML_DOCB_DOCUMENT_NODE:   return GDataXMLDocumentKind;
+      case XML_ELEMENT_NODE:         return LT_GDataXMLElementKind;
+      case XML_ATTRIBUTE_NODE:       return LT_GDataXMLAttributeKind;
+      case XML_TEXT_NODE:            return LT_GDataXMLTextKind;
+      case XML_CDATA_SECTION_NODE:   return LT_GDataXMLTextKind;
+      case XML_ENTITY_REF_NODE:      return LT_GDataXMLEntityDeclarationKind;
+      case XML_ENTITY_NODE:          return LT_GDataXMLEntityDeclarationKind;
+      case XML_PI_NODE:              return LT_GDataXMLProcessingInstructionKind;
+      case XML_COMMENT_NODE:         return LT_GDataXMLCommentKind;
+      case XML_DOCUMENT_NODE:        return LT_GDataXMLDocumentKind;
+      case XML_DOCUMENT_TYPE_NODE:   return LT_GDataXMLDocumentKind;
+      case XML_DOCUMENT_FRAG_NODE:   return LT_GDataXMLDocumentKind;
+      case XML_NOTATION_NODE:        return LT_GDataXMLNotationDeclarationKind;
+      case XML_HTML_DOCUMENT_NODE:   return LT_GDataXMLDocumentKind;
+      case XML_DTD_NODE:             return LT_GDataXMLDTDKind;
+      case XML_ELEMENT_DECL:         return LT_GDataXMLElementDeclarationKind;
+      case XML_ATTRIBUTE_DECL:       return LT_GDataXMLAttributeDeclarationKind;
+      case XML_ENTITY_DECL:          return LT_GDataXMLEntityDeclarationKind;
+      case XML_NAMESPACE_DECL:       return LT_GDataXMLNamespaceKind;
+      case XML_XINCLUDE_START:       return LT_GDataXMLProcessingInstructionKind;
+      case XML_XINCLUDE_END:         return LT_GDataXMLProcessingInstructionKind;
+      case XML_DOCB_DOCUMENT_NODE:   return LT_GDataXMLDocumentKind;
     }
   }
-  return GDataXMLInvalidKind;
+  return LT_GDataXMLInvalidKind;
 }
 
 - (NSArray *)nodesForXPath:(NSString *)xpath error:(NSError **)error {
@@ -1012,7 +1012,7 @@ static xmlChar *SplitQNameReverse(const xmlChar *qname, xmlChar **prefix) {
 }
 
 - (void)addChild:(GDataXMLNode *)child {
-  if ([child kind] == GDataXMLAttributeKind) {
+  if ([child kind] == LT_GDataXMLAttributeKind) {
     [self addAttribute:child];
     return;
   }

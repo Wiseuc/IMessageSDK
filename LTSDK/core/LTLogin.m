@@ -11,6 +11,7 @@
 //#import "AppDelegate+XMPP.h"
 #import "LTSVProgressHUD.h"
 #import "LoginManager.h"
+#import "LTXMPPManager+presence.h"
 
 #define kLTLogin_lastLoginUserKey @"LTLogin_loginUserKey"
 #define kLTLogin_loginStateKey @"LTLogin_loginStateKey"
@@ -127,9 +128,9 @@
 
 /**登出**/
 -(void)asyncLogout{
-//    [[XMPPManager shareXMPPManager] offline];
-//    [[XMPPManager shareXMPPManager] clear];
     [self updateLoginState:NO];
+    [LTXMPPManager.share sendPresenceUNAvailable];
+    [LTXMPPManager.share clear];
 }
 
 

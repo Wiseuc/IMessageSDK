@@ -8,31 +8,252 @@
 
 #import "ChatController.h"
 #import "UIConfig.h"
+#import "CHTCollectionViewWaterfallLayout.h"
+#import "MJRefresh.h"
+#import "InformationController.h"
+#import "LTSDKFull.h"
 @interface ChatController ()
-
+<
+CHTCollectionViewDelegateWaterfallLayout,
+UICollectionViewDataSource,
+UICollectionViewDelegate
+>
+@property (nonatomic, strong) CHTCollectionViewWaterfallLayout *chLayout;
+@property (nonatomic, strong) UICollectionView *collectionview;
+@property (nonatomic, strong) NSMutableArray *datasource;
 @end
 
+
+
+
+
+
+
+
 @implementation ChatController
+
+#pragma mark - UI
+
+-(void)settingUI {
+    
+    self.title = @"联系人name";
+    [self.view addSubview:self.collectionview];
+    [self settingUIBarButtonItem];
+}
+-(void)settingUIBarButtonItem{
+    UIBarButtonItem *rightItem =
+    [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"wode_changtai"]
+                                     style:UIBarButtonItemStylePlain
+                                    target:self action:@selector(pushToInformationController)];
+    rightItem.tag = 1001;
+    self.navigationItem.rightBarButtonItems = @[rightItem];
+}
+-(void)pushToInformationController {
+    InformationController *infovc = [[InformationController alloc] init];
+    [self.navigationController pushViewController:infovc animated:YES];
+}
+
+
+
+
+
+
+
+
+#pragma mark - Data
+
+-(void)settingData {
+    
+
+}
+-(void)refreshData {
+    
+    __weak typeof(self) weakself = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [weakself.collectionview.mj_header endRefreshing];
+        [weakself.collectionview reloadData];
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - start
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kBackgroundColor;
+    
+    [self settingUI];
 }
-
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self settingData];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+
+
+
+
+
+
+#pragma mark - private
+
+-(void)buttonClick:(UIButton *)sender {
+    
+    
+    
+    
+    
 }
-*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - 代理：collectionview
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 100;
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(kScreenWidth, 50);
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell =
+    [collectionView dequeueReusableCellWithReuseIdentifier:@"chat_cell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor whiteColor];
+//    GroupModel *model = self.datasource[indexPath.item];
+//    cell.model = model;
+    return cell;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+//           viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+//    UICollectionReusableView  *reuseableView = nil;
+//    __weak typeof(self) weakself = self;
+//    if (kind == CHTCollectionElementKindSectionHeader)
+//    {
+//        RosterReuseableHeader *aRosterReuseableHeader =
+//        [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"roster_header" forIndexPath:indexPath];
+//        [aRosterReuseableHeader setARosterReuseableHeaderSelectBlock:^(NSInteger tag) {
+//
+//        }];
+//        reuseableView = aRosterReuseableHeader;
+//    }
+//    return reuseableView;
+//}
+
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout heightForHeaderInSection:(NSInteger)section {
+//    return 100;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - Init
+
+-(NSMutableArray *)datasource {
+    if (!_datasource) {
+        _datasource = [NSMutableArray array];
+    }
+    return _datasource;
+}
+-(CHTCollectionViewWaterfallLayout *)chLayout {
+    if (!_chLayout) {
+        _chLayout = [[CHTCollectionViewWaterfallLayout alloc] init];
+        _chLayout.columnCount = 1;
+        _chLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        _chLayout.minimumColumnSpacing = 0;
+        _chLayout.minimumInteritemSpacing = 2;
+        
+        //_chLayout.headerHeight = 174;  /**页眉页脚高度：设置了之后必须实现，不然报错**/
+        //_chLayout.footerHeight = 100;
+    }
+    return _chLayout;
+}
+-(UICollectionView *)collectionview {
+    if (!_collectionview) {
+        _collectionview =
+        [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:self.chLayout];
+        _collectionview.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
+        _collectionview.delegate = self;
+        _collectionview.dataSource = self;
+        //__weak typeof(self) weakself = self;
+        //        _collectionview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        //            [weakself settingData];
+        //        }];
+        [_collectionview registerClass:[UICollectionViewCell class]
+            forCellWithReuseIdentifier:@"chat_cell"];
+        //        [_collectionview registerClass:[RosterReuseableHeader class]
+        //            forSupplementaryViewOfKind:CHTCollectionElementKindSectionHeader
+        //                   withReuseIdentifier:@"roster_header"];
+    }
+    return _collectionview;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @end

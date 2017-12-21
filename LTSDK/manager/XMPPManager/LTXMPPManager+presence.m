@@ -51,6 +51,13 @@ void runCategoryForFramework36(){}
     [self.aXMPPStream sendElement:presence];
 }
 
+- (void)clear {
+    [self.aXMPPStream addDelegate:nil delegateQueue:dispatch_get_main_queue()];
+    [self.aXMPPStream disconnect];
+    self.aXMPPStream.myJID = nil;
+}
+
+
 
 
 

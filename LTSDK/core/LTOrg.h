@@ -7,13 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LTSDKFull.h"
+#import "LT_GDataXMLNode.h"
 
+typedef void(^LTOrg_downloadOrgBlock)(GDataXMLDocument *doc, LTError *error);
 @interface LTOrg : NSObject
-//@property (nonatomic, copy) NSString *filePath;             //!<组织架构文件路径
-//@property (nonatomic, copy) NSString *orgName;              //!<企业名称
-//@property (nonatomic, strong) NSArray *orgVisibleRangeArray;//!<组织架构可视范围
-//@property (nonatomic, strong) GDataXMLDocument *xmlDoc;
-
 
 
 
@@ -21,18 +19,29 @@
 /*!
  @method
  @abstract 初始化
- @discussion
+ @discussion null
  @result  登陆管理类
  */
 + (instancetype)share;
 
 
 
+/*!
+ @method
+ @abstract 下载组织架构
+ @discussion 再次下载，旧数据会被覆盖，回调返回Document
+ */
+- (void)downloadOrg:(LTOrg_downloadOrgBlock)downloadOrgBlock;
+
+
+
+
+
 
 /*!
  @method
- @abstract 更新组织架构
- @discussion
+ @abstract 更新个人在组织架构中的信息
+ @discussion null
  */
 -(void)updateOrgWithID:(NSString *)ID
              LoginName:(NSString *)LoginName
@@ -59,7 +68,7 @@
 /*!
  @method
  @abstract 查询组织架构
- @discussion
+ @discussion null
  @result  字典
  */
 - (NSDictionary *)queryOrg;
@@ -69,7 +78,7 @@
 /*!
  @method
  @abstract 删除组织架构
- @discussion
+ @discussion null
  */
 - (void)deleteOrg;
 

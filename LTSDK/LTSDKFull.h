@@ -21,6 +21,7 @@
 #import "LTUser.h"
 #import "LTFriend.h"
 #import "LTGroup.h"
-
+#import "LTOrg.h"
+#import "LTMessage.h"
 
 #endif /* LTSDKFull_h */

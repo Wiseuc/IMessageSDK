@@ -13,6 +13,9 @@
 #import "LTSDKFull.h"
 #import "AppUtility.h"
 #import "UIViewController+child.h"
+#import "UIConfig.h"
+#import "SVProgressHUD.h"
+#import "DocManager.h"
 
 
 @interface MainController ()
@@ -65,12 +68,20 @@
                         NSString *aIP = userDict[@"aIP"];
                         NSString *aPort = userDict[@"aPort"];
                         
+                        __weak typeof(self) weakself = self;
                         [LTLogin.share asyncLoginWithUsername:aUsername
                                                      password:aPassword
                                                      serverIP:aIP
                                                          port:aPort
                                                     completed:^(LTError *error) {
-                                                        
+                                                        if (error) {
+                                                            NSLog(@"%@",error.localDescription);
+                                                            [SVProgressHUD showErrorWithStatus:error.localDescription];
+                                                            [weakself loginFailureAction];
+                                                        }else{
+                                                            NSLog(@"登录成功");
+                                                            [weakself loginSuccessAction];
+                                                        }
                                                     }];
                     }
                         break;
@@ -89,6 +100,16 @@
 }
 
 
+
+
+
+
+
+
+
+
+
+
 - (void)showLoginController {
     [self jianghai_removeAllChildController];
     [self jianghai_addChildController:self.loginController];
@@ -103,6 +124,32 @@
 }
 
 
+
+
+- (void)loginSuccessAction {
+    [kMainVC showTabBarController];
+    
+    //下载组织架构
+    [LTOrg.share downloadOrg:^(GDataXMLDocument *doc, LTError *error) {
+        if (error)
+        {
+            NSLog(@"组织架构下载失败");
+        }else{
+            NSLog(@"组织架构下载成功");
+            /**更新doc**/
+            [DocManager.share updateDocument:doc];
+            
+            /**浏览doc基本信息**/
+            NSDictionary *dict = [DocManager.share queryDocumentDescribe];
+            
+            NSLog(@"%@",dict);
+            
+        }
+    }];
+}
+- (void)loginFailureAction {
+    //    [_loginView hideServerView];
+}
 
 
 @end

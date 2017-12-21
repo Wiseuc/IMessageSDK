@@ -7,7 +7,7 @@
 //
 
 #import "TabbarController.h"
-#import "ChatController.h"
+#import "ChatListController.h"
 #import "MineController.h"
 #import "RosterController.h"
 #import "UIConfig.h"
@@ -24,7 +24,7 @@
 
 -(void)settingUI {
     
-    ChatController *chatvc = [[ChatController alloc] init];
+    ChatListController *chatvc = [[ChatListController alloc] init];
     RosterController *contactvc = [[RosterController alloc] init];
     MineController *minevc = [[MineController alloc] init];
     
@@ -134,7 +134,7 @@
     [super viewWillAppear:animated];
     
     //默认选择显示中间控制器
-    self.selectedIndex = 0;
+    //self.selectedIndex = 0;
 }
 
 

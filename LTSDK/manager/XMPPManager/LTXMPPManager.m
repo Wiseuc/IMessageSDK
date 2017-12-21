@@ -11,6 +11,7 @@
 #import "LTXMPPManager+presence.h"
 #import "LTXMPPManager+friend.h"
 #import "LTXMPPManager+group.h"
+#import "LTXMPPManager+message.h"
 
 
 
@@ -125,10 +126,11 @@
     }
 }
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
-    LTError *error2 = [LTError errorWithDescription:@"连接服务器被拒" code:(LTErrorLogin_connectRefused)];
-    if ( _aXMPPManagerLoginBlock) {
-        _aXMPPManagerLoginBlock(error2);
-    }
+    NSLog(@"连接服务器被拒");
+//    LTError *error2 = [LTError errorWithDescription:@"连接服务器被拒" code:(LTErrorLogin_connectRefused)];
+//    if ( _aXMPPManagerLoginBlock) {
+//        _aXMPPManagerLoginBlock(error2);
+//    }
 }
 
 
@@ -298,10 +300,10 @@ didNotAuthenticate:(DDXMLElement *)error {
         
         
         runCategoryForFramework41();
-//        runCategoryForFramework32();
-//        runCategoryForFramework33();
-//        runCategoryForFramework34();
-//        runCategoryForFramework35();
+        runCategoryForFramework42();
+//        runCategoryForFramework43();
+//        runCategoryForFramework44();
+//        runCategoryForFramework45();
 //        runCategoryForFramework36();
 //        runCategoryForFramework37();
 //        runCategoryForFramework38();

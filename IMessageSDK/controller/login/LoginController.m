@@ -10,6 +10,7 @@
 #import "SVProgressHUD.h"
 #import "LTSDKFull.h"
 #import "UIConfig.h"
+#import "DocManager.h"
 
 @interface LoginController ()<UITextFieldDelegate>
 @property (nonatomic, strong) UITextField *usernameTF;
@@ -188,6 +189,24 @@
 }
 - (void)loginSuccessAction {
     [kMainVC showTabBarController];
+    
+    //下载组织架构
+    [LTOrg.share downloadOrg:^(GDataXMLDocument *doc, LTError *error) {
+        if (error)
+        {
+            NSLog(@"组织架构下载失败");
+        }else{
+            NSLog(@"组织架构下载成功");
+            /**更新doc**/
+            [DocManager.share updateDocument:doc];
+            
+            /**浏览doc基本信息**/
+            NSDictionary *dict = [DocManager.share queryDocumentDescribe];
+            
+            NSLog(@"%@",dict);
+            
+        }
+    }];
 }
 - (void)loginFailureAction {
     [SVProgressHUD showErrorWithStatus:@"登录失败"];

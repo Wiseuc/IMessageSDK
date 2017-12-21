@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LTSDK/manager/XMPPManager/LTXMPPManager+iq.m"
-            timestampString = "535022117.799133"
+            timestampString = "535432688.766171"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LTSDK/manager/XMPPManager/LTXMPPManager+iq.m"
-            timestampString = "535022117.799222"
+            filePath = "IMessageSDK/controller/org/OrgController.m"
+            timestampString = "535368132.295279"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
-            landmarkName = "-xmppStream:didReceiveIQ:"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "-parseOrgWith:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -7,12 +7,13 @@
 //
 
 #import "LTOrg.h"
-#import "OrgManager.h"
+#import "LT_OrgManager.h"
 #define kLTOrg_orgKey @"kLTOrg_orgKey"
+#import "LT_Macros.h"
 
 
 @interface LTOrg ()
-
+@property (nonatomic, strong) LTOrg_downloadOrgBlock downloadOrgBlock;
 /**
  ID="58"
  LoginName="江海"
@@ -70,6 +71,51 @@
     });
     return instance;
 }
+
+
+
+- (void)downloadOrg:(LTOrg_downloadOrgBlock)downloadOrgBlock {
+    _downloadOrgBlock = downloadOrgBlock;
+    [LT_OrgManager downloadOrgWithlocalVersion:NO completed:^(LTError *error) {
+        if (error)
+        {
+            LTError *error = [LTError errorWithDescription:@"组织架构下载失败" code:(LTErrorLogin_OrgDownloadFailure)];
+            if (_downloadOrgBlock) {
+                self.downloadOrgBlock(nil,error);
+            }
+        }else{
+            if (_downloadOrgBlock) {
+                //GDataXMLDocument *doc = [LT_XMLParserManager queryOrgDocument];
+                GDataXMLDocument *doc = [self queryOrgDocument];
+                self.downloadOrgBlock(doc,nil);
+            }
+        }
+    }];
+}
+
+
+/**获取组织架构**/
+- (GDataXMLDocument *)queryOrgDocument {
+    NSString *docPath = [self queryOrgFilepath];
+    NSString *docStr = [NSString stringWithContentsOfFile:docPath encoding:NSUTF8StringEncoding error:nil];
+    return [[GDataXMLDocument alloc] initWithXMLString:docStr options:0 error:nil];
+}
+
+- (GDataXMLElement *)queryRootElement {
+    GDataXMLDocument *doc = [self queryOrgDocument];
+    return [doc rootElement];
+}
+
+- (NSString *)queryOrgFilepath {
+    return [kOrgFilePath stringByAppendingPathComponent:@"Organize.xml"];
+}
+
+
+
+
+
+
+
 
 
 #pragma mark -================= 服务器返回的用户真实信息
@@ -143,10 +189,15 @@
 /**获取组织架构可见范围**/
 - (NSArray *)queryOrgVisibleRange {
     __block NSArray *retArr = nil;
-    [OrgManager getOrgVisibleRange:^(BOOL hasOrgVisible, NSArray *visibleRangeArray) {
+    [LT_OrgManager getOrgVisibleRange:^(BOOL hasOrgVisible, NSArray *visibleRangeArray) {
         retArr =  visibleRangeArray;
     }];
     return retArr;
 }
+
+
+
+
+
 
 @end

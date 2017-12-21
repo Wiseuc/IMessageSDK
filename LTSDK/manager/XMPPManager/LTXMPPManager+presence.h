@@ -50,6 +50,7 @@ typedef enum {
 + (void)sendPresenceToRoomID:(NSString *)roomID domain:(NSString *)domain resource:(NSString *)resource;
 
 
+
 /**发送在线**/
 -(void)sendPresenceAvailable;
 /**发送离线**/
@@ -58,7 +59,8 @@ typedef enum {
 - (void)sendPresenceBusy;
 /**发送后台**/
 - (void)sendPresenceReside;
-
+/**清理**/
+- (void)clear;
 
 
 

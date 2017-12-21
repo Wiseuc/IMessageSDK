@@ -10,19 +10,11 @@
 #import "AppManager.h"
 #import "INFManager.h"
 #import "LTIniHelper.h"
-//#import "SoapRequest.h"
 #import "Encrypt_Decipher.h"
-//#import "UserManager.h"
 #import "LTXMPPManager.h"
 #import "LTXMPPManager+iq.h"
-//#import "XMPPManager+Presence.h"
-#import "OrgManager.h"
-//#import "GetGroupsDataModel.h"
-#import "XMLParserManager.h"
-//#import "DownloadOrganizationsController.h"
-//#import "AppDelegate+JPush.h"
-//#import "SVProgressHUD+Custom.h"
-//#define KLoginSuccess @"登录成功"
+#import "LT_OrgManager.h"
+#import "LT_OrgModel.h"
 #define KLoginFailed_NetWorkingError @"网络异常"
 #define KLoginFailed_FetchOrgFileError @"组织架构获取失败"
 #define KLoginFailed_FetchLoginConfigError @"登录配置获取失败，请检查网络是否畅通！"
@@ -158,7 +150,7 @@
     [self changePresenceStatuToOnline];
     
     /**下载组织架构**/
-    [self downloadOrg];
+    //[self downloadOrg];
     
     /**更新最后的登录用户**/
     [self updateLastLoginUser];
@@ -206,9 +198,8 @@
     NSString *JID = userDict[@"JID"];
     NSString *IMPwd = userDict[@"IMPwd"];
     
-    
     //[XMPPManager jid:JID changePresenceStatuTo:PresenceType_Online];
-//    [XMPPManager requestHeaderIconURLWithJID:[UserManager shareInstance].currentUser.jid];
+    //[XMPPManager requestHeaderIconURLWithJID:[UserManager shareInstance].currentUser.jid];
 }
 
 
@@ -219,176 +210,6 @@
                                                 ip:_serverIP
                                               port:_port];
 }
-
-/**下载组织架构**/
-- (void)downloadOrg
-{
-//    NSString *orgFilePath = [kOrgFilePath stringByAppendingPathComponent:@"Organize.xml"];
-//    [UserManager shareInstance].currentUser.filePath = orgFilePath;
-//
-//    [OrgManager downloadAndParserOrgZipWithLocalOrgVersion:NO completeHandler:^(BOOL complete) {
-//        if ( complete ) {
-//            OrgModel *orgModel = [XMLParserManager getPersonInfoByJid:[UserManager shareInstance].currentUser.jid];
-//            if (orgModel) {
-//                [UserManager shareInstance].currentUser.jid = orgModel.JID;
-//                [UserManager shareInstance].currentUser.username = orgModel.LoginName;
-//                [UserManager shareInstance].currentUser.nickname = orgModel.NAME;
-//                [UserManager shareInstance].currentUser.pid = orgModel.PID;
-//            }
-//
-//            //上线
-//            NSString *presenceJID = [NSString stringWithFormat:@"%@/IphoneIM",[UserManager shareInstance].currentUser.jid];
-//            [XMPPManager jid:presenceJID changePresenceStatuTo:PresenceType_Online];
-//
-//            //获取头像
-//            [XMPPManager requestHeaderIconURLWithJID:[UserManager shareInstance].currentUser.jid];
-//
-//            //获取可视范围
-//            [OrgManager getOrgVisibleRange:^(BOOL hasOrgVisible, NSArray *visibleRangeArray) {
-//                [[NSNotificationCenter defaultCenter]
-//                 postNotificationName:Wiseuc_Notification_OrgDownloadAndOrgvisibleRange object:nil];
-//            }];
-//        }
-//    }];
-    
-    
-    [OrgManager downloadOrgWithlocalVersion:NO completed:^(LTError *error) {
-        if (error)
-        {
-            LTError *error = [LTError errorWithDescription:@"下载组织架构失败" code:(LTErrorLogin_OrgDownloadFailure)];
-        }else{
-            /**组织架构下载成功**/
-            NSDictionary  *userDict = [LTUser.share queryUser];
-            NSString *UserName = userDict[@"UserName"];
-            NSString *JID = userDict[@"JID"];
-            NSString *IMPwd = userDict[@"IMPwd"];
-            
-            OrgModel *orgModel = [XMLParserManager getPersonInfoByJid:JID];
-            NSLog(@"%@",orgModel.NAME);
-            NSLog(@"%@",orgModel.position);
-            NSLog(@"%@",orgModel.JID);
-            NSLog(@"%@",orgModel.PID);
-            NSLog(@"%@",orgModel.LoginName);
-            NSLog(@"%@",orgModel.pinyin);
-
-            //获取头像
-            [LTXMPPManager.share sendRequestHeaderIconURLWithJID:JID];
-        }
-    }];
-    
-    
-    
-    
-    
-    
-    
-    
-    //获取群组信息
-//    GetGroupsDataModel *getGroupsDataModel = [[GetGroupsDataModel alloc] init];
-//    [getGroupsDataModel getGroupsDataDictionary];
-}
-
-
-
-
-
-
-
-
-//
-//#pragma mark – 登录历史
-//
-//+ (void)saveLastLoginUsername:(NSString *)username
-//                     password:(NSString *)password
-//                     serverIP:(NSString *)serverIP
-//                         port:(NSString *)port {
-//    NSDictionary *newAccount = @{@"username":username,
-//                                 @"password":password,
-//                                 @"serverIP":serverIP,
-//                                 @"port":port};
-//    LoginHistoryModel *model = [[LoginHistoryModel alloc] init];
-//    [model setValuesForKeysWithDictionary:newAccount];
-//    [LoginManager saveLoginAccount:model];
-//}
-//
-//+ (void)saveLoginAccount:(LoginHistoryModel *)newAccount {
-//    NSDictionary *newAccountDict = [self dictionaryWithAccount:newAccount];
-//
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    NSArray *historyAccount = [userDefaults objectForKey:Wiseuc_NSUserDefaults_HistoryAccount];
-//    if ( historyAccount && historyAccount.count > 0 ) {
-//        NSMutableArray *mHisAccount = [NSMutableArray arrayWithArray:historyAccount];
-//        NSMutableArray *tempMHisAccount = [NSMutableArray arrayWithArray:historyAccount];
-//        for ( NSDictionary *accountDict in tempMHisAccount ) {
-//            if ( [accountDict[@"username"] isEqualToString:newAccount.username] ) {
-//                [mHisAccount removeObject:accountDict];
-//            }
-//        }
-//
-//        if ( mHisAccount.count >= 4 ) {
-//            [mHisAccount removeObjectAtIndex:mHisAccount.count - 1];
-//        }
-//        [mHisAccount insertObject:newAccountDict atIndex:0];
-//        [userDefaults setObject:mHisAccount forKey:Wiseuc_NSUserDefaults_HistoryAccount];
-//        [userDefaults synchronize];
-//    }
-//    else {
-//        historyAccount = [NSArray arrayWithObject:newAccountDict];
-//        [userDefaults setObject:historyAccount forKey:Wiseuc_NSUserDefaults_HistoryAccount];
-//        [userDefaults synchronize];
-//    }
-//}
-//
-//+ (void)deleteLoginAccount:(LoginHistoryModel *)account {
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    NSArray *historyAccount = [userDefaults objectForKey:Wiseuc_NSUserDefaults_HistoryAccount];
-//    if ( historyAccount && historyAccount.count > 0 ) {
-//        NSMutableArray *mHisAccount = [NSMutableArray arrayWithArray:historyAccount];
-//        NSMutableArray *tempMHisAccount = [NSMutableArray arrayWithArray:historyAccount];
-//        for ( NSDictionary *accountDict in tempMHisAccount ) {
-//            if ( [accountDict[@"username"] isEqualToString:account.username] ) {
-//                [mHisAccount removeObject:accountDict];
-//            }
-//        }
-//        [userDefaults setObject:mHisAccount forKey:Wiseuc_NSUserDefaults_HistoryAccount];
-//        [userDefaults synchronize];
-//    }
-//}
-//
-//+ (NSArray *)loginHistory {
-//    NSArray *loginHistoryAccountArray = [[NSUserDefaults standardUserDefaults] objectForKey:Wiseuc_NSUserDefaults_HistoryAccount];
-//    if ( loginHistoryAccountArray.count > 0 ) {
-//        return loginHistoryAccountArray;
-//    }
-//    return nil;
-//}
-//
-//+ (LoginHistoryModel *)lastLoginHistoryModel {
-//    if ( [self loginHistory] ) {
-//        NSDictionary *lastAccout = [self loginHistory][0];
-//        LoginHistoryModel *lastHistoryModel = [[LoginHistoryModel alloc] init];
-//        lastHistoryModel.username = lastAccout[@"username"];
-//        lastHistoryModel.serverIP  = lastAccout[@"serverIP"];
-//        lastHistoryModel.password  = lastAccout[@"password"];
-//        lastHistoryModel.port = lastAccout[@"port"];
-//        return lastHistoryModel;
-//    }
-//    return nil;
-//}
-//
-//#pragma mark - private
-//
-//+ (NSDictionary *)dictionaryWithAccount:(LoginHistoryModel *)account {
-//    return @{@"username":account.username,
-//             @"password":account.password,
-//             @"serverIP":account.serverIP,
-//             @"port":account.port};
-//}
-
-
-
-
-
 
 
 

@@ -18,11 +18,15 @@
 #import "LT_NSObject+Additions.h"
 #import "LT_NSMutableString+ReplacingOccurencesOfString.h"
 #import "LT_POAPinyin.h"
+#import "LT_MessageAnalysis.h"
+#import "LT_OrgManager.h"
 
 
 typedef void(^LTXMPPManagerLoginBlock)(LTError *error);
 typedef void(^LTXMPPManager_friend_queryRostersBlock)(NSMutableArray *arrM, NSString *rosterVersion);
 typedef void(^LTXMPPManager_friend_queryGroupsBlock)(NSMutableArray *arrM, NSString *groupVersion);
+typedef void(^LTXMPPManager_iq_queryInformationByJidBlock)(NSDictionary *dict,LTError *error);
+typedef void(^LTXMPPManager_message_queryMessageBlock)(NSDictionary *dict);
 
 
 @interface LTXMPPManager : NSObject
@@ -45,9 +49,8 @@ typedef void(^LTXMPPManager_friend_queryGroupsBlock)(NSMutableArray *arrM, NSStr
 //好友
 @property (nonatomic, strong) LTXMPPManager_friend_queryRostersBlock friend_queryRostersBlock;  /**请求好友列表回调**/
 @property (nonatomic, strong) LTXMPPManager_friend_queryGroupsBlock friend_queryGroupsBlock;  /**请求群组列表回调**/
-
-
-
+@property (nonatomic, strong) LTXMPPManager_iq_queryInformationByJidBlock iq_queryInformationByJidBlock;  /**请求Vcard回调**/
+@property (nonatomic, strong) LTXMPPManager_message_queryMessageBlock message_queryMessageBlock;  /**请求Message回调**/
 
 
 
