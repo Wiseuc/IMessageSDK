@@ -37,49 +37,67 @@ UITableViewDelegate
 - (void)setUI {
     [self.view addSubview:self.tableView];
 }
-- (void)setDatas
-{
-    [self refreshData];
-    
-    __weak typeof(self) weakself = self;
-    [LTMessage.share queryMesageCompleted:^(NSDictionary *dict) {
-        [weakself dealData:dict];
-    }];
-}
--(void)dealData:(NSDictionary *)dict {
-    Message *msg = [[Message alloc] init];
-    msg.currentMyJID = dict[@"currentMyJID"];
-    msg.currentOtherJID = dict[@"currentOtherJID"];
-    msg.conversationName = dict[@"conversationName"];
-    msg.stamp = dict[@"stamp"];
-    msg.body = dict[@"body"];
-    msg.bodyType = dict[@"bodyType"];
-    msg.from = dict[@"from"];
-    msg.to = dict[@"to"];
-    msg.type = dict[@"type"];
-    msg.UID = dict[@"UID"];
-    msg.SenderJID = dict[@"SenderJID"];
-    [msg jh_saveOrUpdate];
-     [self refreshData];
-}
+//- (void)setDatas
+//{
+//    [self refreshData];
+//
+//    __weak typeof(self) weakself = self;
+//    [LTMessage.share queryMesageCompleted:^(NSDictionary *dict) {
+//        [weakself dealData:dict];
+//    }];
+//}
+//-(void)dealData:(NSDictionary *)dict {
+//    Message *msg = [[Message alloc] init];
+//    msg.currentMyJID = dict[@"currentMyJID"];
+//    msg.currentOtherJID = dict[@"currentOtherJID"];
+//    msg.conversationName = dict[@"conversationName"];
+//    msg.stamp = dict[@"stamp"];
+//    msg.body = dict[@"body"];
+//    msg.bodyType = dict[@"bodyType"];
+//    msg.from = dict[@"from"];
+//    msg.to = dict[@"to"];
+//    msg.type = dict[@"type"];
+//    msg.UID = dict[@"UID"];
+//    msg.SenderJID = dict[@"SenderJID"];
+//    [msg jh_saveOrUpdate];
+//   // [self refreshData];
+//}
 -(void)refreshData {
+    
+    NSDictionary *userDict = [LTUser.share queryUser];
+    NSString *myJID = userDict[@"JID"];
+    
     NSMutableArray *arrM = [NSMutableArray array];
     NSArray *arr = [Message jh_queryByDistinctCurrentOtherJID];
     for (Message *msg in arr) {
         NSString *conversationName = msg.conversationName;
         //NSLog(@"== %@",conversationName);
-        
         //通过conversationName查找聊天信息,并排序
         NSArray *arr02 = [Message jh_queryByConversationName:conversationName];
+        //NSArray *arr02 = [Message jh_queryByConversationName:conversationName currentMyJID:myJID];
         NSLog(@"%li",arr02.count);
         
-        Message *message =arr02.firstObject;
+        Message *message =arr02.lastObject;
+        if (message == nil) {
+            return;
+        }
         [arrM addObject:message];
     }
     self.dataSource = arrM;
     [self.tableView reloadData];
 }
-
+/**
+ 注册监听bg_tablename表的数据变化，唯一识别标识是@"change".
+ */
+-(void)settingDBOberser{
+    __weak typeof(self) weakself = self;
+    [Message settingDBOberser:^{
+        [weakself refreshData];
+    }];
+}
+-(void)unsettingDBOberser{
+    [Message unsettingDBOberser];
+}
 
 
 
@@ -95,14 +113,21 @@ UITableViewDelegate
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = kBackgroundColor;
+    
     self.view.userInteractionEnabled = YES;
     
     [self setUI];
+    
+    [self refreshData];
+    
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [self setDatas];
+    [self settingDBOberser];
+}
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self unsettingDBOberser];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -156,7 +181,9 @@ UITableViewDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    ChatController *chatvc = [[ChatController alloc] init];
+    Message *model = self.dataSource[indexPath.row];
+    
+    ChatController *chatvc = [[ChatController alloc] initWithCurrentOtherJID:model.currentOtherJID];
     [self.navigationController pushViewController:chatvc animated:YES];
 }
 

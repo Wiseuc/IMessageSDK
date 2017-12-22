@@ -195,7 +195,9 @@
     return retArr;
 }
 
-
++ (NSDictionary *)queryInformationByJid:(NSString *)aJID {
+    return [LT_OrgManager queryInformationByJid:aJID];
+}
 
 
 

@@ -8,6 +8,13 @@
 
 #import "Message.h"
 #define kBG_TableName @"kBG_TableName"  /**数据库表名**/
+@interface Message ()
+
+@property (nonatomic, strong) MessageDBChangeBlock aMessageDBChangeBlock;
+@end
+
+
+
 @implementation Message
 
 
@@ -81,12 +88,77 @@
 }
 +(NSArray *)jh_queryByConversationName:(NSString *)aConversationName {
     
-    NSString *sql = [NSString stringWithFormat:@"select * From kBG_TableName WHERE BG_conversationName = '%@' ORDER BY BG_stamp DESC;",aConversationName ];
-    
+    NSString *sql =
+    [NSString stringWithFormat:@"select * From kBG_TableName WHERE BG_conversationName = '%@' ORDER BY BG_stamp ASC;",aConversationName ];
     NSArray  *arr03 = bg_executeSql(sql, kBG_TableName, [self class]);
-    
     return arr03;
 }
++(NSArray *)jh_queryByConversationName:(NSString *)aConversationName currentMyJID:(NSString *)aCurrentMyJID {
+    NSString *sql =
+    [NSString stringWithFormat:@"select * From kBG_TableName WHERE BG_currentMyJID = '%@' BG_conversationName = '%@' ORDER BY BG_stamp ASC;",aConversationName,aCurrentMyJID];
+    NSArray  *arr03 = bg_executeSql(sql, kBG_TableName, [self class]);
+    return arr03;
+}
+
++(NSString *)jh_queryConversationNameByJID:(NSString *)aJID {
+    NSString *conversationName = nil;
+    NSArray *arr = [self jh_queryByCurentOtherJID:aJID];
+    
+    if (arr.count>0) {
+        for (Message *model in arr) {
+            if ([model.currentOtherJID isEqualToString:aJID]) {
+                conversationName = model.conversationName;
+            }
+        }
+    }
+    return conversationName;
+}
+
+
+
+
+
+
+
+
+#pragma mark - 监听
+/**
+ 注册监听bg_tablename表的数据变化，唯一识别标识是@"change".
+ */
++(void)settingDBOberser:(MessageDBChangeBlock)aBlock {
+    
+    [self bg_registerChangeForTableName:kBG_TableName identify:@"change" block:^(bg_changeState result) {
+//        switch (result) {
+//            case bg_insert:
+//                NSLog(@"有数据插入");
+//                break;
+//            case bg_update:
+//                NSLog(@"有数据更新");
+//                break;
+//            case bg_delete:
+//                NSLog(@"有数据删删除");
+//                break;
+//            case bg_drop:
+//                NSLog(@"有表删除");
+//                break;
+//            default:
+//                break;
+//        }
+        
+        if (aBlock) {
+            aBlock();
+        }
+    }];
+}
+
+/**
+ 移除bg_tablename表数据变化的监听，唯一识别标识是@"change".
+ */
++(void)unsettingDBOberser{
+    [self bg_removeChangeForTableName:kBG_TableName identify:@"change"];
+}
+
+
 
 
 

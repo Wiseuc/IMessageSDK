@@ -14,6 +14,7 @@
 - (void)showLoginController;
 - (void)showGuideController;
 - (void)showTabBarController;
-    
+- (void)showTbaBar;
+- (void)hiddenTbaBar;
     
 @end

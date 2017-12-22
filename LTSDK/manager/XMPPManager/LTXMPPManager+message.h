@@ -14,4 +14,11 @@ void runCategoryForFramework42();
 /**请求好友列表**/
 - (void)sendRequestMessageCompleted:(LTXMPPManager_message_queryMessageBlock)message_queryMessageBlock;
 
+
+/**发送消息**/
+-(NSDictionary *)sendMessageWithMyJID:(NSString *)aMyJID
+                            otherJID:(NSString *)aOtherJID
+                                body:(NSString *)aBody
+                            chatType:(NSString *)aChatType;
+
 @end

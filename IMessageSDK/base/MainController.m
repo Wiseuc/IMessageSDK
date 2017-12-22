@@ -99,6 +99,12 @@
     }
 }
 
+-(void)hiddenTbaBar {
+    self.tabBarController.tabBar.hidden = YES;
+}
+-(void)showTbaBar {
+    self.tabBarController.tabBar.hidden = NO;
+}
 
 
 

@@ -72,8 +72,7 @@ typedef void(^LTOrg_downloadOrgBlock)(GDataXMLDocument *doc, LTError *error);
  @result  字典
  */
 - (NSDictionary *)queryOrg;
-    
-    
+
 
 /*!
  @method
@@ -83,13 +82,22 @@ typedef void(^LTOrg_downloadOrgBlock)(GDataXMLDocument *doc, LTError *error);
 - (void)deleteOrg;
 
 
-
-
-
-
-
 /**获取组织架构可见范围**/
 - (NSArray *)queryOrgVisibleRange ;
+
+
+/*!
+ @method
+ @abstract 通过jid获取信息
+ @discussion 查询本地组织架构
+ @result  字典
+ */
++ (NSDictionary *)queryInformationByJid:(NSString *)aJID;
+
+
+
+
+
 
 
 

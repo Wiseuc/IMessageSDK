@@ -353,6 +353,10 @@
 		F9C557F91FE2128A00539EAB /* LTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C557F71FE2128A00539EAB /* LTUser.m */; };
 		F9C558041FE23B8400539EAB /* LTXMPPManager+presence.h in Headers */ = {isa = PBXBuildFile; fileRef = F9C558021FE23B8400539EAB /* LTXMPPManager+presence.h */; };
 		F9C558051FE23B8400539EAB /* LTXMPPManager+presence.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C558031FE23B8400539EAB /* LTXMPPManager+presence.m */; };
+		F9F7C0941FEBAF9900F56A23 /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F7C0931FEBAF9900F56A23 /* ChatCell.m */; };
+		F9F7C0981FEBB73C00F56A23 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F7C0971FEBB73C00F56A23 /* NSString+Extension.m */; };
+		F9F7C09B1FEBBD3C00F56A23 /* JHLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F7C09A1FEBBD3C00F56A23 /* JHLabel.m */; };
+		F9F7C09E1FEBC6EE00F56A23 /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F7C09D1FEBC6EE00F56A23 /* InputView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1045,6 +1049,14 @@
 		F9C557F71FE2128A00539EAB /* LTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTUser.m; sourceTree = "<group>"; };
 		F9C558021FE23B8400539EAB /* LTXMPPManager+presence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LTXMPPManager+presence.h"; sourceTree = "<group>"; };
 		F9C558031FE23B8400539EAB /* LTXMPPManager+presence.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LTXMPPManager+presence.m"; sourceTree = "<group>"; };
+		F9F7C0921FEBAF9900F56A23 /* ChatCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
+		F9F7C0931FEBAF9900F56A23 /* ChatCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
+		F9F7C0961FEBB73C00F56A23 /* NSString+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		F9F7C0971FEBB73C00F56A23 /* NSString+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		F9F7C0991FEBBD3C00F56A23 /* JHLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JHLabel.h; sourceTree = "<group>"; };
+		F9F7C09A1FEBBD3C00F56A23 /* JHLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JHLabel.m; sourceTree = "<group>"; };
+		F9F7C09C1FEBC6EE00F56A23 /* InputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputView.h; sourceTree = "<group>"; };
+		F9F7C09D1FEBC6EE00F56A23 /* InputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1255,6 +1267,7 @@
 		F9194CAD1FDFD39F00CCFB32 /* category */ = {
 			isa = PBXGroup;
 			children = (
+				F9F7C0951FEBB71200F56A23 /* NSString+ */,
 				F9194CC41FDFD9EE00CCFB32 /* UIViewController+ */,
 			);
 			path = category;
@@ -2792,6 +2805,7 @@
 		F9558D861FE39F2000D13CD0 /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				F9F7C0911FEBAF7C00F56A23 /* chat */,
 				F97D69B21FEA6FD000E19477 /* chatList */,
 				F97D69151FE9F08600E19477 /* Information */,
 				F93496EF1FE9016100E8D8A3 /* mine */,
@@ -3010,6 +3024,8 @@
 		F97D69201FEA03C700E19477 /* chat */ = {
 			isa = PBXGroup;
 			children = (
+				F9F7C09C1FEBC6EE00F56A23 /* InputView.h */,
+				F9F7C09D1FEBC6EE00F56A23 /* InputView.m */,
 			);
 			path = chat;
 			sourceTree = "<group>";
@@ -3131,6 +3147,26 @@
 				F963FD9B1FE273DB0073D490 /* orgModel */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		F9F7C0911FEBAF7C00F56A23 /* chat */ = {
+			isa = PBXGroup;
+			children = (
+				F9F7C0921FEBAF9900F56A23 /* ChatCell.h */,
+				F9F7C0931FEBAF9900F56A23 /* ChatCell.m */,
+				F9F7C0991FEBBD3C00F56A23 /* JHLabel.h */,
+				F9F7C09A1FEBBD3C00F56A23 /* JHLabel.m */,
+			);
+			path = chat;
+			sourceTree = "<group>";
+		};
+		F9F7C0951FEBB71200F56A23 /* NSString+ */ = {
+			isa = PBXGroup;
+			children = (
+				F9F7C0961FEBB73C00F56A23 /* NSString+Extension.h */,
+				F9F7C0971FEBB73C00F56A23 /* NSString+Extension.m */,
+			);
+			path = "NSString+";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3351,8 +3387,10 @@
 				F9194CB91FDFD64D00CCFB32 /* TabbarController.m in Sources */,
 				F9558D941FE3AF9C00D13CD0 /* RosterHeaderButton.m in Sources */,
 				F9194C861FDFD2C400CCFB32 /* main.m in Sources */,
+				F9F7C09E1FEBC6EE00F56A23 /* InputView.m in Sources */,
 				F93496F21FE901D600E8D8A3 /* MineCell01.m in Sources */,
 				F9558D841FE399CA00D13CD0 /* UIView+MJExtension.m in Sources */,
+				F9F7C0981FEBB73C00F56A23 /* NSString+Extension.m in Sources */,
 				F97D69B51FEA6FEE00E19477 /* ChatListCell.m in Sources */,
 				F9558D7C1FE399CA00D13CD0 /* NSObject+MJKeyValue.m in Sources */,
 				F9558D821FE399CA00D13CD0 /* UIScrollView+MJExtension.m in Sources */,
@@ -3373,6 +3411,7 @@
 				F9558D6E1FE399CA00D13CD0 /* MJRefreshBackGifFooter.m in Sources */,
 				F93496F51FE9041300E8D8A3 /* MineCell02.m in Sources */,
 				F98FDBA31FEB8DB200618C82 /* FMDatabaseAdditions.m in Sources */,
+				F9F7C09B1FEBBD3C00F56A23 /* JHLabel.m in Sources */,
 				F93496EB1FE8E52000E8D8A3 /* StackView.m in Sources */,
 				F93496F91FE90DE800E8D8A3 /* InformationController.m in Sources */,
 				F98FDBA21FEB8DB200618C82 /* FMDatabase.m in Sources */,
@@ -3405,6 +3444,7 @@
 				F9558D7A1FE399CA00D13CD0 /* NSObject+MJClass.m in Sources */,
 				F9558CDC1FE3800100D13CD0 /* RosterModel.m in Sources */,
 				F9558D7E1FE399CA00D13CD0 /* NSString+MJExtension.m in Sources */,
+				F9F7C0941FEBAF9900F56A23 /* ChatCell.m in Sources */,
 				F9558D801FE399CA00D13CD0 /* MJRefreshConst.m in Sources */,
 				F9558D671FE399CA00D13CD0 /* MJRefreshBackFooter.m in Sources */,
 				F9558CC31FE35A6600D13CD0 /* OrgController.m in Sources */,

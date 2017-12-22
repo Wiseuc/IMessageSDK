@@ -75,6 +75,10 @@
     if ( [xmlMessage elementForName:@"offlinedir"] ) {
         return nil;
     }
+    if ([body isEqualToString:@""] || body == nil) {
+        return nil;
+    }
+    
     [dict setValue:body forKey:@"body"];
     [dict setValue:@"bodyType_Text" forKey:@"bodyType"];
     

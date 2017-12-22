@@ -78,15 +78,9 @@ typedef void (^LTUser_queryInformationByJIDBlock)(NSDictionary *dict);
 
 
 /*!
- @enum
+ @method
  @abstract 通过JID获取资料
- @constant <#参数#>  <#注释#>
- @constant <#参数#>  <#注释#>
- @constant <#参数#>  <#注释#>
- @constant <#参数#>  <#注释#>
- @constant <#参数#>  <#注释#>
- @constant <#参数#>  <#注释#>
- @constant <#参数#>  <#注释#>
+ @discussion 通过查询网络数据
  */
 -(void)queryInformationByJID:(NSString *)aJID completed:(LTUser_queryInformationByJIDBlock)aBlock;
 

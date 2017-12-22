@@ -44,6 +44,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BGFMDB.h"
+typedef void(^MessageDBChangeBlock)(void);
 @interface Message : NSObject
 
 
@@ -53,7 +54,7 @@
 
 @property (nonatomic, strong) NSString  *stamp;               /**时间**/
 @property (nonatomic, strong) NSString  *body;               /**文本**/
-@property (nonatomic, strong) NSString  *bodyType;           /**文本类型**/
+@property (nonatomic, strong) NSString  *bodyType;           /**bodyType_Text:文本   bodyType_Voice:声音**/
 
 
 
@@ -109,8 +110,16 @@
 +(NSArray *)jh_queryByDistinctCurrentOtherJID;
 /**通过conversationName查找信息，并用timestamp时间戳排序**/
 +(NSArray *)jh_queryByConversationName:(NSString *)aConversationName;
+/**通过conversationName查找信息，并用timestamp时间戳排序**/
++(NSArray *)jh_queryByConversationName:(NSString *)aConversationName currentMyJID:(NSString *)aCurrentMyJID;
+/**通过jid获取回话name，没有则返回nil**/
++(NSString *)jh_queryConversationNameByJID:(NSString *)aJID;
 
 
+#pragma mark - 监听DB
+
++(void)settingDBOberser:(MessageDBChangeBlock)aBlock;
++(void)unsettingDBOberser;
 
 
 

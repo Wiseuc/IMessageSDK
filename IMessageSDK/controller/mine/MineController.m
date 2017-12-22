@@ -45,9 +45,24 @@ UITableViewDelegate
     logoutBTN.titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
     [logoutBTN addTarget:self action:@selector(buttonClick:) forControlEvents:(UIControlEventTouchUpInside)];
     
-    
     self.tableView.tableFooterView = logoutBTN;
     
+    
+    UILabel *jhLAB = [[UILabel alloc] init];
+    jhLAB.frame = CGRectMake((kScreenWidth-300)/2, kScreenHeight-40-49, 300, 20);
+    jhLAB.text = @"IMessageSDK版权由深圳市励拓软件有限公司所有，盗版必究";
+    jhLAB.textColor = [UIColor lightGrayColor];
+    jhLAB.font = [UIFont boldSystemFontOfSize:10.0];
+    [self.view addSubview:jhLAB];
+    jhLAB.textAlignment = NSTextAlignmentCenter;
+    
+    UILabel *jhLAB02 = [[UILabel alloc] init];
+    jhLAB02.frame = CGRectMake((kScreenWidth-200)/2, kScreenHeight-20-49, 200, 20);
+    jhLAB02.text = @"Editor：江海   TEL:18823780407";
+    jhLAB02.textColor = [UIColor lightGrayColor];
+    jhLAB02.font = [UIFont boldSystemFontOfSize:10.0];
+    [self.view addSubview:jhLAB02];
+    jhLAB02.textAlignment = NSTextAlignmentCenter;
 }
 - (void)setDatas
 {

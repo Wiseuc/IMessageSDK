@@ -10,4 +10,9 @@
 
 @interface ChatController : UIViewController
 
+/**初始**/
+-(instancetype)initWithCurrentOtherJID:(NSString *)aCurrentOtherJID;
+
+
+
 @end

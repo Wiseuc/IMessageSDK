@@ -40,4 +40,16 @@
     
     
 }
+
+
+-(NSDictionary *)asyncSendMessageWithMyJID:(NSString *)aMyJID
+                                  otherJID:(NSString *)aOtherJID
+                                      body:(NSString *)aBody
+                                  chatType:(NSString *)aChatType {
+    
+    return [LTXMPPManager.share sendMessageWithMyJID:aMyJID
+                                            otherJID:aOtherJID
+                                                body:aBody
+                                            chatType:aChatType];
+}
 @end
