@@ -156,12 +156,12 @@ UICollectionViewDelegate
     
     NSDictionary *userDict = [LTUser.share queryUser];
     NSString *myJID = userDict[@"JID"];
+    NSString *ConversationName = [Message jh_queryConversationNameByJID:self.currentOtherJID myJID:myJID];
+    NSArray *arr = [Message jh_queryByConversationName:ConversationName currentMyJID:myJID];
     
-    NSString *ConversationName = [Message jh_queryConversationNameByJID:self.currentOtherJID];
-    NSArray *arr = [Message jh_queryByConversationName:ConversationName];
-    //NSArray *arr = [Message jh_queryByConversationName:ConversationName currentMyJID:myJID];
-    
-    
+    if (arr == nil || arr.count == 0) {
+        return;
+    }
     self.datasource = [arr mutableCopy];
     [self refreshData];
     
@@ -216,7 +216,7 @@ UICollectionViewDelegate
     [self settingGesture];
     
     
-    [self settingData];
+    
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -228,6 +228,7 @@ UICollectionViewDelegate
     [super viewWillDisappear:animated];
     [self unsettingDBOberser];
     [kMainVC showTbaBar];
+    [self settingData];
 }
 
 - (void)didReceiveMemoryWarning {

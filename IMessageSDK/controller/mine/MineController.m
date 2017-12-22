@@ -48,6 +48,11 @@ UITableViewDelegate
     self.tableView.tableFooterView = logoutBTN;
     
     
+    
+    
+    
+    
+    /*****不要动我代码***********不要动我代码*******不要动我代码***********不要动我代码********/
     UILabel *jhLAB = [[UILabel alloc] init];
     jhLAB.frame = CGRectMake((kScreenWidth-300)/2, kScreenHeight-40-49, 300, 20);
     jhLAB.text = @"IMessageSDK版权由深圳市励拓软件有限公司所有，盗版必究";
@@ -63,6 +68,7 @@ UITableViewDelegate
     jhLAB02.font = [UIFont boldSystemFontOfSize:10.0];
     [self.view addSubview:jhLAB02];
     jhLAB02.textAlignment = NSTextAlignmentCenter;
+   /*****不要动我代码*******不要动我代码*********不要动我代码**************不要动我代码********/
 }
 - (void)setDatas
 {

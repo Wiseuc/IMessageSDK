@@ -78,14 +78,16 @@
     NSArray* arr = [self bg_find:kBG_TableName where:where];
     return arr;
 }
-+(NSArray *)jh_queryByDistinctCurrentOtherJID {
-    //NSArray* arr = bg_executeSql(@"select * from yy", kBG_TableName, [People class]);
-    //    NSArray  *arr03 = bg_executeSql(@"select * from kBG_TableName where BG_currentOtherJID = 50", kBG_TableName, [LT_Message class]);
-    //    select * from Test2 where ID in (select min(ID) from Test2 group by A,B)
-    NSArray  *arr03 =
-    bg_executeSql(@"select distinct BG_conversationName from kBG_TableName", kBG_TableName, [self class]);
+
+
++(NSArray *)jh_queryCurrentOtherJIDByMyJID:(NSString *)aMyJID {
+    NSString *sql =
+    [NSString stringWithFormat:@"select distinct BG_conversationName from kBG_TableName Where BG_currentMyJID = '%@'",aMyJID];
+    NSArray  *arr03 = bg_executeSql(sql, kBG_TableName, [self class]);
     return arr03;
 }
+
+
 +(NSArray *)jh_queryByConversationName:(NSString *)aConversationName {
     
     NSString *sql =
@@ -93,14 +95,17 @@
     NSArray  *arr03 = bg_executeSql(sql, kBG_TableName, [self class]);
     return arr03;
 }
+
+
 +(NSArray *)jh_queryByConversationName:(NSString *)aConversationName currentMyJID:(NSString *)aCurrentMyJID {
     NSString *sql =
-    [NSString stringWithFormat:@"select * From kBG_TableName WHERE BG_currentMyJID = '%@' BG_conversationName = '%@' ORDER BY BG_stamp ASC;",aConversationName,aCurrentMyJID];
+    [NSString stringWithFormat:@"select * From kBG_TableName WHERE BG_currentMyJID = '%@' and BG_conversationName = '%@' ORDER BY BG_stamp ASC;",aCurrentMyJID, aConversationName];
     NSArray  *arr03 = bg_executeSql(sql, kBG_TableName, [self class]);
     return arr03;
 }
 
-+(NSString *)jh_queryConversationNameByJID:(NSString *)aJID {
+
++(NSString *)jh_queryConversationNameByJID:(NSString *)aJID myJID:(NSString *)aMyJID {
     NSString *conversationName = nil;
     NSArray *arr = [self jh_queryByCurentOtherJID:aJID];
     

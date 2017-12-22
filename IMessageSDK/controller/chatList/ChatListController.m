@@ -37,49 +37,23 @@ UITableViewDelegate
 - (void)setUI {
     [self.view addSubview:self.tableView];
 }
-//- (void)setDatas
-//{
-//    [self refreshData];
-//
-//    __weak typeof(self) weakself = self;
-//    [LTMessage.share queryMesageCompleted:^(NSDictionary *dict) {
-//        [weakself dealData:dict];
-//    }];
-//}
-//-(void)dealData:(NSDictionary *)dict {
-//    Message *msg = [[Message alloc] init];
-//    msg.currentMyJID = dict[@"currentMyJID"];
-//    msg.currentOtherJID = dict[@"currentOtherJID"];
-//    msg.conversationName = dict[@"conversationName"];
-//    msg.stamp = dict[@"stamp"];
-//    msg.body = dict[@"body"];
-//    msg.bodyType = dict[@"bodyType"];
-//    msg.from = dict[@"from"];
-//    msg.to = dict[@"to"];
-//    msg.type = dict[@"type"];
-//    msg.UID = dict[@"UID"];
-//    msg.SenderJID = dict[@"SenderJID"];
-//    [msg jh_saveOrUpdate];
-//   // [self refreshData];
-//}
 -(void)refreshData {
     
     NSDictionary *userDict = [LTUser.share queryUser];
     NSString *myJID = userDict[@"JID"];
-    
     NSMutableArray *arrM = [NSMutableArray array];
-    NSArray *arr = [Message jh_queryByDistinctCurrentOtherJID];
+    /**会话数组**/
+    NSArray *arr = [Message jh_queryCurrentOtherJIDByMyJID:myJID];
+    
     for (Message *msg in arr) {
+        /**会话名**/
         NSString *conversationName = msg.conversationName;
-        //NSLog(@"== %@",conversationName);
-        //通过conversationName查找聊天信息,并排序
-        NSArray *arr02 = [Message jh_queryByConversationName:conversationName];
-        //NSArray *arr02 = [Message jh_queryByConversationName:conversationName currentMyJID:myJID];
+        NSArray *arr02 = [Message jh_queryByConversationName:conversationName currentMyJID:myJID];
         NSLog(@"%li",arr02.count);
         
         Message *message =arr02.lastObject;
         if (message == nil) {
-            return;
+            continue;
         }
         [arrM addObject:message];
     }
@@ -117,13 +91,11 @@ UITableViewDelegate
     self.view.userInteractionEnabled = YES;
     
     [self setUI];
-    
-    [self refreshData];
-    
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self settingDBOberser];
+    [self refreshData];
 }
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];

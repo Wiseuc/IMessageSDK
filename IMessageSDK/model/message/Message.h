@@ -107,14 +107,24 @@ typedef void(^MessageDBChangeBlock)(void);
 +(NSArray *)jh_queryByUID:(NSString *)aUID;
 /**通过UID查询**/
 +(NSArray *)jh_queryByCurentOtherJID:(NSString *)aOtherJID;
-+(NSArray *)jh_queryByDistinctCurrentOtherJID;
+
+/**
+ 通过我的jid查询所有会话
+ **/
++(NSArray *)jh_queryCurrentOtherJIDByMyJID:(NSString *)aMyJID;
+
+
 /**通过conversationName查找信息，并用timestamp时间戳排序**/
-+(NSArray *)jh_queryByConversationName:(NSString *)aConversationName;
+//+(NSArray *)jh_queryByConversationName:(NSString *)aConversationName;
+
+
 /**通过conversationName查找信息，并用timestamp时间戳排序**/
 +(NSArray *)jh_queryByConversationName:(NSString *)aConversationName currentMyJID:(NSString *)aCurrentMyJID;
-/**通过jid获取回话name，没有则返回nil**/
-+(NSString *)jh_queryConversationNameByJID:(NSString *)aJID;
 
+
+/**通过jid获取回话name，没有则返回nil**/
+//+(NSString *)jh_queryConversationNameByJID:(NSString *)aJID;
++(NSString *)jh_queryConversationNameByJID:(NSString *)aJID myJID:(NSString *)aMyJID;
 
 #pragma mark - 监听DB
 
