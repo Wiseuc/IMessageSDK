@@ -31,7 +31,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        self.contentView.backgroundColor = kBackgroundColor;
 //        self.timeLAB = [[UILabel alloc] init];
 //        [self.contentView addSubview:self.timeLAB];
 //        self.timeLAB.text = @"2017-33-30 12:23:25";
@@ -75,8 +75,8 @@
     
     
     //self.timeLAB.frame = CGRectMake((KWIDTH-140)/2, 0, 140, 10);
-    self.iconIMGV.frame = CGRectMake(10, 20, 40, 40);
     //self.messageLAB.frame = CGRectMake(60, 20, KWIDTH-120, KHEIGHT-30);
+//    self.iconIMGV.frame = CGRectMake(10, 20, 40, 40);
 }
 
 
@@ -86,18 +86,42 @@
     CGFloat KWIDTH  = self.frame.size.width;
     CGFloat KHEIGHT = self.frame.size.height;
     
-    
+    /**时间**/
     self.timeLAB.text = model.stamp;
     CGSize timeSize = [self.timeLAB sizeThatFits:(CGSizeMake(MAXFLOAT, 10))];
     self.timeLAB.frame = CGRectMake((KWIDTH-timeSize.width-20)/2, 0, timeSize.width+10, 10);
     
     
-    self.messageLAB.text = model.body;
-    if (KHEIGHT < 71){
+    /**我是否为发送方**/
+    if ([model.from containsString:model.currentMyJID])
+    {
+        /**头像**/
+        self.iconIMGV.frame = CGRectMake(KWIDTH-10-40, 20, 40, 40);
+        
+        /**消息**/
+        self.messageLAB.text = model.body;
         CGSize messageSize = [self.messageLAB sizeThatFits:(CGSizeMake(MAXFLOAT, 40))];
-        self.messageLAB.frame = CGRectMake(60, 20, messageSize.width + 10, KHEIGHT-30);
+        if (KHEIGHT < 71){
+            self.messageLAB.frame = CGRectMake(KWIDTH-10-messageSize.width-10 - 40 - 10, 20, messageSize.width+10, KHEIGHT-30);
+        }else{
+            self.messageLAB.frame = CGRectMake(60, 20, KWIDTH-120, KHEIGHT-30);
+        }
+        
+        self.messageLAB.backgroundColor = [kTintColor colorWithAlphaComponent:0.5];
     }else{
-        self.messageLAB.frame = CGRectMake(60, 20, KWIDTH-120, KHEIGHT-30);
+        /**头像**/
+        self.iconIMGV.frame = CGRectMake(10, 20, 40, 40);
+        
+        /**消息**/
+        self.messageLAB.text = model.body;
+        if (KHEIGHT < 71){
+            CGSize messageSize = [self.messageLAB sizeThatFits:(CGSizeMake(MAXFLOAT, 40))];
+            self.messageLAB.frame = CGRectMake(60, 20, messageSize.width + 10, KHEIGHT-30);
+        }else{
+            self.messageLAB.frame = CGRectMake(60, 20, KWIDTH-120, KHEIGHT-30);
+        }
+        
+        self.messageLAB.backgroundColor = [UIColor whiteColor];
     }
 }
 

@@ -414,7 +414,8 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
         _collectionview =
         [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight-64 - 49)
                            collectionViewLayout:self.chLayout];
-        _collectionview.backgroundColor =  [UIColor whiteColor];//[[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
+        _collectionview.backgroundColor = kBackgroundColor;
+        // [UIColor whiteColor];//[[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
         _collectionview.delegate = self;
         _collectionview.dataSource = self;
         //__weak typeof(self) weakself = self;
@@ -433,7 +434,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (!_inputView) {
         _inputView = [[InputView alloc] init];
         _inputView.frame = CGRectMake(0, kScreenHeight-49, kScreenWidth, 49);
-        _inputView.backgroundColor = kBackgroundColor;
+        _inputView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
     }
     return _inputView;
 }

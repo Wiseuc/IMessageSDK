@@ -112,9 +112,10 @@ UITextViewDelegate
     //判断输入的字是否是回车，即按下return
     if ([text isEqualToString:@"\n"]){
         //在这里做你响应return键的代码
-        if (self.aInputViewBlock) {
+        if (self.aInputViewBlock && textView.text.length > 0) {
             self.aInputViewBlock(textView.text);
             textView.text = @"";
+            [self textViewDidChange:textView];
         }
         //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
         return NO;
