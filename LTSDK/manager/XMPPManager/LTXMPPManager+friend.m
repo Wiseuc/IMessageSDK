@@ -26,5 +26,18 @@ void runCategoryForFramework40(){}
     [self.aXMPPStream sendElement:iq];
 }
 
+//获取个人消息
+-(void)queryInformationByJid:(NSString *)aJID completed:(LTXMPPManager_iq_queryInformationByJidBlock)aBlock {
+    self.iq_queryInformationByJidBlock = aBlock;
+    NSString *elementID = @"rstrone";
+    XMPPJID *to = [XMPPJID jidWithString:aJID];
+    XMPPIQ *iq = [XMPPIQ iqWithType:@"get" to:to elementID:elementID];
+    NSXMLElement *query = [NSXMLElement elementWithName:@"vCard" xmlns:@"vcard-temp"];
+    [query addAttributeWithName:kStringXMPPVersion stringValue:@"0"];
+    [iq addChild:query];
+    [self.aXMPPStream sendElement:iq];
+}
+
+
 
 @end

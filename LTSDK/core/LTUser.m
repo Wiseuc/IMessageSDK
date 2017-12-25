@@ -10,7 +10,7 @@
 #define kLTUser_SignatureKey @"kLTUser_SignatureKey"
 
 @interface LTUser ()
-@property (nonatomic, strong) LTUser_queryInformationByJIDBlock queryInformationByJIDBlock;
+
 
 
 @property (nonatomic, copy) NSString *PID;
@@ -177,17 +177,6 @@
 }
 
 
-
--(void)queryInformationByJID:(NSString *)aJID
-                   completed:(LTUser_queryInformationByJIDBlock)aBlock {
-    _queryInformationByJIDBlock = aBlock;
-    [LTXMPPManager.share queryInformationByJid:aJID
-                                     completed:^(NSDictionary *dict, LTError *error) {
-                                         if (_queryInformationByJIDBlock) {
-                                             _queryInformationByJIDBlock(dict);
-                                         }
-                                     }];
-}
 
 
 

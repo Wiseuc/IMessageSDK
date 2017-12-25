@@ -176,7 +176,7 @@ UICollectionViewDelegate
 }
 - (void)collectionView:(UICollectionView *)collectionView
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     OrgModel *model = self.datasource[indexPath.item];
 
     if ([model.ITEMTYPE isEqualToString:@"1"])

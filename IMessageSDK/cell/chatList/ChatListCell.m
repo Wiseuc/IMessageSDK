@@ -27,7 +27,7 @@
         
         self.iconIMGV = [[UIImageView alloc] init];
         [self.contentView addSubview:self.iconIMGV];
-        self.iconIMGV.image = [UIImage imageNamed:@"color_D"];
+        self.iconIMGV.image = [UIImage imageNamed:@"icon_40pt"];
         self.iconIMGV.layer.cornerRadius = 4;
         self.iconIMGV.layer.masksToBounds = YES;
         
@@ -82,6 +82,12 @@
     self.nameLAB.text = model.conversationName;
     self.messageLAB.text = model.body;
     self.timeLAB.text = model.stamp;
+    
+    if ([model.type isEqualToString:@"chat"]) {
+        self.iconIMGV.image = [UIImage imageNamed:@"icon_40pt"];
+    }else {
+        self.iconIMGV.image = [UIImage imageNamed:@"group"];
+    }
 }
 
 @end

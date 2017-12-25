@@ -48,15 +48,13 @@ UICollectionViewDelegate
     __weak typeof(self) weakself = self;
     if ([self.jid containsString:@"conference"])
     {
-        [LTGroup.share queryGroupVCardByGroupJID:self.jid
-                                       completed:^(NSDictionary *dict) {
-                                           [weakself dealDict:dict];
+        [LTGroup.share queryGroupVCardByGroupJID:self.jid completed:^(NSDictionary *dict) {
+            [weakself dealDict:dict];
         }];
     }else{
-        [LTUser.share queryInformationByJID:self.jid
-                                  completed:^(NSDictionary *dict) {
-                                      [weakself dealDict:dict];
-                                  }];
+        [LTFriend.share queryInformationByJID:self.jid completed:^(NSDictionary *dict) {
+            [weakself dealDict:dict];
+        }];
     }
 }
 

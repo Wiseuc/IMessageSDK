@@ -28,7 +28,7 @@
         
         self.iconIMGV = [[UIImageView alloc] init];
         [self.contentView addSubview:self.iconIMGV];
-        self.iconIMGV.image = [UIImage imageNamed:@"wode_xuanzhong"];
+        self.iconIMGV.image = [UIImage imageNamed:@"group"];
         
         self.nameLAB = [[UILabel alloc] init];
         [self.contentView addSubview:self.nameLAB];

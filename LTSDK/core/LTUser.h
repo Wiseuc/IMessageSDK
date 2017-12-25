@@ -6,7 +6,7 @@
  */
 
 #import <Foundation/Foundation.h>
-typedef void (^LTUser_queryInformationByJIDBlock)(NSDictionary *dict);
+
 
 @interface LTUser : NSObject
 
@@ -77,12 +77,7 @@ typedef void (^LTUser_queryInformationByJIDBlock)(NSDictionary *dict);
 - (void)deleteSignature;
 
 
-/*!
- @method
- @abstract 通过JID获取资料
- @discussion 通过查询网络数据
- */
--(void)queryInformationByJID:(NSString *)aJID completed:(LTUser_queryInformationByJIDBlock)aBlock;
+
 
 
 

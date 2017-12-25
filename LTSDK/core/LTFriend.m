@@ -34,4 +34,15 @@
 }
 
 
+-(void)queryInformationByJID:aJID completed:(LTUser_queryInformationByJIDBlock)queryInformationByJIDBlock {
+    [LTXMPPManager.share queryInformationByJid:aJID
+                                     completed:^(NSDictionary *dict, LTError *error) {
+                                         if (queryInformationByJIDBlock) {
+                                             queryInformationByJIDBlock(dict);
+                                         }
+                                     }];
+}
+
+
+
 @end

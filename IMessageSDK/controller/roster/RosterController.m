@@ -144,6 +144,7 @@ UICollectionViewDelegate
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     RosterModel *model = self.datasource[indexPath.item];
     NSString *ohterJID = model.jid;
     ChatController *chatvc = [[ChatController alloc] initWithCurrentOtherJID:ohterJID conversationName:model.name];

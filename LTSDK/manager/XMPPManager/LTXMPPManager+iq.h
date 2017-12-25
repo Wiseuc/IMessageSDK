@@ -27,8 +27,8 @@ void runCategoryForFramework34();
 
 /**登录错误**/
 - (void)xmppIqLoginCheck:(XMPPIQ *)iq;
-/**通过JID获取资料**/
-- (void)queryInformationByJid:(NSString *)aJID completed:(LTXMPPManager_iq_queryInformationByJidBlock)aBlock;
+
+
 
 
 @end
