@@ -13,9 +13,10 @@ void runCategoryForFramework41();
 @interface LTXMPPManager (group)
 
 
-/**请求好友列表**/
-- (void)sendRequestGroupCompleted:(LTXMPPManager_friend_queryGroupsBlock)friend_queryGroupsBlock;
+/**请求群组列表**/
+- (void)sendRequestGroupCompleted:(LTXMPPManager_group_queryGroupsBlock)group_queryGroupsBlock;
 
-
+/**获取群组资料VCard**/
+- (void)sendRequestQueryGroupVCardInformationByGroupJid:(NSString *)aGroupJid completed:(LTXMPPManager_group_queryGroupVCardBlock)aBlock;
 
 @end

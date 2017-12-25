@@ -10,7 +10,14 @@
 
 @interface InformationController : UIViewController
 
-/**必须设置jid**/
-@property (nonatomic, strong) NSString *jid;
+
+/**
+ 初始化
+
+ @param aJID <#aJID description#>
+ @return <#return value description#>
+ */
+- (instancetype)initWithJID:(NSString *)aJID;
+
 
 @end

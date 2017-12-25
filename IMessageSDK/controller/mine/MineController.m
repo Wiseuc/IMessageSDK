@@ -204,8 +204,7 @@ UITableViewDelegate
             //NSString *UserName = userDict[@"UserName"];
             NSString *JID = userDict[@"JID"];
             //NSString *IMPwd = userDict[@"IMPwd"];
-            InformationController *infovc = [[InformationController alloc] init];
-            infovc.jid = JID;
+            InformationController *infovc = [[InformationController alloc] initWithJID:JID];
             [self.navigationController pushViewController:infovc animated:YES];
         }
         else if (row == 1)

@@ -12,8 +12,8 @@ void runCategoryForFramework41(){}
 @implementation LTXMPPManager (group)
 
 
-- (void)sendRequestGroupCompleted:(LTXMPPManager_friend_queryGroupsBlock)friend_queryGroupsBlock {
-    self.friend_queryGroupsBlock = friend_queryGroupsBlock;
+- (void)sendRequestGroupCompleted:(LTXMPPManager_group_queryGroupsBlock)group_queryGroupsBlock {
+    self.group_queryGroupsBlock = group_queryGroupsBlock;
     
     NSMutableString *host = [[NSMutableString alloc] initWithString:self.aXMPPStream.myJID.full];
     [host remainAfterString:@"@"];
@@ -28,6 +28,19 @@ void runCategoryForFramework41(){}
     [self.aXMPPStream sendElement:iq];
 }
 
+//获取群资料
+- (void)sendRequestQueryGroupVCardInformationByGroupJid:(NSString *)aGroupJid
+                                              completed:(LTXMPPManager_group_queryGroupVCardBlock)aBlock
+{
+    self.group_queryGroupVCardBlock = aBlock;
+    //  NSString *to = groupJid;
+    NSString *elementID = kStringXMPPElementIDRoster4One;
+    XMPPJID *to = [XMPPJID jidWithString:aGroupJid];
+    XMPPIQ *iq = [XMPPIQ iqWithType:@"get" to:to elementID:elementID];
+    NSXMLElement *query = [NSXMLElement elementWithName:@"query" xmlns:@"http://jabber.org/protocol/disco#info"];
+    [iq addChild:query];
+    [self.aXMPPStream sendElement:iq];
+}
 
 
 

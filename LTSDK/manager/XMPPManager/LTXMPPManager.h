@@ -24,7 +24,11 @@
 
 typedef void(^LTXMPPManagerLoginBlock)(LTError *error);
 typedef void(^LTXMPPManager_friend_queryRostersBlock)(NSMutableArray *arrM, NSString *rosterVersion);
-typedef void(^LTXMPPManager_friend_queryGroupsBlock)(NSMutableArray *arrM, NSString *groupVersion);
+
+
+typedef void(^LTXMPPManager_group_queryGroupsBlock)(NSMutableArray *arrM, NSString *groupVersion);
+typedef void(^LTXMPPManager_group_queryGroupVCardBlock)(NSDictionary *dict);
+
 typedef void(^LTXMPPManager_iq_queryInformationByJidBlock)(NSDictionary *dict,LTError *error);
 typedef void(^LTXMPPManager_message_queryMessageBlock)(NSDictionary *dict);
 
@@ -46,10 +50,18 @@ typedef void(^LTXMPPManager_message_queryMessageBlock)(NSDictionary *dict);
 
 //回调
 @property (nonatomic, strong) LTXMPPManagerLoginBlock aXMPPManagerLoginBlock;
-//好友
+
+/**好友**/
 @property (nonatomic, strong) LTXMPPManager_friend_queryRostersBlock friend_queryRostersBlock;  /**请求好友列表回调**/
-@property (nonatomic, strong) LTXMPPManager_friend_queryGroupsBlock friend_queryGroupsBlock;  /**请求群组列表回调**/
+
+/**群组**/
+@property (nonatomic, strong) LTXMPPManager_group_queryGroupsBlock group_queryGroupsBlock;  /**请求群组列表回调**/
+@property (nonatomic, strong) LTXMPPManager_group_queryGroupVCardBlock group_queryGroupVCardBlock;  /**请求群组资料VCard回调**/
+
+/**一般IQ**/
 @property (nonatomic, strong) LTXMPPManager_iq_queryInformationByJidBlock iq_queryInformationByJidBlock;  /**请求Vcard回调**/
+
+/**消息**/
 @property (nonatomic, strong) LTXMPPManager_message_queryMessageBlock message_queryMessageBlock;  /**请求Message回调**/
 
 

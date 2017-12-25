@@ -63,8 +63,8 @@ UICollectionViewDelegate
     rightItem.tag = 1001;
     self.navigationItem.rightBarButtonItems = @[rightItem];
 }
--(void)pushToInformationController {
-    InformationController *infovc = [[InformationController alloc] init];
+-(void)pushToInformationController {    
+    InformationController *infovc = [[InformationController alloc] initWithJID:self.currentOtherJID];
     [self.navigationController pushViewController:infovc animated:YES];
 }
 /**键盘监听**/

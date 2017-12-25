@@ -23,6 +23,9 @@ UICollectionViewDelegate
 @property (nonatomic, strong) NSMutableArray *datasource;
 
 @property (nonatomic, strong) NSMutableDictionary *dict;
+
+/**必须设置jid**/
+@property (nonatomic, strong) NSString *jid;
 @end
 
 
@@ -43,15 +46,21 @@ UICollectionViewDelegate
 
 -(void)settingData {
     __weak typeof(self) weakself = self;
-    [LTUser.share queryInformationByJID:self.jid
-                              completed:^(NSDictionary *dict) {
-                                  [weakself dealDict:dict];
-                              }];
+    if ([self.jid containsString:@"conference"])
+    {
+        [LTGroup.share queryGroupVCardByGroupJID:self.jid
+                                       completed:^(NSDictionary *dict) {
+                                           [weakself dealDict:dict];
+        }];
+    }else{
+        [LTUser.share queryInformationByJID:self.jid
+                                  completed:^(NSDictionary *dict) {
+                                      [weakself dealDict:dict];
+                                  }];
+    }
 }
 
--(void)dealDict:(NSDictionary *)dict {
-    
-    
+-(void)dealDict:(NSDictionary *)dict {    
     self.dict = [dict mutableCopy];
     [self.dict removeObjectForKey:@"ORG"];
     [self.collectionview reloadData];
@@ -169,6 +178,15 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
 
 #pragma mark - init
+
+- (instancetype)initWithJID:(NSString *)aJID
+{
+    self = [super init];
+    if (self) {
+        self.jid = aJID;
+    }
+    return self;
+}
 -(NSMutableArray *)datasource {
     if (!_datasource) {
         _datasource = [NSMutableArray array];

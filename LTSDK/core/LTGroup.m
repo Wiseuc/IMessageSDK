@@ -31,5 +31,11 @@
 }
 
 
-
+-(void)queryGroupVCardByGroupJID:(NSString *)aGroupJID  completed:(LTGroup_queryGroupVCardBlock)queryGroupVCardBlock {
+    [LTXMPPManager.share sendRequestQueryGroupVCardInformationByGroupJid:aGroupJID completed:^(NSDictionary *dict) {
+        if (queryGroupVCardBlock) {
+            queryGroupVCardBlock(dict);
+        }
+    }];
+}
 @end

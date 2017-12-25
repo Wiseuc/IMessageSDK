@@ -336,7 +336,7 @@ void runCategoryForFramework34(){}
                 }
                 [items addObjectsFromArray:subItems];
             }
-            self.friend_queryGroupsBlock(items, nil);
+            self.group_queryGroupsBlock(items, nil);
         }
     }
     
@@ -389,7 +389,7 @@ void runCategoryForFramework34(){}
      </vCard>
      </iq>
      **/
-    /**获取Vcard资料**/
+    
     if ([iq isResultIQ])
     {
         NSError *error = nil;
@@ -399,29 +399,28 @@ void runCategoryForFramework34(){}
         /**字典取值 espectedType：预期类型**/
         NSDictionary *info = [NSObject objectForKey:@"iq"  inDictionary:result  espectedType:[NSDictionary class]];
         
-        //rstrone
+        /**获取个人／群组信息**/
         if ([elementId rangeOfString:kStringXMPPElementIDRoster4One options:NSCaseInsensitiveSearch].length>0)
         {
+            /**获取个人信息**/
             if([[info allKeys] containsObject:kStringXMPPIQVCard])
             {
                 NSDictionary *card = [NSObject objectForKey:kStringXMPPIQVCard inDictionary:info espectedType:[NSDictionary class]];
                 
                 //如果不含有新版本的信息，那么vCard里只有两个元素xmlns和ver
-                if(![NSObject isEmpty:card] && [card allKeys].count>2)        //vCard为空表示已经是最新版本，不需要更新
+                //vCard为空表示已经是最新版本，不需要更新
+                if(![NSObject isEmpty:card] && [card allKeys].count>2)
                 {
                     NSMutableDictionary *someone = [[NSMutableDictionary alloc] initWithCapacity:10];
-                    
                     //版本号
                     [someone setObject:[NSObject objectForKey:kStringXMPPVersion inDictionary:card] forKey:kStringXMPPRosterVCardVersion];
                     
                     NSMutableString *from = [[NSMutableString alloc] initWithString:[self valueForKey:kStringXMPPFrom inDictionary:info]];
                     [from remainBeforeString:@"/"];
                     [someone setObject:from forKey:kStringXMPPRosterJabberId];
-                    
                     //性别
                     NSString *sex = [self valueForKey:kStringXMPPRosterSex inDictionary:card];
                     [someone setObject:sex forKey:kStringXMPPRosterSex];
-                    
                     NSString *portrait = [self valueForKey:kStringXMPPRosterPortrait inDictionary:card];
                     if([sex rangeOfString:@"男" options:NSCaseInsensitiveSearch].length>0)
                     {
@@ -546,9 +545,75 @@ void runCategoryForFramework34(){}
                         self.iq_queryInformationByJidBlock(someone, nil);
                     }
                 }
+            }//end 获取个人信息
+            /**获取群组信息**/
+            else if ([[info allKeys] containsObject:kStringXMPPIQQuery])
+            {
+                NSDictionary *query =
+                [NSObject objectForKey:kStringXMPPIQQuery inDictionary:info espectedType:[NSDictionary class]];
+                NSString *xmlns = [NSObject objectForKey:kStringXMPPXmlns inDictionary:query];
+                if([kStringXMPPXmlnsGroup isEqualToString:xmlns])   //检查xmlns是否是群组相关的请求域
+                {
+                    //应用需要的群组信息
+                    NSMutableDictionary *group = [[NSMutableDictionary alloc] initWithCapacity:10];
+                    [group setObject:[NSObject objectForKey:kStringXMPPFrom inDictionary:info] forKey:kStringXMPPRosterJabberId];
+                    //群组名称
+                    NSDictionary *identity =
+                    [NSObject objectForKey:kStringXMPPRosterGroupIdentity inDictionary:query espectedType:[NSDictionary class]];
+                    NSString *fullName = [NSObject objectForKey:kStringXMPPRosterGroupName inDictionary:identity];
+                    [group setObject:fullName forKey:kStringXMPPRosterNameFull];
+                    [group setObject:[self transferToPinYin:fullName] forKey:kStringXMPPRosterNamePinYin];
                 
-            }
-        }
+                    //群组其它字段
+                    //x和identity平级
+                    NSDictionary *x = [NSObject  objectForKey:kStringXMPPX inDictionary:query espectedType:[NSDictionary class]];
+                    id f = [NSObject objectForKey:kStringXMPPRosterGroupField inDictionary:x];
+                    
+                    NSMutableArray *fields = [NSMutableArray arrayWithCapacity:10];
+                    if([f isKindOfClass:[NSDictionary class]])
+                    {
+                        [fields addObject:f];
+                    }else if([f isKindOfClass:[NSArray class]]) {
+                        [fields addObjectsFromArray:f];
+                    }
+                    
+                    for(NSDictionary *field in fields)
+                    {
+                        NSString *k = [NSObject objectForKey:kStringXMPPRosterGroupFieldLabel inDictionary:field];
+                        if(![NSObject isEmpty:k])
+                        {
+                            NSString *v = [self valueForKey:kStringXMPPRosterGroupFieldValue inDictionary:field];
+                            //群简介
+                            if([kStringXMPPRosterGroupDescription isEqualToString:k]){
+                                [group setObject:v forKey:kStringXMPPRosterDescription];
+                            }
+                            //群公告
+                            if([kStringXMPPRosterBulletin isEqualToString:k]){
+                                [group setObject:v forKey:kStringXMPPRosterBulletin];
+                            }
+                            //创建时间
+                            if([kStringXMPPRosterCreatedTime isEqualToString:k])
+                            {
+                                if(![NSObject isEmpty:v]){
+                                    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[v doubleValue]];
+                                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                                    dateFormatter.dateFormat = @"yyyy-M-d";
+                                    v = [dateFormatter stringFromDate:date];
+                                }
+                            }
+                            [group setObject:v forKey:k];
+                        }
+                    }
+                    
+                    if (self.group_queryGroupVCardBlock) {
+                        self.group_queryGroupVCardBlock(group);
+                    }
+                }
+                
+            }//end 获取群组信息
+            
+        }//end 获取个人群组信息
+        
         
     }
     return NO;
