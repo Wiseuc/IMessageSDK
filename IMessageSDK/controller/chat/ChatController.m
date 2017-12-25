@@ -27,6 +27,7 @@ UICollectionViewDelegate
 @property (nonatomic, strong) UICollectionView *collectionview;
 @property (nonatomic, strong) NSMutableArray *datasource;
 @property (nonatomic, strong) NSString *currentOtherJID;  /**对方jid**/
+@property (nonatomic, strong) NSString *conversationName; /**对方name**/
 @property (nonatomic, strong) InputView *inputView;  /**输入框**/
 @end
 
@@ -153,20 +154,16 @@ UICollectionViewDelegate
         return;
     }
     /**通过对方jid获取**/
-    
     NSDictionary *userDict = [LTUser.share queryUser];
     NSString *myJID = userDict[@"JID"];
     NSString *ConversationName = [Message jh_queryConversationNameByJID:self.currentOtherJID myJID:myJID];
-    NSArray *arr = [Message jh_queryByConversationName:ConversationName currentMyJID:myJID];
-    
+    NSArray *arr = [Message jh_queryByConversationName:ConversationName currentMyJID:myJID];    
     if (arr == nil || arr.count == 0) {
         return;
     }
     self.datasource = [arr mutableCopy];
     [self refreshData];
     
-    
-    self.title = ConversationName;
 }
 -(void)refreshData {
     
@@ -221,14 +218,14 @@ UICollectionViewDelegate
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self settingDBOberser];
-    
     [kMainVC hiddenTbaBar];
+    [self settingData];
 }
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self unsettingDBOberser];
     [kMainVC showTbaBar];
-    [self settingData];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -254,12 +251,23 @@ UICollectionViewDelegate
     
     NSDictionary *userDict = [LTUser.share queryUser];
     NSString *myJID =userDict[@"JID"];
-        
-    NSDictionary *dict = [LTMessage.share asyncSendMessageWithMyJID:myJID
-                                                           otherJID:self.currentOtherJID
-                                                               body:content
-                                                           chatType:@"chat"];
-    [self dealData:dict];
+    if ([self.currentOtherJID isEqualToString:@"conference"])
+    {
+        NSDictionary *dict02 =
+        [LTMessage.share sendMessageWithSenderJID:myJID
+                                         otherJID:self.currentOtherJID
+                                             body:content];
+        [self dealData:dict02];
+    }
+    else
+    {
+        NSDictionary *dict03 =
+        [LTMessage.share sendConferenceMessageWithSenderJID:myJID
+                                              conferenceJID:self.currentOtherJID
+                                                      conferenceName:self.conversationName
+                                                       body:content];
+        [self dealData:dict03];
+    }
 }
 -(void)dealData:(NSDictionary *)dict {
     Message *msg = [[Message alloc] init];
@@ -302,21 +310,23 @@ UICollectionViewDelegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView
+     numberOfItemsInSection:(NSInteger)section {
     return self.datasource.count;
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     Message *model = self.datasource[indexPath.item];
     CGSize size = [model.body sizeWithFontSize:17.0 maxSize:CGSizeMake(kScreenWidth-120, MAXFLOAT)];
-    
     if (size.height + 30 < 70) {
         return CGSizeMake(kScreenWidth, 70);
     }
     return CGSizeMake(kScreenWidth, size.height + 40);
 }
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ChatCell *cell =
     [collectionView dequeueReusableCellWithReuseIdentifier:@"ChatCell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
@@ -324,7 +334,8 @@ UICollectionViewDelegate
     cell.model = model;
     return cell;
 }
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(UICollectionView *)collectionView
+didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
 }
 //- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
@@ -365,6 +376,17 @@ UICollectionViewDelegate
     self = [super init];
     if (self) {
         self.currentOtherJID = aCurrentOtherJID;
+    }
+    return self;
+}
+-(instancetype)initWithCurrentOtherJID:(NSString *)aCurrentOtherJID
+                      conversationName:(NSString *)aConversationName {
+    self = [super init];
+    if (self) {
+        self.currentOtherJID = aCurrentOtherJID;
+        self.conversationName = aConversationName;
+        
+        self.title = self.conversationName;
     }
     return self;
 }

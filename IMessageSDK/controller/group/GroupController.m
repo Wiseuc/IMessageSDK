@@ -16,6 +16,7 @@
 #import "GroupController.h"
 #import "CompanyController.h"
 #import "GroupCell.h"
+#import "ChatController.h"
 
 @interface GroupController ()
 <
@@ -151,7 +152,10 @@ UICollectionViewDelegate
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    GroupModel *model = self.datasource[indexPath.item];
+    NSString *otherJID = model.jid;
+    ChatController *chatvc = [[ChatController alloc] initWithCurrentOtherJID:otherJID conversationName:model.name];
+    [self.navigationController pushViewController:chatvc animated:YES];
 }
 //- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
 //           viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
@@ -238,7 +242,7 @@ UICollectionViewDelegate
         _collectionview.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
         _collectionview.delegate = self;
         _collectionview.dataSource = self;
-        __weak typeof(self) weakself = self;
+//        __weak typeof(self) weakself = self;
 //        _collectionview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
 //            [weakself settingData];
 //        }];

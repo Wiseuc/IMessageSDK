@@ -14,7 +14,7 @@
 #import "OrgCell.h"
 #import "StackView.h"
 #import "LTStack.h"
-
+#import "ChatController.h"
 
 
 
@@ -178,10 +178,17 @@ UICollectionViewDelegate
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     OrgModel *model = self.datasource[indexPath.item];
-    
-    if ([model.ITEMTYPE isEqualToString:@"1"]) {
+
+    if ([model.ITEMTYPE isEqualToString:@"1"])
+    {
         [self.ltStack push:model];
         [self parseOrgWith:model];
+    }
+    else if ([model.ITEMTYPE isEqualToString:@"2"])
+    {
+        NSString *otherJID = model.JID;
+        ChatController *chatvc = [[ChatController alloc] initWithCurrentOtherJID:otherJID conversationName:model.NAME];
+        [self.navigationController pushViewController:chatvc animated:YES];
     }
 }
 

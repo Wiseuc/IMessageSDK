@@ -42,14 +42,30 @@
 }
 
 
--(NSDictionary *)asyncSendMessageWithMyJID:(NSString *)aMyJID
-                                  otherJID:(NSString *)aOtherJID
-                                      body:(NSString *)aBody
-                                  chatType:(NSString *)aChatType {
+
+
+-(NSDictionary *)sendMessageWithSenderJID:(NSString *)aSenderJID
+                                 otherJID:(NSString *)aOtherJID
+                                     body:(NSString *)aBody
+{
+    return [LTXMPPManager.share sendMessageWithSenderJID:aSenderJID
+                                                otherJID:aOtherJID
+                                                    body:aBody];
     
-    return [LTXMPPManager.share sendMessageWithMyJID:aMyJID
-                                            otherJID:aOtherJID
-                                                body:aBody
-                                            chatType:aChatType];
 }
+-(NSDictionary *)sendConferenceMessageWithSenderJID:(NSString *)aSenderJID
+                                      conferenceJID:(NSString *)aConferenceJID
+                                     conferenceName:(NSString *)aConferenceName
+                                               body:(NSString *)aBody
+{
+    return [LTXMPPManager.share sendConferenceMessageWithSenderJID:aSenderJID
+                                                     conferenceJID:aConferenceJID
+                                                    conferenceName:aConferenceName
+                                                              body:aBody];
+}
+
+
+
+
+
 @end

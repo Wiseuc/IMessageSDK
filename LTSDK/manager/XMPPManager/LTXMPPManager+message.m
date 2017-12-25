@@ -36,25 +36,20 @@ void runCategoryForFramework42(){}
 
 /**
  文本消息：
- 
+ SEND:
  <message
- xmlns="jabber:client"
- UID="b20b1a2a994b4cfb9447da57edec33db"
- id="ObASN-12"
- to="江海@duowin-server/IphoneIM"
- from="萧凡宇@duowin-server/AndroidIM"
- type="chat">
- 
- <body>啊啊啊啊</body>
- <thread>2284edcd-dd18-489c-992f-54f2daf328e9</thread>
+ id="EFF5B5BD14524B75ABB0A8ED25828F9E"
+ to="萧凡宇@duowin-server"
+ from="江海@duowin-server/IphoneIM"
+ type="chat"
+ UID="4F9E3310D1B34BE190DCD36FA8A01B0A">
+     <body>得得得</body>
  </message>
- 
- <message 794AAA4AF2B94F5CA54CAB4D19736C68="id" 51DD674A6D044A6E855F7E16B5FBE945="UID" 江海@duowin-server/IphoneIM="from" 萧凡宇@duowin-server="to" chat="type"><body>拉萨菩萨</body></message>
  **/
--(NSDictionary *)sendMessageWithMyJID:(NSString *)aMyJID
-                             otherJID:(NSString *)aOtherJID
-                                 body:(NSString *)aBody
-                             chatType:(NSString *)aChatType {
+-(NSDictionary *)sendMessageWithSenderJID:(NSString *)aSenderJID
+                                 otherJID:(NSString *)aOtherJID
+                                     body:(NSString *)aBody
+{
     
     NSXMLElement *msg = [NSXMLElement elementWithName:@"message"];
     NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
@@ -62,26 +57,25 @@ void runCategoryForFramework42(){}
     
     [msg addAttributeWithName:@"id"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
     [msg addAttributeWithName:@"UID"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
-    [msg addAttributeWithName:@"from" stringValue: [aMyJID stringByAppendingString:@"/IphoneIM"]];
+    [msg addAttributeWithName:@"from" stringValue: [aSenderJID stringByAppendingString:@"/IphoneIM"]];
     [msg addAttributeWithName:@"to"  stringValue:aOtherJID];
-    [msg addAttributeWithName:@"type"  stringValue:aChatType];
-    
+    [msg addAttributeWithName:@"type"  stringValue:@"chat"];
     [body setStringValue:aBody];
     [self.aXMPPStream sendElement:msg];
     
     //通过jid组织架构获取信息
     NSDictionary *dict02 = [LT_OrgManager queryInformationByJid:aOtherJID];
     return @{
-             @"currentMyJID":aMyJID,
+             @"currentMyJID":aSenderJID,
              @"currentOtherJID":aOtherJID,
              @"conversationName":dict02[@"NAME"],
              @"stamp":[self getTimestamp],
              @"body":aBody,
-             
+
              @"bodyType":@"bodyType_Text",
-             @"from":[aMyJID stringByAppendingString:@"/IphoneIM"],
+             @"from":[aSenderJID stringByAppendingString:@"/IphoneIM"],
              @"to":aOtherJID,
-             @"type":aChatType,
+             @"type":@"chat",
              @"UID":[self get_32Bytes_UUID],
              };
 }
@@ -90,21 +84,49 @@ void runCategoryForFramework42(){}
 /**
  群组消息：
  
+ SEND:
  <message
- xmlns="jabber:client"
- SenderJID="萧凡宇@duowin-server/AndroidIM"
- UID="8282f8ad82bb4254864e082ae5d489f1"
- id="ObASN-19"
- to="江海@duowin-server/IphoneIM"
+ id="427C3A02801A44A79A4082FF091E1E33"
+ to="fd3f752ffdfe4c5cbb26e818c6ca6f4c@conference.duowin-server"
+ SenderJID="江海@duowin-server"
  type="groupchat"
- from="fd3f752ffdfe4c5cbb26e818c6ca6f4c@conference.duowin-server/萧凡宇"
- name="萧凡宇,江海">
- 
- <body>摸摸弄</body>
- <x xmlns="jabber:x:delay" from="fd3f752ffdfe4c5cbb26e818c6ca6f4c@conference.duowin-server" stamp="20171220T11:53:20"></x>
+ UID="4197AA42F8FF4536ABA34BFB31F13426">
+     <body>得到</body>
  </message>
  **/
-
+-(NSDictionary *)sendConferenceMessageWithSenderJID:(NSString *)aSenderJID
+                                      conferenceJID:(NSString *)aConferenceJID
+                                     conferenceName:(NSString *)aConferenceName
+                                               body:(NSString *)aBody
+{
+    NSXMLElement *msg = [NSXMLElement elementWithName:@"message"];
+    NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
+    [msg addChild:body];
+    
+    [msg addAttributeWithName:@"id"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
+    [msg addAttributeWithName:@"to"  stringValue:aConferenceJID];
+    [msg addAttributeWithName:@"SenderJID"  stringValue:aSenderJID];
+    [msg addAttributeWithName:@"type"  stringValue:@"groupchat"];
+    [msg addAttributeWithName:@"UID"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
+    [body setStringValue:aBody];
+    [self.aXMPPStream sendElement:msg];
+    
+    //通过jid组织架构获取信息
+    //NSDictionary *dict02 = [LT_OrgManager queryInformationByJid:aOtherJID];
+    return @{
+             @"currentMyJID":aSenderJID,
+             @"currentOtherJID":aConferenceJID,
+             @"conversationName":aConferenceName,
+             @"stamp":[self getTimestamp],
+             @"body":aBody,
+             
+             @"bodyType":@"bodyType_Text",
+             @"from":[aSenderJID stringByAppendingString:@"/IphoneIM"],
+             @"to":aConferenceJID,
+             @"type":@"groupchat",
+             @"UID":[self get_32Bytes_UUID],
+             };
+}
 
 
 

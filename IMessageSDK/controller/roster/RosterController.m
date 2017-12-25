@@ -17,7 +17,7 @@
 #import "GroupController.h"
 #import "CompanyController.h"
 #import "RosterCell.h"
-
+#import "ChatController.h"
 
 
 
@@ -144,7 +144,10 @@ UICollectionViewDelegate
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    RosterModel *model = self.datasource[indexPath.item];
+    NSString *ohterJID = model.jid;
+    ChatController *chatvc = [[ChatController alloc] initWithCurrentOtherJID:ohterJID conversationName:model.name];
+    [self.navigationController pushViewController:chatvc animated:YES];
 }
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
            viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {

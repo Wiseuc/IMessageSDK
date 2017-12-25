@@ -231,6 +231,17 @@
 		F93496F21FE901D600E8D8A3 /* MineCell01.m in Sources */ = {isa = PBXBuildFile; fileRef = F93496F11FE901D600E8D8A3 /* MineCell01.m */; };
 		F93496F51FE9041300E8D8A3 /* MineCell02.m in Sources */ = {isa = PBXBuildFile; fileRef = F93496F41FE9041300E8D8A3 /* MineCell02.m */; };
 		F93496F91FE90DE800E8D8A3 /* InformationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F93496F81FE90DE800E8D8A3 /* InformationController.m */; };
+		F94B8CB41FECF612001A4211 /* LTOrg.h in Copy Files */ = {isa = PBXBuildFile; fileRef = F9637DE91FE7A27000B1250C /* LTOrg.h */; };
+		F94B8CB51FECF612001A4211 /* LTUser.h in Copy Files */ = {isa = PBXBuildFile; fileRef = F9C557F61FE2128900539EAB /* LTUser.h */; };
+		F94B8CB61FECF612001A4211 /* LTErrorDef.h in Copy Files */ = {isa = PBXBuildFile; fileRef = F9194F941FDFE1CA00CCFB32 /* LTErrorDef.h */; };
+		F94B8CB71FECF612001A4211 /* LTLoginDef.h in Copy Files */ = {isa = PBXBuildFile; fileRef = F9194F951FDFE1CA00CCFB32 /* LTLoginDef.h */; };
+		F94B8CB81FECF612001A4211 /* LTError.h in Copy Files */ = {isa = PBXBuildFile; fileRef = F9194F981FDFE1CB00CCFB32 /* LTError.h */; };
+		F94B8CB91FECF612001A4211 /* LTINF.h in Copy Files */ = {isa = PBXBuildFile; fileRef = F9194F991FDFE1CB00CCFB32 /* LTINF.h */; };
+		F94B8CBA1FECF612001A4211 /* LTLogin.h in Copy Files */ = {isa = PBXBuildFile; fileRef = F9194F9A1FDFE1CB00CCFB32 /* LTLogin.h */; };
+		F94B8CBB1FECF612001A4211 /* LTFriend.h in Copy Files */ = {isa = PBXBuildFile; fileRef = F9558CD61FE369A100D13CD0 /* LTFriend.h */; };
+		F94B8CBC1FECF612001A4211 /* LTGroup.h in Copy Files */ = {isa = PBXBuildFile; fileRef = F9558D961FE3BA7500D13CD0 /* LTGroup.h */; };
+		F94B8CBD1FECF612001A4211 /* LTMessage.h in Copy Files */ = {isa = PBXBuildFile; fileRef = F97D69221FEA0A4B00E19477 /* LTMessage.h */; };
+		F94B8CBE1FECF6E7001A4211 /* LTSDKFull.h in Copy Files */ = {isa = PBXBuildFile; fileRef = F9194F9F1FDFE29000CCFB32 /* LTSDKFull.h */; };
 		F9558CC31FE35A6600D13CD0 /* OrgController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9558CC21FE35A6600D13CD0 /* OrgController.m */; };
 		F9558CCA1FE35BF900D13CD0 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F9558CC91FE35BF900D13CD0 /* CHTCollectionViewWaterfallLayout.m */; };
 		F9558CCD1FE3622C00D13CD0 /* GroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9558CCC1FE3622C00D13CD0 /* GroupController.m */; };
@@ -383,6 +394,17 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				F94B8CBE1FECF6E7001A4211 /* LTSDKFull.h in Copy Files */,
+				F94B8CB41FECF612001A4211 /* LTOrg.h in Copy Files */,
+				F94B8CB51FECF612001A4211 /* LTUser.h in Copy Files */,
+				F94B8CB61FECF612001A4211 /* LTErrorDef.h in Copy Files */,
+				F94B8CB71FECF612001A4211 /* LTLoginDef.h in Copy Files */,
+				F94B8CB81FECF612001A4211 /* LTError.h in Copy Files */,
+				F94B8CB91FECF612001A4211 /* LTINF.h in Copy Files */,
+				F94B8CBA1FECF612001A4211 /* LTLogin.h in Copy Files */,
+				F94B8CBB1FECF612001A4211 /* LTFriend.h in Copy Files */,
+				F94B8CBC1FECF612001A4211 /* LTGroup.h in Copy Files */,
+				F94B8CBD1FECF612001A4211 /* LTMessage.h in Copy Files */,
 				F9194CD11FDFDCE500CCFB32 /* LTSDK.h in Copy Files */,
 			);
 			name = "Copy Files";

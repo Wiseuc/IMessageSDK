@@ -154,8 +154,7 @@ UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Message *model = self.dataSource[indexPath.row];
-    
-    ChatController *chatvc = [[ChatController alloc] initWithCurrentOtherJID:model.currentOtherJID];
+    ChatController *chatvc = [[ChatController alloc] initWithCurrentOtherJID:model.currentOtherJID conversationName:model.conversationName];
     [self.navigationController pushViewController:chatvc animated:YES];
 }
 
