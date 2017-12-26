@@ -223,9 +223,6 @@ UICollectionViewDelegate
     [self settingKeyBoardNotification];
     [self settingUI];
     [self settingGesture];
-    
-    
-    
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

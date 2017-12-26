@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F90D3A761FF2017100BDB5DA /* NewFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = F90D3A751FF2017100BDB5DA /* NewFriendController.m */; };
 		F90D3A791FF2035700BDB5DA /* NewFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F90D3A781FF2035700BDB5DA /* NewFriendCell.m */; };
+		F90D3A7C1FF22BF900BDB5DA /* NewFriendMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F90D3A7B1FF22BF900BDB5DA /* NewFriendMessage.m */; };
 		F91761B41FE0B3FA00906CBB /* AppUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = F91761B31FE0B3FA00906CBB /* AppUtility.m */; };
 		F91761BE1FE0D48000906CBB /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F91761B91FE0D48000906CBB /* SVIndefiniteAnimatedView.m */; };
 		F91761BF1FE0D48000906CBB /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F91761BB1FE0D48000906CBB /* SVProgressHUD.bundle */; };
@@ -419,6 +420,8 @@
 		F90D3A751FF2017100BDB5DA /* NewFriendController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewFriendController.m; sourceTree = "<group>"; };
 		F90D3A771FF2035700BDB5DA /* NewFriendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewFriendCell.h; sourceTree = "<group>"; };
 		F90D3A781FF2035700BDB5DA /* NewFriendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewFriendCell.m; sourceTree = "<group>"; };
+		F90D3A7A1FF22BF900BDB5DA /* NewFriendMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewFriendMessage.h; sourceTree = "<group>"; };
+		F90D3A7B1FF22BF900BDB5DA /* NewFriendMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewFriendMessage.m; sourceTree = "<group>"; };
 		F91761B21FE0B3FA00906CBB /* AppUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppUtility.h; sourceTree = "<group>"; };
 		F91761B31FE0B3FA00906CBB /* AppUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppUtility.m; sourceTree = "<group>"; };
 		F91761B61FE0BCEE00906CBB /* UIConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIConfig.h; sourceTree = "<group>"; };
@@ -3130,6 +3133,8 @@
 			children = (
 				F98FDB7F1FEB8BDD00618C82 /* Message.h */,
 				F98FDB801FEB8BDD00618C82 /* Message.m */,
+				F90D3A7A1FF22BF900BDB5DA /* NewFriendMessage.h */,
+				F90D3A7B1FF22BF900BDB5DA /* NewFriendMessage.m */,
 			);
 			path = message;
 			sourceTree = "<group>";
@@ -3427,6 +3432,7 @@
 				F9194CB91FDFD64D00CCFB32 /* TabbarController.m in Sources */,
 				F9558D941FE3AF9C00D13CD0 /* RosterHeaderButton.m in Sources */,
 				F9194C861FDFD2C400CCFB32 /* main.m in Sources */,
+				F90D3A7C1FF22BF900BDB5DA /* NewFriendMessage.m in Sources */,
 				F9F7C09E1FEBC6EE00F56A23 /* InputView.m in Sources */,
 				F93496F21FE901D600E8D8A3 /* MineCell01.m in Sources */,
 				F9558D841FE399CA00D13CD0 /* UIView+MJExtension.m in Sources */,

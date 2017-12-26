@@ -235,7 +235,7 @@
     
     NSDictionary *userDict = [LTUser.share queryUser];
     NSString *myJID = userDict[@"JID"];
-    
+
     
     Message *msg = [[Message alloc] init];
     msg.currentMyJID = myJID;

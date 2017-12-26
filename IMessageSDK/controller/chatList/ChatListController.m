@@ -117,6 +117,23 @@ UITableViewDelegate
 
 
 
+#pragma mark - private
+
+/**删除与对方所有聊天记录**/
+-(void)deleteRecord:(Message *)message {
+    NSString *myJID = message.currentMyJID;
+    NSString *otherJID = message.currentOtherJID;
+    [Message jh_deleteDataByCurrentMyJID:myJID currentOtherJID:otherJID];
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -187,23 +204,28 @@ UITableViewDelegate
 //}
 -(NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewRowAction *action01 =
-    [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleDestructive)
-                                       title:@"删除"
-                                     handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-                                      
-                                     }];
-    
-    UITableViewRowAction *action02 =
-    [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleNormal)
-                                       title:@"置顶"
-                                     handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-                                      
-                                     }];
-    
-    NSArray *arr = @[action01,action02];
-    return arr;
+    Message *message = self.dataSource[indexPath.row];
+    if ([message.type isEqualToString:@"NewFriend"] )
+    {
+        return nil;
+        
+    }
+    else
+    {
+        UITableViewRowAction *action01 =
+        [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleDestructive)
+                                           title:@"删除"
+                                         handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+                                             [self deleteRecord:message];
+                                         }];
+        NSArray *arr = @[action01];
+        return arr;
+        
+    }
+    return nil;
 }
+
+
 
 
 

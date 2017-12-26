@@ -53,12 +53,64 @@
     NSString* where = [NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"currentOtherJID"),bg_sqlValue(aJID)];
     [self bg_delete:kBG_TableName where:where];
 }
+
+/*!
+ @method
+ @abstract 清空表数据
+ */
 +(void)jh_clear {
     //[self bg_clear:kBG_TableName];
 }
 
+/*!
+ @method
+ @abstract 删除表
+ */
 +(void)jh_drop {
     //[self bg_drop:kBG_TableName];
+}
+
+/*!
+ @method
+ @abstract 删除信息
+ @discussion 删除好友请求，群组请求。。。
+ @param aType （好友请求／群组请求）
+ @param aMyJID 我的jid
+ @param aOtherJID 对方jid
+ @param aOtherName 对方名字
+ */
++(void)jh_deleteMessageByType:(NSString *)aType
+                 currentMyJID:(NSString *)aMyJID
+               curentOtherJID:(NSString *)aOtherJID
+             currentOtherName:(NSString *)aOtherName
+{
+    NSString* where =
+    [NSString stringWithFormat:@"where %@=%@ and %@=%@ and %@=%@ and %@=%@",
+     bg_sqlKey(@"type"),bg_sqlValue(aType),
+     bg_sqlKey(@"currentMyJID"),bg_sqlValue(aMyJID),
+     bg_sqlKey(@"currentOtherJID"),bg_sqlValue(aOtherJID),
+     bg_sqlKey(@"from"),bg_sqlValue(aOtherName)
+     ];
+    [self bg_delete:kBG_TableName where:where];
+}
+
+
+/*!
+ @method
+ @abstract 删除记录
+ @discussion 备注
+ @param aCurrentMyJID 我的jid
+ @param aCurrentOtherJID 对方jid
+ */
++(void)jh_deleteDataByCurrentMyJID:(NSString *)aCurrentMyJID
+                   currentOtherJID:(NSString *)aCurrentOtherJID
+{
+    NSString* where =
+    [NSString stringWithFormat:@"where %@=%@ and %@=%@",
+     bg_sqlKey(@"currentMyJID"),bg_sqlValue(aCurrentMyJID),
+     bg_sqlKey(@"currentOtherJID"),bg_sqlValue(aCurrentOtherJID)
+     ];
+    [self bg_delete:kBG_TableName where:where];
 }
 
 
@@ -69,6 +121,7 @@
 
 
 #pragma mark - query
+
 +(NSArray *)jh_queryAll{
     return [self bg_findAll:kBG_TableName];
 }
@@ -119,30 +172,6 @@
     return conversationName;
 }
 
-
-/*!
- @method
- @abstract 删除信息
- @discussion 删除好友请求，群组请求。。。
- @param aType （好友请求／群组请求）
- @param aMyJID 我的jid
- @param aOtherJID 对方jid
- @param aOtherName 对方名字
- */
-+(void)jh_deleteMessageByType:(NSString *)aType
-                 currentMyJID:(NSString *)aMyJID
-               curentOtherJID:(NSString *)aOtherJID
-             currentOtherName:(NSString *)aOtherName
-{
-    NSString* where =
-    [NSString stringWithFormat:@"where %@=%@ and %@=%@ and %@=%@ and %@=%@",
-     bg_sqlKey(@"type"),bg_sqlValue(aType),
-     bg_sqlKey(@"currentMyJID"),bg_sqlValue(aMyJID),
-     bg_sqlKey(@"currentOtherJID"),bg_sqlValue(aOtherJID),
-     bg_sqlKey(@"from"),bg_sqlValue(aOtherName)
-     ];
-    [self bg_delete:kBG_TableName where:where];
-}
 
 
 

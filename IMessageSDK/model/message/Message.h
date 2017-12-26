@@ -97,6 +97,42 @@ typedef void(^MessageDBChangeBlock)(void);
 /**删除数据库信息表**/
 +(void)jh_drop;
 
+/*!
+ @method
+ @abstract 删除信息
+ @discussion 删除好友请求，群组请求。。。
+ @param aType （好友请求／群组请求）
+ @param aMyJID 我的jid
+ @param aOtherJID 对方jid
+ @param aOtherName 对方名字
+ */
++(void)jh_deleteMessageByType:(NSString *)aType
+                 currentMyJID:(NSString *)aMyJID
+               curentOtherJID:(NSString *)aOtherJID
+             currentOtherName:(NSString *)aOtherName;
+
+
+/*!
+ @method
+ @abstract 删除记录
+ @discussion <#备注#>
+ @param aCurrentMyJID 我的jid
+ @param aCurrentOtherJID 对方jid
+ */
++(void)jh_deleteDataByCurrentMyJID:(NSString *)aCurrentMyJID
+                   currentOtherJID:(NSString *)aCurrentOtherJID;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -109,7 +145,7 @@ typedef void(^MessageDBChangeBlock)(void);
 +(NSArray *)jh_queryByCurentOtherJID:(NSString *)aOtherJID;
 
 /**
- 通过我的jid查询所有会话
+ 通过我的jid查询所有会话(去重)
  **/
 +(NSArray *)jh_queryCurrentOtherJIDByMyJID:(NSString *)aMyJID;
 
@@ -128,19 +164,6 @@ typedef void(^MessageDBChangeBlock)(void);
 
 
 
-/*!
- @method
- @abstract 删除信息
- @discussion 删除好友请求，群组请求。。。
- @param aType （好友请求／群组请求）
- @param aMyJID 我的jid
- @param aOtherJID 对方jid
- @param aOtherName 对方名字
- */
-+(void)jh_deleteMessageByType:(NSString *)aType
-                 currentMyJID:(NSString *)aMyJID
-               curentOtherJID:(NSString *)aOtherJID
-             currentOtherName:(NSString *)aOtherName;
 
 
 
