@@ -126,6 +126,28 @@ typedef void(^MessageDBChangeBlock)(void);
 //+(NSString *)jh_queryConversationNameByJID:(NSString *)aJID;
 +(NSString *)jh_queryConversationNameByJID:(NSString *)aJID myJID:(NSString *)aMyJID;
 
+
+
+/*!
+ @method
+ @abstract 删除信息
+ @discussion 删除好友请求，群组请求。。。
+ @param aType （好友请求／群组请求）
+ @param aMyJID 我的jid
+ @param aOtherJID 对方jid
+ @param aOtherName 对方名字
+ */
++(void)jh_deleteMessageByType:(NSString *)aType
+                 currentMyJID:(NSString *)aMyJID
+               curentOtherJID:(NSString *)aOtherJID
+             currentOtherName:(NSString *)aOtherName;
+
+
+
+
+
+
+
 #pragma mark - 监听DB
 
 +(void)settingDBOberser:(MessageDBChangeBlock)aBlock;

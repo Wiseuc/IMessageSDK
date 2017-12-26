@@ -120,6 +120,35 @@
 }
 
 
+/*!
+ @method
+ @abstract 删除信息
+ @discussion 删除好友请求，群组请求。。。
+ @param aType （好友请求／群组请求）
+ @param aMyJID 我的jid
+ @param aOtherJID 对方jid
+ @param aOtherName 对方名字
+ */
++(void)jh_deleteMessageByType:(NSString *)aType
+                 currentMyJID:(NSString *)aMyJID
+               curentOtherJID:(NSString *)aOtherJID
+             currentOtherName:(NSString *)aOtherName
+{
+    NSString* where =
+    [NSString stringWithFormat:@"where %@=%@ and %@=%@ and %@=%@ and %@=%@",
+     bg_sqlKey(@"type"),bg_sqlValue(aType),
+     bg_sqlKey(@"currentMyJID"),bg_sqlValue(aMyJID),
+     bg_sqlKey(@"currentOtherJID"),bg_sqlValue(aOtherJID),
+     bg_sqlKey(@"from"),bg_sqlValue(aOtherName)
+     ];
+    [self bg_delete:kBG_TableName where:where];
+}
+
+
+
+
+
+
 
 
 

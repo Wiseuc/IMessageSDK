@@ -134,7 +134,18 @@ UITableViewDelegate
  **/
 -(void)deleteNewFriendRecode:(Message *)message {
     
+    NSString *type = message.type;
+    NSString *myJID = message.currentMyJID;
+    NSString *otherJID = message.currentOtherJID;
+    NSString *otherName = message.from;
     
+    [Message jh_deleteMessageByType:type
+                       currentMyJID:myJID
+                     curentOtherJID:otherJID
+                   currentOtherName:otherName];
+    
+    //[self settingData];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

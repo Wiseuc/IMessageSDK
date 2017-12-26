@@ -107,7 +107,7 @@ void runCategoryForFramework40(){}
     
     XMPPPresence *presence = [XMPPPresence presence];
     [presence addAttributeWithName:kStringXMPPTo stringValue:aFriendJid];
-    [presence addAttributeWithName:@"type" stringValue:@"subscribed"];
+    [presence addAttributeWithName:@"type" stringValue:@"subscribe"];  //subscribed
     [presence addChild:[NSXMLElement elementWithName:kStringXMPPPresenceShow]];
     [self.aXMPPStream sendElement:presence];
     
