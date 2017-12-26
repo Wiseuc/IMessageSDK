@@ -19,10 +19,33 @@ void runCategoryForFramework42(){}
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
+    
+    /*
+     异地登录消息
+     
+     <message
+     xmlns="jabber:client"
+     from="duowin-server"
+     to="test001@duowin-server/IphoneIM"
+     notify="sessionreplace">
+     <body>您的帐号在其他地方登入,您被迫下线,如果不是您自己的操作,请及时更改密码!</body>
+     </message>
+     */
+    NSString *notify = [[message attributeForName:@"notify"] stringValue];
+    if ( notify && [notify isEqualToString:@"sessionreplace"] ) {
+        NSString *body = [message elementsForName:@"body"].firstObject.stringValue;
+        if (self.message_queryMessageBlock) {
+            LTError *error = [LTError errorWithDescription:body code:(LTErrorLogin_SessionReplace)];
+            self.message_queryMessageBlock(nil, error);
+        }
+    }
+    
+    
+    
     //dict
     NSDictionary *dict = [LT_MessageAnalysis analysisXMPPMessage:message];
     if (self.message_queryMessageBlock && dict != nil) {
-        self.message_queryMessageBlock(dict);
+        self.message_queryMessageBlock(dict,nil);
     }
     
 }

@@ -83,10 +83,10 @@
     self.messageLAB.text = model.body;
     self.timeLAB.text = model.stamp;
     
-    if ([model.type isEqualToString:@"chat"]) {
-        self.iconIMGV.image = [UIImage imageNamed:@"icon_40pt"];
-    }else {
+    if ([model.currentOtherJID containsString:@"conference"]) {
         self.iconIMGV.image = [UIImage imageNamed:@"group"];
+    }else {
+        self.iconIMGV.image = [UIImage imageNamed:@"icon_40pt"];
     }
 }
 

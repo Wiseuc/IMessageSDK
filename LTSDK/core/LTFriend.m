@@ -22,11 +22,9 @@
 
 
 -(void)queryRostersCompleted:(LTFriend_queryRostersBlock)queryRostersBlock {
-    _queryRostersBlock = queryRostersBlock;
-    
     [LTXMPPManager.share sendRequestRosterCompleted:^(NSMutableArray *arrM, NSString *rosterVersion) {
-        if (_queryRostersBlock) {
-            self.queryRostersBlock(arrM, nil);
+        if (queryRostersBlock) {
+            queryRostersBlock(arrM, nil);
         }
     }];
     
@@ -34,15 +32,26 @@
 }
 
 
--(void)queryInformationByJID:aJID completed:(LTUser_queryInformationByJIDBlock)queryInformationByJIDBlock {
+-(void)queryRosterVCardByJID:aJID completed:(LTFriend_queryRosterVCardBlock)queryRosterVCardBlock {
     [LTXMPPManager.share queryInformationByJid:aJID
                                      completed:^(NSDictionary *dict, LTError *error) {
-                                         if (queryInformationByJIDBlock) {
-                                             queryInformationByJIDBlock(dict);
+                                         if (queryRosterVCardBlock) {
+                                             queryRosterVCardBlock(dict);
                                          }
                                      }];
 }
 
 
-
+- (void)sendRequestAddFriendWithFriendJid:(NSString *)aFriendJid
+                               friendName:(NSString *)aFriendName
+                                completed:(LTFriend_addFriendBlock)aBlock {
+    
+    [LTXMPPManager.share sendRequestAddFriendWithFriendJid:aFriendJid
+                                                friendName:aFriendName
+                                                 completed:^(NSDictionary *dict, LTError *error) {
+                                                     if (aBlock) {
+                                                         aBlock(dict,error);
+                                                     }
+                                                 }];
+}
 @end

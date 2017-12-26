@@ -32,13 +32,11 @@
     _queryMessageBlock = aBlock;
     
     __weak typeof(self) weakself = self;
-    [LTXMPPManager.share sendRequestMessageCompleted:^(NSDictionary *dict) {
+    [LTXMPPManager.share sendRequestMessageCompleted:^(NSDictionary *dict, LTError *error) {
         if (weakself.queryMessageBlock) {
-            weakself.queryMessageBlock(dict);
+            weakself.queryMessageBlock(dict, error);
         }
     }];
-    
-    
 }
 
 

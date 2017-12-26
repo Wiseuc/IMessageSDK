@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "LTError.h"
-typedef void(^LTFriend_queryRostersBlock)(NSMutableArray *rosters, LTError *error);
-typedef void (^LTUser_queryInformationByJIDBlock)(NSDictionary *dict);
-
+typedef void (^LTFriend_queryRostersBlock)(NSMutableArray *rosters, LTError *error);
+typedef void (^LTFriend_queryRosterVCardBlock)(NSDictionary *dict);
+typedef void (^LTFriend_addFriendBlock)(NSDictionary *dict, LTError *error);
 
 
 @interface LTFriend : NSObject
-@property (nonatomic, strong) LTFriend_queryRostersBlock queryRostersBlock;
+//@property (nonatomic, strong) LTFriend_queryRostersBlock queryRostersBlock;
 
 
 /*!
@@ -30,8 +30,7 @@ typedef void (^LTUser_queryInformationByJIDBlock)(NSDictionary *dict);
 /*!
  @method
  @abstract 请求好友列表
- @discussion null
- @result  回调返回好友列表
+ @discussion 回调返回好友列表
  */
 - (void)queryRostersCompleted:(LTFriend_queryRostersBlock)queryRostersBlock;
 
@@ -41,7 +40,23 @@ typedef void (^LTUser_queryInformationByJIDBlock)(NSDictionary *dict);
  @abstract 通过JID获取资料
  @discussion 通过查询网络数据
  */
--(void)queryInformationByJID:(NSString *)aJID completed:(LTUser_queryInformationByJIDBlock)queryInformationByJIDBlock;
+-(void)queryRosterVCardByJID:(NSString *)aJID
+                   completed:(LTFriend_queryRosterVCardBlock)queryRosterVCardBlock;
+
+
+
+
+/*!
+ @method
+ @abstract 请求添加好友
+ @discussion <#备注#>
+ @param aFriendJid 好友jid
+ @param aFriendName 好友名字
+ @param aBlock 回调
+ */
+- (void)sendRequestAddFriendWithFriendJid:(NSString *)aFriendJid
+                               friendName:(NSString *)aFriendName
+                                completed:(LTFriend_addFriendBlock)aBlock;
 
 
 @end

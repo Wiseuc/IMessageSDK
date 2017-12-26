@@ -126,7 +126,7 @@
     }
 }
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
-    NSLog(@"连接服务器被拒");
+//    NSLog(@"连接服务器被拒");
 //    LTError *error2 = [LTError errorWithDescription:@"连接服务器被拒" code:(LTErrorLogin_connectRefused)];
 //    if ( _aXMPPManagerLoginBlock) {
 //        _aXMPPManagerLoginBlock(error2);
@@ -194,10 +194,11 @@ didNotAuthenticate:(DDXMLElement *)error {
 
 
 #pragma mark - Init
+static dispatch_once_t onceToken;
+static LTXMPPManager *instance = nil;
+
 
 +(instancetype)share {
-    static LTXMPPManager *instance = nil;
-    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[LTXMPPManager alloc] init];
     });
@@ -208,6 +209,7 @@ didNotAuthenticate:(DDXMLElement *)error {
 {
     self = [super init];
     if (self) {
+        
         /**XMPPStream**/
         self.aXMPPStream = [[XMPPStream alloc] init];
         self.aXMPPStream.enableBackgroundingOnSocket = YES;
@@ -217,7 +219,6 @@ didNotAuthenticate:(DDXMLElement *)error {
         [self.aXMPPStream setKeepAliveInterval:45-2];  /**心跳激活**/
 
         /**XMPPRosterCoreDataStorage**/
-        
         self.aXMPPRosterCoreDataStorage = [[XMPPRosterCoreDataStorage alloc] init];
         self.aXMPPRoster = [[XMPPRoster alloc] initWithRosterStorage:self.aXMPPRosterCoreDataStorage];
         //[self.aXMPPRoster activate:self.aXMPPStream];
@@ -320,4 +321,10 @@ didNotAuthenticate:(DDXMLElement *)error {
 }
 
 
++(void)xmppmanagerDealloc{
+    onceToken = 0;
+    // 只有置成0,GCD才会认为它从未执行过.它默认为0.这样才能保证下次再次调用shareInstance的时候,再次创建对象.
+    //[instance release];
+    instance = nil;
+}
 @end

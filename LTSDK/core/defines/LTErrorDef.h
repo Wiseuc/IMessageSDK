@@ -77,24 +77,25 @@ typedef enum{
     LTErrorNetworkUnknow,             /**网络未知**/
     
     
-    LTErrorInvalidAppkey = 100,       /**Appkey无效**/
+    LTErrorInvalidAppkey = 101,       /**Appkey无效**/
     LTErrorInvalidUsername,           /**用户名无效**/
     LTErrorInvalidPassword,           /**密码无效**/
-    
     LTErrorLogin_loginGeneralFailure, /**登录一般错误**/
     LTErrorLogin_InfDownloadFailure,  /**inf文件下载失败**/
+    
     LTErrorLogin_loginTimeOut,        /**登录超时**/
     LTErrorLogin_connectFailure,      /**连接失败**/
     LTErrorLogin_connectRefused,      /**连接被拒绝**/
     LTErrorLogin_InvalidUsername,     /**用户名错误**/
     LTErrorLogin_InvalidPassword,     /**密码错误**/
+    
     LTErrorLogin_InvalidIp,           /**服务器地址错误**/
     LTErrorLogin_InvalidPort,         /**服务器地址错误**/
     LTErrorLogin_OrgDownloadFailure,  /**组织架构下载失败**/
+    LTErrorLogin_SessionReplace,      /**异地登录**/
     
     
-    
-    LTErrorUserAlreadyLogin = 200,    /**已经登陆**/
+    LTErrorUserAlreadyLogin = 201,    /**已经登陆**/
     LTErrorUserNotLogin,              /**未登陆**/
     LTErrorUserAuthenticationFailed,  /**授权失败**/
     LTErrorUserAlreadyExist,          /**用户已存在**/

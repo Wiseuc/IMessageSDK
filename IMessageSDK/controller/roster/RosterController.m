@@ -226,7 +226,7 @@ UICollectionViewDelegate
     if (!_collectionview) {
         _collectionview =
         [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:self.chLayout];
-        _collectionview.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
+        _collectionview.backgroundColor =  kBackgroundColor;//[[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
         _collectionview.delegate = self;
         _collectionview.dataSource = self;
         __weak typeof(self) weakself = self;

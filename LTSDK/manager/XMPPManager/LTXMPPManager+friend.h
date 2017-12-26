@@ -14,9 +14,11 @@ void runCategoryForFramework40();
 /**请求好友列表**/
 - (void)sendRequestRosterCompleted:(LTXMPPManager_friend_queryRostersBlock)friend_queryRostersBlock;
 
+/**获取资料VCard**/
+- (void)queryInformationByJid:(NSString *)aJID completed:(LTXMPPManager_friend_queryRosterVCardBlock)aBlock;
 
-/**通过JID获取资料**/
-- (void)queryInformationByJid:(NSString *)aJID completed:(LTXMPPManager_iq_queryInformationByJidBlock)aBlock;
+/**请求添加好友**/
+- (void)sendRequestAddFriendWithFriendJid:(NSString *)aFriendJid friendName:(NSString *)aFriendName completed:(LTXMPPManager_friend_addFriendBlock)aBlock;
 
 
 @end

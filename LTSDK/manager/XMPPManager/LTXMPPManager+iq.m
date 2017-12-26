@@ -541,8 +541,8 @@ void runCategoryForFramework34(){}
                     }
                     //短号
                     [someone setObject:[self valueForKey:kStringXMPPRosterMobileExt inDictionary:card] forKey:kStringXMPPRosterMobileExt];
-                    if (self.iq_queryInformationByJidBlock) {
-                        self.iq_queryInformationByJidBlock(someone, nil);
+                    if (self.friend_queryRosterVCardByJidBlock) {
+                        self.friend_queryRosterVCardByJidBlock(someone, nil);
                     }
                 }
             }//end 获取个人信息

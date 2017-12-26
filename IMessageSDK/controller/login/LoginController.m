@@ -183,11 +183,11 @@
                                         [weakself loginFailureAction];
                                     }else{
                                         NSLog(@"登录成功");
-                                        [weakself loginSuccessAction];
+                                        [weakself loginSuccessAction01];
                                     }
                                 }];
 }
-- (void)loginSuccessAction {
+- (void)loginSuccessAction01 {
     [kMainVC showTabBarController];
     
     //下载组织架构

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LTError.h"
-typedef void(^LTMessage_queryMessageBlock)(NSDictionary *dict);
+typedef void(^LTMessage_queryMessageBlock)(NSDictionary *dict,LTError *error);
 
 
 @interface LTMessage : NSObject

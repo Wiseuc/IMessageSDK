@@ -11,6 +11,7 @@
 #import "UIConfig.h"
 #import "LTSDKFull.h"
 #import "InformationCell.h"
+#import "RosterModel.h"
 
 @interface InformationController ()
 <
@@ -42,6 +43,10 @@ UICollectionViewDelegate
 -(void)settingUI {
     [self.view addSubview:self.collectionview];
     [self.collectionview reloadData];
+    
+    
+    
+//    self.collectionview.sec
 }
 
 -(void)settingData {
@@ -52,7 +57,7 @@ UICollectionViewDelegate
             [weakself dealDict:dict];
         }];
     }else{
-        [LTFriend.share queryInformationByJID:self.jid completed:^(NSDictionary *dict) {
+        [LTFriend.share queryRosterVCardByJID:self.jid completed:^(NSDictionary *dict) {
             [weakself dealDict:dict];
         }];
     }
@@ -123,6 +128,44 @@ UICollectionViewDelegate
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)dealloc
+{
+    NSLog(@"个人信息页面dealloc");
+}
+
+
+
+
+
+
+
+
+#pragma mark - Private
+/**添加好友**/
+-(void)addFriend {
+    
+    NSDictionary *dict = [LTOrg queryInformationByJid:self.jid];
+    NSString *aJID = dict[@"JID"];
+    NSString *aName = dict[@"NAME"];
+    
+    [LTFriend.share sendRequestAddFriendWithFriendJid:aJID
+                                           friendName:aName
+                                            completed:^(NSDictionary *dict, LTError *error) {
+                                                
+                                                
+                                                
+                                                
+                                            }];
+    
+}
+/**删除好友**/
+-(void)deleteFriend {
+    
+    
+    
+}
+
+
 
 
 
@@ -163,9 +206,74 @@ UICollectionViewDelegate
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
  
 }
-
-
-
+//每段的段头视图，或者段尾视图
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+          viewForSupplementaryElementOfKind:(NSString *)kind
+                                atIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([kind isEqualToString:CHTCollectionElementKindSectionFooter])
+    {
+        UICollectionReusableView *footer =
+        [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"footer" forIndexPath:indexPath];
+        
+        __weak typeof(self) weakself = self;
+        [LTFriend.share queryRostersCompleted:^(NSMutableArray *rosters, LTError *error) {
+            
+            //是否为好友
+            BOOL isfriend = NO;
+            for (NSDictionary *dict01 in rosters)
+            {
+                if ([dict01[@"jid"] isEqualToString:self.jid]) {
+                    isfriend = YES;
+                }
+            }
+            
+            //是否为自己
+            NSDictionary *userDict = [LTUser.share queryUser];
+            NSString *myJID = userDict[@"JID"];
+            if ([weakself.jid isEqualToString:myJID])
+            {
+                
+            }
+            else
+            {
+                //是否为会议
+                if ([weakself.jid containsString:@"conference"])
+                {
+                    
+                }else{
+                    [weakself addFooterWithFooter:footer ByIsFriend:isfriend];
+                }
+            }
+        }];
+        return footer;
+    }
+    return nil;
+}
+-(CGFloat)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+heightForFooterInSection:(NSInteger)section {
+    return 100.0f;
+}
+-(void)addFooterWithFooter:(UICollectionReusableView *)footer ByIsFriend:(BOOL)isfriend {
+    
+    UIButton *addFriendBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    [footer addSubview:addFriendBTN];
+    addFriendBTN.frame = CGRectMake(10, 10, kScreenWidth-20, 40);
+    [addFriendBTN setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    
+    if (isfriend)
+    {
+        [addFriendBTN setTitle:@"删除好友" forState:(UIControlStateNormal)];
+        [addFriendBTN setBackgroundColor:[[UIColor redColor] colorWithAlphaComponent:0.5f]];
+        [addFriendBTN addTarget:self action:@selector(deleteFriend) forControlEvents:(UIControlEventTouchUpInside)];
+    }else{
+        [addFriendBTN setTitle:@"添加好友" forState:(UIControlStateNormal)];
+        [addFriendBTN setBackgroundColor:kDarkGreenColor];
+        [addFriendBTN addTarget:self action:@selector(addFriend) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    
+}
 
 
 
@@ -215,9 +323,16 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
          collectionViewLayout:self.chLayout];
         _collectionview.delegate = self;
         _collectionview.dataSource = self;
+        
         [_collectionview registerClass:[InformationCell class]
             forCellWithReuseIdentifier:@"InformationCell"];
         _collectionview.backgroundColor = kBackgroundColor;
+        
+        
+        
+        [self.collectionview registerClass:[UICollectionReusableView class]
+                forSupplementaryViewOfKind:CHTCollectionElementKindSectionFooter
+                       withReuseIdentifier:@"footer"];
     }
     return _collectionview;
 }

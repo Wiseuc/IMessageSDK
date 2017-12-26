@@ -127,9 +127,10 @@
 }
 
 /**登出**/
--(void)asyncLogout{
+-(void)asyncLogout{    
     [self updateLoginState:NO];
-    [LTXMPPManager.share sendPresenceUNAvailable];
+    
+    [LTXMPPManager.share sendPresenceUNAvailable]; //发送离线
     [LTXMPPManager.share clear];
 }
 

@@ -13,6 +13,9 @@
 
 
 + (NSDictionary *)analysisXMPPMessage:(XMPPMessage *)xmlMessage {
+
+
+    
     
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -30,7 +33,6 @@
     [dict setValue:to forKey:@"to"];
     [dict setValue:type forKey:@"type"];
    
-    
     
     /**我的jid**/
     NSDictionary *userDict = [LTUser.share queryUser];

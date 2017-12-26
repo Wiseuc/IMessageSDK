@@ -141,6 +141,9 @@ UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ChatListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatListCell"];
     //cell.textLabel.text = @"name";
+//    Message *msg  =  self.dataSource[indexPath.row];
+//    NSLog(@"== %@",msg.currentOtherJID);
+    
     cell.model = self.dataSource[indexPath.row];
     return cell;
 }

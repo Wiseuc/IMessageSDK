@@ -24,13 +24,16 @@
 
 typedef void(^LTXMPPManagerLoginBlock)(LTError *error);
 typedef void(^LTXMPPManager_friend_queryRostersBlock)(NSMutableArray *arrM, NSString *rosterVersion);
+typedef void(^LTXMPPManager_friend_queryRosterVCardBlock)(NSDictionary *dict,LTError *error);
+typedef void(^LTXMPPManager_friend_addFriendBlock)(NSDictionary *dict,LTError *error);
 
 
 typedef void(^LTXMPPManager_group_queryGroupsBlock)(NSMutableArray *arrM, NSString *groupVersion);
 typedef void(^LTXMPPManager_group_queryGroupVCardBlock)(NSDictionary *dict);
 
-typedef void(^LTXMPPManager_iq_queryInformationByJidBlock)(NSDictionary *dict,LTError *error);
-typedef void(^LTXMPPManager_message_queryMessageBlock)(NSDictionary *dict);
+
+
+typedef void(^LTXMPPManager_message_queryMessageBlock)(NSDictionary *dict,LTError *error);
 
 
 @interface LTXMPPManager : NSObject
@@ -51,15 +54,22 @@ typedef void(^LTXMPPManager_message_queryMessageBlock)(NSDictionary *dict);
 //回调
 @property (nonatomic, strong) LTXMPPManagerLoginBlock aXMPPManagerLoginBlock;
 
+
+
 /**好友**/
 @property (nonatomic, strong) LTXMPPManager_friend_queryRostersBlock friend_queryRostersBlock;  /**请求好友列表回调**/
+@property (nonatomic, strong) LTXMPPManager_friend_queryRosterVCardBlock friend_queryRosterVCardByJidBlock;  /**请求Vcard回调**/
+@property (nonatomic, strong) LTXMPPManager_friend_addFriendBlock friend_addFriendBlock;  /**请求添加好友**/
+
 
 /**群组**/
 @property (nonatomic, strong) LTXMPPManager_group_queryGroupsBlock group_queryGroupsBlock;  /**请求群组列表回调**/
 @property (nonatomic, strong) LTXMPPManager_group_queryGroupVCardBlock group_queryGroupVCardBlock;  /**请求群组资料VCard回调**/
 
+
 /**一般IQ**/
-@property (nonatomic, strong) LTXMPPManager_iq_queryInformationByJidBlock iq_queryInformationByJidBlock;  /**请求Vcard回调**/
+
+
 
 /**消息**/
 @property (nonatomic, strong) LTXMPPManager_message_queryMessageBlock message_queryMessageBlock;  /**请求Message回调**/
@@ -76,7 +86,11 @@ typedef void(^LTXMPPManager_message_queryMessageBlock)(NSDictionary *dict);
  */
 + (instancetype)share;
 
-
++(void)xmppmanagerDealloc;
+    
+    
+    
+    
 /*!
  @method
  @abstract 登录操作

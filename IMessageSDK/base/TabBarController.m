@@ -13,6 +13,8 @@
 #import "UIConfig.h"
 #import "LTSDKFull.h"
 #import "Message.h"
+#import "SVProgressHUD.h"
+
 
 @interface TabbarController ()
 
@@ -119,29 +121,6 @@
 }
 
 
--(void)settingMessage  {
-    __weak typeof(self) weakself = self;
-    [LTMessage.share queryMesageCompleted:^(NSDictionary *dict) {
-        [weakself dealData:dict];
-    }];
-}
--(void)dealData:(NSDictionary *)dict {
-    Message *msg = [[Message alloc] init];
-    msg.currentMyJID = dict[@"currentMyJID"];
-    msg.currentOtherJID = dict[@"currentOtherJID"];
-    msg.conversationName = dict[@"conversationName"];
-    msg.stamp = dict[@"stamp"];
-    msg.body = dict[@"body"];
-    msg.bodyType = dict[@"bodyType"];
-    msg.from = dict[@"from"];
-    msg.to = dict[@"to"];
-    msg.type = dict[@"type"];
-    msg.UID = dict[@"UID"];
-    msg.SenderJID = dict[@"SenderJID"];
-    [msg jh_saveOrUpdate];
-    // [self refreshData];
-}
-
 
 
 
@@ -159,8 +138,6 @@
     [self settingUI];
     
     [self settingAppearence];
-    
-    [self settingMessage];
     
 }
 -(void)viewWillAppear:(BOOL)animated {

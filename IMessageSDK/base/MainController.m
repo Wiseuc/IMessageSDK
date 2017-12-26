@@ -16,7 +16,7 @@
 #import "UIConfig.h"
 #import "SVProgressHUD.h"
 #import "DocManager.h"
-
+#import "Message.h"
 
 @interface MainController ()
 @property (nonatomic, strong) LoginController     *loginController;
@@ -32,6 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self settingMessage];
     
     self.loginController = [[LoginController alloc] init];
     self.guideController = [[GuideController alloc] init];
@@ -80,7 +82,7 @@
                                                             [weakself loginFailureAction];
                                                         }else{
                                                             NSLog(@"登录成功");
-                                                            [weakself loginSuccessAction];
+                                                            [weakself loginSuccessAction02];
                                                         }
                                                     }];
                     }
@@ -128,11 +130,7 @@
     [self jianghai_removeAllChildController];
     [self jianghai_addChildController:self.tabBarController];
 }
-
-
-
-
-- (void)loginSuccessAction {
+- (void)loginSuccessAction02 {
     [kMainVC showTabBarController];
     
     //下载组织架构
@@ -157,5 +155,56 @@
     //    [_loginView hideServerView];
 }
 
+
+
+
+
+
+
+#pragma mark - private
+
+-(void)settingMessage  {
+    __weak typeof(self) weakself = self;
+    [LTMessage.share queryMesageCompleted:^(NSDictionary *dict, LTError *error) {
+        if (error)
+        {
+            [weakself dealError:error];
+        }else{
+            [weakself dealData:dict];
+        }
+    }];
+}
+-(void)dealData:(NSDictionary *)dict {
+    Message *msg = [[Message alloc] init];
+    msg.currentMyJID = dict[@"currentMyJID"];
+    msg.currentOtherJID = dict[@"currentOtherJID"];
+    msg.conversationName = dict[@"conversationName"];
+    msg.stamp = dict[@"stamp"];
+    msg.body = dict[@"body"];
+    msg.bodyType = dict[@"bodyType"];
+    msg.from = dict[@"from"];
+    msg.to = dict[@"to"];
+    msg.type = dict[@"type"];
+    msg.UID = dict[@"UID"];
+    msg.SenderJID = dict[@"SenderJID"];
+    [msg jh_saveOrUpdate];
+    // [self refreshData];
+}
+/**处理错误**/
+-(void)dealError:(LTError *)error {
+    switch (error.code) {
+        case LTErrorLogin_SessionReplace:
+        {
+            /**异地登录**/
+            [SVProgressHUD showInfoWithStatus:error.localDescription];
+            [LTLogin.share asyncLogout];
+            [self showLoginController];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
 
 @end
