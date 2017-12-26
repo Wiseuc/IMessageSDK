@@ -117,9 +117,14 @@ UICollectionViewDelegate
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+     [kMainVC hiddenTbaBar];
     [self settingData];
 }
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [kMainVC showTbaBar];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -128,6 +128,14 @@ UICollectionViewDelegate
     [self settingData];
     
 }
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [kMainVC hiddenTbaBar];
+}
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [kMainVC showTbaBar];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -222,7 +230,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (!_collectionview) {
         _collectionview =
         [[UICollectionView alloc]
-         initWithFrame:CGRectMake(0, 64+50, kScreenWidth, kScreenHeight-64-50-49)
+         initWithFrame:CGRectMake(0, 64+50, kScreenWidth, kScreenHeight-64-50)
          collectionViewLayout:self.chLayout];
         _collectionview.delegate = self;
         _collectionview.dataSource = self;
