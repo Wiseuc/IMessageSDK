@@ -56,6 +56,10 @@ void runCategoryForFramework36(){}
     self.aXMPPStream.myJID = nil;
 }
 
+-(void)addFriendPresenceObserver:(LTXMPPManager_presence_addFriendPresenceObserverBlock)aBlock {
+    self.presence_addFriendPresenceObserverBlock = aBlock;
+}
+
 
 
 
@@ -115,45 +119,65 @@ void runCategoryForFramework36(){}
 //            }
 //        }
 //    }
-//
-//
+
+
+    /**好友状态改变**/
 //    if ( isNeedRefreshPresence ) {
 //        [[NSNotificationCenter defaultCenter] postNotificationName:Wiseuc_Notification_PresenceChange object:nil];
 //    }
-//
-//    NSError *error = nil;
-//    NSDictionary *result = [XMLReader dictionaryForXMLString:[presence XMLString] error:&error];
-//
-//    NSDictionary *info = [NSObject objectForKey:kStringXMPPPresence inDictionary:result espectedType:[NSDictionary class]];
-//
-//    NSString *presenceType = [NSObject objectForKey:kStringXMPPPresenceType inDictionary:info];
-//    if ( [presenceType isEqualToString:kStringXMPPPresenceTypeState] ) {
-//        return;
-//    }
-//
-//    if ([kStringXMPPPresenceTypeSubscribe isEqualToString:presenceType]) {
-//
-//        NSString *from = [[presence from] full];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:Wiseuc_Notification_DealwithFriendRequest object:from];
-//    }else if ([kStringXMPPPresenceTypeUnsubscribed isEqualToString:presenceType])
-//    {
-//        NSString *from = [[presence from] full];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:Wiseuc_Notification_RefuseAddYouToBeFriend object:from];
-//    }else if ([kStringXMPPPresenceUnavailable isEqualToString:presenceType])
-//    {
-//        //接收到销毁群消息后删除聊天面板的数据
-//        NSArray *xArr = [presence elementsForName:kStringXMPPX];
-//        if ( xArr.count > 0 ) {
-//            NSXMLElement *x = xArr[0];
-//            if ( [x elementsForName:@"destroy"].count > 0 ) {
-//                NSString *from = [NSObject objectForKey:@"from" inDictionary:info];
-//                [List removeConversationWithchatterJID:from];
-//
-//                [[NSNotificationCenter defaultCenter] postNotificationName:Wiseuc_Notification_DeleteFromGroupOrRoomRefresh object:nil];
-//                return;
-//            }
-//        }
-//    }
+
+    NSError *error = nil;
+    NSDictionary *result = [XMLReader dictionaryForXMLString:[presence XMLString] error:&error];
+    NSDictionary *info = [NSObject objectForKey:kStringXMPPPresence inDictionary:result espectedType:[NSDictionary class]];
+
+    /**<#注释#>**/
+    NSString *presenceType = [NSObject objectForKey:kStringXMPPPresenceType inDictionary:info];
+    if ( [presenceType isEqualToString:kStringXMPPPresenceTypeState] ) {
+        return;
+    }
+    
+    /**
+     对方请求添加好友1
+     
+     RECV:
+     <presence
+     xmlns="jabber:client"
+     to="江海@duowin-server/IphoneIM"
+     type="subscribe"
+     from="测试2@duowin-server">
+        <show/>
+     </presence>
+     ***/
+    if ([@"subscribe" isEqualToString:presenceType] || [@"probe" isEqualToString:presenceType]) {
+        NSString *from = [[presence from] full];
+        if (self.presence_addFriendPresenceObserverBlock) {
+            NSDictionary *dict = @{ @"subscribe":from };
+            self.presence_addFriendPresenceObserverBlock(dict);
+        }
+    }
+    /**对方拒绝添加好友**/
+    else if ([@"unsubscribed" isEqualToString:presenceType])
+    {
+        NSString *from = [[presence from] full];
+        if (self.presence_addFriendPresenceObserverBlock) {
+            NSDictionary *dict = @{ @"unsubscribed":from };
+            self.presence_addFriendPresenceObserverBlock(dict);
+        }
+    }
+    /**群组删除或被踢**/
+    else if ([kStringXMPPPresenceUnavailable isEqualToString:presenceType])
+    {
+        NSArray *xArr = [presence elementsForName:kStringXMPPX];
+        if ( xArr.count > 0 ) {
+            NSXMLElement *x = xArr[0];
+            if ( [x elementsForName:@"destroy"].count > 0 ) {
+                NSString *from = [NSObject objectForKey:@"from" inDictionary:info];
+                //[List removeConversationWithchatterJID:from];
+                //[[NSNotificationCenter defaultCenter] postNotificationName:Wiseuc_Notification_DeleteFromGroupOrRoomRefresh object:nil];
+                return;
+            }
+        }
+    }
     
 }
 

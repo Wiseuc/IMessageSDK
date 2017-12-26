@@ -161,7 +161,19 @@ UICollectionViewDelegate
     if (arr == nil || arr.count == 0) {
         return;
     }
-    self.datasource = [arr mutableCopy];
+    
+    NSMutableArray *arrTemp = [NSMutableArray array];
+    for (Message *message in arr) {
+        if (message.body != nil && message.body.length > 0 && ![message.type isEqualToString:@"NewFriend"]) {
+            [arrTemp addObject:message];
+        }
+    }
+    
+    self.datasource = [arrTemp mutableCopy];
+    
+    if (self.datasource.count == 0) {
+        return;
+    }
     [self refreshData];
     
 }

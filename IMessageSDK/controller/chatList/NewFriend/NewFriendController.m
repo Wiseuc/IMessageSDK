@@ -1,20 +1,18 @@
 //
-//  ChatListController.m
+//  NewFriendController.m
 //  IMessageSDK
 //
-//  Created by JH on 2017/12/20.
+//  Created by JH on 2017/12/26.
 //  Copyright © 2017年 JiangHai. All rights reserved.
 //
 
-#import "ChatListController.h"
-#import "UIConfig.h"
-#import "ChatController.h"
-#import "ChatListCell.h"
-#import "LTSDKFull.h"
-#import "Message.h"
 #import "NewFriendController.h"
+#import "UIConfig.h"
+#import "Message.h"
+#import "LTSDKFull.h"
 
-@interface ChatListController ()
+
+@interface NewFriendController ()
 <
 UITableViewDataSource,
 UITableViewDelegate
@@ -26,18 +24,16 @@ UITableViewDelegate
 
 
 
+@implementation NewFriendController
 
-
-
-
-
-
-@implementation ChatListController
 #pragma mark - UI
-- (void)setUI {
+-(void)settingUI {
+    
     [self.view addSubview:self.tableView];
+    
 }
--(void)refreshData {
+
+-(void)settingData {
     
     NSDictionary *userDict = [LTUser.share queryUser];
     NSString *myJID = userDict[@"JID"];
@@ -45,37 +41,37 @@ UITableViewDelegate
     /**会话数组**/
     NSArray *arr = [Message jh_queryCurrentOtherJIDByMyJID:myJID];
     
-    for (Message *msg in arr) {
+    for (Message *msg in arr)
+    {
         /**会话名**/
         NSString *conversationName = msg.conversationName;
         NSArray *arr02 = [Message jh_queryByConversationName:conversationName currentMyJID:myJID];
-        NSLog(@"%li",arr02.count);
         
-        Message *message =arr02.lastObject;
-        if (message == nil) {
-            continue;
+        for (Message *newMessage in arr02)
+        {
+            NSString *type = newMessage.type;
+            BOOL isNewFriend = NO;
+            if ([type isEqualToString:@"NewFriend"])
+            {
+                isNewFriend = YES;
+            }
+            
+            BOOL isHave = NO;
+            for (Message *message in arrM)
+            {
+                if ([message.from isEqualToString:newMessage.from]) {
+                    isHave = YES;
+                }
+            }
+            
+            if (isHave == NO && isNewFriend) {
+                [arrM addObject:newMessage];
+            }
         }
-        [arrM addObject:message];
     }
     self.dataSource = arrM;
     [self.tableView reloadData];
 }
-/**
- 注册监听bg_tablename表的数据变化，唯一识别标识是@"change".
- */
--(void)settingDBOberser{
-    __weak typeof(self) weakself = self;
-    [Message settingDBOberser:^{
-        [weakself refreshData];
-    }];
-}
--(void)unsettingDBOberser{
-    [Message unsettingDBOberser];
-}
-
-
-
-
 
 
 
@@ -85,21 +81,18 @@ UITableViewDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.title = @"新的好友";
     self.view.backgroundColor = kBackgroundColor;
-    
-    self.view.userInteractionEnabled = YES;
-    
-    [self setUI];
+    [self settingUI];
+    [self settingData];
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self settingDBOberser];
-    [self refreshData];
+    [kMainVC hiddenTbaBar];
 }
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self unsettingDBOberser];
+    [kMainVC showTbaBar];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -113,6 +106,36 @@ UITableViewDelegate
 
 
 
+
+#pragma mark - Private
+
+/**
+ 接受好友请求
+ **/
+-(void)acceptNewFriend:(Message *)message {
+    NSString *aFriendJid = message.currentOtherJID;
+    NSString *aFriendName = message.from;
+    [LTFriend.share acceptAddFriendJid:aFriendJid friendName:aFriendName];
+    [self deleteNewFriendRecode:message];
+}
+
+/**
+ 拒绝好友请求
+ **/
+-(void)refrusedNewFriend:(Message *)message {
+    NSString *aFriendJid = message.currentOtherJID;
+    //NSString *aFriendName = message.from;
+    [LTFriend.share refuseAddFriendJid:aFriendJid];
+    [self deleteNewFriendRecode:message];
+}
+
+/**
+ 删除请求记录
+ **/
+-(void)deleteNewFriendRecode:(Message *)message {
+    
+    
+}
 
 
 
@@ -139,12 +162,13 @@ UITableViewDelegate
     return 8.0f;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ChatListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatListCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewFriendCell"];
     //cell.textLabel.text = @"name";
-//    Message *msg  =  self.dataSource[indexPath.row];
-//    NSLog(@"== %@",msg.currentOtherJID);
     
-    cell.model = self.dataSource[indexPath.row];
+    Message *msg  =  self.dataSource[indexPath.row];
+    //    NSLog(@"== %@",msg.currentOtherJID);
+    cell.textLabel.text = msg.from;
+    cell.imageView.image = [UIImage imageNamed:@"NewFriend"];
     return cell;
 }
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -154,51 +178,27 @@ UITableViewDelegate
 //    [self.navigationController pushViewController:chatvc animated:YES];
 //}
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    Message *model = self.dataSource[indexPath.row];
-    
-    if ([model.type isEqualToString:@"NewFriend"])
-    {
-        NewFriendController *newFriendvc = [[NewFriendController alloc] init];
-        [self.navigationController pushViewController:newFriendvc animated:YES];
-    }
-    else
-    {
-        ChatController *chatvc = [[ChatController alloc] initWithCurrentOtherJID:model.currentOtherJID conversationName:model.conversationName];
-        [self.navigationController pushViewController:chatvc animated:YES];
-    }
-    
-}
-
-//- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return indexPath.section == 0 ? NO : YES;
-//}
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-//        [cell setSeparatorInset:UIEdgeInsetsZero];
-//    }
-//    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-//        [cell setLayoutMargins:UIEdgeInsetsZero];
-//    }
-//    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
-//        [cell setPreservesSuperviewLayoutMargins:NO];
-//    }
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    Message *model = self.dataSource[indexPath.row];
 //}
 -(NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    Message *message = self.dataSource[indexPath.row];
+    
+    __weak typeof(self) weakself = self;
     UITableViewRowAction *action01 =
     [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleDestructive)
-                                       title:@"删除"
+                                       title:@"拒绝"
                                      handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-                                      
+                                         [weakself refrusedNewFriend:message];
                                      }];
     
     UITableViewRowAction *action02 =
     [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleNormal)
-                                       title:@"置顶"
+                                       title:@"接受"
                                      handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-                                      
+                                         [weakself acceptNewFriend:message];
                                      }];
     
     NSArray *arr = @[action01,action02];
@@ -215,9 +215,7 @@ UITableViewDelegate
 
 
 
-
 #pragma mark - Init
-
 - (NSMutableArray *)dataSource {
     if (!_dataSource) {
         _dataSource = [NSMutableArray array];
@@ -229,12 +227,13 @@ UITableViewDelegate
         _tableView =
         [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-49)
                                      style:UITableViewStylePlain];
-        [_tableView registerClass:[ChatListCell class] forCellReuseIdentifier:@"ChatListCell"];
+        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"NewFriendCell"];
         _tableView.tableFooterView = [UIView new];
         _tableView.delegate = self;
         _tableView.dataSource = self;
     }
     return _tableView;
 }
+
 
 @end

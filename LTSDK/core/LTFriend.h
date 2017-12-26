@@ -11,10 +11,9 @@
 typedef void (^LTFriend_queryRostersBlock)(NSMutableArray *rosters, LTError *error);
 typedef void (^LTFriend_queryRosterVCardBlock)(NSDictionary *dict);
 typedef void (^LTFriend_addFriendBlock)(NSDictionary *dict, LTError *error);
-
+typedef void (^LTFriend_addFriendBehaviorObserver)(NSDictionary *dict);
 
 @interface LTFriend : NSObject
-//@property (nonatomic, strong) LTFriend_queryRostersBlock queryRostersBlock;
 
 
 /*!
@@ -57,6 +56,31 @@ typedef void (^LTFriend_addFriendBlock)(NSDictionary *dict, LTError *error);
 - (void)sendRequestAddFriendWithFriendJid:(NSString *)aFriendJid
                                friendName:(NSString *)aFriendName
                                 completed:(LTFriend_addFriendBlock)aBlock;
+
+
+/**同意添加好友请求**/
+- (void)acceptAddFriendJid:(NSString *)aFriendJid friendName:(NSString *)aFriendName;
+
+/**拒绝添加好友请求**/
+- (void)refuseAddFriendJid:(NSString *)aFriendJid;
+
+/**删除好友**/
+- (void)deleteFriendJid:(NSString *)aFriendJid;
+
+
+
+
+
+/*!
+ @method
+ @abstract 添加好友行为监测
+ @discussion 返回字典
+ @param aBlock 行为回调
+ */
+-(void)addFriendBehaviorObserver:(LTFriend_addFriendBehaviorObserver)aBlock;
+
+
+
 
 
 @end

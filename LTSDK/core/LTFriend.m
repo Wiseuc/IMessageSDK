@@ -8,6 +8,7 @@
 
 #import "LTFriend.h"
 #import "LTXMPPManager+friend.h"
+#import "LTXMPPManager+presence.h"
 
 @implementation LTFriend
 
@@ -41,7 +42,7 @@
                                      }];
 }
 
-
+/**请求添加好友**/
 - (void)sendRequestAddFriendWithFriendJid:(NSString *)aFriendJid
                                friendName:(NSString *)aFriendName
                                 completed:(LTFriend_addFriendBlock)aBlock {
@@ -54,4 +55,45 @@
                                                      }
                                                  }];
 }
+
+
+/**同意添加好友**/
+- (void)acceptAddFriendJid:(NSString *)aFriendJid friendName:(NSString *)aFriendName {
+    [LTXMPPManager.share acceptAddFriendJid:aFriendJid friendName:aFriendName];
+}
+
+//拒绝添加好友
+- (void)refuseAddFriendJid:(NSString *)aFriendJid {
+    [LTXMPPManager.share refuseAddFriendJid:aFriendJid];
+}
+
+//删除好友
+- (void)deleteFriendJid:(NSString *)aFriendJid {
+    [LTXMPPManager.share deleteFriendJid:aFriendJid];
+}
+
+
+
+
+
+
+
+-(void)addFriendBehaviorObserver:(LTFriend_addFriendBehaviorObserver)aBlock {
+    
+    [LTXMPPManager.share addFriendPresenceObserver:^(NSDictionary *dict) {
+        if (aBlock) {
+            aBlock(dict);
+        }
+    }];
+    
+    
+    
+}
+
+
+
+
+
+
+
 @end

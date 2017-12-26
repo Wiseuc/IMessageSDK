@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F90D3A761FF2017100BDB5DA /* NewFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = F90D3A751FF2017100BDB5DA /* NewFriendController.m */; };
+		F90D3A791FF2035700BDB5DA /* NewFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F90D3A781FF2035700BDB5DA /* NewFriendCell.m */; };
 		F91761B41FE0B3FA00906CBB /* AppUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = F91761B31FE0B3FA00906CBB /* AppUtility.m */; };
 		F91761BE1FE0D48000906CBB /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F91761B91FE0D48000906CBB /* SVIndefiniteAnimatedView.m */; };
 		F91761BF1FE0D48000906CBB /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F91761BB1FE0D48000906CBB /* SVProgressHUD.bundle */; };
@@ -413,6 +415,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F90D3A741FF2017100BDB5DA /* NewFriendController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewFriendController.h; sourceTree = "<group>"; };
+		F90D3A751FF2017100BDB5DA /* NewFriendController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewFriendController.m; sourceTree = "<group>"; };
+		F90D3A771FF2035700BDB5DA /* NewFriendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewFriendCell.h; sourceTree = "<group>"; };
+		F90D3A781FF2035700BDB5DA /* NewFriendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewFriendCell.m; sourceTree = "<group>"; };
 		F91761B21FE0B3FA00906CBB /* AppUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppUtility.h; sourceTree = "<group>"; };
 		F91761B31FE0B3FA00906CBB /* AppUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppUtility.m; sourceTree = "<group>"; };
 		F91761B61FE0BCEE00906CBB /* UIConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIConfig.h; sourceTree = "<group>"; };
@@ -1119,6 +1125,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F90D3A731FF2016200BDB5DA /* NewFriend */ = {
+			isa = PBXGroup;
+			children = (
+				F90D3A741FF2017100BDB5DA /* NewFriendController.h */,
+				F90D3A751FF2017100BDB5DA /* NewFriendController.m */,
+			);
+			path = NewFriend;
+			sourceTree = "<group>";
+		};
 		F91761AF1FE0B2C100906CBB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -3073,6 +3088,8 @@
 			children = (
 				F97D69B31FEA6FEE00E19477 /* ChatListCell.h */,
 				F97D69B41FEA6FEE00E19477 /* ChatListCell.m */,
+				F90D3A771FF2035700BDB5DA /* NewFriendCell.h */,
+				F90D3A781FF2035700BDB5DA /* NewFriendCell.m */,
 			);
 			path = chatList;
 			sourceTree = "<group>";
@@ -3101,6 +3118,7 @@
 		F98FDB771FEB8AF300618C82 /* chatList */ = {
 			isa = PBXGroup;
 			children = (
+				F90D3A731FF2016200BDB5DA /* NewFriend */,
 				F98FDB781FEB8AF300618C82 /* ChatListController.h */,
 				F98FDB791FEB8AF300618C82 /* ChatListController.m */,
 			);
@@ -3414,6 +3432,7 @@
 				F9558D841FE399CA00D13CD0 /* UIView+MJExtension.m in Sources */,
 				F9F7C0981FEBB73C00F56A23 /* NSString+Extension.m in Sources */,
 				F97D69B51FEA6FEE00E19477 /* ChatListCell.m in Sources */,
+				F90D3A791FF2035700BDB5DA /* NewFriendCell.m in Sources */,
 				F9558D7C1FE399CA00D13CD0 /* NSObject+MJKeyValue.m in Sources */,
 				F9558D821FE399CA00D13CD0 /* UIScrollView+MJExtension.m in Sources */,
 				F91761B41FE0B3FA00906CBB /* AppUtility.m in Sources */,
@@ -3457,6 +3476,7 @@
 				F97D69181FE9F09C00E19477 /* InformationCell.m in Sources */,
 				F98FDB9E1FEB8DB200618C82 /* BGModelInfo.m in Sources */,
 				F99AADB41FE3C74C00D87B35 /* GroupCell.m in Sources */,
+				F90D3A761FF2017100BDB5DA /* NewFriendController.m in Sources */,
 				F98FDBA61FEB8DB200618C82 /* FMResultSet.m in Sources */,
 				F91761C01FE0D48000906CBB /* SVProgressHUD.m in Sources */,
 				F963FD6E1FE257570073D490 /* ChatController.m in Sources */,

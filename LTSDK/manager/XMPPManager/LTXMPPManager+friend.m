@@ -42,7 +42,23 @@ void runCategoryForFramework40(){}
 
 
 
-/**添加好友**/
+/**
+ 添加好友
+ 
+ SEND:
+ <iq type="error">
+ <query xmlns="jabber:iq:roster" ver="326">
+ <item jid="测试2@duowin-server" name="测试2" subscription="none" ask="subscribe">
+ <group>我的同事</group>
+ </item>
+ </query>
+ 
+ <error type="cancel" code="501">
+ <feature-not-implemented xmlns="urn:ietf:params:xml:ns:xmpp-stanzas"/>
+ </error>
+ 
+ </iq>
+ **/
 - (void)sendRequestAddFriendWithFriendJid:(NSString *)aFriendJid
                                friendName:(NSString *)aFriendName
                                 completed:(LTXMPPManager_friend_addFriendBlock)aBlock {
@@ -73,8 +89,58 @@ void runCategoryForFramework40(){}
     [self.aXMPPStream sendElement:presence];
 }
 
+//同意添加好友
+- (void)acceptAddFriendJid:(NSString *)aFriendJid friendName:(NSString *)aFriendName
+{
+    NSString *elementID = kStringXMPPElementIDAgreeAddFriend;
+    XMPPIQ *iq = [XMPPIQ iqWithType:@"set" elementID:elementID];
+    NSXMLElement *query = [NSXMLElement elementWithName:@"query" xmlns:@"jabber:iq:roster"];
+    NSXMLElement *item = [NSXMLElement elementWithName:@"item"];
+    [item addAttributeWithName:@"jid" stringValue:aFriendJid];
+    [item addAttributeWithName:@"name" stringValue:aFriendName];
+    NSXMLElement *group = [NSXMLElement elementWithName:@"group"];
+    [group setStringValue:@"我的同事"];
+    [query addChild:item];
+    [item addChild:group];
+    [iq addChild:query];
+    [self.aXMPPStream sendElement:iq];
+    
+    XMPPPresence *presence = [XMPPPresence presence];
+    [presence addAttributeWithName:kStringXMPPTo stringValue:aFriendJid];
+    [presence addAttributeWithName:@"type" stringValue:@"subscribed"];
+    [presence addChild:[NSXMLElement elementWithName:kStringXMPPPresenceShow]];
+    [self.aXMPPStream sendElement:presence];
+    
+    
+//    if (kSolveBug_AcceptNewFriendRequest) {
+//        XMPPPresence *presence2 = [XMPPPresence presence];
+//        [presence2 addAttributeWithName:kStringXMPPTo stringValue:friendJid];
+//        [presence2 addAttributeWithName:@"type" stringValue:@"subscribe"];
+//        [presence2 addChild:[NSXMLElement elementWithName:kStringXMPPPresenceShow]];
+//        [[XMPPManager shareXMPPManager].xmppStream sendElement:presence2];
+//    }
+}
+//拒绝添加好友
+- (void)refuseAddFriendJid:(NSString *)aFriendJid
+{
+    XMPPPresence *presence = [XMPPPresence presence];
+    [presence addAttributeWithName:kStringXMPPTo stringValue:aFriendJid];
+    [presence addAttributeWithName:@"type" stringValue:@"unsubscribed"];
+    NSXMLElement *show = [NSXMLElement elementWithName:@"show"];
+    [presence addChild:show];
+    [self.aXMPPStream sendElement:presence];
+}
 
 
+
+//删除好友
+- (void)deleteFriendJid:(NSString *)aFriendJid
+{
+    XMPPPresence *presence = [XMPPPresence presence];
+    [presence addAttributeWithName:kStringXMPPTo stringValue:aFriendJid];
+    [presence addAttributeWithName:@"type" stringValue:@"unsubscribe"];
+    [self.aXMPPStream sendElement:presence];
+}
 
 
 

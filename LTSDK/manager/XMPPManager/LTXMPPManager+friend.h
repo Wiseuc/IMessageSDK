@@ -20,5 +20,12 @@ void runCategoryForFramework40();
 /**请求添加好友**/
 - (void)sendRequestAddFriendWithFriendJid:(NSString *)aFriendJid friendName:(NSString *)aFriendName completed:(LTXMPPManager_friend_addFriendBlock)aBlock;
 
+/**同意添加好友**/
+- (void)acceptAddFriendJid:(NSString *)aFriendJid friendName:(NSString *)aFriendName;
 
+//拒绝添加好友
+- (void)refuseAddFriendJid:(NSString *)aFriendJid;
+
+//删除好友
+- (void)deleteFriendJid:(NSString *)aFriendJid;
 @end

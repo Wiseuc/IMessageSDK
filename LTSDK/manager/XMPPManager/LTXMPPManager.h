@@ -34,7 +34,7 @@ typedef void(^LTXMPPManager_group_queryGroupVCardBlock)(NSDictionary *dict);
 
 
 typedef void(^LTXMPPManager_message_queryMessageBlock)(NSDictionary *dict,LTError *error);
-
+typedef void(^LTXMPPManager_presence_addFriendPresenceObserverBlock)(NSDictionary *dict);
 
 @interface LTXMPPManager : NSObject
 {
@@ -74,8 +74,8 @@ typedef void(^LTXMPPManager_message_queryMessageBlock)(NSDictionary *dict,LTErro
 /**消息**/
 @property (nonatomic, strong) LTXMPPManager_message_queryMessageBlock message_queryMessageBlock;  /**请求Message回调**/
 
-
-
+/**Presence**/
+@property (nonatomic, strong) LTXMPPManager_presence_addFriendPresenceObserverBlock presence_addFriendPresenceObserverBlock;  /**好友出席状态回调**/
 
 
 /*!

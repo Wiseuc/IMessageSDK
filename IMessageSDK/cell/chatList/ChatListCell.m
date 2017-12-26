@@ -66,7 +66,7 @@
     
     self.iconIMGV.frame = CGRectMake(10, 8, (KHEIGHT-16), (KHEIGHT-16));
     
-    self.nameLAB.frame = CGRectMake(10+(KHEIGHT-16)+10, 8, 150, 20);
+    self.nameLAB.frame = CGRectMake(10+(KHEIGHT-16)+10, 8, 200, 20);
     
     self.messageLAB.frame = CGRectMake(10+(KHEIGHT-16)+10, 28+2, 300, 20);
     
@@ -79,15 +79,42 @@
 -(void)setModel:(Message *)model {
     _model = model;
     
+    CGFloat KWIDTH  = self.frame.size.width;
+    CGFloat KHEIGHT = self.frame.size.height;
+    
     self.nameLAB.text = model.conversationName;
     self.messageLAB.text = model.body;
     self.timeLAB.text = model.stamp;
     
-    if ([model.currentOtherJID containsString:@"conference"]) {
-        self.iconIMGV.image = [UIImage imageNamed:@"group"];
-    }else {
-        self.iconIMGV.image = [UIImage imageNamed:@"icon_40pt"];
+    if ([model.type isEqualToString:@"NewFriend"])
+    {
+        self.iconIMGV.image = [UIImage imageNamed:@"NewFriend"];
+        self.timeLAB.text = nil;
+        
+        
+//        UIButton *acceptBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
+//        [self.contentView addSubview:acceptBTN];
+//        acceptBTN.frame = CGRectMake(KWIDTH - 110, 10, 50, 30);
+//        [acceptBTN setTitle:@"接受" forState:(UIControlStateNormal)];
+//        [acceptBTN setBackgroundColor:[UIColor greenColor]];
+//
+//
+//        UIButton *refuseBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
+//        [self.contentView addSubview:refuseBTN];
+//        refuseBTN.frame = CGRectMake(KWIDTH - 60, 10, 50, 30);
+//        [refuseBTN setTitle:@"拒绝" forState:(UIControlStateNormal)];
+//         [refuseBTN setBackgroundColor:[UIColor redColor]];
     }
+    else
+    {
+        if ([model.currentOtherJID containsString:@"conference"]) {
+            self.iconIMGV.image = [UIImage imageNamed:@"group"];
+        }else {
+            self.iconIMGV.image = [UIImage imageNamed:@"icon_40pt"];
+        }
+    }
+    
+
 }
 
 @end

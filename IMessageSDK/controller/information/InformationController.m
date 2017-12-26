@@ -143,29 +143,55 @@ UICollectionViewDelegate
 #pragma mark - Private
 /**添加好友**/
 -(void)addFriend {
-    
+    UIAlertController *alertvc =
+    [UIAlertController alertControllerWithTitle:nil
+                                        message:@"确定添加好友吗"
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *ac1 = [UIAlertAction actionWithTitle:@"确定"
+                                                 style:UIAlertActionStyleDestructive
+                                               handler:^(UIAlertAction * _Nonnull action) {
+                                                   [self add];
+                                               }];
+    UIAlertAction *ac2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alertvc addAction:ac1];
+    [alertvc addAction:ac2];
+    [self presentViewController:alertvc animated:YES completion:nil];
+}
+/**删除好友**/
+-(void)deleteFriend {
+    UIAlertController *alertvc =
+    [UIAlertController alertControllerWithTitle:nil
+                                        message:@"确定删除好友吗"
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *ac1 = [UIAlertAction actionWithTitle:@"确定"
+                                                  style:UIAlertActionStyleDestructive
+                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                    [self delete];
+                                                }];
+    UIAlertAction *ac2 =
+    [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alertvc addAction:ac1];
+    [alertvc addAction:ac2];
+    [self presentViewController:alertvc animated:YES completion:nil];
+}
+
+-(void)add {
     NSDictionary *dict = [LTOrg queryInformationByJid:self.jid];
     NSString *aJID = dict[@"JID"];
     NSString *aName = dict[@"NAME"];
     
     [LTFriend.share sendRequestAddFriendWithFriendJid:aJID
                                            friendName:aName
-                                            completed:^(NSDictionary *dict, LTError *error) {
-                                                
-                                                
-                                                
-                                                
-                                            }];
-    
+                                            completed:nil];
+    [self back];
 }
-/**删除好友**/
--(void)deleteFriend {
-    
-    
-    
+-(void)delete {
+    [LTFriend.share deleteFriendJid:self.jid];
+    [self back];
 }
-
-
+-(void)back {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 

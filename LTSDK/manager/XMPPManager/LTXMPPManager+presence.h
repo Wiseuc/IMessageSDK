@@ -62,8 +62,8 @@ typedef enum {
 /**清理**/
 - (void)clear;
 
-
-
+/**好友出席状态监测**/
+-(void)addFriendPresenceObserver:(LTXMPPManager_presence_addFriendPresenceObserverBlock)aBlock;
 
 
 
