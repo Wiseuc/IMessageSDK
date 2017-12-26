@@ -40,7 +40,7 @@
 
 -(void)layoutSubviews {
     [super layoutSubviews];
-    CGFloat KWIDTH  = self.frame.size.width;
+//    CGFloat KWIDTH  = self.frame.size.width;
     CGFloat KHEIGHT = self.frame.size.height;
     
     self.iconIMGV.frame = CGRectMake(20, (KHEIGHT-20)/2, 20, 20);

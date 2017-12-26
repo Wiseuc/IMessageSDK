@@ -43,7 +43,7 @@
 
 -(void)layoutSubviews {
     [super layoutSubviews];
-    CGFloat KWIDTH  = self.frame.size.width;
+//    CGFloat KWIDTH  = self.frame.size.width;
     CGFloat KHEIGHT = self.frame.size.height;
     
     

@@ -17,6 +17,6 @@
     CGFloat KHEIGHT = self.frame.size.height;
     
     self.imageView.frame = CGRectMake(20, (KHEIGHT-20)/2, 20, 20);
-    self.titleLabel.frame = CGRectMake(50, (KHEIGHT-20)/2, 100, 20);
+    self.titleLabel.frame = CGRectMake(50, (KHEIGHT-20)/2, 200, 20);
 }
 @end

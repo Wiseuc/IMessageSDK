@@ -18,7 +18,8 @@
 #import "CompanyController.h"
 #import "RosterCell.h"
 #import "ChatController.h"
-
+#import "NewRosterGroupController.h"
+#import "NewRosterMessage.h"
 
 
 
@@ -43,15 +44,15 @@ UICollectionViewDelegate
 
 
 @implementation RosterController
+
+
+
 #pragma mark - UI
 
 -(void)settingUI {
-    
     [self.view addSubview:self.collectionview];
 }
-
 -(void)settingData {
-    
     __weak typeof(self) weakself = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [LTFriend.share queryRostersCompleted:^(NSMutableArray *rosters, LTError *error) {
@@ -74,15 +75,31 @@ UICollectionViewDelegate
         }];
     });
 }
-
 -(void)refreshData {
-    
     __weak typeof(self) weakself = self;
     dispatch_async(dispatch_get_main_queue(), ^{
        
         [weakself.collectionview.mj_header endRefreshing];
         [weakself.collectionview reloadData];
     });
+}
+/**
+ 注册监听NewRosterMessage数据库监听
+ */
+-(void)settingDBOberser{
+    __weak typeof(self) weakself = self;
+    [NewRosterMessage settingDBOberser:^{
+        [weakself refreshNewRosterMessage];
+    }];
+}
+-(void)unsettingDBOberser{
+    [NewRosterMessage unsettingDBOberser];
+}
+
+/**有新的好友请求消息**/
+-(void)refreshNewRosterMessage {
+    /**给新的朋友和新的群组 添加一个红点**/
+    
 }
 
 
@@ -98,24 +115,49 @@ UICollectionViewDelegate
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     self.view.backgroundColor = kBackgroundColor;
     
     [self settingUI];
     
     [self settingData];
+    
+    [self settingDBOberser];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
+    
+    [self settingDBOberser];
     
     [self settingData];
 }
-
+-(void)viewDidDisappear:(BOOL)animated {
+    
+    [super viewDidDisappear:animated];
+    
+    [self unsettingDBOberser];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -162,6 +204,13 @@ UICollectionViewDelegate
             
             /**跳转**/
             switch (tag) {
+                case 1000:
+                {
+                    NewRosterGroupController *newvc = [[NewRosterGroupController alloc] init];
+                    [weakself.navigationController pushViewController:newvc animated:YES];
+                }
+                    break;
+                    
                 case 1001:
                 {
                     GroupController *groupvc = [[GroupController alloc] init];
@@ -185,6 +234,7 @@ UICollectionViewDelegate
             }
         }];
         reuseableView = aRosterReuseableHeader;
+        
     }
     return reuseableView;
 }
@@ -217,8 +267,8 @@ UICollectionViewDelegate
         _chLayout.minimumColumnSpacing = 0;
         _chLayout.minimumInteritemSpacing = 2;
         
-        _chLayout.headerHeight = 174;  /**页眉页脚高度：设置了之后必须实现，不然报错**/
-        //_chLayout.footerHeight = 100;
+        _chLayout.headerHeight = 206+20 +10 +10;  /**页眉页脚高度：设置了之后必须实现，不然报错**/
+        //_chLayout.footerHeight = 100; 206  154 + 20
     }
     return _chLayout;
 }

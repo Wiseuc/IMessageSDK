@@ -17,6 +17,7 @@
 #import "SVProgressHUD.h"
 #import "DocManager.h"
 #import "Message.h"
+#import "NewRosterMessage.h"
 
 @interface MainController ()
 @property (nonatomic, strong) LoginController     *loginController;
@@ -34,7 +35,7 @@
     // Do any additional setup after loading the view.
     
     [self addMessageBehaviorObserver];
-    
+    /**roster行为监测**/
     [self addFriendBehaviorObserver];
     
     self.loginController = [[LoginController alloc] init];
@@ -163,7 +164,7 @@
 
 
 
-#pragma mark - private
+#pragma mark - observer message
 
 -(void)addMessageBehaviorObserver {
     __weak typeof(self) weakself = self;
@@ -214,44 +215,37 @@
 
 
 
-#pragma mark - <#start#>
-
+#pragma mark - observer roster
 
 -(void)addFriendBehaviorObserver {
-    
+
     [LTFriend.share addFriendBehaviorObserver:^(NSDictionary *dict) {
         NSString *key = dict.allKeys.firstObject;
-        
+
         /**对方请求添加好友**/
         if ([key isEqualToString:@"subscribe"])
         {
             [self addFriendMessage:dict];
+        }
+        else
+        {
+            
         }
     }];
 }
 
 /**将好友请求放在消息**/
 -(void)addFriendMessage:(NSDictionary *)dict {
-    
     NSDictionary *userDict = [LTUser.share queryUser];
     NSString *myJID = userDict[@"JID"];
-
     
-    Message *msg = [[Message alloc] init];
-    msg.currentMyJID = myJID;
-    msg.currentOtherJID = dict[@"subscribe"];
-    msg.conversationName = @"新的好友";
-    //msg.conversationName = [NSString stringWithFormat:@"%@ 请求添加好友",otherName];// @"新的好友";
-    msg.stamp = @"0001";  //置于最前面0001
-    msg.body = nil;
-    msg.bodyType = nil;
-    msg.from = [dict[@"subscribe"] componentsSeparatedByString:@"@"].firstObject;
-    msg.to = nil;
-    msg.type = @"NewFriend";
-    msg.UID = nil;
-    msg.SenderJID = nil;
-    [msg jh_saveOrUpdate];
-    
+    NewRosterMessage *message = [[NewRosterMessage alloc] init];
+    message.currentMyJID = myJID;
+    message.currentOtherJID = dict[@"subscribe"];
+    message.body = nil;
+    message.from = [dict[@"subscribe"] componentsSeparatedByString:@"@"].firstObject;
+    message.type = @"NewRoster";
+    [message jh_saveOrUpdate];
 }
 
 

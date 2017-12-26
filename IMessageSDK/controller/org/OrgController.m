@@ -78,7 +78,6 @@ UICollectionViewDelegate
     {
         NSDictionary *dict = [DocManager.share queryDocumentDescribe];
         model = [[OrgModel alloc] init];
-        model = [[OrgModel alloc] init];
         model.ITEMTYPE = dict[@"ITEMTYPE"];
         model.NAME = dict[@"NAME"];
         model.ID = dict[@"ID"];

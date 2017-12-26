@@ -77,11 +77,11 @@ UITableViewDelegate
                         @"软件设置",
                         @"关于"
                         ];
-    NSArray *images = @[
-                        @"wodexinxi",
-                        @"wodefangchang",
-                        @"shezhi"
-                        ];
+//    NSArray *images = @[
+//                        @"wodexinxi",
+//                        @"wodefangchang",
+//                        @"shezhi"
+//                        ];
     
     [self.dataSource removeAllObjects];
     for (NSInteger i = 0; i < titles.count; i ++) {

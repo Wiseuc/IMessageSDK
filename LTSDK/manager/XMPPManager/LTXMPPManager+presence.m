@@ -171,7 +171,7 @@ void runCategoryForFramework36(){}
         if ( xArr.count > 0 ) {
             NSXMLElement *x = xArr[0];
             if ( [x elementsForName:@"destroy"].count > 0 ) {
-                NSString *from = [NSObject objectForKey:@"from" inDictionary:info];
+                //NSString *from = [NSObject objectForKey:@"from" inDictionary:info];
                 //[List removeConversationWithchatterJID:from];
                 //[[NSNotificationCenter defaultCenter] postNotificationName:Wiseuc_Notification_DeleteFromGroupOrRoomRefresh object:nil];
                 return;

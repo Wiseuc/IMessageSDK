@@ -111,8 +111,8 @@
 - (void)loginWithPassword:(NSString *)password
             withLoginType:(LoginType)loginType {
     
-    BOOL enableLDAP = loginType == LoginType_LDAP;
-    NSString *ip = _imServerIp ? _imServerIp :_serverIP;
+//    BOOL enableLDAP = loginType == LoginType_LDAP;
+//    NSString *ip = _imServerIp ? _imServerIp :_serverIP;
     __weak typeof(self) weakself = self;
     [LTXMPPManager.share loginWithaIP:_serverIP
                                  port:_port
@@ -193,10 +193,10 @@
 /**上线**/
 - (void)changePresenceStatuToOnline {
     
-    NSDictionary  *userDict = [LTUser.share queryUser];
-    NSString *UserName = userDict[@"UserName"];
-    NSString *JID = userDict[@"JID"];
-    NSString *IMPwd = userDict[@"IMPwd"];
+//    NSDictionary  *userDict = [LTUser.share queryUser];
+//    NSString *UserName = userDict[@"UserName"];
+//    NSString *JID = userDict[@"JID"];
+//    NSString *IMPwd = userDict[@"IMPwd"];
     
     //[XMPPManager jid:JID changePresenceStatuTo:PresenceType_Online];
     //[XMPPManager requestHeaderIconURLWithJID:[UserManager shareInstance].currentUser.jid];

@@ -39,7 +39,7 @@
 -(void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat KWIDTH  = self.frame.size.width;
+//    CGFloat KWIDTH  = self.frame.size.width;
     CGFloat KHEIGHT = self.frame.size.height;
     
     self.nameLAB.frame = CGRectMake(20, (KHEIGHT-20)/2, 100, 20);

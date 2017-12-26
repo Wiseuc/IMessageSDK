@@ -79,8 +79,8 @@
 -(void)setModel:(Message *)model {
     _model = model;
     
-    CGFloat KWIDTH  = self.frame.size.width;
-    CGFloat KHEIGHT = self.frame.size.height;
+//    CGFloat KWIDTH  = self.frame.size.width;
+//    CGFloat KHEIGHT = self.frame.size.height;
     
     self.nameLAB.text = model.conversationName;
     self.messageLAB.text = model.body;

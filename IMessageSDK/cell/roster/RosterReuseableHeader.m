@@ -10,6 +10,7 @@
 #import "RosterHeaderButton.h"
 
 @interface RosterReuseableHeader ()
+@property (nonatomic, strong) RosterHeaderButton *friendBTN;
 @property (nonatomic, strong) RosterHeaderButton *groupBTN;
 @property (nonatomic, strong) RosterHeaderButton *OrgBTN;
 @property (nonatomic, strong) RosterHeaderButton *companyBTN;
@@ -25,6 +26,16 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.friendBTN = [RosterHeaderButton buttonWithType:(UIButtonTypeSystem)];
+        [self.friendBTN setBackgroundColor:[UIColor whiteColor]];
+        [self addSubview:self.friendBTN];
+        self.friendBTN.tag = 1000;
+        [self.friendBTN addTarget:self action:@selector(buttonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.friendBTN setImage:[[UIImage imageNamed:@"pinglun_dianji"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)] forState:(UIControlStateNormal)];
+        [self.friendBTN setTitle:@"新的朋友 / 群组" forState:(UIControlStateNormal)];
+        [self.friendBTN setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        
+        
         
         self.groupBTN = [RosterHeaderButton buttonWithType:(UIButtonTypeSystem)];
         [self.groupBTN setBackgroundColor:[UIColor whiteColor]];
@@ -68,9 +79,11 @@
     CGFloat KWIDTH  = self.frame.size.width;
     //CGFloat KHEIGHT = self.frame.size.height;
     
-    self.groupBTN.frame   = CGRectMake(0, 0, KWIDTH, 50);
-    self.OrgBTN.frame     = CGRectMake(0, 52, KWIDTH, 50);
-    self.companyBTN.frame = CGRectMake(0, 104, KWIDTH, 50);
+
+    self.friendBTN.frame  = CGRectMake(0, 20, KWIDTH, 50);
+    self.groupBTN.frame   = CGRectMake(0, 52+20, KWIDTH, 50);
+    self.OrgBTN.frame     = CGRectMake(0, 104+20, KWIDTH, 50);
+    self.companyBTN.frame = CGRectMake(0, 156+20, KWIDTH, 50);
 }
 
 

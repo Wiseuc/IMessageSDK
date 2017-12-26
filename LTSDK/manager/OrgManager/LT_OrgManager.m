@@ -73,7 +73,7 @@
                             /**解压**/
                             BOOL ret = [SSZipArchive unzipFileAtPath:savePath toDestination:kOrgFilePath];
                             NSFileManager *fileManager = [NSFileManager defaultManager];
-                            if ( [fileManager fileExistsAtPath:savePath] ){
+                            if ( [fileManager fileExistsAtPath:savePath] && ret){
                                 [fileManager removeItemAtPath:savePath error:nil];
                             }
                             aDownloadBlock(nil);
