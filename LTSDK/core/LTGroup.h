@@ -10,6 +10,10 @@
 #import "LTError.h"
 typedef void(^LTGroup_queryGroupsBlock)(NSMutableArray *groups, LTError *error);
 typedef void(^LTGroup_queryGroupVCardBlock)(NSDictionary *dict);
+typedef void(^LTGroup_createGroupBlock)(LTError *error);
+typedef void(^LTGroup_deleteGroupBlock)(LTError *error);
+
+
 
 @interface LTGroup : NSObject
 @property (nonatomic, strong) LTGroup_queryGroupsBlock queryGroupsBlock;
@@ -41,5 +45,37 @@ typedef void(^LTGroup_queryGroupVCardBlock)(NSDictionary *dict);
  @param aGroupJID 群组jid
  */
 -(void)queryGroupVCardByGroupJID:(NSString *)aGroupJID  completed:(LTGroup_queryGroupVCardBlock)queryGroupVCardBlock;
+
+
+
+
+
+/*!
+ @method
+ @abstract add：创建群组
+ @discussion 备注
+ @param aGroupID 群组ID
+ @param aDomain 域名
+ @param aResource 资源
+ @param aBlock 回调
+ */
+-(void)sendRequestCreateGroupWithGroupID:(NSString *)aGroupID
+                                  domain:(NSString *)aDomain
+                                resource:(NSString *)aResource
+                               completed:(LTGroup_createGroupBlock)aBlock;
+
+
+/*!
+ @method
+ @abstract delete:删除群组
+ @discussion 备注
+ @param aGroupID 群组ID
+ @param aBlock 回调
+ */
+-(void)sendRequestDeleteGroupWithGroupID:(NSString *)aGroupID
+                               completed:(LTGroup_deleteGroupBlock)aBlock;
+
+
+
 
 @end

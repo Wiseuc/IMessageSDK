@@ -73,21 +73,22 @@ void runCategoryForFramework36(){}
 #pragma  mark - 获取订阅信息
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
 {
-//    NSString *fromAttribute = [[presence attributeForName:kStringXMPPFrom] stringValue];
-//
-//    //创建群组确认消息
-//    NSArray *xArr = [presence elementsForName:kStringXMPPX];
-//    if (xArr.count == 2) {
-//        if ([[xArr[0] xmlns] isEqualToString:@"http://jabber.org/protocol/muc"] && [[xArr[1] xmlns] isEqualToString:kStringXMPPXmlnsGroupMembers]) {
-//            NSArray *status = [xArr[1] elementsForName:@"status"];
-//            if (status.count > 0) {
+    NSString *fromAttribute = [[presence attributeForName:kStringXMPPFrom] stringValue];
+
+    //创建群组确认消息
+    NSArray *xArr = [presence elementsForName:kStringXMPPX];
+    if (xArr.count == 2) {
+        if ([[xArr[0] xmlns] isEqualToString:@"http://jabber.org/protocol/muc"] && [[xArr[1] xmlns] isEqualToString:kStringXMPPXmlnsGroupMembers]) {
+            NSArray *status = [xArr[1] elementsForName:@"status"];
+            if (status.count > 0) {
+                
 //                if (self.msgReceiverdelegate && [self.msgReceiverdelegate respondsToSelector:@selector(XMPPServer:didReceiveCreateGroupPresence:from:)]) {
 //                    [self.msgReceiverdelegate XMPPServer:self didReceiveCreateGroupPresence:[status[0] attributeForName:@"code"].stringValue from:[presence attributeForName:@"from"].stringValue];
 //                }
-//            }
-//        }
-//    }
-//
+            }
+        }
+    }
+
 //
 //    void(^presenceSetBlock)(NSDictionary *presenceDict) = ^(NSDictionary *presenceDict) {
 //        if ( presenceDict ) {

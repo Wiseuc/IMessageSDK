@@ -30,8 +30,8 @@ typedef void(^LTXMPPManager_friend_addFriendBlock)(NSDictionary *dict,LTError *e
 
 typedef void(^LTXMPPManager_group_queryGroupsBlock)(NSMutableArray *arrM, NSString *groupVersion);
 typedef void(^LTXMPPManager_group_queryGroupVCardBlock)(NSDictionary *dict);
-
-
+typedef void(^LTXMPPManager_group_createGroupBlock)(LTError *error);
+typedef void(^LTXMPPManager_group_deleteGroupBlock)(LTError *error);
 
 typedef void(^LTXMPPManager_message_queryMessageBlock)(NSDictionary *dict,LTError *error);
 typedef void(^LTXMPPManager_presence_addFriendPresenceObserverBlock)(NSDictionary *dict);
@@ -65,6 +65,10 @@ typedef void(^LTXMPPManager_presence_addFriendPresenceObserverBlock)(NSDictionar
 /**群组**/
 @property (nonatomic, strong) LTXMPPManager_group_queryGroupsBlock group_queryGroupsBlock;  /**请求群组列表回调**/
 @property (nonatomic, strong) LTXMPPManager_group_queryGroupVCardBlock group_queryGroupVCardBlock;  /**请求群组资料VCard回调**/
+@property (nonatomic, strong) LTXMPPManager_group_createGroupBlock group_createGroupBlock;  /**创建群组**/
+@property (nonatomic, strong) LTXMPPManager_group_deleteGroupBlock group_deleteGroupBlock;  /**删除群组**/
+
+
 
 
 /**一般IQ**/

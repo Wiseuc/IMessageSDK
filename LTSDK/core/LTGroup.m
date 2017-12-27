@@ -38,4 +38,63 @@
         }
     }];
 }
+
+
+
+
+
+
+/*!
+ @method
+ @abstract add：创建群组
+ @discussion 备注
+ @param aGroupID 群组ID
+ @param aDomain 域名
+ @param aResource 资源
+ @param aBlock 回调
+ */
+-(void)sendRequestCreateGroupWithGroupID:(NSString *)aGroupID
+                                  domain:(NSString *)aDomain
+                                resource:(NSString *)aResource
+                               completed:(LTGroup_createGroupBlock)aBlock
+{
+    [LTXMPPManager.share sendRequestCreateGroupWithGroupID:aGroupID
+                                                    domain:aDomain
+                                                  resource:aResource
+                                                 completed:^(LTError *error) {
+                                                     if (aBlock) {
+                                                         aBlock(error);
+                                                     }
+                                                 }];
+}
+
+
+
+
+
+/*!
+ @method
+ @abstract delete:删除群组
+ @discussion 备注
+ @param aGroupID 群组ID
+ @param aBlock 回调
+ */
+-(void)sendRequestDeleteGroupWithGroupID:(NSString *)aGroupID
+                               completed:(LTGroup_deleteGroupBlock)aBlock
+{
+    [LTXMPPManager.share sendRequestDeleteGroupWithGroupID:aGroupID
+                                                 completed:^(LTError *error) {
+                                                     if (aBlock) {
+                                                         aBlock(error);
+                                                     }
+                                                 }];
+}
+
+
+
+
+
+
+
+
 @end

@@ -195,7 +195,7 @@ UITableViewDelegate
                                          [self refrusedNewFriend:jid];
                                      }];
     UITableViewRowAction *action02 =
-    [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleDefault)
+    [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleNormal)
                                        title:@"同意"
                                      handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
                                          [self acceptNewFriend:jid];

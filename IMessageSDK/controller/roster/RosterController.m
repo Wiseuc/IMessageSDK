@@ -20,7 +20,7 @@
 #import "ChatController.h"
 #import "NewRosterGroupController.h"
 #import "NewRosterMessage.h"
-
+#import "AddRosterGroupController.h"
 
 
 @interface RosterController ()
@@ -50,8 +50,21 @@ UICollectionViewDelegate
 #pragma mark - UI
 
 -(void)settingUI {
+    
+    [self settingUIBarButtonItem];
+    
     [self.view addSubview:self.collectionview];
 }
+
+-(void)settingUIBarButtonItem {
+    UIImage *img = [[UIImage imageNamed:@"barbuttonicon_addfriends_30x30_"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:img
+                                                                  style:(UIBarButtonItemStylePlain)
+                                                                 target:self
+                                                                 action:@selector(gotoAddRosterGroupVC)];
+    self.navigationItem.rightBarButtonItems = @[rightItem];
+}
+
 -(void)settingData {
     __weak typeof(self) weakself = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -132,6 +145,8 @@ UICollectionViewDelegate
     [self settingDBOberser];
     
     [self settingData];
+    
+    [kMainVC showTbaBar];
 }
 -(void)viewDidDisappear:(BOOL)animated {
     
@@ -143,7 +158,10 @@ UICollectionViewDelegate
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)gotoAddRosterGroupVC {
+    AddRosterGroupController *vc = [[AddRosterGroupController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 
@@ -276,7 +294,7 @@ UICollectionViewDelegate
     if (!_collectionview) {
         _collectionview =
         [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:self.chLayout];
-        _collectionview.backgroundColor =  kBackgroundColor;//[[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
+        _collectionview.backgroundColor =  [kBackgroundColor colorWithAlphaComponent:0.5];//[[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
         _collectionview.delegate = self;
         _collectionview.dataSource = self;
         __weak typeof(self) weakself = self;
