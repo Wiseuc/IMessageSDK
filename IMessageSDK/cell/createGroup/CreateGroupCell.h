@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrgModel.h"
 
 @interface CreateGroupCell : UICollectionViewCell
 
 
--(void)setImage:(NSString *)image;
+
+@property (nonatomic, strong) OrgModel *model;
 
 
 @end

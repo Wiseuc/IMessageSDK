@@ -94,6 +94,28 @@
 
 
 
+//-(void)createGroupWithRoomID:(NSString *)roomid
+//                     roomJID:(NSString *)roomJID
+//                    presence:(NSString *)presence
+//                      domain:(NSString *)domain
+//                    resource:(NSString *)resource
+//               isCreateGroup:(BOOL)isCreateGroup
+//                  datasource:(NSMutableArray *)datasouce
+//            groupDetailModel:(GroupDetailsModel *)groupDetailModel
+//{
+//    self.roomID = roomid;
+//    self.presence = presence;
+//    self.roomJID = roomJID;
+//    self.domain = domain;
+//    self.resource = resource;
+//    self.isCreateGroup = isCreateGroup;
+//    self.datasource = [datasouce copy];
+//    self.groupDetailModel = groupDetailModel;
+//
+//    [XMPPManager sendPresenceToRoomID:self.roomID domain:self.domain resource:self.resource];
+//}
+
+
 
 
 

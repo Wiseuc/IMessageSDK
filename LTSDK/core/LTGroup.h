@@ -78,4 +78,17 @@ typedef void(^LTGroup_deleteGroupBlock)(LTError *error);
 
 
 
+-(void)createGroupWithRoomID:(NSString *)roomid
+                     roomJID:(NSString *)roomJID
+                    presence:(NSString *)presence
+                      domain:(NSString *)domain
+                    resource:(NSString *)resource
+               isCreateGroup:(BOOL)isCreateGroup
+                  datasource:(NSMutableArray *)datasouce
+            groupDetailModel:(GroupDetailsModel *)groupDetailModel;
+
+
+
+
+
 @end

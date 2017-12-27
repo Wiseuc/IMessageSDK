@@ -91,4 +91,14 @@
 @property (nonatomic, strong) NSString *leader;   //是否为leader
 //@property (nonatomic, strong) NSString *indexs;
 
+
+
+
+#pragma mark - other
+@property (nonatomic, strong) NSArray   *parent;
+@property (nonatomic, strong) NSArray   *children;
+@property (nonatomic, assign) NSInteger lever;      /**层级 = 0 **/
+@property (nonatomic, assign) BOOL      isSelect;   /**被选中**/
+@property (nonatomic, assign) BOOL      isAdd;      /**是add符号**/
+
 @end

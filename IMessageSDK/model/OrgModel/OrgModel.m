@@ -10,6 +10,19 @@
 
 @implementation OrgModel
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+        _children = [NSArray array];
+        _parent = [NSArray array];
+        _lever  = 0;
+        _isSelect = NO;
+        _isAdd = NO;
+    }
+    return self;
+}
 
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key {
     

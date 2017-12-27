@@ -9,6 +9,8 @@
 #import "CreateGroupCell.h"
 @interface CreateGroupCell ()
 @property (nonatomic, strong) UIImageView *iconIMGV;
+
+@property (nonatomic, strong) UILabel *nameLAB;
 @end
 
 
@@ -30,6 +32,15 @@
         self.iconIMGV.layer.cornerRadius = 4;
         self.iconIMGV.layer.masksToBounds = YES;
         
+        
+        
+        self.nameLAB = [[UILabel alloc] init];
+        [self.contentView addSubview:self.nameLAB];
+        self.nameLAB.text = @"xxxx";
+        self.nameLAB.textAlignment = NSTextAlignmentCenter;
+        self.nameLAB.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
+        
+        
     }
     return self;
 }
@@ -40,13 +51,27 @@
     CGFloat KWIDTH  = self.frame.size.width;
     CGFloat KHEIGHT = self.frame.size.height;
     self.iconIMGV.frame = CGRectMake(0, 0,KWIDTH, KHEIGHT);
+    
+    self.nameLAB.frame = CGRectMake(0, KHEIGHT-20, KWIDTH, 20);
 }
 
 
--(void)setImage:(NSString *)image {
+-(void)setModel:(OrgModel *)model {
+    _model = model;
     
-    self.iconIMGV.image = [UIImage imageNamed:image];
+    self.nameLAB.text = model.NAME;
     
+    if (model.isAdd) {
+        self.iconIMGV.image = [UIImage imageNamed:@"AddGroupMemberBtnHL_58x58_"];
+        self.nameLAB.hidden = YES;
+    }else{
+        self.iconIMGV.image = [UIImage imageNamed:@"icon_40pt"];
+        self.nameLAB.hidden = NO;
+    }
 }
+
+
+
+
 
 @end

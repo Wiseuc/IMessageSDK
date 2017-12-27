@@ -13,8 +13,8 @@
 #import "UITextView+ZWPlaceHolder.h"
 #import "SelectGroupMemberController.h"
 #import "SVProgressHUD.h"
-
-
+#import "OrgModel.h"
+#import "LTSDKFull.h"
 
 
 
@@ -28,7 +28,7 @@ UICollectionViewDelegate
 @property (nonatomic, strong) CHTCollectionViewWaterfallLayout *chLayout;
 @property (nonatomic, strong) UICollectionView *collectionview;
 @property (nonatomic, strong) NSMutableArray *datasource;
-
+@property (nonatomic, strong) NSMutableArray *allDatasource;
 
 
 @property (nonatomic, strong) UITextView *nameTV;          /**名称**/
@@ -48,6 +48,15 @@ UICollectionViewDelegate
 @implementation CreateGroupController
 
 -(void)settingUI {
+    
+    UIBarButtonItem *rightItem =
+    [[UIBarButtonItem alloc] initWithTitle:@"创建"
+                                     style:UIBarButtonItemStylePlain
+                                    target:self
+                                    action:@selector(createGroup)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
+    
     
     self.nameTV = [[UITextView alloc] init];
     self.nameTV.frame = CGRectMake(0, 10 + 64, kScreenWidth, 50);
@@ -108,15 +117,15 @@ UICollectionViewDelegate
     [self.view addSubview:self.collectionview];
     self.collectionview.frame = CGRectMake(0, 310 + 64, kScreenWidth, kScreenHeight - 310 - 64);
 }
--(void)settingData {
-    
-    NSArray *images = @[
-                        @"AddGroupMemberBtnHL_58x58_",
-                        ];
-    [self.datasource addObjectsFromArray:images];
-    
-    [self.collectionview reloadData];
-}
+//-(void)settingData {
+//
+//    NSArray *images = @[
+//                        @"AddGroupMemberBtnHL_58x58_",
+//                        ];
+//    [self.allDatasource addObjectsFromArray:images];
+//
+//    [self.collectionview reloadData];
+//}
 -(void)settingGesture {
     UITapGestureRecognizer *tapG =
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewEndEditing)];
@@ -124,7 +133,22 @@ UICollectionViewDelegate
     tapG.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:tapG];
 }
-
+-(void)refreshData {
+    
+    [self.allDatasource removeAllObjects];
+    
+    
+    if (self.datasource.count > 0) {
+        [self.allDatasource addObjectsFromArray:self.datasource];
+    }
+    
+    OrgModel *model = [[OrgModel alloc] init];
+    model.isAdd = YES;
+    model.NAME = @"";
+    [self.allDatasource addObject:model];
+    
+    [self.collectionview reloadData];
+}
 
 
 
@@ -145,7 +169,7 @@ UICollectionViewDelegate
     
     [self settingUI];
     
-    [self settingData];
+    [self refreshData];
     
     //[self settingGesture];
     
@@ -180,6 +204,59 @@ UICollectionViewDelegate
 
 
 
+#pragma mark - Private
+
+-(void)createGroup {
+    
+    [self.view endEditing:YES];
+    if (self.nameTV.text.length == 0  ||
+        self.titleTV.text.length == 0 ||
+        self.introTV.text.length == 0 ||
+        self.announcementTV.text.length == 0
+        )
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"群组名称和群组主题不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    
+    
+    NSDictionary *userDict = [LTUser.share queryUser];
+    NSString *UserName = userDict[@"UserName"];
+    NSString *Domain   = userDict[@"Domain"];
+    NSString *resource = UserName;
+    NSString *roomID   = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    NSString *domain   = Domain;
+    NSString *roomJID  = [NSString stringWithFormat:@"%@@%@",roomID.lowercaseString,domain];
+    NSString *presence = [NSString stringWithFormat:@"%@/%@",roomID,resource];
+    
+//    [GroupManager.defaultManager createGroupWithRoomID:roomID
+//                                               roomJID:roomJID
+//                                              presence:presence
+//                                                domain:domain
+//                                              resource:resource
+//                                         isCreateGroup:self.isCreateGroup
+//                                            datasource:self.dataSource
+//                                      groupDetailModel:gModel];
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -191,7 +268,7 @@ UICollectionViewDelegate
     return 1;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.datasource.count;
+    return self.allDatasource.count;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -201,14 +278,21 @@ UICollectionViewDelegate
     CreateGroupCell *cell =
     [collectionView dequeueReusableCellWithReuseIdentifier:@"CreateGroupCell" forIndexPath:indexPath];
     
-    [cell setImage:self.datasource[indexPath.item]];
+    cell.model = self.allDatasource[indexPath.item];
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.item == self.datasource.count - 1) {
+    if (indexPath.item == self.allDatasource.count - 1) {
         SelectGroupMemberController *vc = [[SelectGroupMemberController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+        
+        __weak typeof(self) weakself = self;
+        [vc selectGroupMember:^(NSArray *arr) {
+           //返回群租成员数组。。。
+            weakself.datasource = [arr mutableCopy];
+            [weakself refreshData];
+        }];
     }
 }
 
@@ -254,6 +338,14 @@ UICollectionViewDelegate
     }
     return _datasource;
 }
+-(NSMutableArray *)allDatasource {
+    if (!_allDatasource) {
+        _allDatasource = [NSMutableArray array];
+    }
+    return _allDatasource;
+}
+
+
 -(CHTCollectionViewWaterfallLayout *)chLayout {
     if (!_chLayout) {
         _chLayout = [[CHTCollectionViewWaterfallLayout alloc] init];
