@@ -139,6 +139,38 @@ void runCategoryForFramework34(){}
         }
     }
     
+    /**
+     删除群组
+     
+     RECV:
+     <iq xmlns="jabber:client"
+     type="result"
+     to="江海@duowin-server/IphoneIM"
+     id="deleteGroup"
+     passkey="1"
+     from="0d14d1af2c434e55bf6c4bf5f712b12d@conference.duowin-server">
+     
+     <query xmlns="http://jabber.org/protocol/muc#owner">
+         <destroy roomid="0d14d1af2c434e55bf6c4bf5f712b12d@conference.duowin-server"/>
+     </query>
+     </iq>
+     **/
+    if ([iq isResultIQ])
+    {
+        NSString *IDStr = [iq attributeForName:@"id"].stringValue;
+        NSString *from = [iq attributeForName:@"from"].stringValue;
+        NSXMLElement *query = [iq elementForName:@"query" xmlns:@"http://jabber.org/protocol/muc#owner"];
+        if (query != nil && [IDStr isEqualToString:@"deleteGroup"] && [from containsString:@"conference"])
+        {
+            NSXMLElement *destroy = [query elementsForName:@"destroy"].firstObject;
+            NSString *roomid = [destroy attributeForName:@"roomid"].stringValue;
+            if (roomid != nil && [roomid containsString:@"conference"]) {
+                if (self.group_deleteGroupBlock) {
+                    self.group_deleteGroupBlock(nil);
+                }
+            }
+        }
+    }
 
     
     
@@ -597,15 +629,15 @@ void runCategoryForFramework34(){}
                         {
                             NSString *v = [self valueForKey:kStringXMPPRosterGroupFieldValue inDictionary:field];
                             //群简介
-                            if([kStringXMPPRosterGroupDescription isEqualToString:k]){
+                            if([@"Introduction" isEqualToString:k]){
                                 [group setObject:v forKey:kStringXMPPRosterDescription];
                             }
                             //群公告
-                            if([kStringXMPPRosterBulletin isEqualToString:k]){
+                            if([@"Description" isEqualToString:k]){
                                 [group setObject:v forKey:kStringXMPPRosterBulletin];
                             }
                             //创建时间
-                            if([kStringXMPPRosterCreatedTime isEqualToString:k])
+                            if([@"CreateDate" isEqualToString:k])
                             {
                                 if(![NSObject isEmpty:v]){
                                     NSDate *date = [NSDate dateWithTimeIntervalSince1970:[v doubleValue]];
@@ -614,6 +646,8 @@ void runCategoryForFramework34(){}
                                     v = [dateFormatter stringFromDate:date];
                                 }
                             }
+                            
+                            
                             [group setObject:v forKey:k];
                         }
                     }

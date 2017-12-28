@@ -87,7 +87,7 @@ UICollectionViewDelegate
     
     
     self.introTV = [[UITextView alloc] init];
-    self.introTV.frame = CGRectMake(0, 130 + 64, kScreenWidth, 80);
+    self.introTV.frame = CGRectMake(0, 130 + 64, kScreenWidth, 60);
     self.introTV.layer.borderWidth = 1;
     self.introTV.font = [UIFont systemFontOfSize:14];
     self.introTV.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -101,7 +101,7 @@ UICollectionViewDelegate
     
     
     self.announcementTV = [[UITextView alloc] init];
-    self.announcementTV.frame = CGRectMake(0, 220 + 64, kScreenWidth, 80);
+    self.announcementTV.frame = CGRectMake(0, 200 + 64, kScreenWidth, 60);
     self.announcementTV.layer.borderWidth = 1;
     self.announcementTV.font = [UIFont systemFontOfSize:14];
     self.announcementTV.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -115,7 +115,7 @@ UICollectionViewDelegate
     
     
     [self.view addSubview:self.collectionview];
-    self.collectionview.frame = CGRectMake(0, 310 + 64, kScreenWidth, kScreenHeight - 310 - 64);
+    self.collectionview.frame = CGRectMake(0, 270 + 64, kScreenWidth, kScreenHeight - 270 - 64);
 }
 //-(void)settingData {
 //
@@ -136,6 +136,17 @@ UICollectionViewDelegate
 -(void)refreshData {
     
     [self.allDatasource removeAllObjects];
+    
+
+    //加自己
+    NSDictionary *userDict = [LTUser.share queryUser];
+    NSString *UserName = userDict[@"UserName"];
+    NSString *myJID = userDict[@"JID"];
+    OrgModel *model0 = [[OrgModel alloc] init];
+    model0.isAdd = NO;
+    model0.NAME = UserName;
+    model0.JID = myJID;
+    [self.allDatasource addObject:model0];
     
     
     if (self.datasource.count > 0) {
@@ -198,6 +209,9 @@ UICollectionViewDelegate
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self viewEndEditing];
 }
+-(void)back {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 
@@ -212,10 +226,11 @@ UICollectionViewDelegate
     if (self.nameTV.text.length == 0  ||
         self.titleTV.text.length == 0 ||
         self.introTV.text.length == 0 ||
-        self.announcementTV.text.length == 0
+        self.announcementTV.text.length == 0 ||
+        self.datasource.count < 1
         )
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"群组名称、主题、简介等信息不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"创建群组时，群组名称、主题、简介等信息不能为空,且必须选择2个及以上群组成员" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
         return;
     }
@@ -240,7 +255,7 @@ UICollectionViewDelegate
     }
     
     
-    
+    __weak typeof(self) weakself = self;
     [LTGroup.share sendRequesCreateGroupWithRoomID:roomID
                                            roomJID:roomJID
                                           presence:presence
@@ -256,9 +271,7 @@ UICollectionViewDelegate
                                         createrJID:myJID
      
                                          completed:^(LTError *error) {
-                                             
-                                             
-                                             
+                                             [weakself back];
                                          }];
 }
 

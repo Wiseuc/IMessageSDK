@@ -115,6 +115,11 @@ void runCategoryForFramework41();
 -(void)sendRequestDeleteGroupWithGroupID:(NSString *)aGroupID
                                completed:(LTXMPPManager_group_deleteGroupBlock)aBlock;
 
+
+
+
+
+
 /**
  update
  删除群组成员

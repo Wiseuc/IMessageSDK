@@ -17,7 +17,7 @@ typedef void(^LTGroup_deleteGroupBlock)(LTError *error);
 
 @interface LTGroup : NSObject
 @property (nonatomic, strong) LTGroup_queryGroupsBlock queryGroupsBlock;
-
+@property (nonatomic, strong) LTGroup_createGroupBlock createGroupBlock;
 
 /*!
  @method

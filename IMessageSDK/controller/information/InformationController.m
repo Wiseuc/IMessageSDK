@@ -179,7 +179,6 @@ UICollectionViewDelegate
     [alertvc addAction:ac2];
     [self presentViewController:alertvc animated:YES completion:nil];
 }
-
 -(void)add {
     NSDictionary *dict = [LTOrg queryInformationByJid:self.jid];
     NSString *aJID = dict[@"JID"];
@@ -194,8 +193,38 @@ UICollectionViewDelegate
     [LTFriend.share deleteFriendJid:self.jid];
     [self back];
 }
+
+
+
+/**删除群组**/
+-(void)deleteGroupAction {
+    UIAlertController *alertvc =
+    [UIAlertController alertControllerWithTitle:nil
+                                        message:@"确定删除群组吗"
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *ac1 = [UIAlertAction actionWithTitle:@"确定"
+                                                  style:UIAlertActionStyleDestructive
+                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                    [self deleteGroup];
+                                                }];
+    UIAlertAction *ac2 =
+    [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alertvc addAction:ac1];
+    [alertvc addAction:ac2];
+    [self presentViewController:alertvc animated:YES completion:nil];
+}
+-(void)deleteGroup {
+    __weak typeof(self) weakself = self;
+    [LTGroup.share sendRequestDeleteGroupWithGroupID:self.jid
+                                           completed:^(LTError *error) {
+                                               [weakself back];
+                                           }];
+}
+
+
 -(void)back {
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
 }
 
 
@@ -248,35 +277,89 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
         [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"footer" forIndexPath:indexPath];
         
         __weak typeof(self) weakself = self;
-        [LTFriend.share queryRostersCompleted:^(NSMutableArray *rosters, LTError *error) {
-            
-            //是否为好友
-            BOOL isfriend = NO;
-            for (NSDictionary *dict01 in rosters)
-            {
-                if ([dict01[@"jid"] isEqualToString:self.jid]) {
-                    isfriend = YES;
-                }
-            }
-            
-            //是否为自己
-            NSDictionary *userDict = [LTUser.share queryUser];
-            NSString *myJID = userDict[@"JID"];
-            if ([weakself.jid isEqualToString:myJID])
-            {
+        
+        
+        if ([self.jid containsString:@"conference"])
+        {
+            [LTGroup.share queryGroupsCompleted:^(NSMutableArray *groups, LTError *error) {
                 
-            }
-            else
-            {
-                //是否为会议
-                if ([weakself.jid containsString:@"conference"])
+                //是否为自己
+                NSDictionary *userDict = [LTUser.share queryUser];
+                NSString *myJID = userDict[@"JID"];
+                
+                
+                NSDictionary *dict01 = groups.firstObject;
+                NSArray *arr01 = dict01[@"item"];
+                BOOL isOwner     = NO;
+                BOOL isconference = NO;
+                
+                for (NSDictionary *dict02 in arr01) {
+                    /**
+                     [0]    (null)    @"introduction" : @""
+                     [1]    (null)    @"password" : @"0"
+                     [2]    (null)    @"owner" : @"test@duowin-server"
+                     [3]    (null)    @"category" : @"conference"
+                     [4]    (null)    @"admin" : @"刘明@duowin-server"
+                     [5]    (null)    @"FN" : @"技术中心"
+                     [6]    (null)    @"subject" : @"企业版交流区"
+                     [7]    (null)    @"conferencetype" : @"1"
+                     [8]    (null)    @"jid" : @"c1c97d0ba53a4328a49da40399d03f18@conference.duowin-server"
+                     [9]    (null)    @"type" : @"public"
+                     [10]    (null)    @"name" : @"技术中心"
+                     **/
+                    NSString *introduction = dict02[@"introduction"];
+                    NSString *password = dict02[@"password"];
+                    NSString *owner = dict02[@"owner"];
+                    NSString *category = dict02[@"category"];
+                    NSString *admin = dict02[@"admin"];
+                    NSString *FN = dict02[@"FN"];
+                    
+                    NSString *subject = dict02[@"subject"];
+                    NSString *conferencetype = dict02[@"conferencetype"];
+                    NSString *jid = dict02[@"jid"];
+                    NSString *type = dict02[@"type"];
+                    NSString *name = dict02[@"name"];
+                    
+                    if ([owner isEqualToString:myJID]) {
+                        isOwner = YES;
+                    }
+                }
+                
+                if (isOwner) {
+                    [weakself addFooterWithFooter:footer];
+                }
+            }];
+        }
+        else
+        {
+            [LTFriend.share queryRostersCompleted:^(NSMutableArray *rosters, LTError *error) {
+                
+                //是否为好友
+                BOOL isfriend = NO;
+                for (NSDictionary *dict01 in rosters)
+                {
+                    if ([dict01[@"jid"] isEqualToString:self.jid]) {
+                        isfriend = YES;
+                    }
+                }
+                //是否为自己
+                NSDictionary *userDict = [LTUser.share queryUser];
+                NSString *myJID = userDict[@"JID"];
+                if ([weakself.jid isEqualToString:myJID])
                 {
                     
                 }else{
-                    [weakself addFooterWithFooter:footer ByIsFriend:isfriend];
+                    //是否为会议
+                    if (![weakself.jid containsString:@"conference"])
+                    {
+                        [weakself addFooterWithFooter:footer ByIsFriend:isfriend];
+                    }
                 }
-            }
-        }];
+            }];
+        }
+        
+        
+        
         return footer;
     }
     return nil;
@@ -303,9 +386,34 @@ heightForFooterInSection:(NSInteger)section {
         [addFriendBTN setBackgroundColor:kDarkGreenColor];
         [addFriendBTN addTarget:self action:@selector(addFriend) forControlEvents:(UIControlEventTouchUpInside)];
     }
-    
 }
-
+-(void)addFooterWithFooter:(UICollectionReusableView *)footer {
+    
+    /**
+     po _dict
+     {
+     CreateDate = "2017-12-28";
+     Description = jwoh;
+     FN = ainioni;
+     Introduction = kming;
+     Persistent = 1;
+     Subject = johnie;
+     introduction = kming;
+     jid = "0003b3aef6184270a4d5cb38af74c24c@conference.duowin-server";
+     pinYin = A;
+     }
+     **/
+    
+    
+    UIButton *addFriendBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    [footer addSubview:addFriendBTN];
+    addFriendBTN.frame = CGRectMake(10, 10, kScreenWidth-20, 40);
+    [addFriendBTN setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    
+    [addFriendBTN setTitle:@"删除群组" forState:(UIControlStateNormal)];
+    [addFriendBTN setBackgroundColor:[[UIColor redColor] colorWithAlphaComponent:0.5f]];
+    [addFriendBTN addTarget:self action:@selector(deleteGroupAction) forControlEvents:(UIControlEventTouchUpInside)];
+}
 
 
 

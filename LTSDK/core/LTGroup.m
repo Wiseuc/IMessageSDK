@@ -74,7 +74,7 @@
 
                              completed:(LTGroup_createGroupBlock)aBlock;
 {
-    
+    self.createGroupBlock = aBlock;
     
     __weak typeof(self) weakself = self;
     [LTXMPPManager.share sendRequestCreateGroupWithGroupID:roomid
@@ -114,6 +114,7 @@
                  groupNotice:(NSString *)groupNotice
                   createrJID:(NSString *)aCreaterJID
 {
+    __weak typeof(self) weakself = self;
     [LTXMPPManager.share createGroupWithRoomID:aRoomID
                                         domain:aDomain
      
@@ -123,7 +124,7 @@
                              groupIntroduction:groupIntroduction
                                    groupNotice:groupNotice
                                      completed:^(NSDictionary *dict, LTError *error) {
-                                        
+                                         
                                          /**
                                           from = "3d06a64e86fd421db468e040fa882d0e@conference.duowin-server";
                                           **/
@@ -131,14 +132,17 @@
                                          NSString *from = dict[@"from"];
                                          if ([from containsString:[aRoomID lowercaseString]])
                                          {
+                                             //创建成功，回调
+                                             if (weakself.createGroupBlock) {
+                                                 weakself.createGroupBlock(nil);
+                                             }
+                                             
                                              [self inviteGroupMembersWithRoomID:aRoomID
                                                                          domain:aDomain
                                                                            jids:jids
                                                                   isCreateGroup:isCreateGroup
                                                               groupIntroduction:groupIntroduction
                                                                      createrJID:aCreaterJID];
-                                             
-                                             
                                          }
                                      }];
 }
@@ -162,7 +166,7 @@
                   groupIntroduction:(NSString *)groupIntroduction
                          createrJID:(NSString *)aCreaterJID
 {
-    
+    __weak typeof(self) weakself = self;
     [LTXMPPManager.share inviteGroupMembersWithRoomID:aRoomID
                                                domain:aDomain
                                                  jids:jids
@@ -171,8 +175,9 @@
                                            createrJID:aCreaterJID
                                             completed:^(NSDictionary *dict, LTError *error) {
                                                 
-                                                
-                                                
+                                                if (weakself.createGroupBlock) {
+                                                    weakself.createGroupBlock(nil);
+                                                }
                                             }];
 }
 
@@ -196,6 +201,7 @@
 -(void)sendRequestDeleteGroupWithGroupID:(NSString *)aGroupID
                                completed:(LTGroup_deleteGroupBlock)aBlock
 {
+    
     [LTXMPPManager.share sendRequestDeleteGroupWithGroupID:aGroupID
                                                  completed:^(LTError *error) {
                                                      if (aBlock) {

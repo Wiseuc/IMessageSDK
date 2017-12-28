@@ -223,6 +223,11 @@ RECV: <message xmlns="jabber:client" type="normal" to="江海@duowin-server/Ipho
 /**
  delete
  删除群组
+ 
+SEND: <iq type="set" to="0d14d1af2c434e55bf6c4bf5f712b12d@conference.duowin-server" id="deleteGroup" passkey="1"><query xmlns="http://jabber.org/protocol/muc#owner"><destroy/></query></iq>
+ 
+RECV: <iq xmlns="jabber:client" type="result" to="江海@duowin-server/IphoneIM" id="deleteGroup" passkey="1" from="0d14d1af2c434e55bf6c4bf5f712b12d@conference.duowin-server"><query xmlns="http://jabber.org/protocol/muc#owner"><destroy roomid="0d14d1af2c434e55bf6c4bf5f712b12d@conference.duowin-server"/></query></iq>
+
  **/
 -(void)sendRequestDeleteGroupWithGroupID:(NSString *)aGroupID
                                completed:(LTXMPPManager_group_deleteGroupBlock)aBlock
