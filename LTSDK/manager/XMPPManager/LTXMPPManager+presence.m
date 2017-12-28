@@ -75,20 +75,43 @@ void runCategoryForFramework36(){}
 {
     NSString *fromAttribute = [[presence attributeForName:kStringXMPPFrom] stringValue];
 
-    //创建群组确认消息
-    NSArray *xArr = [presence elementsForName:kStringXMPPX];
-    if (xArr.count == 2) {
-        if ([[xArr[0] xmlns] isEqualToString:@"http://jabber.org/protocol/muc"] && [[xArr[1] xmlns] isEqualToString:kStringXMPPXmlnsGroupMembers]) {
-            NSArray *status = [xArr[1] elementsForName:@"status"];
-            if (status.count > 0) {
-                
-//                if (self.msgReceiverdelegate && [self.msgReceiverdelegate respondsToSelector:@selector(XMPPServer:didReceiveCreateGroupPresence:from:)]) {
-//                    [self.msgReceiverdelegate XMPPServer:self didReceiveCreateGroupPresence:[status[0] attributeForName:@"code"].stringValue from:[presence attributeForName:@"from"].stringValue];
-//                }
+    /**
+     创建群组确认消息
+     
+     RECV:
+     <presence xmlns="jabber:client" to="江海@duowin-server/IphoneIM" from="10c755cedc2540089ecfbb6ae6a5d8c3@conference.duowin-server/江海">
+     <x xmlns="http://jabber.org/protocol/muc"/>
+     <show/>
+     
+     <x xmlns="http://jabber.org/protocol/muc#user">
+     <item jid="江海@duowin-server/IphoneIM" affiliation="owner" role="moderator"/>
+     <status code="201"/>
+     </x>
+     </presence>
+     **/
+    NSArray *xArr = [presence elementsForName:@"x"];
+    if (xArr.count == 2)
+    {
+        if ([[xArr[0] xmlns] isEqualToString:@"http://jabber.org/protocol/muc"] &&
+            [[xArr[1] xmlns] isEqualToString:@"http://jabber.org/protocol/muc#user"]
+            )
+        {
+            NSXMLElement *status =  [xArr[1] elementsForName:@"status"].firstObject;
+            NSString *code = [status attributeForName:@"code"].stringValue;
+            NSString *from = [presence attributeForName:@"from"].stringValue;
+            if ([code isEqualToString:@"201"] )
+            {
+                if (self.group_didReceiveCreateGroupResponseBlock) {
+                    NSDictionary *dict = @{ @"from":from };
+                    self.group_didReceiveCreateGroupResponseBlock(dict, nil);
+                }
             }
         }
     }
 
+    
+    
+    
 //
 //    void(^presenceSetBlock)(NSDictionary *presenceDict) = ^(NSDictionary *presenceDict) {
 //        if ( presenceDict ) {

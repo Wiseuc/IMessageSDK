@@ -30,7 +30,9 @@ typedef void(^LTXMPPManager_friend_addFriendBlock)(NSDictionary *dict,LTError *e
 
 typedef void(^LTXMPPManager_group_queryGroupsBlock)(NSMutableArray *arrM, NSString *groupVersion);
 typedef void(^LTXMPPManager_group_queryGroupVCardBlock)(NSDictionary *dict);
-typedef void(^LTXMPPManager_group_createGroupBlock)(LTError *error);
+typedef void(^LTXMPPManager_group_createGroupBlock)(NSDictionary *dict,LTError *error);
+typedef void(^LTXMPPManager_group_didReceiveCreateGroupResponseBlock)(NSDictionary *dict,LTError *error);
+typedef void(^LTXMPPManager_group_inviteGroupMembersBlock)(NSDictionary *dict,LTError *error);
 typedef void(^LTXMPPManager_group_deleteGroupBlock)(LTError *error);
 
 typedef void(^LTXMPPManager_message_queryMessageBlock)(NSDictionary *dict,LTError *error);
@@ -66,7 +68,11 @@ typedef void(^LTXMPPManager_presence_addFriendPresenceObserverBlock)(NSDictionar
 @property (nonatomic, strong) LTXMPPManager_group_queryGroupsBlock group_queryGroupsBlock;  /**请求群组列表回调**/
 @property (nonatomic, strong) LTXMPPManager_group_queryGroupVCardBlock group_queryGroupVCardBlock;  /**请求群组资料VCard回调**/
 @property (nonatomic, strong) LTXMPPManager_group_createGroupBlock group_createGroupBlock;  /**创建群组**/
+@property (nonatomic, strong) LTXMPPManager_group_didReceiveCreateGroupResponseBlock group_didReceiveCreateGroupResponseBlock;  /**接收到创建群组响应**/
+@property (nonatomic, strong) LTXMPPManager_group_inviteGroupMembersBlock group_inviteGroupMembersBlock;  /**插入群组成员响应**/
 @property (nonatomic, strong) LTXMPPManager_group_deleteGroupBlock group_deleteGroupBlock;  /**删除群组**/
+
+
 
 
 

@@ -215,7 +215,7 @@ UICollectionViewDelegate
         self.announcementTV.text.length == 0
         )
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"群组名称和群组主题不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"群组名称、主题、简介等信息不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
         return;
     }
@@ -224,21 +224,42 @@ UICollectionViewDelegate
     NSDictionary *userDict = [LTUser.share queryUser];
     NSString *UserName = userDict[@"UserName"];
     NSString *Domain   = userDict[@"Domain"];
+    NSString *myJID    = userDict[@"JID"];
+    
     NSString *resource = UserName;
     NSString *roomID   = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    NSString *domain   = Domain;
-    NSString *roomJID  = [NSString stringWithFormat:@"%@@%@",roomID.lowercaseString,domain];
+    NSString *conferenceDomain   = [NSString stringWithFormat:@"conference.%@",Domain];
+    NSString *roomJID  = [NSString stringWithFormat:@"%@@conference.%@",roomID.lowercaseString,Domain];
     NSString *presence = [NSString stringWithFormat:@"%@/%@",roomID,resource];
+//    NSArray *jids = @[@"江海@duowin-server",@"萧凡宇@duowin-server"];
     
-//    [GroupManager.defaultManager createGroupWithRoomID:roomID
-//                                               roomJID:roomJID
-//                                              presence:presence
-//                                                domain:domain
-//                                              resource:resource
-//                                         isCreateGroup:self.isCreateGroup
-//                                            datasource:self.dataSource
-//                                      groupDetailModel:gModel];
     
+    NSMutableArray *jids = [NSMutableArray array];
+    for (OrgModel * model in self.datasource) {
+        [jids addObject:model.JID];
+    }
+    
+    
+    
+    [LTGroup.share sendRequesCreateGroupWithRoomID:roomID
+                                           roomJID:roomJID
+                                          presence:presence
+                                  conferenceDomain:conferenceDomain
+                                          resource:resource
+                                              jids:[jids mutableCopy]
+     
+                                     isCreateGroup:YES
+                                         groupName:self.nameTV.text
+                                        groupTheme:self.titleTV.text
+                                 groupIntroduction:self.introTV.text
+                                       groupNotice:self.announcementTV.text
+                                        createrJID:myJID
+     
+                                         completed:^(LTError *error) {
+                                             
+                                             
+                                             
+                                         }];
 }
 
 

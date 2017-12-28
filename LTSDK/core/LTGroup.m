@@ -42,31 +42,145 @@
 
 
 
+/**
+ roomid:            10C755CEDC2540089ECFBB6AE6A5D8C3
+ presence:          10c755cedc2540089ecfbb6ae6a5d8c3/江海
+ roomJID:           10c755cedc2540089ecfbb6ae6a5d8c3@conference.duowin-server
+ domain:            conference.duowin-server
+ resource:          江海
+ isCreateGroup:     NO
+ datasource:        NSArray
+ groupDetailModel:  群组信息 name  theme  intro  title  subTitle
+ 
+ @property (nonatomic, strong) NSString *name;
+ @property (nonatomic, strong) NSString *theme;
+ @property (nonatomic, strong) NSString *introduction;
+ @property (nonatomic, strong) NSString *notice;
+ **/
+
+-(void)sendRequesCreateGroupWithRoomID:(NSString *)roomid
+                               roomJID:(NSString *)roomJID
+                              presence:(NSString *)presence
+                      conferenceDomain:(NSString *)conferenceDomain
+                              resource:(NSString *)resource
+                                  jids:(NSMutableArray *)jids
+
+                         isCreateGroup:(BOOL)isCreateGroup
+                             groupName:(NSString *)groupName
+                            groupTheme:(NSString *)groupTheme
+                     groupIntroduction:(NSString *)groupIntroduction
+                           groupNotice:(NSString *)groupNotice
+                            createrJID:(NSString *)aCreaterJID
+
+                             completed:(LTGroup_createGroupBlock)aBlock;
+{
+    
+    
+    __weak typeof(self) weakself = self;
+    [LTXMPPManager.share sendRequestCreateGroupWithGroupID:roomid
+                                                    domain:conferenceDomain
+                                                  resource:resource
+                                                 completed:^(NSDictionary *dict, LTError *error) {
+                                                    
+                                                     //1a1be8d8181f4c7da89a8bc45d3d5389@conference.duowin-server/江海
+                                                     /**判断是不是自己发起的创建群**/
+                                                     NSString *form0 = [NSString stringWithFormat:@"%@/%@",roomJID,resource];
+                                                     NSString *from = dict[@"from"];
+                                                     if ([from isEqualToString:form0])
+                                                     {
+                                                         [weakself createGroupWithRoomID:roomid
+                                                                                  domain:conferenceDomain
+                                                                                    jids:(NSMutableArray *)jids
+                                                          
+                                                                           isCreateGroup:isCreateGroup
+                                                                               groupName:groupName
+                                                                              groupTheme:groupTheme
+                                                                       groupIntroduction:groupIntroduction
+                                                                             groupNotice:groupNotice
+                                                                              createrJID:aCreaterJID];
+                                                     }
+                                                 }];
+}
+
+
+-(void)createGroupWithRoomID:(NSString *)aRoomID
+                      domain:(NSString *)aDomain
+                        jids:(NSMutableArray *)jids
+
+               isCreateGroup:(BOOL)isCreateGroup
+                   groupName:(NSString *)groupName
+                  groupTheme:(NSString *)groupTheme
+           groupIntroduction:(NSString *)groupIntroduction
+                 groupNotice:(NSString *)groupNotice
+                  createrJID:(NSString *)aCreaterJID
+{
+    [LTXMPPManager.share createGroupWithRoomID:aRoomID
+                                        domain:aDomain
+     
+                                 isCreateGroup:isCreateGroup
+                                     groupName:groupName
+                                    groupTheme:groupTheme
+                             groupIntroduction:groupIntroduction
+                                   groupNotice:groupNotice
+                                     completed:^(NSDictionary *dict, LTError *error) {
+                                        
+                                         /**
+                                          from = "3d06a64e86fd421db468e040fa882d0e@conference.duowin-server";
+                                          **/
+                                         /**判断是不是自己发起的创建群**/
+                                         NSString *from = dict[@"from"];
+                                         if ([from containsString:[aRoomID lowercaseString]])
+                                         {
+                                             [self inviteGroupMembersWithRoomID:aRoomID
+                                                                         domain:aDomain
+                                                                           jids:jids
+                                                                  isCreateGroup:isCreateGroup
+                                                              groupIntroduction:groupIntroduction
+                                                                     createrJID:aCreaterJID];
+                                             
+                                             
+                                         }
+                                     }];
+}
 
 
 /*!
  @method
- @abstract add：创建群组
- @discussion 备注
- @param aGroupID 群组ID
+ @abstract 插入群组成员
+ @discussion <#备注#>
+ @param aRoomID 群组ID
  @param aDomain 域名
- @param aResource 资源
- @param aBlock 回调
+ @param jids 成员
+ @param isCreateGroup 是否群
+ @param groupIntroduction 群描述
+ @param aCreaterJID 创建着jid
  */
--(void)sendRequestCreateGroupWithGroupID:(NSString *)aGroupID
-                                  domain:(NSString *)aDomain
-                                resource:(NSString *)aResource
-                               completed:(LTGroup_createGroupBlock)aBlock
+-(void)inviteGroupMembersWithRoomID:(NSString *)aRoomID
+                             domain:(NSString *)aDomain
+                               jids:(NSMutableArray *)jids
+                      isCreateGroup:(BOOL)isCreateGroup
+                  groupIntroduction:(NSString *)groupIntroduction
+                         createrJID:(NSString *)aCreaterJID
 {
-    [LTXMPPManager.share sendRequestCreateGroupWithGroupID:aGroupID
-                                                    domain:aDomain
-                                                  resource:aResource
-                                                 completed:^(LTError *error) {
-                                                     if (aBlock) {
-                                                         aBlock(error);
-                                                     }
-                                                 }];
+    
+    [LTXMPPManager.share inviteGroupMembersWithRoomID:aRoomID
+                                               domain:aDomain
+                                                 jids:jids
+                                        isCreateGroup:isCreateGroup
+                                    groupIntroduction:groupIntroduction
+                                           createrJID:aCreaterJID
+                                            completed:^(NSDictionary *dict, LTError *error) {
+                                                
+                                                
+                                                
+                                            }];
 }
+
+
+
+
+
+
 
 
 
@@ -89,33 +203,6 @@
                                                      }
                                                  }];
 }
-
-
-
-
-
-//-(void)createGroupWithRoomID:(NSString *)roomid
-//                     roomJID:(NSString *)roomJID
-//                    presence:(NSString *)presence
-//                      domain:(NSString *)domain
-//                    resource:(NSString *)resource
-//               isCreateGroup:(BOOL)isCreateGroup
-//                  datasource:(NSMutableArray *)datasouce
-//            groupDetailModel:(GroupDetailsModel *)groupDetailModel
-//{
-//    self.roomID = roomid;
-//    self.presence = presence;
-//    self.roomJID = roomJID;
-//    self.domain = domain;
-//    self.resource = resource;
-//    self.isCreateGroup = isCreateGroup;
-//    self.datasource = [datasouce copy];
-//    self.groupDetailModel = groupDetailModel;
-//
-//    [XMPPManager sendPresenceToRoomID:self.roomID domain:self.domain resource:self.resource];
-//}
-
-
 
 
 

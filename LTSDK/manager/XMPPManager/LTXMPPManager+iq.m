@@ -116,18 +116,31 @@ void runCategoryForFramework34(){}
         self.timeOffset_localAndServer = timeOffset;
     }
     
+    /**
+     创建群组
+     
+     RECV:
+     <iq
+     xmlns="jabber:client"
+     type="result"
+     to="江海@duowin-server/IphoneIM"
+     from="10C755CEDC2540089ECFBB6AE6A5D8C3@conference.duowin-server"
+     />
+     **/
+    if ([iq isResultIQ]) {
+        NSArray *query = [iq elementsForName:@"query"];
+        NSString *from = [iq attributeForName:@"from"].stringValue;
+        if (from != nil && query.count == 0)
+        {
+            if (self.group_createGroupBlock) {
+                NSDictionary *dict = @{ @"from":from };
+                self.group_createGroupBlock(dict, nil);
+            }
+        }
+    }
     
+
     
-    /**创建群组**/
-    //    if ([iq isResultIQ]) {
-    //        NSArray *query = [iq elementsForName:@"query"];
-    //        if ([iq attributeForName:@"from"].stringValue && query.count == 0) {
-    //            if (self.msgReceiverdelegate && [self.msgReceiverdelegate respondsToSelector:@selector(XMPPServer:didReceiveSuccessCreateGroup:from:)]) {
-    //                [self.msgReceiverdelegate XMPPServer:self didReceiveSuccessCreateGroup:YES from:[iq attributeForName:@"from"].stringValue];
-    //                return YES;
-    //            }
-    //        }
-    //    }
     
     
     

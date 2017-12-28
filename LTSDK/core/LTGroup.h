@@ -52,17 +52,41 @@ typedef void(^LTGroup_deleteGroupBlock)(LTError *error);
 
 /*!
  @method
- @abstract add：创建群组
- @discussion 备注
- @param aGroupID 群组ID
- @param aDomain 域名
- @param aResource 资源
+ @abstract 创建群组
+ @discussion <#备注#>
+ 
+ @param roomid 群组ID  如：10C755CEDC2540089ECFBB6AE6A5D8C3
+ @param roomJID 群租jid  如：10c755cedc2540089ecfbb6ae6a5d8c3@conference.duowin-server/江海
+ @param presence 如：10c755cedc2540089ecfbb6ae6a5d8c3@conference.duowin-server/江海
+ @param conferenceDomain 如：conference.duowin-server
+ @param resource 群主名字  如：江海
+ @param jids 成员jid数组（不带／IphoneIM）
+ 
+ @param isCreateGroup （0:创建讨论组  1:创建群）
+ @param groupName 群组名称
+ @param groupTheme 群主题
+ @param groupIntroduction 群介绍
+ @param groupNotice 群公告
+ 
  @param aBlock 回调
  */
--(void)sendRequestCreateGroupWithGroupID:(NSString *)aGroupID
-                                  domain:(NSString *)aDomain
-                                resource:(NSString *)aResource
-                               completed:(LTGroup_createGroupBlock)aBlock;
+-(void)sendRequesCreateGroupWithRoomID:(NSString *)roomid
+                               roomJID:(NSString *)roomJID
+                              presence:(NSString *)presence
+                      conferenceDomain:(NSString *)conferenceDomain
+                              resource:(NSString *)resource
+                                  jids:(NSMutableArray *)jids
+
+                         isCreateGroup:(BOOL)isCreateGroup
+                             groupName:(NSString *)groupName
+                            groupTheme:(NSString *)groupTheme
+                     groupIntroduction:(NSString *)groupIntroduction
+                           groupNotice:(NSString *)groupNotice
+                            createrJID:(NSString *)aCreaterJID
+
+                             completed:(LTGroup_createGroupBlock)aBlock;
+
+
 
 
 /*!
@@ -74,18 +98,6 @@ typedef void(^LTGroup_deleteGroupBlock)(LTError *error);
  */
 -(void)sendRequestDeleteGroupWithGroupID:(NSString *)aGroupID
                                completed:(LTGroup_deleteGroupBlock)aBlock;
-
-
-
-
--(void)createGroupWithRoomID:(NSString *)roomid
-                     roomJID:(NSString *)roomJID
-                    presence:(NSString *)presence
-                      domain:(NSString *)domain
-                    resource:(NSString *)resource
-               isCreateGroup:(BOOL)isCreateGroup
-                  datasource:(NSMutableArray *)datasouce
-            groupDetailModel:(GroupDetailsModel *)groupDetailModel;
 
 
 

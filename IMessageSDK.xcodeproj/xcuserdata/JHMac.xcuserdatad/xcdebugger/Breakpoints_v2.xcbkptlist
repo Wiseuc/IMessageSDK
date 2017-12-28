@@ -26,28 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LTSDK/manager/XMPPManager/LTXMPPManager+iq.m"
-            timestampString = "535893028.09522"
+            timestampString = "536132093.548321"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
             endingLineNumber = "81"
             landmarkName = "-xmppIqLoginCheck:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LTSDK/manager/XMPPManager/LTXMPPManager+presence.m"
-            timestampString = "536063216.845725"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "-xmppStream:didReceivePresence:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
