@@ -18,6 +18,8 @@
 #import "DocManager.h"
 #import "Message.h"
 #import "NewRosterMessage.h"
+#import "ApnsManager.h"
+#import "VoipManager.h"
 
 @interface MainController ()
 @property (nonatomic, strong) LoginController     *loginController;
@@ -153,6 +155,9 @@
             
         }
     }];
+    
+    
+    [self settingPID];
 }
 - (void)loginFailureAction {
     //    [_loginView hideServerView];
@@ -216,7 +221,7 @@
 
 
 #pragma mark - observer roster
-
+/**添加好友行为（添加好友，删除好友等）监测**/
 -(void)addFriendBehaviorObserver {
 
     [LTFriend.share addFriendBehaviorObserver:^(NSDictionary *dict) {
@@ -257,8 +262,35 @@
 
 
 
+#pragma mark - Private
 
+-(void)settingApnsToken
+{
+    [ApnsManager.share settingApns];
+    
+    [VoipManager.share settingVoip];
+}
 
+/**获取自己的PID**/
+-(void)settingPID
+{
+    NSDictionary *userDict = [LTUser.share queryUser];
+    NSString *JID = userDict[@"JID"];
+    [LTUser.share sendRequestPidWithJid:JID completed:^(NSDictionary *dict, LTError *error) {
+       
+        NSString *key = dict.allKeys.firstObject;        
+        if ([key isEqualToString:@"myPID"])
+        {
+            NSString *value = dict[@"myPID"];
+            VoipManager.share.myPID = value;
+        }
+//        else if ([key isEqualToString:@"otherPID"])
+//        {
+//            NSString *value = dict[@"otherPID"];
+//            VoipManager.share.otherPID = value;
+//        }
+    }];
+}
 
 
 

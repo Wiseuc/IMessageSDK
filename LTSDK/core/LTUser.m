@@ -183,7 +183,15 @@
 
 
 
-
+#pragma mark - public
+- (void)sendRequestPidWithJid:(NSString *)aJID completed:(LTUser_queryPIDBlock)aBlock {
+    [LTXMPPManager.share sendRequestPidWithJid:aJID
+                                     completed:^(NSDictionary *dict, LTError *error) {
+                                         if (aBlock) {
+                                             aBlock(dict,nil);
+                                         }
+                                     }];
+}
 
 
 

@@ -29,6 +29,9 @@ void runCategoryForFramework34();
 - (void)xmppIqLoginCheck:(XMPPIQ *)iq;
 
 
+/**获取PID**/
+- (void)sendRequestPidWithJid:(NSString *)aJID completed:(LTXMPPManager_user_requestPIDBlock)aBlock;
+
 
 
 @end

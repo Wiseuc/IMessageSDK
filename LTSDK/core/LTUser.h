@@ -6,7 +6,8 @@
  */
 
 #import <Foundation/Foundation.h>
-
+#import "LTError.h"
+typedef void(^LTUser_queryPIDBlock)(NSDictionary *dict, LTError *error);
 
 @interface LTUser : NSObject
 
@@ -77,7 +78,14 @@
 - (void)deleteSignature;
 
 
-
+/*!
+ @method
+ @abstract 通过请求PID
+ @discussion <#备注#>
+ @param aJID
+ @result  <#描述4#>
+ */
+- (void)sendRequestPidWithJid:(NSString *)aJID completed:(LTUser_queryPIDBlock)aBlock;
 
 
 

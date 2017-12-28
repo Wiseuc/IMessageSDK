@@ -177,6 +177,42 @@ void runCategoryForFramework34(){}
     
     
     
+    
+    /**请求Pid**/
+    if ( [iq isResultIQ] ) {
+        
+        NSString *fromstr = iq.fromStr;
+        NSString *tostr   = iq.toStr;
+        NSString *elementId = [iq elementID];
+        if ([elementId isEqualToString:kStringXMPPElementIDRequestPid])
+        {
+            NSXMLElement *pidEle = [iq elementForName:@"pid"];
+            
+            if ([tostr containsString:fromstr])
+            {
+                if (self.user_requestPIDBlock) {
+                    NSDictionary *dict = @{ @"myPID":pidEle.stringValue };
+                    self.user_requestPIDBlock(dict, nil);
+                }
+            }
+            else
+            {
+                if (self.user_requestPIDBlock) {
+                    NSDictionary *dict = @{ @"otherPID":pidEle.stringValue };
+                    self.user_requestPIDBlock(dict, nil);
+                }
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**登录Auth**/
     if ( [iq isResultIQ] ) {
         NSXMLElement *query = [iq elementForName:@"query"];
@@ -753,6 +789,27 @@ void runCategoryForFramework34(){}
     [iq addChild:vCard];
     [self.aXMPPStream sendElement:iq];
 }
+
+/**获取PID**/
+- (void)sendRequestPidWithJid:(NSString *)aJID completed:(LTXMPPManager_user_requestPIDBlock)aBlock
+{
+    self.user_requestPIDBlock = aBlock;
+    XMPPIQ *iqEle = [XMPPIQ iqWithType:kStringXMPPIQTypeGet elementID:kStringXMPPElementIDRequestPid];
+    [iqEle addAttributeWithName:kStringXMPPTo stringValue:aJID];
+    NSXMLElement *queryEle = [NSXMLElement elementWithName:@"vCard" xmlns:@"vcard-temp"];
+    NSXMLElement *pidEle = [NSXMLElement elementWithName:@"pid"];
+    [queryEle addChild:pidEle];
+    [iqEle addChild:queryEle];
+    
+    [self.aXMPPStream sendElement:iqEle];
+}
+
+
+
+
+
+
+
 
 
 

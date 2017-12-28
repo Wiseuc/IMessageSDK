@@ -22,7 +22,13 @@
 #import "LT_OrgManager.h"
 
 
+
+
 typedef void(^LTXMPPManagerLoginBlock)(LTError *error);
+
+typedef void(^LTXMPPManager_user_requestPIDBlock)(NSDictionary *dict,LTError *error);
+
+
 typedef void(^LTXMPPManager_friend_queryRostersBlock)(NSMutableArray *arrM, NSString *rosterVersion);
 typedef void(^LTXMPPManager_friend_queryRosterVCardBlock)(NSDictionary *dict,LTError *error);
 typedef void(^LTXMPPManager_friend_addFriendBlock)(NSDictionary *dict,LTError *error);
@@ -56,6 +62,9 @@ typedef void(^LTXMPPManager_presence_addFriendPresenceObserverBlock)(NSDictionar
 //回调
 @property (nonatomic, strong) LTXMPPManagerLoginBlock aXMPPManagerLoginBlock;
 
+
+//USER
+@property (nonatomic, strong) LTXMPPManager_user_requestPIDBlock user_requestPIDBlock;
 
 
 /**好友**/

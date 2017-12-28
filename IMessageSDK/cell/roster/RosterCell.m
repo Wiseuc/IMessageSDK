@@ -9,8 +9,10 @@
 #import "RosterCell.h"
 
 @interface RosterCell ()
-
+@property (nonatomic, strong) UIImageView *IMGV;
 @property (nonatomic, strong) UILabel *nameLAB;
+
+
 @end
 
 
@@ -27,6 +29,11 @@
     if (self) {
         self.contentView.backgroundColor = [UIColor whiteColor];
         
+        self.IMGV = [[UIImageView alloc] init];
+        [self.contentView addSubview:self.IMGV];
+        self.IMGV.image = [UIImage imageNamed:@"icon_40pt"];
+        
+        
         self.nameLAB = [[UILabel alloc] init];
         [self.contentView addSubview:self.nameLAB];
         self.nameLAB.text = @"name";
@@ -42,7 +49,8 @@
 //    CGFloat KWIDTH  = self.frame.size.width;
     CGFloat KHEIGHT = self.frame.size.height;
     
-    self.nameLAB.frame = CGRectMake(20, (KHEIGHT-20)/2, 100, 20);
+    self.IMGV.frame = CGRectMake(20, (KHEIGHT-20)/2, 20, 20);
+    self.nameLAB.frame = CGRectMake(50, (KHEIGHT-20)/2, 100, 20);
     
 }
 

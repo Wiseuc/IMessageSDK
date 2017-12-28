@@ -11,6 +11,8 @@
 		F90D3A791FF2035700BDB5DA /* NewFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F90D3A781FF2035700BDB5DA /* NewFriendCell.m */; };
 		F90D3A821FF2423D00BDB5DA /* NewRosterGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = F90D3A811FF2423D00BDB5DA /* NewRosterGroupController.m */; };
 		F90D3A851FF2534900BDB5DA /* NewRosterMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F90D3A841FF2534900BDB5DA /* NewRosterMessage.m */; };
+		F9121C511FF4D2BA004B14B8 /* ApnsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9121C501FF4D2BA004B14B8 /* ApnsManager.m */; };
+		F9121C551FF4D566004B14B8 /* VoipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9121C541FF4D566004B14B8 /* VoipManager.m */; };
 		F91761B41FE0B3FA00906CBB /* AppUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = F91761B31FE0B3FA00906CBB /* AppUtility.m */; };
 		F91761BE1FE0D48000906CBB /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F91761B91FE0D48000906CBB /* SVIndefiniteAnimatedView.m */; };
 		F91761BF1FE0D48000906CBB /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F91761BB1FE0D48000906CBB /* SVProgressHUD.bundle */; };
@@ -453,6 +455,10 @@
 		F90D3A811FF2423D00BDB5DA /* NewRosterGroupController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewRosterGroupController.m; sourceTree = "<group>"; };
 		F90D3A831FF2534900BDB5DA /* NewRosterMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewRosterMessage.h; sourceTree = "<group>"; };
 		F90D3A841FF2534900BDB5DA /* NewRosterMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewRosterMessage.m; sourceTree = "<group>"; };
+		F9121C4F1FF4D2BA004B14B8 /* ApnsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApnsManager.h; sourceTree = "<group>"; };
+		F9121C501FF4D2BA004B14B8 /* ApnsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApnsManager.m; sourceTree = "<group>"; };
+		F9121C531FF4D566004B14B8 /* VoipManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoipManager.h; sourceTree = "<group>"; };
+		F9121C541FF4D566004B14B8 /* VoipManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoipManager.m; sourceTree = "<group>"; };
 		F91761B21FE0B3FA00906CBB /* AppUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppUtility.h; sourceTree = "<group>"; };
 		F91761B31FE0B3FA00906CBB /* AppUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppUtility.m; sourceTree = "<group>"; };
 		F91761B61FE0BCEE00906CBB /* UIConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIConfig.h; sourceTree = "<group>"; };
@@ -1225,6 +1231,24 @@
 				F90D3A751FF2017100BDB5DA /* NewFriendController.m */,
 			);
 			path = NewFriend;
+			sourceTree = "<group>";
+		};
+		F9121C4E1FF4D2A9004B14B8 /* ApnsManager */ = {
+			isa = PBXGroup;
+			children = (
+				F9121C4F1FF4D2BA004B14B8 /* ApnsManager.h */,
+				F9121C501FF4D2BA004B14B8 /* ApnsManager.m */,
+			);
+			path = ApnsManager;
+			sourceTree = "<group>";
+		};
+		F9121C521FF4D55B004B14B8 /* VoipManager */ = {
+			isa = PBXGroup;
+			children = (
+				F9121C531FF4D566004B14B8 /* VoipManager.h */,
+				F9121C541FF4D566004B14B8 /* VoipManager.m */,
+			);
+			path = VoipManager;
 			sourceTree = "<group>";
 		};
 		F91761AF1FE0B2C100906CBB /* Frameworks */ = {
@@ -3168,6 +3192,8 @@
 		F9637E131FE7C5A400B1250C /* manager */ = {
 			isa = PBXGroup;
 			children = (
+				F9121C521FF4D55B004B14B8 /* VoipManager */,
+				F9121C4E1FF4D2A9004B14B8 /* ApnsManager */,
 				F9637E291FE7D2DB00B1250C /* DocManager */,
 			);
 			path = manager;
@@ -3648,6 +3674,7 @@
 			files = (
 				F9194C7B1FDFD2C400CCFB32 /* ViewController.m in Sources */,
 				F959FC401FF372A7001D689F /* RABatchChanges.m in Sources */,
+				F9121C511FF4D2BA004B14B8 /* ApnsManager.m in Sources */,
 				F9558D731FE399CA00D13CD0 /* MJRefreshStateHeader.m in Sources */,
 				F959FC4C1FF372A7001D689F /* RATreeView.m in Sources */,
 				F959FC5F1FF39942001D689F /* UIImage+Color2Image.m in Sources */,
@@ -3704,6 +3731,7 @@
 				F9194CBC1FDFD72500CCFB32 /* MainController.m in Sources */,
 				F98FDBA51FEB8DB200618C82 /* FMDatabaseQueue.m in Sources */,
 				F9558D6E1FE399CA00D13CD0 /* MJRefreshBackGifFooter.m in Sources */,
+				F9121C551FF4D566004B14B8 /* VoipManager.m in Sources */,
 				F959FBFB1FF3339C001D689F /* AddRosterGroupController.m in Sources */,
 				F93496F51FE9041300E8D8A3 /* MineCell02.m in Sources */,
 				F959FC601FF39942001D689F /* UIImage+ImageEffects.m in Sources */,
