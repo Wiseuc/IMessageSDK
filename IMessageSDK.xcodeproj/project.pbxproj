@@ -403,6 +403,8 @@
 		F9E53B4E1FF611AB008A0B41 /* VideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E53B4D1FF611AA008A0B41 /* VideoController.m */; };
 		F9E53B561FF61979008A0B41 /* LinphoneManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F9E53B541FF61979008A0B41 /* LinphoneManager.h */; };
 		F9E53B571FF61979008A0B41 /* LinphoneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E53B551FF61979008A0B41 /* LinphoneManager.m */; };
+		F9E545A61FF63375008A0B41 /* libLTVideoSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E545A41FF63375008A0B41 /* libLTVideoSDK.a */; };
+		F9E545A71FF63375008A0B41 /* LTVideoSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = F9E545A51FF63375008A0B41 /* LTVideoSDK.h */; };
 		F9F7C0941FEBAF9900F56A23 /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F7C0931FEBAF9900F56A23 /* ChatCell.m */; };
 		F9F7C0981FEBB73C00F56A23 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F7C0971FEBB73C00F56A23 /* NSString+Extension.m */; };
 		F9F7C09B1FEBBD3C00F56A23 /* JHLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F7C09A1FEBBD3C00F56A23 /* JHLabel.m */; };
@@ -1187,6 +1189,8 @@
 		F9E53B4D1FF611AA008A0B41 /* VideoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoController.m; sourceTree = "<group>"; };
 		F9E53B541FF61979008A0B41 /* LinphoneManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinphoneManager.h; sourceTree = "<group>"; };
 		F9E53B551FF61979008A0B41 /* LinphoneManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinphoneManager.m; sourceTree = "<group>"; };
+		F9E545A41FF63375008A0B41 /* libLTVideoSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLTVideoSDK.a; sourceTree = "<group>"; };
+		F9E545A51FF63375008A0B41 /* LTVideoSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTVideoSDK.h; sourceTree = "<group>"; };
 		F9F7C0921FEBAF9900F56A23 /* ChatCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
 		F9F7C0931FEBAF9900F56A23 /* ChatCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
 		F9F7C0961FEBB73C00F56A23 /* NSString+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
@@ -1228,6 +1232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9E545A61FF63375008A0B41 /* libLTVideoSDK.a in Frameworks */,
 				F9194EC41FDFE11C00CCFB32 /* libidn.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1603,6 +1608,7 @@
 		F9194CD91FDFE0CE00CCFB32 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				F9E545A31FF63375008A0B41 /* LTVideoSDK */,
 				F9637E1C1FE7CF3500B1250C /* GDataXMLNode */,
 				F9194F771FDFE18F00CCFB32 /* AFNetworking */,
 				F9194E8F1FDFE11C00CCFB32 /* Encrypt_Decipher */,
@@ -3484,6 +3490,15 @@
 			path = LinphoneManager;
 			sourceTree = "<group>";
 		};
+		F9E545A31FF63375008A0B41 /* LTVideoSDK */ = {
+			isa = PBXGroup;
+			children = (
+				F9E545A41FF63375008A0B41 /* libLTVideoSDK.a */,
+				F9E545A51FF63375008A0B41 /* LTVideoSDK.h */,
+			);
+			path = LTVideoSDK;
+			sourceTree = "<group>";
+		};
 		F9F7C0911FEBAF7C00F56A23 /* chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -3526,6 +3541,7 @@
 				F9637E1F1FE7CF3500B1250C /* LT_GDataXMLNode.h in Headers */,
 				F97D69281FEA0BD400E19477 /* LTXMPPManager+message.h in Headers */,
 				F963FDBC1FE278AE0073D490 /* LT_XMLReader.h in Headers */,
+				F9E545A71FF63375008A0B41 /* LTVideoSDK.h in Headers */,
 				F9637DFF1FE7A54D00B1250C /* ioapi.h in Headers */,
 				F963FDB01FE275CB0073D490 /* pinyin.h in Headers */,
 				F97D69311FEA128F00E19477 /* LT_MessageAnalysis.h in Headers */,
@@ -4223,6 +4239,10 @@
 				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = IMessageSDK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IMessageSDK/3rd/LTVideoSDK",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lito.IMessageSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4241,6 +4261,10 @@
 				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = IMessageSDK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IMessageSDK/3rd/LTVideoSDK",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lito.IMessageSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4317,6 +4341,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LTSDK/3rd/XMPPFramework-master/libidn",
+					"$(PROJECT_DIR)/LTSDK/3rd/LTVideoSDK",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -4341,6 +4366,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LTSDK/3rd/XMPPFramework-master/libidn",
+					"$(PROJECT_DIR)/LTSDK/3rd/LTVideoSDK",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
