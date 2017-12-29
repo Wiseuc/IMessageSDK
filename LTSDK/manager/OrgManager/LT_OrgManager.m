@@ -13,6 +13,7 @@
 #import "Encrypt_Decipher.h"
 #import "LT_Macros.h"
 #import "LT_SSZipArchive.h"
+#import "LT_GDataXMLNode.h"
 
 #define kLOGIN_FORMAT_URL @"http://%@:14132/admin/user/login?wiseuc=%@"
 @implementation LT_OrgManager

@@ -1,10 +1,10 @@
-//
-//  LTFriend.h
-//  LTSDK
-//
-//  Created by JH on 2017/12/15.
-//  Copyright © 2017年 JiangHai. All rights reserved.
-//
+/*!
+ @header
+ @abstract 好友管理类
+ @author 江海（JiangHai）
+ @version v5.2.0
+ */
+
 
 #import <Foundation/Foundation.h>
 #import "LTError.h"
@@ -13,6 +13,10 @@ typedef void (^LTFriend_queryRosterVCardBlock)(NSDictionary *dict);
 typedef void (^LTFriend_addFriendBlock)(NSDictionary *dict, LTError *error);
 typedef void (^LTFriend_addFriendBehaviorObserver)(NSDictionary *dict);
 
+/*!
+ @class
+ @abstract 好友管理类
+ */
 @interface LTFriend : NSObject
 
 
@@ -58,17 +62,31 @@ typedef void (^LTFriend_addFriendBehaviorObserver)(NSDictionary *dict);
                                 completed:(LTFriend_addFriendBlock)aBlock;
 
 
-/**同意添加好友请求**/
-- (void)acceptAddFriendJid:(NSString *)aFriendJid friendName:(NSString *)aFriendName;
+/*!
+ @method
+ @abstract 同意添加好友请求
+ @discussion <#备注#>
+ @param aFriendJid 好友jid
+ @param aFriendName 好友名字
+ */
+- (void)acceptAddFriendJid:(NSString *)aFriendJid
+                friendName:(NSString *)aFriendName;
 
-/**拒绝添加好友请求**/
+/*!
+ @method
+ @abstract 拒绝添加好友请求
+ @discussion <#备注#>
+ @param aFriendJid 好友jid
+ */
 - (void)refuseAddFriendJid:(NSString *)aFriendJid;
 
-/**删除好友**/
+/*!
+ @method
+ @abstract 删除好友
+ @discussion <#备注#>
+ @param aFriendJid 好友jid
+ */
 - (void)deleteFriendJid:(NSString *)aFriendJid;
-
-
-
 
 
 /*!

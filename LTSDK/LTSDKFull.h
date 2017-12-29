@@ -23,5 +23,6 @@
 #import "LTGroup.h"
 #import "LTOrg.h"
 #import "LTMessage.h"
+#import "LTVideo.h"
 
 #endif /* LTSDKFull_h */

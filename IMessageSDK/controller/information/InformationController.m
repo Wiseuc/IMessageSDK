@@ -291,7 +291,9 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
                 NSDictionary *dict01 = groups.firstObject;
                 NSArray *arr01 = dict01[@"item"];
                 BOOL isOwner     = NO;
-                BOOL isconference = NO;
+                //BOOL isconference = NO;
+                
+                //NSDictionary *dict03 = nil;
                 
                 for (NSDictionary *dict02 in arr01) {
                     /**
@@ -320,8 +322,9 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
                     NSString *type = dict02[@"type"];
                     NSString *name = dict02[@"name"];
                     
-                    if ([owner isEqualToString:myJID]) {
+                    if ([owner isEqualToString:myJID] && [jid isEqualToString:self.jid]) {
                         isOwner = YES;
+                        //dict03 = dict02;
                     }
                 }
                 

@@ -1,10 +1,3 @@
-//
-//  LTErrorDef.h
-//  WiseUC
-//
-//  Created by JH on 2017/12/6.
-//  Copyright © 2017年 WiseUC. All rights reserved.
-//
 
 /*!
  @enum

@@ -1,17 +1,26 @@
-//
-//  LTMessage.h
-//  LTSDK
-//
-//  Created by JH on 2017/12/20.
-//  Copyright © 2017年 JiangHai. All rights reserved.
-//
+/*!
+ @header
+ @abstract 信息管理类
+ @author 江海（JiangHai）
+ @version v5.2.0
+ */
 
 #import <Foundation/Foundation.h>
 #import "LTError.h"
 typedef void(^LTMessage_queryMessageBlock)(NSDictionary *dict,LTError *error);
 
 
+
+
+
+/*!
+ @class
+ @abstract 信息管理类
+ */
 @interface LTMessage : NSObject
+
+
+
 /*!
  @method
  @abstract 初始化
@@ -58,37 +67,5 @@ typedef void(^LTMessage_queryMessageBlock)(NSDictionary *dict,LTError *error);
                                       conferenceJID:(NSString *)aConferenceJID
                                      conferenceName:(NSString *)aConferenceName
                                                body:(NSString *)aBody;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @end

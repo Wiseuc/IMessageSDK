@@ -22,7 +22,7 @@ typedef void(^LTUser_queryPIDBlock)(NSDictionary *dict, LTError *error);
 
 
 
-#pragma mark -=================
+
 
 /*!
  @method
@@ -30,8 +30,23 @@ typedef void(^LTUser_queryPIDBlock)(NSDictionary *dict, LTError *error);
  @discussion null
  */
 - (NSDictionary *)queryUser;
+
+
+/*!
+ @method
+ @abstract 删除服务器返回的用户真实信息
+ @discussion <#备注#>
+ */
 - (void)deleteUser;
--(void)updateUserWithPID:(NSString *)PID
+
+
+
+/*!
+ @method
+ @abstract 更新服务器返回的用户真实信息
+ @discussion <#备注#>
+ */
+- (void)updateUserWithPID:(NSString *)PID
                AccountID:(NSString *)AccountID
                 UserName:(NSString *)UserName
                  IsAdmin:(NSString *)IsAdmin
@@ -64,12 +79,16 @@ typedef void(^LTUser_queryPIDBlock)(NSDictionary *dict, LTError *error);
  @discussion null
  */
 -(void)updateUserWithSignature:(NSString *)Signature;
+
+
 /*!
  @method
  @abstract 查询签名
  @discussion null
  */
 - (NSString *)querySignature;
+
+
 /*!
  @method
  @abstract 删除签名
@@ -83,10 +102,9 @@ typedef void(^LTUser_queryPIDBlock)(NSDictionary *dict, LTError *error);
  @abstract 通过请求PID
  @discussion <#备注#>
  @param aJID
- @result  <#描述4#>
+ @param aBlock 回调
  */
 - (void)sendRequestPidWithJid:(NSString *)aJID completed:(LTUser_queryPIDBlock)aBlock;
-
 
 
 @end

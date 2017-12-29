@@ -20,11 +20,13 @@
 #import "NewRosterMessage.h"
 #import "ApnsManager.h"
 #import "VoipManager.h"
+#import "VideoController.h"
 
 @interface MainController ()
 @property (nonatomic, strong) LoginController     *loginController;
 @property (nonatomic, strong) GuideController     *guideController;
 @property (nonatomic, strong) TabbarController    *tabBarController;
+@property (nonatomic, strong) VideoController     *videoController;
 @end
 
 
@@ -43,6 +45,7 @@
     self.loginController = [[LoginController alloc] init];
     self.guideController = [[GuideController alloc] init];
     self.tabBarController = [[TabbarController alloc] init];
+    self.videoController = [[VideoController alloc] init];
     
     //是否首次登录
     BOOL ret = [AppUtility queryIsFirstLaunching];
@@ -158,6 +161,10 @@
     
     
     [self settingPID];
+    
+    [self settingApnsToken];
+    
+    [self settingVoipToken];
 }
 - (void)loginFailureAction {
     //    [_loginView hideServerView];
@@ -267,10 +274,11 @@
 -(void)settingApnsToken
 {
     [ApnsManager.share settingApns];
-    
+}
+-(void)settingVoipToken
+{
     [VoipManager.share settingVoip];
 }
-
 /**获取自己的PID**/
 -(void)settingPID
 {
@@ -290,6 +298,58 @@
 //            VoipManager.share.otherPID = value;
 //        }
     }];
+}
+/**配置voip**/
+-(void)settingVoip {
+    
+    /**linphone:将相关数据传入sip服务器,**/
+    
+    NSDictionary *userDict  = [LTUser.share queryUser];
+    NSDictionary *loginDict = [LTLogin.share queryLastLoginUser];
+    
+    
+    
+    NSString *apns        = [ApnsManager.share queryApnsToken];
+    NSString *voip        = [VoipManager.share queryVoipToken];
+    NSNumber *platform    = @(1);
+    NSString *aIP         = loginDict[@"aIP"];
+    NSString *aPort       = loginDict[@"aPort"];
+    
+    NSString *voipPort    = @"25060";
+    NSString *aAccountID  = userDict[@"AccountID"];
+    NSString *aUserName   = loginDict[@"aUsername"];
+    NSString *aIMPwd      = loginDict[@"IMPwd"];
+    NSString *registerIdentifies     = VoipManager.share.myPID;
+    NSString *registerJIDIdentifies  = userDict[@"JID"];
+    
+    NSString *transport  = userDict[@"tcp"];
+    UIViewController *videovc  = self.videoController;
+    UIViewController *mainVC  = self;
+    
+    [LTVideo.share settingPushKitManagerWithAPNsToken:apns
+                                            VoIPToken:voip
+                                             platform:platform
+                                             serverip:aIP
+                                           serverPort:aPort
+     
+                                             voipPort:voipPort
+                                            accountID:aAccountID
+                                             username:aUserName
+                                             password:aIMPwd
+                                   registerIdentifies:registerIdentifies
+     
+                                registerJIDIdentifies:registerJIDIdentifies
+                                            transport:transport
+                                            chatterVC:videovc
+                                               mainVC:mainVC
+                                            completed:^(NSDictionary *dict, LTError *error) {
+                                               
+                                                if (error) {
+                                                    NSLog(@"sip服务注册失败");
+                                                } else {
+                                                    NSLog(@"sip服务注册成功");
+                                                }
+                                            }];
 }
 
 

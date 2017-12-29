@@ -8,12 +8,15 @@
 #import "LTErrorDef.h"
 
 
+
+
+
+
 /*!
  @class
  @abstract 错误
  */
 @interface LTError : NSObject
-
 
 /*!
  @property
@@ -28,8 +31,6 @@
 @property (nonatomic, strong) NSString *localDescription;
 
 
-
-
 /*!
  @method
  @abstract 创建错误实例
@@ -39,6 +40,7 @@
  */
 + (instancetype)errorWithDescription:(NSString *)aDescription
                                 code:(LTErrorCode)aCode;
+
 
 
 /*!

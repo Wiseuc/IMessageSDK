@@ -1,12 +1,15 @@
-//
-//  LTINF.h
-//  WiseUC
-//
-//  Created by JH on 2017/12/7.
-//  Copyright © 2017年 WiseUC. All rights reserved.
-//
-
+/*!
+ @header
+ @abstract INF配置文件类
+ @author 江海（JiangHai）
+ @version v5.2.0
+ */
 #import <Foundation/Foundation.h>
+
+
+
+
+
 
 @interface LTINF : NSObject
 /**

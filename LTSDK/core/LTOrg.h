@@ -1,14 +1,13 @@
-//
-//  LTOrg.h
-//  WiseUC
-//
-//  Created by JH on 2017/12/6.
-//  Copyright © 2017年 WiseUC. All rights reserved.
-//
+/*!
+ @header
+ @abstract 组织架构管理类
+ @author 江海（JiangHai）
+ @version v5.2.0
+ */
 
 #import <Foundation/Foundation.h>
 #import "LTSDKFull.h"
-#import "LT_GDataXMLNode.h"
+@class GDataXMLDocument;
 
 typedef void(^LTOrg_downloadOrgBlock)(GDataXMLDocument *doc, LTError *error);
 @interface LTOrg : NSObject
@@ -35,54 +34,12 @@ typedef void(^LTOrg_downloadOrgBlock)(GDataXMLDocument *doc, LTError *error);
 
 
 
-
-
-
 /*!
  @method
- @abstract 更新个人在组织架构中的信息
- @discussion null
+ @abstract 获取组织架构可见范围
+ @discussion <#备注#>
+ @result  数组
  */
--(void)updateOrgWithID:(NSString *)ID
-             LoginName:(NSString *)LoginName
-                   PID:(NSString *)PID
-              ITEMTYPE:(NSString *)ITEMTYPE
-                  NAME:(NSString *)NAME
-
-                   JID:(NSString *)JID
-                  NICK:(NSString *)NICK
-                MOBILE:(NSString *)MOBILE
-                  TELE:(NSString *)TELE
-                TelExt:(NSString *)TelExt
-
-                MOBEXT:(NSString *)MOBEXT
-                 EMAIL:(NSString *)EMAIL
-                 title:(NSString *)title
-                   sex:(NSString *)sex
-                leader:(NSString *)leader
-
-                indexs:(NSString *)indexs;
-
-
-
-/*!
- @method
- @abstract 查询组织架构
- @discussion null
- @result  字典
- */
-- (NSDictionary *)queryOrg;
-
-
-/*!
- @method
- @abstract 删除组织架构
- @discussion null
- */
-- (void)deleteOrg;
-
-
-/**获取组织架构可见范围**/
 - (NSArray *)queryOrgVisibleRange ;
 
 
@@ -93,13 +50,6 @@ typedef void(^LTOrg_downloadOrgBlock)(GDataXMLDocument *doc, LTError *error);
  @result  字典
  */
 + (NSDictionary *)queryInformationByJid:(NSString *)aJID;
-
-
-
-
-
-
-
 
 
 

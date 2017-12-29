@@ -398,6 +398,11 @@
 		F9C557F91FE2128A00539EAB /* LTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C557F71FE2128A00539EAB /* LTUser.m */; };
 		F9C558041FE23B8400539EAB /* LTXMPPManager+presence.h in Headers */ = {isa = PBXBuildFile; fileRef = F9C558021FE23B8400539EAB /* LTXMPPManager+presence.h */; };
 		F9C558051FE23B8400539EAB /* LTXMPPManager+presence.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C558031FE23B8400539EAB /* LTXMPPManager+presence.m */; };
+		F9E53B491FF60FD8008A0B41 /* LTVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = F9E53B471FF60FD8008A0B41 /* LTVideo.h */; };
+		F9E53B4A1FF60FD8008A0B41 /* LTVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E53B481FF60FD8008A0B41 /* LTVideo.m */; };
+		F9E53B4E1FF611AB008A0B41 /* VideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E53B4D1FF611AA008A0B41 /* VideoController.m */; };
+		F9E53B561FF61979008A0B41 /* LinphoneManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F9E53B541FF61979008A0B41 /* LinphoneManager.h */; };
+		F9E53B571FF61979008A0B41 /* LinphoneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E53B551FF61979008A0B41 /* LinphoneManager.m */; };
 		F9F7C0941FEBAF9900F56A23 /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F7C0931FEBAF9900F56A23 /* ChatCell.m */; };
 		F9F7C0981FEBB73C00F56A23 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F7C0971FEBB73C00F56A23 /* NSString+Extension.m */; };
 		F9F7C09B1FEBBD3C00F56A23 /* JHLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F7C09A1FEBBD3C00F56A23 /* JHLabel.m */; };
@@ -1176,6 +1181,12 @@
 		F9C557F71FE2128A00539EAB /* LTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTUser.m; sourceTree = "<group>"; };
 		F9C558021FE23B8400539EAB /* LTXMPPManager+presence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LTXMPPManager+presence.h"; sourceTree = "<group>"; };
 		F9C558031FE23B8400539EAB /* LTXMPPManager+presence.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LTXMPPManager+presence.m"; sourceTree = "<group>"; };
+		F9E53B471FF60FD8008A0B41 /* LTVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LTVideo.h; sourceTree = "<group>"; };
+		F9E53B481FF60FD8008A0B41 /* LTVideo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LTVideo.m; sourceTree = "<group>"; };
+		F9E53B4C1FF611AA008A0B41 /* VideoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoController.h; sourceTree = "<group>"; };
+		F9E53B4D1FF611AA008A0B41 /* VideoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoController.m; sourceTree = "<group>"; };
+		F9E53B541FF61979008A0B41 /* LinphoneManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinphoneManager.h; sourceTree = "<group>"; };
+		F9E53B551FF61979008A0B41 /* LinphoneManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinphoneManager.m; sourceTree = "<group>"; };
 		F9F7C0921FEBAF9900F56A23 /* ChatCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
 		F9F7C0931FEBAF9900F56A23 /* ChatCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
 		F9F7C0961FEBB73C00F56A23 /* NSString+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
@@ -1387,6 +1398,7 @@
 		F9194CAA1FDFD37B00CCFB32 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				F9E53B4B1FF611AA008A0B41 /* video */,
 				F959FC091FF34634001D689F /* createGroup */,
 				F959FBF81FF33361001D689F /* addRosterGroup */,
 				F93496F61FE90DCA00E8D8A3 /* information */,
@@ -1544,6 +1556,8 @@
 				F9558D971FE3BA7500D13CD0 /* LTGroup.m */,
 				F97D69221FEA0A4B00E19477 /* LTMessage.h */,
 				F97D69231FEA0A4B00E19477 /* LTMessage.m */,
+				F9E53B471FF60FD8008A0B41 /* LTVideo.h */,
+				F9E53B481FF60FD8008A0B41 /* LTVideo.m */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -1551,6 +1565,7 @@
 		F9194CD61FDFE0CE00CCFB32 /* manager */ = {
 			isa = PBXGroup;
 			children = (
+				F9E53B531FF6196D008A0B41 /* LinphoneManager */,
 				F963FD721FE25FE60073D490 /* OrgManager */,
 				F97E33DC1FE10920001CBFA8 /* XMPPManager */,
 				F91761C21FE0EB3500906CBB /* INFManager */,
@@ -3451,6 +3466,24 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		F9E53B4B1FF611AA008A0B41 /* video */ = {
+			isa = PBXGroup;
+			children = (
+				F9E53B4C1FF611AA008A0B41 /* VideoController.h */,
+				F9E53B4D1FF611AA008A0B41 /* VideoController.m */,
+			);
+			path = video;
+			sourceTree = "<group>";
+		};
+		F9E53B531FF6196D008A0B41 /* LinphoneManager */ = {
+			isa = PBXGroup;
+			children = (
+				F9E53B541FF61979008A0B41 /* LinphoneManager.h */,
+				F9E53B551FF61979008A0B41 /* LinphoneManager.m */,
+			);
+			path = LinphoneManager;
+			sourceTree = "<group>";
+		};
 		F9F7C0911FEBAF7C00F56A23 /* chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -3496,10 +3529,12 @@
 				F9637DFF1FE7A54D00B1250C /* ioapi.h in Headers */,
 				F963FDB01FE275CB0073D490 /* pinyin.h in Headers */,
 				F97D69311FEA128F00E19477 /* LT_MessageAnalysis.h in Headers */,
+				F9E53B561FF61979008A0B41 /* LinphoneManager.h in Headers */,
 				F963FDB71FE2784D0073D490 /* LT_NSObject+Additions.h in Headers */,
 				F9C557F31FE20D5200539EAB /* LTXMPPManager+iq.h in Headers */,
 				F9637DFA1FE7A54D00B1250C /* LT_Common.h in Headers */,
 				F97D69241FEA0A4B00E19477 /* LTMessage.h in Headers */,
+				F9E53B491FF60FD8008A0B41 /* LTVideo.h in Headers */,
 				F9C557F81FE2128A00539EAB /* LTUser.h in Headers */,
 				F9637DFB1FE7A54D00B1250C /* LT_SSZipArchive.h in Headers */,
 				F93496D91FE8AE4B00E8D8A3 /* LT_OrgModel.h in Headers */,
@@ -3781,6 +3816,7 @@
 				F9558D7E1FE399CA00D13CD0 /* NSString+MJExtension.m in Sources */,
 				F9F7C0941FEBAF9900F56A23 /* ChatCell.m in Sources */,
 				F9558D801FE399CA00D13CD0 /* MJRefreshConst.m in Sources */,
+				F9E53B4E1FF611AB008A0B41 /* VideoController.m in Sources */,
 				F9558D671FE399CA00D13CD0 /* MJRefreshBackFooter.m in Sources */,
 				F9558CC31FE35A6600D13CD0 /* OrgController.m in Sources */,
 				F9558D761FE399CA00D13CD0 /* MJFoundation.m in Sources */,
@@ -3860,6 +3896,7 @@
 				F9194F0F1FDFE11C00CCFB32 /* XMPPvCardTempEmail.m in Sources */,
 				F9194EC91FDFE11C00CCFB32 /* XMPPPlainAuthentication.m in Sources */,
 				F9194F4A1FDFE11C00CCFB32 /* XMPPRoomLightCoreDataStorage.m in Sources */,
+				F9E53B571FF61979008A0B41 /* LinphoneManager.m in Sources */,
 				F9194F541FDFE11D00CCFB32 /* XMPPTimer.m in Sources */,
 				F9194F161FDFE11C00CCFB32 /* XMPPPubSub.m in Sources */,
 				F9194F121FDFE11C00CCFB32 /* XMPPvCardTempTel.m in Sources */,
@@ -3996,6 +4033,7 @@
 				F9194EDB1FDFE11C00CCFB32 /* XMPPIncomingFileTransfer.m in Sources */,
 				F9194ECA1FDFE11C00CCFB32 /* XMPPSCRAMSHA1Authentication.m in Sources */,
 				F9194F531FDFE11D00CCFB32 /* XMPPStringPrep.m in Sources */,
+				F9E53B4A1FF60FD8008A0B41 /* LTVideo.m in Sources */,
 				F963FD761FE25FE60073D490 /* LT_OrgManager.m in Sources */,
 				F9194F101FDFE11C00CCFB32 /* XMPPvCardTempLabel.m in Sources */,
 				F9194EEB1FDFE11C00CCFB32 /* XMPPRosterCoreDataStorage.m in Sources */,

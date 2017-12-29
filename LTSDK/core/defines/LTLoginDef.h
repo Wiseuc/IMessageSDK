@@ -1,10 +1,9 @@
-//
-//  LTLoginDef.h
-//  WiseUC
-//
-//  Created by JH on 2017/12/6.
-//  Copyright © 2017年 WiseUC. All rights reserved.
-//
+/*!
+ @header
+ @abstract <#描述#>
+ @author 江海（JiangHai）
+ @version v5.2.0
+ */
 
 #ifndef LTLoginDef_h
 #define LTLoginDef_h

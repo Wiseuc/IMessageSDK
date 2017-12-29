@@ -1,10 +1,9 @@
-//
-//  LTGroup.h
-//  LTSDK
-//
-//  Created by JH on 2017/12/15.
-//  Copyright © 2017年 JiangHai. All rights reserved.
-//
+/*!
+ @header
+ @abstract 群组管理类
+ @author 江海（JiangHai）
+ @version v5.2.0
+ */
 
 #import <Foundation/Foundation.h>
 #import "LTError.h"
@@ -14,10 +13,18 @@ typedef void(^LTGroup_createGroupBlock)(LTError *error);
 typedef void(^LTGroup_deleteGroupBlock)(LTError *error);
 
 
-
+/*!
+ @class
+ @abstract 群组管理类
+ */
 @interface LTGroup : NSObject
 @property (nonatomic, strong) LTGroup_queryGroupsBlock queryGroupsBlock;
 @property (nonatomic, strong) LTGroup_createGroupBlock createGroupBlock;
+
+
+
+
+
 
 /*!
  @method

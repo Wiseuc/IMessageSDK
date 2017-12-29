@@ -16,6 +16,7 @@
 #import "ChatCell.h"
 #import "NSString+Extension.h"
 #import "InputView.h"
+#import "VideoController.h"
 
 @interface ChatController ()
 <
@@ -60,13 +61,26 @@ UICollectionViewDelegate
     [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"wode_changtai"]
                                      style:UIBarButtonItemStylePlain
                                     target:self action:@selector(pushToInformationController)];
+    
+    UIBarButtonItem *rightItem2 =
+    [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"TabBar_Call_NL"]
+                                     style:UIBarButtonItemStylePlain
+                                    target:self action:@selector(pushToVideoController)];
+    
     rightItem.tag = 1001;
-    self.navigationItem.rightBarButtonItems = @[rightItem];
+    rightItem2.tag = 1002;
+    self.navigationItem.rightBarButtonItems = @[rightItem,rightItem2];
 }
 -(void)pushToInformationController {    
     InformationController *infovc = [[InformationController alloc] initWithJID:self.currentOtherJID];
     [self.navigationController pushViewController:infovc animated:YES];
 }
+-(void)pushToVideoController {
+    VideoController *videovc = [[VideoController alloc] init];
+    [self.navigationController pushViewController:videovc animated:YES];
+}
+
+
 /**键盘监听**/
 - (void)settingKeyBoardNotification
 {

@@ -10,7 +10,7 @@
 #import "LT_OrgManager.h"
 #define kLTOrg_orgKey @"kLTOrg_orgKey"
 #import "LT_Macros.h"
-
+#import "LT_GDataXMLNode.h"
 
 @interface LTOrg ()
 @property (nonatomic, strong) LTOrg_downloadOrgBlock downloadOrgBlock;
@@ -119,7 +119,11 @@
 
 
 #pragma mark -================= 服务器返回的用户真实信息
-
+/*!
+ @method
+ @abstract 更新个人在组织架构中的信息
+ @discussion null
+ */
 -(void)updateOrgWithID:(NSString *)ID
              LoginName:(NSString *)LoginName
                    PID:(NSString *)PID
