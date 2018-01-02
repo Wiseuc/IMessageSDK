@@ -7,7 +7,7 @@
 //
 
 #import "LTVideo.h"
-#import "LinphoneManager.h"
+#import "LT_LinphoneManager.h"
 @implementation LTVideo
 
 + (instancetype)share {
@@ -36,26 +36,22 @@
                        registerIdentifies:(NSString *)registerIdentifies
                     registerJIDIdentifies:(NSString *)jid
                                 transport:(NSString *)transport
-                                chatterVC:(UIViewController *)chatterController
-                                   mainVC:(UIViewController *)mainController
                                 completed:(LTVideo_SettingPushKitBlock)block
 {
-    [LinphoneManager.share settingPushKitManagerWithAPNsToken:apns
+    [LT_LinphoneManager.share settingPushKitManagerWithAPNsToken:apns
                                                     VoIPToken:voip
                                                      platform:platform
                                                      serverip:serverip
                                                    serverPort:serverPort
-     
+
                                                      voipPort:voipport
                                                     accountID:accountID
                                                      username:username
                                                      password:password
                                            registerIdentifies:registerIdentifies
-     
+
                                         registerJIDIdentifies:jid
                                                     transport:transport
-                                                    chatterVC:chatterController
-                                                       mainVC:mainController
                                                     completed:^(NSDictionary *dict, LTError *error) {
                                                         if (block) {
                                                             block(dict,error);

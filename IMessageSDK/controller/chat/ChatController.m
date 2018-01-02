@@ -65,7 +65,7 @@ UICollectionViewDelegate
     UIBarButtonItem *rightItem2 =
     [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"TabBar_Call_NL"]
                                      style:UIBarButtonItemStylePlain
-                                    target:self action:@selector(pushToVideoController)];
+                                    target:self action:@selector(sendRequestQueryPIDWithJID)];
     
     rightItem.tag = 1001;
     rightItem2.tag = 1002;
@@ -75,10 +75,41 @@ UICollectionViewDelegate
     InformationController *infovc = [[InformationController alloc] initWithJID:self.currentOtherJID];
     [self.navigationController pushViewController:infovc animated:YES];
 }
--(void)pushToVideoController {
-    VideoController *videovc = [[VideoController alloc] init];
-    [self.navigationController pushViewController:videovc animated:YES];
+/**
+ 根据jid请求PID
+ **/
+// FIXME:video
+-(void)sendRequestQueryPIDWithJID {
+    
+    __weak typeof(self) weakself = self;
+    [LTUser.share sendRequestPidWithJid:self.currentOtherJID
+                              completed:^(NSDictionary *dict, LTError *error) {
+        NSString *key = dict.allKeys.firstObject;
+                                  
+        if ([key isEqualToString:@"myPID"])
+        {
+        }
+        else if ([key isEqualToString:@"otherPID"])
+        {
+            NSString *otherPID = dict[@"otherPID"];
+            
+            if ([self.currentOtherJID containsString:@"conference"])
+            {
+                
+            }
+            else
+            {
+                [weakself pushToVideoControllerWithPID:otherPID];
+            }
+        }
+    }];
+
 }
+-(void)pushToVideoControllerWithPID:(NSString *)otherPID {
+    VideoController *videovc =[[VideoController alloc] initWithPID:otherPID];
+    [self presentViewController:videovc animated:YES completion:nil];
+}
+
 
 
 /**键盘监听**/
@@ -395,13 +426,13 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 #pragma mark - Init
 
 
--(instancetype)initWithCurrentOtherJID:(NSString *)aCurrentOtherJID {
-    self = [super init];
-    if (self) {
-        self.currentOtherJID = aCurrentOtherJID;
-    }
-    return self;
-}
+//-(instancetype)initWithCurrentOtherJID:(NSString *)aCurrentOtherJID {
+//    self = [super init];
+//    if (self) {
+//        self.currentOtherJID = aCurrentOtherJID;
+//    }
+//    return self;
+//}
 -(instancetype)initWithCurrentOtherJID:(NSString *)aCurrentOtherJID
                       conversationName:(NSString *)aConversationName {
     self = [super init];

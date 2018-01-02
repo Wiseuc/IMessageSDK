@@ -14,7 +14,15 @@
 - (void)showLoginController;
 - (void)showGuideController;
 - (void)showTabBarController;
+
 - (void)showTbaBar;
 - (void)hiddenTbaBar;
+
+
+
+
+-(void)settingApnsToken;
+-(void)settingVoipToken;
+-(void)settingPID;
     
 @end

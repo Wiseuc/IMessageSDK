@@ -8,9 +8,10 @@
 
 #import "VoipManager.h"
 #import <PushKit/PushKit.h>
-
-
-
+#import "LTSDKFull.h"
+#import "ApnsManager.h"
+#define kVoipManager_voipToken @"kVoipManager_voipToken"
+#define kVoipManager_pid    @"kVoipManager_pid"
 @interface VoipManager ()
 <
 PKPushRegistryDelegate
@@ -21,6 +22,8 @@ PKPushRegistryDelegate
  @abstract VoIPToken
  */
 @property (nonatomic, strong) NSString  *voipToken;  //
+
+@property (nonatomic, strong) VoipManager_settingVoipBlock settingVoipBlock;
 @end
 
 
@@ -38,44 +41,108 @@ PKPushRegistryDelegate
 }
 
 
--(void)settingVoip {
-    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-    PKPushRegistry * voipRegistry = [[PKPushRegistry alloc] initWithQueue: mainQueue];
-    voipRegistry.delegate = self;
-    voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
+#pragma mark -================= apns
+
+-(void)updateVoip:(NSString *)ret {
+    [NSUserDefaults.standardUserDefaults
+     setObject:ret
+     forKey:kVoipManager_voipToken];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+- (NSString *)queryVoip {
+    NSString *ret =
+    [NSUserDefaults.standardUserDefaults
+     objectForKey:kVoipManager_voipToken];
+    return ret;
+}
+- (void)deleteVoip {
+    [NSUserDefaults.standardUserDefaults
+     setObject:nil
+     forKey:kVoipManager_voipToken];
+    [NSUserDefaults.standardUserDefaults synchronize];
 }
 
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
 
-//获取voipToken
-- (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(PKPushType)type {
-    NSString *str = [NSString stringWithFormat:@"%@",credentials.token];
-    NSString *str1 = [str stringByReplacingOccurrencesOfString:@"<" withString:@""];
-    NSString *str2 = [str1 stringByReplacingOccurrencesOfString:@">" withString:@""];
-    NSString *voipTokenStr = [str2 stringByReplacingOccurrencesOfString:@" " withString:@""];
-    self.voipToken = voipTokenStr;
+
+
+
+#pragma mark -================= pid
+
+-(void)updatePID:(NSString *)ret {
+    [NSUserDefaults.standardUserDefaults
+     setObject:ret
+     forKey:kVoipManager_pid];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+- (NSString *)queryPID {
+    NSString *ret =
+    [NSUserDefaults.standardUserDefaults
+     objectForKey:kVoipManager_pid];
+    return ret;
+}
+- (void)deletePID {
+    [NSUserDefaults.standardUserDefaults
+     setObject:nil
+     forKey:kVoipManager_pid];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+
+
+
+
+
+
+
+/*!
+ @method
+ @abstract 向sip服务器传递相关参数
+ @discussion <#备注#>
+ */
+-(void)settingParametersToServer {
     
-    NSLog(@"注册Voip推送成功:voip = %@",voipTokenStr);
+    NSDictionary *userDict  = [LTUser.share queryUser];
+    NSDictionary *loginDict = [LTLogin.share queryLastLoginUser];
+    
+    
+    
+    NSString *apns        = [ApnsManager.share queryApns];
+    NSString *voip        = [VoipManager.share queryVoip];
+    NSNumber *platform    = @(1);
+    NSString *aIP         = loginDict[@"aIP"];
+    NSString *aPort       = loginDict[@"aPort"];
+    
+    NSString *voipPort    = @"25060";
+    NSString *aAccountID  = userDict[@"AccountID"];
+    NSString *aUserName   = loginDict[@"aUsername"];
+    NSString *aIMPwd      = loginDict[@"aPassword"];
+    NSString *registerIdentifies     = [VoipManager.share queryPID];
+    NSString *registerJIDIdentifies  = userDict[@"JID"];
+    
+    NSString *transport  = @"tcp";
+    
+    [LTVideo.share settingPushKitManagerWithAPNsToken:apns
+                                            VoIPToken:voip
+                                             platform:platform
+                                             serverip:aIP
+                                           serverPort:aPort
+     
+                                             voipPort:voipPort
+                                            accountID:aAccountID
+                                             username:aUserName
+                                             password:aIMPwd
+     
+                                   registerIdentifies:registerIdentifies
+                                registerJIDIdentifies:registerJIDIdentifies
+                                            transport:transport
+                                            completed:^(NSDictionary *dict, LTError *error) {
+                                                
+                                                
+                                                
+                                                
+                                                
+                                            }];
 }
-- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type {
-    // 收到推送来电
-    // 呼出系统接听界面
-    // 或者生成本地推送
-    // 这个需要voip推送服务器配合，如同apns
-    NSLog(@"收到来电推送");
-}
 
-#pragma clang diagnostic pop
-
-
-
-
-
-
--(NSString *)queryVoipToken {
-    return self.voipToken;
-}
 
 @end

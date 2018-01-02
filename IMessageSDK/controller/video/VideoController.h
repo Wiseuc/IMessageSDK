@@ -10,4 +10,8 @@
 
 @interface VideoController : UIViewController
 
+
+
+- (instancetype)initWithPID:(NSString *)aPID;
+
 @end

@@ -7,13 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+typedef void (^VoipManager_settingVoipBlock)(NSError *error);
+
 
 @interface VoipManager : NSObject
-
-
-@property (nonatomic, strong) NSString *myPID;
-
-@property (nonatomic, strong) NSString *otherPID;
 
 
 /*!
@@ -24,11 +21,32 @@
 + (instancetype)share;
 
 
+-(void)updateVoip:(NSString *)ret;
+- (NSString *)queryVoip;
+- (void)deleteVoip;
+    
+    
+-(void)updatePID:(NSString *)ret;
+- (NSString *)queryPID;
+- (void)deletePID;
+    
 
--(void)settingVoip;
 
 
--(NSString *)queryVoipToken;
+
+
+
+/*!
+ @method
+ @abstract 向sip服务器传递相关参数
+ @discussion <#备注#>
+ */
+-(void)settingParametersToServer;
+
+
+
+
+
 
 
 

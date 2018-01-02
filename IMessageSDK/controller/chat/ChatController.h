@@ -11,7 +11,7 @@
 @interface ChatController : UIViewController
 
 /**初始**/
--(instancetype)initWithCurrentOtherJID:(NSString *)aCurrentOtherJID;
+//-(instancetype)initWithCurrentOtherJID:(NSString *)aCurrentOtherJID;
 -(instancetype)initWithCurrentOtherJID:(NSString *)aCurrentOtherJID  conversationName:(NSString *)aConversationName;
 
 

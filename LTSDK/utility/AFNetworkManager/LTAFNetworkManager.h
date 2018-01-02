@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LTAFNetworking.h"
+#import "LTAFNetworkReachabilityManager.h"
 
 typedef void (^SuccessBlock)(id responseObject);
 typedef void (^FailBlock)(NSError *error);

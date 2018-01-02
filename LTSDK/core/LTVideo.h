@@ -33,6 +33,10 @@ typedef void(^LTVideo_SettingPushKitBlock)(NSDictionary *dict, LTError *error);
 
 
 
+
+
+
+
 /*!
  @method
  @abstract 初始化设置
@@ -65,8 +69,6 @@ typedef void(^LTVideo_SettingPushKitBlock)(NSDictionary *dict, LTError *error);
                        registerIdentifies:(NSString *)registerIdentifies
                     registerJIDIdentifies:(NSString *)jid
                                 transport:(NSString *)transport
-                                chatterVC:(UIViewController *)chatterController
-                                   mainVC:(UIViewController *)mainController
                                 completed:(LTVideo_SettingPushKitBlock)block;
 
 

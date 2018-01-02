@@ -7,6 +7,7 @@
 //
 
 #import "VideoController.h"
+#import "LTSDKFull.h"
 //#import "LTLinphoneManager.h"
 //#import "AppDelegate.h"
 //#import "UIViewController+Bar.h"
@@ -14,6 +15,11 @@
 //NSString *const kVideoCallUpdate  = @"LinphoneCallUpdate";   //通话更新
 
 @interface VideoController ()
+
+@property (nonatomic, strong) NSString  *otherPID; /**对方pid**/
+@property (nonatomic, strong) NSString     *otherJID; /**对方jid**/
+
+
 @property (nonatomic, strong) UILabel      *chatterLabel; /**对方名字**/
 @property (nonatomic, strong) UIButton     *hangupBTN;    /**挂断按钮**/
 @property (nonatomic, strong) UIButton     *acceptBTN;    /**接听按钮**/
@@ -31,7 +37,7 @@
 
 @implementation VideoController
 
-#pragma mark -================= UI
+#pragma mark - UI
 
 -(void)settingUI {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -68,6 +74,7 @@
                     forState:UIControlStateNormal];
     [self.view addSubview: self.acceptBTN];
     
+    
     /**挂断按钮**/
     self.videoBTN = [UIButton buttonWithType:UIButtonTypeSystem];
     self.videoBTN.frame = CGRectMake(20, (HEIGHT - 80), 60, 60);
@@ -94,30 +101,60 @@
 
 
 
-#pragma mark -================= 循环
+
+
+
+
+
+
+
+
+
+#pragma mark - start
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self settingUI];
+    
+    
+    
+}
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self sendCall];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)back {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 
 
 
-#pragma mark -================= Private
+
+
+
+
+
+
+
+
+
+
+#pragma mark - Private
 
 -(void)buttonClick:(UIButton *)sender {
     /**挂断**/
     if (sender.tag == 1001)
     {
 //        [LTLinphoneManager.defaultManager hangup];
+        [self back];
     }
     /**接听**/
     else if (sender.tag == 1002)
@@ -129,4 +166,40 @@
 //        [LTLinphoneManager.defaultManager openCamara];
     }
 }
+/**拨打**/
+-(void)sendCall {
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - Init
+
+- (instancetype)initWithPID:(NSString *)aPID
+{
+    self = [super init];
+    if (self) {
+        self.otherPID = aPID;
+    }
+    return self;
+}
+
+
 @end

@@ -207,6 +207,12 @@
             
             NSLog(@"%@",dict);
             
+            
+            [kMainVC settingApnsToken];
+            
+            [kMainVC settingVoipToken];
+            
+            [kMainVC settingPID];
         }
     }];
 }

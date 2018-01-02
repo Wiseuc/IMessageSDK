@@ -20,13 +20,17 @@
 #import "NewRosterMessage.h"
 #import "ApnsManager.h"
 #import "VoipManager.h"
-#import "VideoController.h"
+//#import "VideoController.h"
+#import "AppDelegate+apns.h"
+#import "AppDelegate+voip.h"
+
+
 
 @interface MainController ()
 @property (nonatomic, strong) LoginController     *loginController;
 @property (nonatomic, strong) GuideController     *guideController;
 @property (nonatomic, strong) TabbarController    *tabBarController;
-@property (nonatomic, strong) VideoController     *videoController;
+//@property (nonatomic, strong) VideoController     *videoController;
 @end
 
 
@@ -45,7 +49,7 @@
     self.loginController = [[LoginController alloc] init];
     self.guideController = [[GuideController alloc] init];
     self.tabBarController = [[TabbarController alloc] init];
-    self.videoController = [[VideoController alloc] init];
+//    self.videoController = [[VideoController alloc] init];
     
     //是否首次登录
     BOOL ret = [AppUtility queryIsFirstLaunching];
@@ -138,6 +142,15 @@
     [self jianghai_removeAllChildController];
     [self jianghai_addChildController:self.tabBarController];
 }
+//- (void)showVideoControllerWithOtherPID:(NSString *)otherPID {
+//    [self jianghai_removeAllChildController];
+//    [self jianghai_addChildController:self.videoController];
+//    self.videoController.otherPID = otherPID;
+//}
+
+
+
+
 - (void)loginSuccessAction02 {
     [kMainVC showTabBarController];
     
@@ -156,15 +169,13 @@
             
             NSLog(@"%@",dict);
             
+            [self settingPID];
+            
+            [self settingApnsToken];
+            
+            [self settingVoipToken];
         }
     }];
-    
-    
-    [self settingPID];
-    
-    [self settingApnsToken];
-    
-    [self settingVoipToken];
 }
 - (void)loginFailureAction {
     //    [_loginView hideServerView];
@@ -273,11 +284,33 @@
 
 -(void)settingApnsToken
 {
-    [ApnsManager.share settingApns];
+    [ApnsManager.share deleteApns];
+    [kAppDelegate settingApns:^(NSString *ret, NSError *error) {
+        if (error)
+        {
+            
+        }
+        else
+        {
+            [ApnsManager.share updateApns:ret];
+            [self settingParametersToSip];
+        }
+    }];
 }
 -(void)settingVoipToken
 {
-    [VoipManager.share settingVoip];
+    [VoipManager.share deleteVoip];
+    [kAppDelegate settingVoip:^(NSString *ret, NSError *error) {
+        if (error)
+        {
+            
+        }
+        else
+        {
+            [VoipManager.share updateVoip:ret];
+            [self settingParametersToSip];
+        }
+    }];
 }
 /**获取自己的PID**/
 -(void)settingPID
@@ -290,7 +323,9 @@
         if ([key isEqualToString:@"myPID"])
         {
             NSString *value = dict[@"myPID"];
-            VoipManager.share.myPID = value;
+            
+            [VoipManager.share updatePID:value];
+            [self settingParametersToSip];
         }
 //        else if ([key isEqualToString:@"otherPID"])
 //        {
@@ -298,58 +333,36 @@
 //            VoipManager.share.otherPID = value;
 //        }
     }];
+    
 }
-/**配置voip**/
--(void)settingVoip {
-    
-    /**linphone:将相关数据传入sip服务器,**/
-    
-    NSDictionary *userDict  = [LTUser.share queryUser];
-    NSDictionary *loginDict = [LTLogin.share queryLastLoginUser];
-    
-    
-    
-    NSString *apns        = [ApnsManager.share queryApnsToken];
-    NSString *voip        = [VoipManager.share queryVoipToken];
-    NSNumber *platform    = @(1);
-    NSString *aIP         = loginDict[@"aIP"];
-    NSString *aPort       = loginDict[@"aPort"];
-    
-    NSString *voipPort    = @"25060";
-    NSString *aAccountID  = userDict[@"AccountID"];
-    NSString *aUserName   = loginDict[@"aUsername"];
-    NSString *aIMPwd      = loginDict[@"IMPwd"];
-    NSString *registerIdentifies     = VoipManager.share.myPID;
-    NSString *registerJIDIdentifies  = userDict[@"JID"];
-    
-    NSString *transport  = userDict[@"tcp"];
-    UIViewController *videovc  = self.videoController;
-    UIViewController *mainVC  = self;
-    
-    [LTVideo.share settingPushKitManagerWithAPNsToken:apns
-                                            VoIPToken:voip
-                                             platform:platform
-                                             serverip:aIP
-                                           serverPort:aPort
-     
-                                             voipPort:voipPort
-                                            accountID:aAccountID
-                                             username:aUserName
-                                             password:aIMPwd
-                                   registerIdentifies:registerIdentifies
-     
-                                registerJIDIdentifies:registerJIDIdentifies
-                                            transport:transport
-                                            chatterVC:videovc
-                                               mainVC:mainVC
-                                            completed:^(NSDictionary *dict, LTError *error) {
-                                               
-                                                if (error) {
-                                                    NSLog(@"sip服务注册失败");
-                                                } else {
-                                                    NSLog(@"sip服务注册成功");
-                                                }
-                                            }];
+
+/**
+ Sip服务器设置相关参数
+ **/
+-(void)settingParametersToSip
+{
+    NSString *apns = [ApnsManager.share queryApns];
+    NSString *voip = [VoipManager.share queryVoip];
+    NSString *pid  = [VoipManager.share queryPID];
+
+    NSLog(@"apns == %@ ",apns);
+    NSLog(@"voip == %@ ",voip);
+    NSLog(@"pid == %@ ",pid);
+
+    if (apns == nil || apns.length == 0)
+    {
+        return;
+    }
+    if (voip == nil || voip.length == 0)
+    {
+        return;
+    }
+    if (pid == nil || pid.length == 0)
+    {
+        return;
+    }
+
+    [VoipManager.share settingParametersToServer];
 }
 
 

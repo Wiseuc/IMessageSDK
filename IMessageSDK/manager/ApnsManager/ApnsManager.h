@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+typedef void (^ApnsManager_settingApnsBlock)(NSError *error);
 
 @interface ApnsManager : NSObject
 
@@ -19,19 +20,10 @@
 
 
 
-/*!
- @method
- @abstract 获取apnaToken
- @discussion <#备注#>
- @result  <#描述4#>
- */
--(NSString *)queryApnsToken;
 
 
-
--(void)settingApns;
-
-
-
+-(void)updateApns:(NSString *)apns;
+- (NSString *)queryApns;
+- (void)deleteApns;
 
 @end
