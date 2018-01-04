@@ -15,21 +15,22 @@
 #import "Message.h"
 #import "ChatCell.h"
 #import "NSString+Extension.h"
-#import "InputView.h"
 #import "VideoController.h"
+#import "LXChatBox.h"
 
 @interface ChatController ()
 <
 CHTCollectionViewDelegateWaterfallLayout,
 UICollectionViewDataSource,
-UICollectionViewDelegate
+UICollectionViewDelegate,
+LTChatBoxDelegate
 >
 @property (nonatomic, strong) CHTCollectionViewWaterfallLayout *chLayout;
 @property (nonatomic, strong) UICollectionView *collectionview;
 @property (nonatomic, strong) NSMutableArray *datasource;
 @property (nonatomic, strong) NSString *currentOtherJID;  /**对方jid**/
 @property (nonatomic, strong) NSString *conversationName; /**对方name**/
-@property (nonatomic, strong) InputView *inputView;  /**输入框**/
+@property (nonatomic, strong) LXChatBox *chatBox;  /**输入框**/
 @end
 
 
@@ -46,15 +47,11 @@ UICollectionViewDelegate
 -(void)settingUI {
     
     [self.view addSubview:self.collectionview];
+    
     [self settingUIBarButtonItem];
+    
     /**添加输入框 - 开始输入**/
-    [self.view addSubview:self.inputView];
-    
-    __weak typeof(self) weakself = self;
-    [self.inputView startInputView:^(NSString *message) {
-        [weakself sendMessage:message];
-    }];
-    
+    [self.view addSubview:self.chatBox];
 }
 -(void)settingUIBarButtonItem{
     UIBarButtonItem *rightItem =
@@ -69,7 +66,7 @@ UICollectionViewDelegate
     
     rightItem.tag = 1001;
     rightItem2.tag = 1002;
-    self.navigationItem.rightBarButtonItems = @[rightItem,rightItem2];
+    self.navigationItem.rightBarButtonItems = @[rightItem /**rightItem2**/ ];
 }
 -(void)pushToInformationController {    
     InformationController *infovc = [[InformationController alloc] initWithJID:self.currentOtherJID];
@@ -111,66 +108,7 @@ UICollectionViewDelegate
 }
 
 
-
-/**键盘监听**/
-- (void)settingKeyBoardNotification
-{
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(keyboardShow:)
-     name:UIKeyboardWillShowNotification
-     object:nil];
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(keyboardHide)
-     name:UIKeyboardWillHideNotification
-     object:nil];
-}
-- (void) keyboardShow:(NSNotification *)no
-{
-    /**
-     {
-     UIKeyboardAnimationCurveUserInfoKey = 7;
-     UIKeyboardAnimationDurationUserInfoKey = "0.25";
-     UIKeyboardBoundsUserInfoKey = "NSRect: {{0, 0}, {320, 251.5}}";
-     UIKeyboardCenterBeginUserInfoKey = "NSPoint: {160, 693.75}";
-     UIKeyboardCenterEndUserInfoKey = "NSPoint: {160, 442.25}";
-     UIKeyboardFrameBeginUserInfoKey = "NSRect: {{0, 568}, {320, 251.5}}";
-     UIKeyboardFrameEndUserInfoKey = "NSRect: {{0, 316.5}, {320, 251.5}}";
-     UIKeyboardIsLocalUserInfoKey = 1;
-     }
-     **/
-    NSDictionary *dic = no.userInfo;
-    id objFrame = dic[@"UIKeyboardFrameEndUserInfoKey"];
-    CGRect kbFrame = {0};
-    [objFrame getValue:&kbFrame];
-    
-    /**键盘**/
-    CGFloat kbMinY = kbFrame.origin.y;
-    CGFloat kbH    = kbFrame.size.height;
-    //视图
-    CGFloat btnMaxY =  CGRectGetMaxY(self.view.frame);  /**这里设置最低的视图**/
-    
-    if (btnMaxY+20 > kbMinY)
-    {
-        CGRect tempFrame = self.view.frame;
-        /**标准Y**/
-        CGFloat standY = kScreenHeight - (kbH);
-        /**现在Y**/
-        CGFloat nowY   = btnMaxY;
-        /**Y差距**/
-        CGFloat distance = nowY - standY;
-        
-        tempFrame.origin.y = tempFrame.origin.y - distance;
-        
-        self.view.frame = tempFrame;
-    }
-}
-- (void)keyboardHide{
-    self.view.frame = self.view.bounds;
-}
-
+/**点击屏幕**/
 -(void)settingGesture {
     UITapGestureRecognizer *tapG =
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewEndEditing)];
@@ -180,6 +118,7 @@ UICollectionViewDelegate
 }
 -(void)viewEndEditing {
     [self.view endEditing:YES];
+    self.chatBox.status = LTChatBoxStatusNothing;
 }
 
 
@@ -264,22 +203,30 @@ UICollectionViewDelegate
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kBackgroundColor;
-    self.view.userInteractionEnabled = YES;
-    [self settingKeyBoardNotification];
+    
     [self settingUI];
+    
     [self settingGesture];
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     [self settingDBOberser];
+    
     [kMainVC hiddenTbaBar];
+    
     [self settingData];
+    
+    self.chatBox.isDisappear = NO;
 }
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
     [self unsettingDBOberser];
+    
     [kMainVC showTbaBar];
     
+    self.chatBox.isDisappear = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -412,6 +359,80 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 //    CGSize size = [model.body sizeWithFontSize:14.0 maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
 //    return CGSizeMake(kScreenWidth, 30+size.height);
 //}
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    self.chatBox.status = LTChatBoxStatusNothing;
+}
+
+
+
+
+
+
+
+
+#pragma mark - 代理 ChatBox
+-(void)changeStatusChat:(CGFloat)chatBoxY{
+    
+    self.collectionview.frame = CGRectMake(0, 64, kScreenWidth, chatBoxY - 64);
+    if (self.datasource.count > 0) {
+        [self.collectionview scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.datasource.count-1 inSection:0]
+                                    atScrollPosition:(UICollectionViewScrollPositionBottom)
+                                            animated:NO];
+    }
+}
+
+
+-(void)chatBoxDidSelectItem:(LXChatBoxItem)itemType {
+    
+    switch (itemType) {
+        case LXChatBoxItemAlbum:
+        {
+            NSLog(@"LXChatBoxItemAlbum");
+        }
+            break;
+            
+        case LXChatBoxItemDoc:
+        {
+            NSLog(@"LXChatBoxItemDoc");
+        }
+            break;
+            
+        case LXChatBoxItemVideo:
+        {
+            NSLog(@"LXChatBoxItemVideo");
+        }
+            break;
+            
+        case LXChatBoxItemCamera:
+        {
+            NSLog(@"LXChatBoxItemCamera");
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+
+/**发送文本text**/
+-(void)chatBox:(LXChatBox *)chatBox sendText:(NSString *)text {
+    NSAttributedString *attribute =
+    [LXEmotionManager transferMessageString:text
+                                       font:[UIFont systemFontOfSize:16.0]
+                                 lineHeight:[UIFont systemFontOfSize:16.0].lineHeight];
+    NSLog(@"=== %@",attribute);
+    [self sendMessage:text];
+    if (self.datasource.count > 0) {
+        [self.collectionview scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.datasource.count-1 inSection:0]
+                                    atScrollPosition:(UICollectionViewScrollPositionBottom)
+                                            animated:YES];
+    }
+}
+
+/**发送音频voice**/
+-(void)chatBox:(LXChatBox *)chatBox sendVoice:(NSString *)voiceLocalPath seconds:(NSTimeInterval)duration{
+    
+}
 
 
 
@@ -466,7 +487,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 -(UICollectionView *)collectionview {
     if (!_collectionview) {
         _collectionview =
-        [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight-64 - 49)
+        [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 49)
                            collectionViewLayout:self.chLayout];
         _collectionview.backgroundColor = kBackgroundColor;
         // [UIColor whiteColor];//[[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
@@ -484,16 +505,14 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     }
     return _collectionview;
 }
--(UIView *)inputView {
-    if (!_inputView) {
-        _inputView = [[InputView alloc] init];
-        _inputView.frame = CGRectMake(0, kScreenHeight-49, kScreenWidth, 49);
-        _inputView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
+-(LXChatBox *)chatBox {
+    if (!_chatBox) {
+        _chatBox = [[LXChatBox alloc] initWithFrame:CGRectMake(0, kScreenHeight - 49, kScreenWidth, 49)];
+        _chatBox.maxVisibleLine = 3;
+        _chatBox.delegate = self;
     }
-    return _inputView;
+    return _chatBox;
 }
-
-
 
 
 

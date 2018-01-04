@@ -99,3 +99,33 @@
 #define kMainVC        (kAppDelegate.mainvc)
 
 
+
+
+
+
+#pragma mark - =================== 文件路径 ========================
+
+#pragma  mark  --语音文件路径
+#define kVoiceFilePath   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingString:@"/wiseuc/Voice"]
+
+#pragma  mark  --图片文件路径
+#define kPictureFilePath   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingString:@"/wiseuc/Pictures"]
+
+#pragma  mark  --文件路径
+#define kFilePath   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingString:@"/wiseuc/File"]
+
+#pragma  mark  --数据库路径
+#define kSqlitePath   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingString:@"/wiseuc/WiseucSqlite"]
+
+#pragma  mark  --头像缓存路径
+#define kHeadPicture   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingString:@"/wiseuc/HeadPicture"]
+
+#pragma  mark  --组织架构文件路径
+#define kOrgFilePath   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingString:@"/wiseuc/OrgFilePath"]
+
+#pragma  mark  --ftp配置文件路径
+#define kFtpConfigFile   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingString:@"/wiseuc/FtpConfigFile"]
+
+#pragma  mark  --消息漫游文件
+#define kRoamingMsgCacheFile   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingString:@"/wiseuc/RoamingMsgCacheFile/RoamingMsgCacheFile.plist"]
+

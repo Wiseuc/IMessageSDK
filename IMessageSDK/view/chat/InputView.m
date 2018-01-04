@@ -10,6 +10,7 @@
 #import "NSString+Extension.h"
 
 
+
 //#define KInput_WIDTH   self.frame.size.width;
 //#define KInputView_HEIGHT  self.frame.size.height;
 @interface InputView ()
@@ -20,8 +21,7 @@ UITextViewDelegate
 @property (nonatomic, strong) UIButton *faceBTN;  /**表情**/
 @property (nonatomic, strong) UIButton *moreBTN;  /**更多**/
 @property (nonatomic, strong) UITextView *contentTextView;  /**输入框**/
-
-
+@property (nonatomic, strong) UIButton   *voiceInputBTN;    /**按着说话**/
 
 @property (nonatomic, strong) InputViewBlock aInputViewBlock;
 @end
@@ -36,10 +36,21 @@ UITextViewDelegate
     self = [super initWithFrame:frame];
     if (self) {
         
+        /**声音**/
         self.voiceBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
         [self addSubview:self.voiceBTN];
-        [self.voiceBTN setImage:
-         [[UIImage imageNamed:@"kaimen"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)] forState:(UIControlStateNormal)];
+        [self.voiceBTN setBackgroundImage: [[UIImage imageNamed:@"chat_voice"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)]
+                                 forState:(UIControlStateNormal)];
+        [self.voiceBTN setBackgroundImage: [[UIImage imageNamed:@"chat_Keyboard"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)]
+                                 forState:(UIControlStateSelected)];
+        self.voiceBTN.layer.borderWidth = 1;
+        self.voiceBTN.layer.cornerRadius = 18;
+        self.voiceBTN.layer.masksToBounds = YES;
+        self.voiceBTN.layer.borderColor = [UIColor grayColor].CGColor;
+        self.voiceBTN.tag = 1001;
+        [self.voiceBTN addTarget:self action:@selector(buttonclick:) forControlEvents:(UIControlEventTouchUpInside)];
+        
+        
         
         
         self.contentTextView = [[UITextView alloc] init];
@@ -58,36 +69,96 @@ UITextViewDelegate
         
         
         
+        /**按着说话**/
+        self.voiceInputBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
+        [self addSubview:self.voiceInputBTN];
+        [self.voiceInputBTN setBackgroundImage:[self imageWithColor:[UIColor greenColor]]
+                                                           forState:(UIControlStateNormal)];
+         [self.voiceInputBTN setBackgroundImage:[self imageWithColor:[[UIColor greenColor] colorWithAlphaComponent:0.5]]
+                                                            forState:(UIControlStateSelected)];
+        
+        self.voiceInputBTN.layer.borderWidth = 1;
+        self.voiceInputBTN.layer.cornerRadius = 4;
+        self.voiceInputBTN.layer.masksToBounds = YES;
+        self.voiceInputBTN.layer.borderColor = [UIColor grayColor].CGColor;
+        self.voiceInputBTN.tag = 1004;
+        [self.voiceInputBTN addTarget:self action:@selector(buttonclick:) forControlEvents:(UIControlEventTouchUpInside)];
+        self.voiceInputBTN.hidden = YES;
+        [self.voiceInputBTN setTitle:@"按着说话" forState:(UIControlStateNormal)];
+        [self.voiceInputBTN setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        
+        
+        
+        
+        
+        /**表情**/
         self.faceBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
         [self addSubview:self.faceBTN];
-        [self.faceBTN setImage:
-         [[UIImage imageNamed:@"kaimen"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)] forState:(UIControlStateNormal)];
+        [self.faceBTN setBackgroundImage: [[UIImage imageNamed:@"chat_face"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)]
+                                 forState:(UIControlStateNormal)];
+        [self.faceBTN setBackgroundImage: [[UIImage imageNamed:@"chat_Keyboard"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)]
+                                 forState:(UIControlStateSelected)];
+        self.faceBTN.layer.borderWidth = 1;
+        self.faceBTN.layer.cornerRadius = 18;
+        self.faceBTN.layer.masksToBounds = YES;
+        self.faceBTN.layer.borderColor = [UIColor grayColor].CGColor;
+        self.faceBTN.tag = 1002;
+        [self.faceBTN addTarget:self action:@selector(buttonclick:) forControlEvents:(UIControlEventTouchUpInside)];
         
         
+        
+        
+        
+        /**更多**/
         self.moreBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
         [self addSubview:self.moreBTN];
-        [self.moreBTN setImage:
-         [[UIImage imageNamed:@"kaimen"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)]
-                      forState:(UIControlStateNormal)];
+        [self.moreBTN setBackgroundImage: [[UIImage imageNamed:@"chat_add2"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)]
+                                forState:(UIControlStateNormal)];
+        self.moreBTN.layer.borderWidth = 1;
+        self.moreBTN.layer.cornerRadius = 18;
+        self.moreBTN.layer.masksToBounds = YES;
+        self.moreBTN.layer.borderColor = [UIColor grayColor].CGColor;
+        self.moreBTN.tag = 1003;
+        [self.moreBTN addTarget:self action:@selector(buttonclick:) forControlEvents:(UIControlEventTouchUpInside)];
+        
+        
+        
+        
         
         
         CGFloat KWIDTH  = UIScreen.mainScreen.bounds.size.width;
-        self.voiceBTN.frame = CGRectMake(5, 5, 40, 40);
-        self.contentTextView.frame = CGRectMake(50, 8, KWIDTH-145, 35);
-        self.faceBTN.frame = CGRectMake(KWIDTH-90, 5, 40, 40);
-        self.moreBTN.frame = CGRectMake(KWIDTH-45, 5, 40, 40);
+        self.voiceBTN.frame = CGRectMake(5, 8, 36, 36);
+        self.contentTextView.frame = CGRectMake(50, 8, KWIDTH-145, 36);
+        self.voiceInputBTN.frame = CGRectMake(50, 8, KWIDTH-145, 36);
+        self.faceBTN.frame = CGRectMake(KWIDTH-90, 8, 36, 36);
+        self.moreBTN.frame = CGRectMake(KWIDTH-45, 8, 36, 36);
         
     }
     return self;
 }
 
-
 -(void)layoutSubviews {
     [super layoutSubviews];
     
     
+}
+
+-(void)showFaceView {
+    
     
 }
+
+-(void)showMoreView {
+    
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -113,7 +184,7 @@ UITextViewDelegate
     if ([text isEqualToString:@"\n"]){
         //在这里做你响应return键的代码
         if (self.aInputViewBlock && textView.text.length > 0) {
-            self.aInputViewBlock(textView.text);
+            self.aInputViewBlock(InputViewActionType_sendMessage, textView.text);
             textView.text = @"";
             [self textViewDidChange:textView];
         }
@@ -127,5 +198,118 @@ UITextViewDelegate
 -(void)startInputView:(InputViewBlock)aInputViewBlock {
     self.aInputViewBlock = aInputViewBlock;
 }
+
+
+
+
+
+
+
+
+
+
+#pragma mark - private
+
+-(void)buttonclick:(UIButton *)sender {
+    
+    switch (sender.tag) {
+        case 1001:
+        {
+            /**将其它按钮置为NO**/
+            self.voiceBTN.selected = !self.voiceBTN.selected;
+            self.faceBTN.selected = NO;
+            self.moreBTN.selected = NO;
+            
+            [self voiceBTNClick];
+            [self faceBTNClick];
+            [self moreBTNClick];
+        }
+            break;
+            
+        case 1002:
+        {
+            self.voiceBTN.selected = NO;
+            self.faceBTN.selected = !self.faceBTN.selected;
+            self.moreBTN.selected = NO;
+            [self voiceBTNClick];
+            [self faceBTNClick];
+            [self moreBTNClick];
+        }
+            break;
+            
+        case 1003:
+        {
+            self.voiceBTN.selected = NO;
+            self.faceBTN.selected = NO;
+            self.moreBTN.selected = !self.faceBTN.selected;
+            [self voiceBTNClick];
+            [self faceBTNClick];
+            [self moreBTNClick];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+-(void)voiceBTNClick {
+    
+    BOOL flag = self.voiceBTN.selected;
+    
+    if (flag)
+    {
+        self.voiceInputBTN.hidden = NO;
+    }
+    else
+    {
+        self.voiceInputBTN.hidden = YES;
+    }
+}
+
+-(void)faceBTNClick {
+    
+    BOOL flag = self.faceBTN.selected;
+    
+    if (flag)
+    {
+        if (self.aInputViewBlock) {
+            self.aInputViewBlock(InputViewActionType_faceSelect, nil);
+        }
+    }
+    else
+    {
+        
+    }
+    
+}
+
+-(void)moreBTNClick {
+    
+    
+}
+
+
+
+
+
+
+
+#pragma mark - Utility
+- (UIImage *)imageWithColor:(UIColor*)color{
+    
+    CGRect rect = CGRectMake(0.0f,0.0f,1.0f,1.0f);UIGraphicsBeginImageContext(rect.size);
+    
+    CGContextRef context=UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    
+    CGContextFillRect(context, rect);
+    
+    UIImage*theImage=UIGraphicsGetImageFromCurrentImageContext();UIGraphicsEndImageContext();
+    
+    return theImage;
+}
+
+
 
 @end

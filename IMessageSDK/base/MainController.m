@@ -169,11 +169,17 @@
             
             NSLog(@"%@",dict);
             
-            [self settingPID];
             
-            [self settingApnsToken];
+            /**
+             Linphone
+             
+             [self settingPID];
+             
+             [self settingApnsToken];
+             
+             [self settingVoipToken];
+             **/
             
-            [self settingVoipToken];
         }
     }];
 }
