@@ -6,40 +6,6 @@
 //  Copyright © 2017年 JiangHai. All rights reserved.
 //
 
-/**
- 文本消息：
- 
- <message
- xmlns="jabber:client"
- UID="b20b1a2a994b4cfb9447da57edec33db"
- id="ObASN-12"
- to="江海@duowin-server/IphoneIM"
- from="萧凡宇@duowin-server/AndroidIM"
- type="chat">
- 
- <body>啊啊啊啊</body>
- <thread>2284edcd-dd18-489c-992f-54f2daf328e9</thread>
- </message>
- **/
-
-
-/**
- 群组消息：
- 
- <message
- xmlns="jabber:client"
- SenderJID="萧凡宇@duowin-server/AndroidIM"
- UID="8282f8ad82bb4254864e082ae5d489f1"
- id="ObASN-19"
- to="江海@duowin-server/IphoneIM"
- type="groupchat"
- from="fd3f752ffdfe4c5cbb26e818c6ca6f4c@conference.duowin-server/萧凡宇"
- name="萧凡宇,江海">
- 
- <body>摸摸弄</body>
- <x xmlns="jabber:x:delay" from="fd3f752ffdfe4c5cbb26e818c6ca6f4c@conference.duowin-server" stamp="20171220T11:53:20"></x>
- </message>
- **/
 
 
 #import <Foundation/Foundation.h>
@@ -50,21 +16,61 @@ typedef void(^MessageDBChangeBlock)(void);
 
 @property (nonatomic, strong) NSString  *currentMyJID;       /**当前登录我的JID:用于区分不同登录用户**/
 @property (nonatomic, strong) NSString  *currentOtherJID;    /**当前对方的JID:搜索和同一用户的所有聊天信息**/
-@property (nonatomic, strong) NSString  *conversationName;   /**会话室name,唯一标识  单聊：对方名  群聊：群名 **/
 
-@property (nonatomic, strong) NSString  *stamp;               /**时间**/
-@property (nonatomic, strong) NSString  *body;               /**文本**/
-@property (nonatomic, strong) NSString  *bodyType;           /**bodyType_Text:文本   bodyType_Voice:声音**/
+
+@property (nonatomic, strong) NSString  *stamp;              /**时间:只有群组消息才有，延迟发送 **/
+@property (nonatomic, strong) NSString  *bodyType;           /**text:文本   voice:声音**/
+/**文本：如果是文本则为文本
+ 为语音：[语音]
+ 为视频：[视频]
+ 为文件：[文件]
+  为图片：[图片]
+  为位置：[位置]
+  为SOS：[SOS]
+ **/
+@property (nonatomic, strong) NSString  *body;
+
+
+
+
+
 
 
 
 #pragma mark - text
-
-@property (nonatomic, strong) NSString *from;
-@property (nonatomic, strong) NSString *to;
-@property (nonatomic, strong) NSString *type;        /**chat:单聊  groupchat:群聊  chatRoom:讨论组   attributeGroupChat:xxx群聊 **/
+//第一组
+//xmlns
 @property (nonatomic, strong) NSString *UID;         /**message的唯一标识**/
-@property (nonatomic, strong) NSString *SenderJID;   /**群组：发送者JID**/
+
+
+
+//第二组
+//id
+@property (nonatomic, strong) NSString *to;
+
+
+
+//第三组
+@property (nonatomic, strong) NSString *conversationName;   /**会话室name,唯一标识  单聊：对方名  群聊：群名 **/
+@property (nonatomic, strong) NSString *SenderJID;          /**群组：发送者JID**/
+
+
+
+//第四组
+/**
+ from="萧凡宇@duowin-server/AndroidIM"
+ from="fd3f752ffdfe4c5cbb26e818c6ca6f4c@conference.duowin-server/萧凡宇"
+ **/
+@property (nonatomic, strong) NSString *from;
+/**
+ chat:单聊  groupchat:群聊  chatRoom:讨论组   attributeGroupChat:xxx群聊
+ **/
+@property (nonatomic, strong) NSString *type;
+
+
+
+
+
 
 
 
@@ -139,29 +145,30 @@ typedef void(^MessageDBChangeBlock)(void);
 #pragma mark - query
 /**查询所有信息**/
 +(NSArray *)jh_queryAll;
-/**通过UID查询**/
-+(NSArray *)jh_queryByUID:(NSString *)aUID;
-/**通过UID查询**/
-+(NSArray *)jh_queryByCurentOtherJID:(NSString *)aOtherJID;
 
-/**
- 通过我的jid查询所有会话(去重)
- **/
+
+
+/*!
+ @method
+ @abstract 查询会话OtherJID数组
+ @discussion <#备注#>
+ @param aMyJID 我的JID
+ @result  会话OtherJID数组
+ */
 +(NSArray *)jh_queryCurrentOtherJIDByMyJID:(NSString *)aMyJID;
 
 
-/**通过conversationName查找信息，并用timestamp时间戳排序**/
-//+(NSArray *)jh_queryByConversationName:(NSString *)aConversationName;
 
-
-/**通过conversationName查找信息，并用timestamp时间戳排序**/
-+(NSArray *)jh_queryByConversationName:(NSString *)aConversationName currentMyJID:(NSString *)aCurrentMyJID;
-
-
-/**通过jid获取回话name，没有则返回nil**/
-//+(NSString *)jh_queryConversationNameByJID:(NSString *)aJID;
-+(NSString *)jh_queryConversationNameByJID:(NSString *)aJID myJID:(NSString *)aMyJID;
-
+/*!
+ @method
+ @abstract 查询和对方所有聊天信息，并用timestamp时间戳排序
+ @discussion null
+ @param aCurrentOtherJID 对方JID
+ @param aCurrentMyJID 我的JID
+ @result  所有聊天信息
+ */
++(NSArray *)jh_queryByCurrentOtherJID:(NSString *)aCurrentOtherJID
+                         currentMyJID:(NSString *)aCurrentMyJID;
 
 
 

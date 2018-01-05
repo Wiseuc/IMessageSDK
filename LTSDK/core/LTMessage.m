@@ -90,6 +90,27 @@
 }
 
 
+-(NSDictionary *)sendTextWithSenderJID:(NSString *)aSenderJID
+                              otherJID:(NSString *)aOtherJID
+                      conversationType:(LTConversationType)aConversationType
+                           messageType:(LTMessageType)aMessageType
+                                  body:(NSString *)aBody {
+    return [LTXMPPManager.share sendTextWithSenderJID:aSenderJID
+                                             otherJID:aOtherJID
+                                     conversationType:aConversationType
+                                          messageType:aMessageType
+                                                 body:aBody];
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

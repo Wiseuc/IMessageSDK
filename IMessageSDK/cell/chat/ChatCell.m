@@ -9,6 +9,8 @@
 #import "ChatCell.h"
 #import "JHLabel.h"
 #import "UIConfig.h"
+#import "XMFaceManager.h"
+
 @interface ChatCell ()
 
 @property (nonatomic, strong) UIImageView *iconIMGV;  /**头像**/
@@ -90,7 +92,80 @@
     self.timeLAB.text = model.stamp;
     CGSize timeSize = [self.timeLAB sizeThatFits:(CGSizeMake(MAXFLOAT, 10))];
     self.timeLAB.frame = CGRectMake((KWIDTH-timeSize.width-20)/2, 0, timeSize.width+10, 10);
+
     
+    
+    NSString *bodyStr = model.body;
+    
+    
+    /**
+     xxxx<i@12.gif>ccccccc<i@12.gif>dddddd<i@12.gif>xxxxxx
+     变
+     xxxxxx_START_11_END_xxxxx_START_11_END_xxxxx
+     **/
+    bodyStr = [bodyStr stringByReplacingOccurrencesOfString:@"<i@" withString:@"_START_"];
+    bodyStr = [bodyStr stringByReplacingOccurrencesOfString:@".gif>" withString:@"_END_"];
+    
+    /**
+     xxxxxx_START_11
+     xxxxx_START_11
+     xxxxx
+     **/
+    NSArray *arr01 = [bodyStr componentsSeparatedByString:@"_END_"];
+
+    NSMutableArray *contentM = [NSMutableArray array];
+    NSMutableArray *idM = [NSMutableArray array];
+
+    for (NSString *temp01 in arr01)
+    {
+        //NSLog(@"temp == %@",temp01);
+        
+        if ([temp01 containsString:@"_START_"])
+        {
+            NSArray *arr03 = [temp01 componentsSeparatedByString:@"_START_"];
+            
+            [contentM addObject:arr03.firstObject];
+            
+            [idM addObject:arr03.lastObject];
+        }
+        else
+        {
+            [contentM addObject:temp01];
+        }
+    }
+    
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] init];
+    
+    
+    for (int i = 0; i < contentM.count; i ++)
+    {
+        NSString *contentStr = contentM[i];
+        NSAttributedString *contentAttrStr = [[NSAttributedString alloc] initWithString:contentStr];
+        [attrString appendAttributedString:contentAttrStr];
+        
+        if (i < contentM.count - 1)
+        {
+            NSString *idStr = idM[i];
+            NSString *faceName = [NSString stringWithFormat:@"f%@.gif",idStr];
+            
+            //附件
+            NSTextAttachment *attach1 = [[NSTextAttachment alloc] init];
+            //设置图片
+            attach1.image = [UIImage imageNamed:faceName];
+            //调整图片位置
+            attach1.bounds = CGRectMake(5, -5, 30, 30);
+            [attrString appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach1]];
+        }
+    }
+
+    
+    
+    
+    
+    
+    
+    self.messageLAB.attributedText = attrString;
+//    self.messageLAB.text = model.body;
     
     /**我是否为发送方**/
     if ([model.from containsString:model.currentMyJID])
@@ -99,7 +174,7 @@
         self.iconIMGV.frame = CGRectMake(KWIDTH-10-40, 20, 40, 40);
         
         /**消息**/
-        self.messageLAB.text = model.body;
+        //self.messageLAB.text = model.body;
         CGSize messageSize = [self.messageLAB sizeThatFits:(CGSizeMake(MAXFLOAT, 40))];
         if (KHEIGHT < 71){
             self.messageLAB.frame = CGRectMake(KWIDTH-10-messageSize.width-10 - 40 - 10, 20, messageSize.width+10, KHEIGHT-30);
@@ -113,7 +188,7 @@
         self.iconIMGV.frame = CGRectMake(10, 20, 40, 40);
         
         /**消息**/
-        self.messageLAB.text = model.body;
+        //self.messageLAB.text = model.body;
         if (KHEIGHT < 71){
             CGSize messageSize = [self.messageLAB sizeThatFits:(CGSizeMake(MAXFLOAT, 40))];
             self.messageLAB.frame = CGRectMake(60, 20, messageSize.width + 10, KHEIGHT-30);
@@ -123,6 +198,11 @@
         
         self.messageLAB.backgroundColor = [UIColor whiteColor];
     }
+    
+    
+    
+
+    
 }
 
 

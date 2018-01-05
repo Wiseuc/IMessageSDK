@@ -125,53 +125,21 @@
 +(NSArray *)jh_queryAll{
     return [self bg_findAll:kBG_TableName];
 }
-+(NSArray *)jh_queryByCurentOtherJID:(NSString *)aOtherJID {
-    NSString* where =
-    [NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"currentOtherJID"),bg_sqlValue(aOtherJID)];
-    NSArray* arr = [self bg_find:kBG_TableName where:where];
-    return arr;
-}
-
 
 +(NSArray *)jh_queryCurrentOtherJIDByMyJID:(NSString *)aMyJID {
     NSString *sql =
-    [NSString stringWithFormat:@"select distinct BG_conversationName from kBG_TableName Where BG_currentMyJID = '%@'",aMyJID];
+    [NSString stringWithFormat:@"select distinct BG_currentOtherJID from kBG_TableName Where BG_currentMyJID = '%@'",aMyJID];
     NSArray  *arr03 = bg_executeSql(sql, kBG_TableName, [self class]);
-    return arr03;
+    return arr03; 
 }
 
-
-+(NSArray *)jh_queryByConversationName:(NSString *)aConversationName {
-    
++(NSArray *)jh_queryByCurrentOtherJID:(NSString *)aCurrentOtherJID
+                         currentMyJID:(NSString *)aCurrentMyJID {
     NSString *sql =
-    [NSString stringWithFormat:@"select * From kBG_TableName WHERE BG_conversationName = '%@' ORDER BY BG_stamp ASC;",aConversationName ];
+    [NSString stringWithFormat:@"select * From kBG_TableName WHERE BG_currentMyJID = '%@' and BG_currentOtherJID = '%@' ORDER BY BG_stamp ASC;",aCurrentMyJID, aCurrentOtherJID];
     NSArray  *arr03 = bg_executeSql(sql, kBG_TableName, [self class]);
     return arr03;
 }
-
-
-+(NSArray *)jh_queryByConversationName:(NSString *)aConversationName currentMyJID:(NSString *)aCurrentMyJID {
-    NSString *sql =
-    [NSString stringWithFormat:@"select * From kBG_TableName WHERE BG_currentMyJID = '%@' and BG_conversationName = '%@' ORDER BY BG_stamp ASC;",aCurrentMyJID, aConversationName];
-    NSArray  *arr03 = bg_executeSql(sql, kBG_TableName, [self class]);
-    return arr03;
-}
-
-
-+(NSString *)jh_queryConversationNameByJID:(NSString *)aJID myJID:(NSString *)aMyJID {
-    NSString *conversationName = nil;
-    NSArray *arr = [self jh_queryByCurentOtherJID:aJID];
-    
-    if (arr.count>0) {
-        for (Message *model in arr) {
-            if ([model.currentOtherJID isEqualToString:aJID]) {
-                conversationName = model.conversationName;
-            }
-        }
-    }
-    return conversationName;
-}
-
 
 
 

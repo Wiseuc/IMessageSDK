@@ -6,7 +6,8 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "LTError.h"
+#import "LTSDKFull.h"
+#import "LTMessageDef.h"
 typedef void(^LTMessage_queryMessageBlock)(NSDictionary *dict,LTError *error);
 
 
@@ -18,6 +19,13 @@ typedef void(^LTMessage_queryMessageBlock)(NSDictionary *dict,LTError *error);
  @abstract 信息管理类
  */
 @interface LTMessage : NSObject
+
+
+
+
+
+
+
 
 
 
@@ -67,5 +75,33 @@ typedef void(^LTMessage_queryMessageBlock)(NSDictionary *dict,LTError *error);
                                       conferenceJID:(NSString *)aConferenceJID
                                      conferenceName:(NSString *)aConferenceName
                                                body:(NSString *)aBody;
+
+
+/*!
+ @method
+ @abstract 发送Text信息
+ @discussion 备注
+ @param aSenderJID 发送者JID
+ @param aOtherJID 接收者JID
+ @param aConversationType 会话类型
+ @param aMessageType 信息类型（Text）
+ @result  返回消息字典Dict
+ */
+-(NSDictionary *)sendTextWithSenderJID:(NSString *)aSenderJID
+                              otherJID:(NSString *)aOtherJID
+                      conversationType:(LTConversationType)aConversationType
+                           messageType:(LTMessageType)aMessageType
+                                  body:(NSString *)aBody;
+
+
+
+
+
+
+
+
+
+
+
 
 @end

@@ -81,9 +81,8 @@ typedef NS_ENUM(NSInteger, LTChatBoxStatus) {
  @discussion 如照片、文件、位置等
  @param itemType 返回点击的item（enum）
  */
--(void)chatBoxDidSelectItem:(LXChatBoxItem)itemType;
-
-
+- (void)chatBox:(LXChatBox *)chatBox
+  didSelectItem:(LXChatBoxItem)itemType;
 
 
 /*!

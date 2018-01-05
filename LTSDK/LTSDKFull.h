@@ -11,12 +11,10 @@
 
 #import "LTSDK.h"
 
-#import "LTErrorDef.h"
+
+
 #import "LTError.h"
-
 #import "LTLogin.h"
-#import "LTLoginDef.h"
-
 #import "LTINF.h"
 #import "LTUser.h"
 #import "LTFriend.h"
@@ -24,5 +22,15 @@
 #import "LTOrg.h"
 #import "LTMessage.h"
 #import "LTVideo.h"
+
+
+
+
+
+#import "LTLoginDef.h"
+#import "LTErrorDef.h"
+#import "LTMessageDef.h"
+
+
 
 #endif /* LTSDKFull_h */

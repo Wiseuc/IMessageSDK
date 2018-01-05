@@ -19,10 +19,18 @@
     
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    
+    //第一组
+    //xmlns
     NSString *UID  = [xmlMessage attributeForName:@"UID"].stringValue;
-    NSString *from = [xmlMessage attributeForName:@"from"].stringValue;
+    
+    
+    //第二组
+    //id
     NSString *to   = [xmlMessage attributeForName:@"to"].stringValue;
+    
+    
+    //第三组
+    NSString *from = [xmlMessage attributeForName:@"from"].stringValue;
     NSString *type = [xmlMessage attributeForName:@"type"].stringValue;
     
     from        = [from componentsSeparatedByString:@"/"].firstObject;
@@ -52,39 +60,65 @@
     /**群聊**/
     else if ([type isEqualToString:@"groupchat"])
     {
+        
+        //第四组
+        /**会话室name**/
+        NSString *name = [xmlMessage attributeForName:@"name"].stringValue;
+        [dict setValue:name forKey:@"conversationName"];
+        
         /**发送者jid**/
         NSString *SenderJID  = [xmlMessage attributeForName:@"SenderJID"].stringValue;
         SenderJID = [SenderJID componentsSeparatedByString:@"/"].firstObject;
         [dict setValue:SenderJID forKey:@"SenderJID"];
-
-        /**会话室name**/
-        NSString *name = [xmlMessage attributeForName:@"name"].stringValue;
-        [dict setValue:name forKey:@"conversationName"];
     }
     
     
-    
-    
+    //所有消息都有
     NSString *body = [xmlMessage elementForName:@"body"].stringValue;
-    /**判断文本类型**/
-    
-    if ( [xmlMessage elementForName:@"voice"] ) {
-        return nil;
-    }
-    if ( [xmlMessage elementForName:@"location"] ) {
-        return nil;
-    }
-    if ( [xmlMessage elementForName:@"offlinedir"] ) {
-        return nil;
-    }
-    if ([body isEqualToString:@""] || body == nil) {
-        return nil;
-    }
-    
     [dict setValue:body forKey:@"body"];
-    [dict setValue:@"bodyType_Text" forKey:@"bodyType"];
     
+    
+    //声音
+    if ( [xmlMessage elementForName:@"voice"] )
+    {
+        NSString *duration = [[xmlMessage elementForName:@"duration"] stringValue];
+        [dict setObject:duration forKey:@"duration"];
+        [dict setObject:@"voice" forKey:@"bodyType"];
+        //音频文件地址，由xxx+body拼接而成
         
+        
+    }
+    //位置
+    else if ([xmlMessage elementForName:@"location"])
+    {
+        [dict setObject:@"location" forKey:@"bodyType"];
+    }
+    //文件
+    else if ( [xmlMessage elementForName:@"offlinedir"] )
+    {
+        [dict setObject:@"file" forKey:@"bodyType"];
+    }
+    else
+    {
+        //图片
+        if ([body hasPrefix:@"<i@"] && [body hasSuffix:@">"] && ![body hasSuffix:@"gif>"])
+        {
+            [dict setObject:@"image" forKey:@"bodyType"];
+        }
+        //震动^SOS
+        else if ([body containsString:@"^SOS"])
+        {
+             [dict setObject:@"vibrate" forKey:@"bodyType"];
+        }
+        //普通文本和表情😊（在XMFaceManager中有方法将文本转face）
+        else
+        {
+            [dict setObject:@"text" forKey:@"bodyType"];
+        }
+    }
+    
+    
+    
     
     // 如果是离线消息，那么需要加上时间，以防止系统自已生成时间
     /**时间戳**/
@@ -97,7 +131,7 @@
 //        [dict setValue:@(timestamp) forKey:@"stamp"];
 //    }else{
 //        [dict setValue:@([LTXMPPManager.share queryServerTimeStamp]) forKey:@"stamp"];
-//    }
+//    }    
     NSDate *date = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -107,11 +141,12 @@
     [dict setValue:dateTime forKey:@"stamp"];
     
     
-    
-    
     return dict;
 }
 
+
+
+#pragma mark - Private
 
 // 离线消息时间：20160522T13:34:36
 + (long long)formatOfflineTimeStampWithTimeString:(NSString *)timeString{
@@ -119,5 +154,16 @@
     dateFormatter.dateFormat = @"yyyyMMdd'T'HH:mm:ss";
     return (long long)[[dateFormatter dateFromString:timeString] timeIntervalSince1970] * 1000 + arc4random_uniform(500);
 }
+
+// 是否为图片内容
+//+ (BOOL)isKindOfPictureMessage:(NSString *)bodyStr
+//{
+//    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"<>"];
+//    NSArray *arr = [bodyStr componentsSeparatedByCharactersInSet:set];
+//
+//    return [bodyStr hasPrefix:@"<i@"] && [bodyStr hasSuffix:@">"] && ![XMFaceManager hasEmotionStrWithString:bodyStr] && arr.count < 4;
+//}
+
+
 
 @end

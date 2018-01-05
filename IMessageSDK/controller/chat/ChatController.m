@@ -140,8 +140,7 @@ LTChatBoxDelegate
     /**通过对方jid获取**/
     NSDictionary *userDict = [LTUser.share queryUser];
     NSString *myJID = userDict[@"JID"];
-    NSString *ConversationName = [Message jh_queryConversationNameByJID:self.currentOtherJID myJID:myJID];
-    NSArray *arr = [Message jh_queryByConversationName:ConversationName currentMyJID:myJID];    
+    NSArray *arr = [Message jh_queryByCurrentOtherJID:self.currentOtherJID currentMyJID:myJID];
     if (arr == nil || arr.count == 0) {
         return;
     }
@@ -269,6 +268,11 @@ LTChatBoxDelegate
                                                        body:content];
         [self dealData:dict03];
     }
+    
+    
+    
+    
+    
 }
 -(void)dealData:(NSDictionary *)dict {
     Message *msg = [[Message alloc] init];
@@ -377,12 +381,12 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.datasource.count > 0) {
         [self.collectionview scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.datasource.count-1 inSection:0]
                                     atScrollPosition:(UICollectionViewScrollPositionBottom)
-                                            animated:NO];
+                                            animated:YES];
     }
 }
 
-
--(void)chatBoxDidSelectItem:(LXChatBoxItem)itemType {
+/**“更多”页面点击的item**/
+-(void)chatBox:(LXChatBox *)chatBox didSelectItem:(LXChatBoxItem)itemType {
     
     switch (itemType) {
         case LXChatBoxItemAlbum:
@@ -430,7 +434,14 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 /**发送音频voice**/
--(void)chatBox:(LXChatBox *)chatBox sendVoice:(NSString *)voiceLocalPath seconds:(NSTimeInterval)duration{
+-(void)chatBox:(LXChatBox *)chatBox
+     sendVoice:(NSString *)voiceLocalPath
+       seconds:(NSTimeInterval)duration{
+    
+    
+    
+    
+    
     
 }
 

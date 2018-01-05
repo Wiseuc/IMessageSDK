@@ -42,13 +42,13 @@ UITableViewDelegate
     NSDictionary *userDict = [LTUser.share queryUser];
     NSString *myJID = userDict[@"JID"];
     NSMutableArray *arrM = [NSMutableArray array];
-    /**会话数组**/
+    /**会话otherJid数组**/
     NSArray *arr = [Message jh_queryCurrentOtherJIDByMyJID:myJID];
     
     for (Message *msg in arr) {
         /**会话名**/
-        NSString *conversationName = msg.conversationName;
-        NSArray *arr02 = [Message jh_queryByConversationName:conversationName currentMyJID:myJID];
+        NSString *currentOtherJID = msg.currentOtherJID;        
+        NSArray *arr02 = [Message jh_queryByCurrentOtherJID:currentOtherJID currentMyJID:myJID];
         NSLog(@"%li",arr02.count);
         
         Message *message =arr02.lastObject;

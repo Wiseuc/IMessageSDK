@@ -335,8 +335,8 @@ LXChatBoxMoreViewDelegate
 
 -(void)chatBoxMoreView:(LXChatBoxMoreView *)chatBoxMoreView didSelectItem:(LXChatBoxItem)itemType{
 //    NSLog(@"%s",__func__);
-    if ([self.delegate respondsToSelector:@selector(chatBoxDidSelectItem:)]) {
-        [self.delegate chatBoxDidSelectItem:itemType];
+    if ([self.delegate respondsToSelector:@selector(chatBox:didSelectItem:)]) {
+        [self.delegate chatBox:self didSelectItem:itemType];
     }
 }
 
@@ -467,8 +467,8 @@ LXChatBoxMoreViewDelegate
 {
     if (self.textView.text.length > 0) {     // send Text
 
-        if (self.delegate && [self.delegate respondsToSelector:@selector(chatBoxSendTextMessage:)]) {
-            [self.delegate chatBoxSendTextMessage:self.textView.text];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(chatBox:sendText:)]) {
+            [self.delegate chatBox:self sendText:self.textView.text];
         }
     }
     [self.textView setText:@""];

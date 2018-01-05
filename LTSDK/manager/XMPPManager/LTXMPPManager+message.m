@@ -42,9 +42,9 @@ void runCategoryForFramework42(){}
     
     
     
-    //dict
+    //信息dict
     NSDictionary *dict = [LT_MessageAnalysis analysisXMPPMessage:message];
-    if (self.message_queryMessageBlock && dict != nil) {
+    if (self.message_queryMessageBlock && dict != nil){
         self.message_queryMessageBlock(dict,nil);
     }
     
@@ -79,10 +79,12 @@ void runCategoryForFramework42(){}
     [msg addChild:body];
     
     [msg addAttributeWithName:@"id"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
-    [msg addAttributeWithName:@"UID"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
-    [msg addAttributeWithName:@"from" stringValue: [aSenderJID stringByAppendingString:@"/IphoneIM"]];
     [msg addAttributeWithName:@"to"  stringValue:aOtherJID];
+    
     [msg addAttributeWithName:@"type"  stringValue:@"chat"];
+    [msg addAttributeWithName:@"UID"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
+    
+    [msg addAttributeWithName:@"from" stringValue: [aSenderJID stringByAppendingString:@"/IphoneIM"]];
     [body setStringValue:aBody];
     [self.aXMPPStream sendElement:msg];
     
@@ -95,7 +97,7 @@ void runCategoryForFramework42(){}
              @"stamp":[self getTimestamp],
              @"body":aBody,
 
-             @"bodyType":@"bodyType_Text",
+             @"bodyType":@"text",
              @"from":[aSenderJID stringByAppendingString:@"/IphoneIM"],
              @"to":aOtherJID,
              @"type":@"chat",
@@ -128,9 +130,11 @@ void runCategoryForFramework42(){}
     
     [msg addAttributeWithName:@"id"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
     [msg addAttributeWithName:@"to"  stringValue:aConferenceJID];
-    [msg addAttributeWithName:@"SenderJID"  stringValue:aSenderJID];
+    
     [msg addAttributeWithName:@"type"  stringValue:@"groupchat"];
     [msg addAttributeWithName:@"UID"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
+    
+    [msg addAttributeWithName:@"SenderJID"  stringValue:aSenderJID];
     [body setStringValue:aBody];
     [self.aXMPPStream sendElement:msg];
     
@@ -143,13 +147,92 @@ void runCategoryForFramework42(){}
              @"stamp":[self getTimestamp],
              @"body":aBody,
              
-             @"bodyType":@"bodyType_Text",
+             @"bodyType":@"text",
              @"from":[aSenderJID stringByAppendingString:@"/IphoneIM"],
              @"to":aConferenceJID,
              @"type":@"groupchat",
              @"UID":[self get_32Bytes_UUID],
              };
 }
+
+
+
+
+
+/*!
+ @method
+ @abstract 发送Text信息
+ @discussion <#备注#>
+ @param aSenderJID 发送者JID
+ @param aOtherJID 接收者JID
+ @param aConversationType 会话类型
+ @param aMessageType 信息类型（Text）
+ @result  返回消息字典Dict
+ */
+-(NSDictionary *)sendTextWithSenderJID:(NSString *)aSenderJID
+                              otherJID:(NSString *)aOtherJID
+                      conversationType:(LTConversationType)aConversationType
+                           messageType:(LTMessageType)aMessageType
+                                  body:(NSString *)aBody {
+    
+    NSXMLElement *msg = [NSXMLElement elementWithName:@"message"];
+    NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
+    [msg addChild:body];
+    [msg addAttributeWithName:@"id"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
+    [msg addAttributeWithName:@"to"  stringValue:aOtherJID];
+    
+    if (aConversationType == LTConversationTypeChat)
+    {
+        [msg addAttributeWithName:@"type"  stringValue:@"chat"];
+        [msg addAttributeWithName:@"from" stringValue: [aSenderJID stringByAppendingString:@"/IphoneIM"]];
+    }
+    else if (aConversationType == LTConversationTypeGroupChat)
+    {
+        [msg addAttributeWithName:@"type"  stringValue:@"groupchat"];
+        [msg addAttributeWithName:@"SenderJID"  stringValue:aSenderJID];
+    }
+    [msg addAttributeWithName:@"UID"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
+    [body setStringValue:aBody];
+    [self.aXMPPStream sendElement:msg];
+    
+    
+    
+    
+    __block NSString *conversationName = nil;
+    NSString *conversationType = nil;
+    if (aConversationType == LTConversationTypeChat)
+    {
+        conversationType = @"chat";
+        NSDictionary *dict01 = [LT_OrgManager queryInformationByJid:aOtherJID];
+        conversationName = dict01[@"NAME"];
+    }
+    else if (aConversationType == LTConversationTypeGroupChat)
+    {
+        conversationType = @"groupchat";
+        [LTGroup.share queryGroupVCardByGroupJID:aOtherJID completed:^(NSDictionary *dict) {
+            conversationName = dict[@"FN"];
+        }];
+    }
+    
+    return @{
+             @"currentMyJID":aSenderJID,
+             @"currentOtherJID":aOtherJID,
+             @"conversationName":conversationName,
+             @"stamp":[self getTimestamp],
+             @"body":aBody,
+             
+             @"bodyType":@"text",
+             @"from":[aSenderJID stringByAppendingString:@"/IphoneIM"],
+             @"to":aOtherJID,
+             @"type":conversationType,
+             @"UID":[self get_32Bytes_UUID],
+             };
+    
+}
+
+
+
+
 
 
 

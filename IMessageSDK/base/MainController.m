@@ -42,7 +42,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    /**信息监听**/
     [self addMessageBehaviorObserver];
+    
     /**roster行为监测**/
     [self addFriendBehaviorObserver];
     
@@ -195,6 +197,11 @@
 
 #pragma mark - observer message
 
+/*!
+ @method
+ @abstract 信息监听
+ @discussion 监听从服务器接收的信息
+ */
 -(void)addMessageBehaviorObserver {
     __weak typeof(self) weakself = self;
     [LTMessage.share queryMesageCompleted:^(NSDictionary *dict, LTError *error) {
@@ -206,6 +213,39 @@
         }
     }];
 }
+
+/**
+ chat：
+ 
+ {
+ UID = 6D1FA0C4ABD74F0EACB360E1E52E37DB;
+ body = "信息文本";
+ bodyType = "text";
+ conversationName = "萧凡宇";
+ currentMyJID = "江海@duowin-server";
+ currentOtherJID = "萧凡宇@duowin-server";
+ from = "萧凡宇@duowin-server";
+ stamp = "2018-01-04 15:55:37";
+ to = "江海@duowin-server";
+ type = chat;
+ 
+ 
+ groupchat：
+ 
+ {
+ SenderJID = "萧凡宇@duowin-server";
+ UID = F2827F0ABD56458DB2C317D3703B1DF9;
+ body = "信息文本";
+ bodyType = "text";
+ conversationName = "力拓大家庭群组";
+ currentMyJID = "江海@duowin-server";
+ currentOtherJID = "82eb16e3b6c141ee968c7528cf7ab493@conference.duowin-server";
+ from = "82eb16e3b6c141ee968c7528cf7ab493@conference.duowin-server";
+ stamp = "2018-01-04 16:00:50";
+ to = "江海@duowin-server";
+ type = groupchat;
+ }
+ **/
 -(void)dealData:(NSDictionary *)dict {
     Message *msg = [[Message alloc] init];
     msg.currentMyJID = dict[@"currentMyJID"];

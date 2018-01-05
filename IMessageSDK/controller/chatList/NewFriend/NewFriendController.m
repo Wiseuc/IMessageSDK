@@ -44,8 +44,8 @@ UITableViewDelegate
     for (Message *msg in arr)
     {
         /**会话名**/
-        NSString *conversationName = msg.conversationName;
-        NSArray *arr02 = [Message jh_queryByConversationName:conversationName currentMyJID:myJID];
+        NSString *currentOtherJID = msg.currentOtherJID;
+        NSArray *arr02 = [Message jh_queryByCurrentOtherJID:currentOtherJID currentMyJID:myJID];
         
         for (Message *newMessage in arr02)
         {
