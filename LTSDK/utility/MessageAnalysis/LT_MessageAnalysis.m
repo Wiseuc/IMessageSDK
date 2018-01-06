@@ -74,6 +74,8 @@
     
     
     //所有消息都有
+    
+    
     NSString *body = [xmlMessage elementForName:@"body"].stringValue;
     [dict setValue:body forKey:@"body"];
     

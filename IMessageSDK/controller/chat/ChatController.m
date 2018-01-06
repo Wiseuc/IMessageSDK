@@ -324,11 +324,45 @@ LTChatBoxDelegate
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     Message *model = self.datasource[indexPath.item];
-    CGSize size = [model.body sizeWithFontSize:17.0 maxSize:CGSizeMake(kScreenWidth-120, MAXFLOAT)];
-    if (size.height + 30 < 70) {
-        return CGSizeMake(kScreenWidth, 70);
-    }
-    return CGSizeMake(kScreenWidth, size.height + 40);
+    
+    
+    
+    NSString *body = model.body;
+    
+    // <i@12.gif会影响长度计算>
+    body = [body stringByReplacingOccurrencesOfString:@"<i@" withString:@""];
+    body = [body stringByReplacingOccurrencesOfString:@".gif>" withString:@""];
+    NSLog(@"width0== %li", body.length);
+    
+    CGSize size = [body sizeWithFontSize:17.0 maxSize:CGSizeMake(kScreenWidth-120, MAXFLOAT)];
+    
+    
+    
+    NSLog(@"width0== %f   height0 == %f", size.width,size.height );
+    
+    //行数
+    int row = size.height/20.28;
+    NSLog(@"行数：%i",row);
+    
+    
+    //20.28为一行高度(font = 17)
+    size = CGSizeMake(kScreenWidth, 40 + 30 + 20.28 * (row-1));
+    
+//    if (size.height < 30)
+//    {
+//        //70 = 头像40 + 底部间距 + 顶部间距30
+//        size = CGSizeMake(kScreenWidth, 40 + 30 + 20.28 * row);
+//    }
+//    //40.57为2行高度
+//    else
+//    {
+//        size = CGSizeMake(kScreenWidth, size.height + 40);
+//    }
+    
+    
+    
+//    NSLog(@"width1== %f   height1 == %f", size.width,size.height );
+    return size;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {

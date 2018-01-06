@@ -57,7 +57,7 @@
         self.messageLAB = [[JHLabel alloc] init];
         [self.contentView addSubview:self.messageLAB];
         self.messageLAB.text = @"打算低价啊是个好睇噶的嘎嘎大大撒的发 i 阿哥好嗲规划 i 老师的红啊还是风度好 i 速滑奋斗啊还是";
-        self.messageLAB.font = [UIFont systemFontOfSize:16.0];
+        self.messageLAB.font = [UIFont systemFontOfSize:15.0];
         self.messageLAB.numberOfLines = 0;
         self.messageLAB.backgroundColor = [kTintColor colorWithAlphaComponent:0.5];
         self.messageLAB.layer.cornerRadius = 4.0;
@@ -153,12 +153,14 @@
             //设置图片
             attach1.image = [UIImage imageNamed:faceName];
             //调整图片位置
-            attach1.bounds = CGRectMake(5, -5, 30, 30);
+            attach1.bounds = CGRectMake(0, 0, 20, 20);
             [attrString appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach1]];
         }
     }
-
     
+    
+
+//    NSLog(@"长度 == %li", attrString.length);
     
     
     
@@ -189,11 +191,18 @@
         
         /**消息**/
         //self.messageLAB.text = model.body;
-        if (KHEIGHT < 71){
+        
+        CGSize messageSize = [self.messageLAB sizeThatFits:(CGSizeMake(MAXFLOAT, 20))];
+        self.messageLAB.frame = CGRectMake(60, 20, messageSize.width, KHEIGHT-30);
+        
+        if (KHEIGHT <= (40 + 30))
+        {
             CGSize messageSize = [self.messageLAB sizeThatFits:(CGSizeMake(MAXFLOAT, 40))];
-            self.messageLAB.frame = CGRectMake(60, 20, messageSize.width + 10, KHEIGHT-30);
-        }else{
-            self.messageLAB.frame = CGRectMake(60, 20, KWIDTH-120, KHEIGHT-30);
+            self.messageLAB.frame = CGRectMake(60, 20, messageSize.width + 10, 40);
+        }
+        else
+        {
+            self.messageLAB.frame = CGRectMake(60, 20, KWIDTH-120, KHEIGHT-40);
         }
         
         self.messageLAB.backgroundColor = [UIColor whiteColor];
