@@ -35,6 +35,8 @@
     
     from        = [from componentsSeparatedByString:@"/"].firstObject;
     to          = [to componentsSeparatedByString:@"/"].firstObject;
+    
+    
 
     [dict setValue:UID forKey:@"UID"];
     [dict setValue:from forKey:@"from"];
@@ -54,8 +56,9 @@
     if ([type isEqualToString:@"chat"])
     {
         //通过jid组织架构获取信息
-        NSDictionary *dict02 = [LT_OrgManager queryInformationByJid:from];
-        [dict setValue:dict02[@"NAME"] forKey:@"conversationName"];
+        //NSDictionary *dict02 = [LT_OrgManager queryInformationByJid:from];
+        NSString *conversationName = [from componentsSeparatedByString:@"@"].firstObject;
+        [dict setValue:conversationName forKey:@"conversationName"];
     }
     /**群聊**/
     else if ([type isEqualToString:@"groupchat"])
@@ -74,8 +77,6 @@
     
     
     //所有消息都有
-    
-    
     NSString *body = [xmlMessage elementForName:@"body"].stringValue;
     [dict setValue:body forKey:@"body"];
     

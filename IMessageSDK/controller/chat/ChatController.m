@@ -10,13 +10,24 @@
 #import "UIConfig.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "MJRefresh.h"
-#import "InformationController.h"
 #import "LTSDKFull.h"
 #import "Message.h"
-#import "ChatCell.h"
 #import "NSString+Extension.h"
 #import "VideoController.h"
 #import "LXChatBox.h"
+
+#import "ChatTextCell.h"
+#import "ChatVoiceCell.h"
+#import "ChatFileCell.h"
+#import "ChatImageCell.h"
+#import "ChatLocationCell.h"
+#import "ChatVideoCell.h"
+#import "ChatVibrateCell.h"
+#import "ChatCommandCell.h"
+
+#import "InformationController.h"
+
+
 
 @interface ChatController ()
 <
@@ -261,8 +272,7 @@ LTChatBoxDelegate
     //会话类型
     LTConversationType type = LTConversationTypeChat;
     
-    if ([self.currentOtherJID containsString:@"conference"])
-    {
+    if ([self.currentOtherJID containsString:@"conference"]) {
         type = LTConversationTypeGroupChat;
     }
     NSDictionary *dict =
@@ -278,7 +288,7 @@ LTChatBoxDelegate
 /*!
  @method
  @abstract 发送语音信息
- @discussion
+ @discussion null
  @param voiceLocalPath  /var/mobile/Containers/Data/Application/D713BC89-59C4-428B-BA05-A64C280D0084/Documents/wiseuc/Voice/151539219460275.mp3
  @param aDuration 语音时长
  */
@@ -314,19 +324,30 @@ LTChatBoxDelegate
     Message *msg = [[Message alloc] init];
     msg.currentMyJID = dict[@"currentMyJID"];
     msg.currentOtherJID = dict[@"currentOtherJID"];
-    msg.conversationName = dict[@"conversationName"];
-    msg.stamp = dict[@"stamp"];
     msg.body = dict[@"body"];
     msg.bodyType = dict[@"bodyType"];
-    msg.from = dict[@"from"];
-    msg.to = dict[@"to"];
-    msg.type = dict[@"type"];
+    msg.stamp = dict[@"stamp"];
+    
+    //一组
     msg.UID = dict[@"UID"];
-    msg.SenderJID = dict[@"SenderJID"];
+    
+    //二组
+    msg.to = dict[@"to"];
+    
+    //三组
+    msg.conversationName = dict[@"conversationName"];
+    //msg.SenderJID = dict[@"SenderJID"];  //为空，则为nil
+    
+    //四组
+    msg.from = dict[@"from"];
+    msg.type = dict[@"type"];
+    
+    //voice
+    msg.duration = dict[@"duration"]; //为空，则为nil
+    
+    //file
+    
     [msg jh_saveOrUpdate];
-    
-    
-   // [self settingData];
 }
 
 
@@ -360,9 +381,6 @@ LTChatBoxDelegate
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     Message *model = self.datasource[indexPath.item];
-    
-    
-    
     NSString *body = model.body;
     
     // <i@12.gif会影响长度计算>
@@ -381,11 +399,75 @@ LTChatBoxDelegate
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ChatCell *cell =
-    [collectionView dequeueReusableCellWithReuseIdentifier:@"ChatCell" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
+
     Message *model = self.datasource[indexPath.item];
-    cell.model = model;
+    UICollectionViewCell *cell = nil;
+    
+    if ([model.bodyType isEqualToString:@"text"]){
+        LTMessageType type = LTMessageType_Text;
+        NSString *cellIndentifier = [self cellIndetifyForMessageType:type];
+        ChatTextCell *cell01 =
+        [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifier forIndexPath:indexPath];
+        cell01.model = model;
+        return cell01;
+    }
+    else if ([model.bodyType isEqualToString:@"voice"]){
+        LTMessageType type = LTMessageType_Voice;
+        NSString *cellIndentifier = [self cellIndetifyForMessageType:type];
+        ChatVoiceCell *cell01 =
+        [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifier forIndexPath:indexPath];
+        cell01.model = model;
+        return cell01;
+    }
+    else if ([model.bodyType isEqualToString:@"image"]){
+        LTMessageType type = LTMessageType_Image;
+        NSString *cellIndentifier = [self cellIndetifyForMessageType:type];
+        ChatImageCell *cell01 =
+        [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifier forIndexPath:indexPath];
+        cell01.model = model;
+        return cell01;
+    }
+    else if ([model.bodyType isEqualToString:@"file"]){
+        LTMessageType type = LTMessageType_File;
+        NSString *cellIndentifier = [self cellIndetifyForMessageType:type];
+        ChatFileCell *cell01 =
+        [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifier forIndexPath:indexPath];
+        cell01.model = model;
+        return cell01;
+    }
+    else if ([model.bodyType isEqualToString:@"video"]){
+        LTMessageType type = LTMessageType_Video;
+        NSString *cellIndentifier = [self cellIndetifyForMessageType:type];
+        ChatVideoCell *cell01 =
+        [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifier forIndexPath:indexPath];
+        cell01.model = model;
+        return cell01;
+    }
+    else if ([model.bodyType isEqualToString:@"command"]){
+        LTMessageType type = LTMessageType_Command;
+        NSString *cellIndentifier = [self cellIndetifyForMessageType:type];
+        ChatTextCell *cell01 =
+        [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifier forIndexPath:indexPath];
+        cell01.model = model;
+        return cell01;
+    }
+    else if ([model.bodyType isEqualToString:@"vibrate"]){
+        LTMessageType type = LTMessageType_Vibrate;
+        NSString *cellIndentifier = [self cellIndetifyForMessageType:type];
+        ChatVibrateCell *cell01 =
+        [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifier forIndexPath:indexPath];
+        cell01.model = model;
+        return cell01;
+    }
+    else if ([model.bodyType isEqualToString:@"location"]){
+        LTMessageType type = LTMessageType_Location;
+        NSString *cellIndentifier = [self cellIndetifyForMessageType:type];
+        ChatLocationCell *cell01 =
+        [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifier forIndexPath:indexPath];
+        cell01.model = model;
+        return cell01;
+    }
+
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView
@@ -552,12 +634,28 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
         // [UIColor whiteColor];//[[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
         _collectionview.delegate = self;
         _collectionview.dataSource = self;
+
+        [_collectionview registerClass:[ChatTextCell class]
+            forCellWithReuseIdentifier:[self cellIndetifyForMessageType:(LTMessageType_Text)]];
+        [_collectionview registerClass:[ChatVoiceCell class]
+             forCellWithReuseIdentifier:[self cellIndetifyForMessageType:(LTMessageType_Voice)]];
+        [_collectionview registerClass:[ChatFileCell class]
+             forCellWithReuseIdentifier:[self cellIndetifyForMessageType:(LTMessageType_File)]];
+        [_collectionview registerClass:[ChatImageCell class]
+             forCellWithReuseIdentifier:[self cellIndetifyForMessageType:(LTMessageType_Image)]];
+        [_collectionview registerClass:[ChatLocationCell class]
+             forCellWithReuseIdentifier:[self cellIndetifyForMessageType:(LTMessageType_Location)]];
+        [_collectionview registerClass:[ChatVideoCell class]
+             forCellWithReuseIdentifier:[self cellIndetifyForMessageType:(LTMessageType_Video)]];
+        [_collectionview registerClass:[ChatVibrateCell class]
+             forCellWithReuseIdentifier:[self cellIndetifyForMessageType:(LTMessageType_Vibrate)]];
+        [_collectionview registerClass:[ChatCommandCell class]
+            forCellWithReuseIdentifier:[self cellIndetifyForMessageType:(LTMessageType_Command)]];
+        
         //__weak typeof(self) weakself = self;
         //        _collectionview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         //            [weakself settingData];
         //        }];
-        [_collectionview registerClass:[ChatCell class]
-            forCellWithReuseIdentifier:@"ChatCell"];
         //        [_collectionview registerClass:[RosterReuseableHeader class]
         //            forSupplementaryViewOfKind:CHTCollectionElementKindSectionHeader
         //                   withReuseIdentifier:@"roster_header"];
@@ -572,16 +670,54 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     }
     return _chatBox;
 }
+/*!
+ @method
+ @abstract 根据消息类型取不同的cell
+ @discussion <#备注#>
+ @param aMessageType 消息类型
+ @result  信息cell
+ */
+- (NSString *)cellIndetifyForMessageType:(LTMessageType)aMessageType{
+    
+    switch (aMessageType) {
+        case LTMessageType_Text:
+            return @"ChatTextCell";
+            break;
+            
+        case LTMessageType_Voice:
+            return @"ChatVoiceCell";
+            break;
+            
+        case LTMessageType_Image:
+            return @"ChatImageCell";
+            break;
 
 
+        case LTMessageType_File:
+            return @"ChatFileCell";
+            break;
+
+        case LTMessageType_Video:
+            return @"ChatVideoCell";
+            break;
+
+        case LTMessageType_Command:
+            return @"ChatCell_command";
+            break;
 
 
+        case LTMessageType_Vibrate:
+            return @"ChatVibrateCell";
+            break;
 
-
-
-
-
-
+        case LTMessageType_Location:
+            return @"ChatLocationCell";
+            break;
+            
+        default:
+            break;
+    }
+}
 
 
 

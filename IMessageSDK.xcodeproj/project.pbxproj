@@ -534,6 +534,14 @@
 		F9B63066200336B500BED631 /* emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9B63052200336B500BED631 /* emoji.plist */; };
 		F9B63067200336B500BED631 /* normal_face.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9B63053200336B500BED631 /* normal_face.plist */; };
 		F9B63068200336B500BED631 /* LXEmotionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B63056200336B500BED631 /* LXEmotionManager.m */; };
+		F9B6306B2003614D00BED631 /* ChatTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B6306A2003614D00BED631 /* ChatTextCell.m */; };
+		F9B6306E2003616500BED631 /* ChatVoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B6306D2003616500BED631 /* ChatVoiceCell.m */; };
+		F9B630712003632800BED631 /* ChatFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B630702003632800BED631 /* ChatFileCell.m */; };
+		F9B630742003635D00BED631 /* ChatImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B630732003635D00BED631 /* ChatImageCell.m */; };
+		F9B630772003637300BED631 /* ChatLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B630762003637300BED631 /* ChatLocationCell.m */; };
+		F9B6307A2003638800BED631 /* ChatVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B630792003638800BED631 /* ChatVideoCell.m */; };
+		F9B6307D2003639B00BED631 /* ChatVibrateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B6307C2003639B00BED631 /* ChatVibrateCell.m */; };
+		F9B6308020036E3600BED631 /* ChatCommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B6307F20036E3600BED631 /* ChatCommandCell.m */; };
 		F9B9E7341FFB530000EAE150 /* AppDelegate+apns.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9E7331FFB530000EAE150 /* AppDelegate+apns.m */; };
 		F9B9E7371FFB539A00EAE150 /* AppDelegate+voip.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9E7361FFB539A00EAE150 /* AppDelegate+voip.m */; };
 		F9C557F31FE20D5200539EAB /* LTXMPPManager+iq.h in Headers */ = {isa = PBXBuildFile; fileRef = F9C557F11FE20D5200539EAB /* LTXMPPManager+iq.h */; };
@@ -1513,6 +1521,22 @@
 		F9B63053200336B500BED631 /* normal_face.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = normal_face.plist; sourceTree = "<group>"; };
 		F9B63055200336B500BED631 /* LXEmotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXEmotionManager.h; sourceTree = "<group>"; };
 		F9B63056200336B500BED631 /* LXEmotionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXEmotionManager.m; sourceTree = "<group>"; };
+		F9B630692003614D00BED631 /* ChatTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatTextCell.h; sourceTree = "<group>"; };
+		F9B6306A2003614D00BED631 /* ChatTextCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatTextCell.m; sourceTree = "<group>"; };
+		F9B6306C2003616500BED631 /* ChatVoiceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatVoiceCell.h; sourceTree = "<group>"; };
+		F9B6306D2003616500BED631 /* ChatVoiceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatVoiceCell.m; sourceTree = "<group>"; };
+		F9B6306F2003632800BED631 /* ChatFileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatFileCell.h; sourceTree = "<group>"; };
+		F9B630702003632800BED631 /* ChatFileCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatFileCell.m; sourceTree = "<group>"; };
+		F9B630722003635D00BED631 /* ChatImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatImageCell.h; sourceTree = "<group>"; };
+		F9B630732003635D00BED631 /* ChatImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatImageCell.m; sourceTree = "<group>"; };
+		F9B630752003637300BED631 /* ChatLocationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatLocationCell.h; sourceTree = "<group>"; };
+		F9B630762003637300BED631 /* ChatLocationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatLocationCell.m; sourceTree = "<group>"; };
+		F9B630782003638800BED631 /* ChatVideoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatVideoCell.h; sourceTree = "<group>"; };
+		F9B630792003638800BED631 /* ChatVideoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatVideoCell.m; sourceTree = "<group>"; };
+		F9B6307B2003639B00BED631 /* ChatVibrateCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatVibrateCell.h; sourceTree = "<group>"; };
+		F9B6307C2003639B00BED631 /* ChatVibrateCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatVibrateCell.m; sourceTree = "<group>"; };
+		F9B6307E20036E3600BED631 /* ChatCommandCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatCommandCell.h; sourceTree = "<group>"; };
+		F9B6307F20036E3600BED631 /* ChatCommandCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatCommandCell.m; sourceTree = "<group>"; };
 		F9B9E7301FFB1EC000EAE150 /* IMessageSDK.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IMessageSDK.entitlements; sourceTree = "<group>"; };
 		F9B9E7321FFB530000EAE150 /* AppDelegate+apns.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+apns.h"; sourceTree = "<group>"; };
 		F9B9E7331FFB530000EAE150 /* AppDelegate+apns.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+apns.m"; sourceTree = "<group>"; };
@@ -4220,6 +4244,22 @@
 				F9F7C0931FEBAF9900F56A23 /* ChatCell.m */,
 				F9F7C0991FEBBD3C00F56A23 /* JHLabel.h */,
 				F9F7C09A1FEBBD3C00F56A23 /* JHLabel.m */,
+				F9B630692003614D00BED631 /* ChatTextCell.h */,
+				F9B6306A2003614D00BED631 /* ChatTextCell.m */,
+				F9B6306C2003616500BED631 /* ChatVoiceCell.h */,
+				F9B6306D2003616500BED631 /* ChatVoiceCell.m */,
+				F9B6306F2003632800BED631 /* ChatFileCell.h */,
+				F9B630702003632800BED631 /* ChatFileCell.m */,
+				F9B630722003635D00BED631 /* ChatImageCell.h */,
+				F9B630732003635D00BED631 /* ChatImageCell.m */,
+				F9B630752003637300BED631 /* ChatLocationCell.h */,
+				F9B630762003637300BED631 /* ChatLocationCell.m */,
+				F9B630782003638800BED631 /* ChatVideoCell.h */,
+				F9B630792003638800BED631 /* ChatVideoCell.m */,
+				F9B6307B2003639B00BED631 /* ChatVibrateCell.h */,
+				F9B6307C2003639B00BED631 /* ChatVibrateCell.m */,
+				F9B6307E20036E3600BED631 /* ChatCommandCell.h */,
+				F9B6307F20036E3600BED631 /* ChatCommandCell.m */,
 			);
 			path = chat;
 			sourceTree = "<group>";
@@ -4554,6 +4594,7 @@
 				F9558D691FE399CA00D13CD0 /* MJRefreshFooter.m in Sources */,
 				F93496E41FE8D2B400E8D8A3 /* OrgCell.m in Sources */,
 				F9558CCD1FE3622C00D13CD0 /* GroupController.m in Sources */,
+				F9B6306B2003614D00BED631 /* ChatTextCell.m in Sources */,
 				F93496DD1FE8BCE500E8D8A3 /* OrgModel.m in Sources */,
 				F91CD2611FFCC6C10011489B /* NSObject+MJKeyValue.m in Sources */,
 				F90D3A851FF2534900BDB5DA /* NewRosterMessage.m in Sources */,
@@ -4561,6 +4602,7 @@
 				F91CD2C81FFCE3CF0011489B /* EMAudioPlayerUtil.m in Sources */,
 				F95B4AD71FFE261E00AFBEDE /* LTTextMessage.m in Sources */,
 				F959FC3F1FF372A7001D689F /* RABatchChangeEntity.m in Sources */,
+				F9B6306E2003616500BED631 /* ChatVoiceCell.m in Sources */,
 				F959FC451FF372A7001D689F /* RATreeNodeItem+Private.m in Sources */,
 				F98FDB7A1FEB8AF400618C82 /* ChatListController.m in Sources */,
 				F959FC081FF33BF1001D689F /* AddRosterGroupCell.m in Sources */,
@@ -4571,6 +4613,8 @@
 				F98FDB9D1FEB8DB200618C82 /* BGDB.m in Sources */,
 				F9194CB91FDFD64D00CCFB32 /* TabbarController.m in Sources */,
 				F9558D941FE3AF9C00D13CD0 /* RosterHeaderButton.m in Sources */,
+				F9B6307D2003639B00BED631 /* ChatVibrateCell.m in Sources */,
+				F9B6307A2003638800BED631 /* ChatVideoCell.m in Sources */,
 				F9B9E7341FFB530000EAE150 /* AppDelegate+apns.m in Sources */,
 				F9B63068200336B500BED631 /* LXEmotionManager.m in Sources */,
 				F95B4ADA1FFE26CD00AFBEDE /* LTVoiceMessage.m in Sources */,
@@ -4579,9 +4623,11 @@
 				F9B63062200336B500BED631 /* LXChatBoxFaceView.m in Sources */,
 				F959FC171FF36199001D689F /* UITextView+ZWPlaceHolder.m in Sources */,
 				F959FC411FF372A7001D689F /* RATableView.m in Sources */,
+				F9B630712003632800BED631 /* ChatFileCell.m in Sources */,
 				F9B63061200336B500BED631 /* LXEmotionPageView.m in Sources */,
 				F9AC229D1FFF607D00A91023 /* UIImageView+GIF.m in Sources */,
 				F9F7C09E1FEBC6EE00F56A23 /* InputView.m in Sources */,
+				F9B630742003635D00BED631 /* ChatImageCell.m in Sources */,
 				F93496F21FE901D600E8D8A3 /* MineCell01.m in Sources */,
 				F9558D841FE399CA00D13CD0 /* UIView+MJExtension.m in Sources */,
 				F91CD25D1FFCC6C10011489B /* MJPropertyKey.m in Sources */,
@@ -4605,6 +4651,7 @@
 				F9558D6D1FE399CA00D13CD0 /* MJRefreshAutoStateFooter.m in Sources */,
 				F9B6305D200336B500BED631 /* LXChatBoxMenuView.m in Sources */,
 				F9194CC31FDFD94000CCFB32 /* GuideController.m in Sources */,
+				F9B6308020036E3600BED631 /* ChatCommandCell.m in Sources */,
 				F91761BE1FE0D48000906CBB /* SVIndefiniteAnimatedView.m in Sources */,
 				F9AC22951FFF607D00A91023 /* NSMutableAttributedString+Config.m in Sources */,
 				F9558D811FE399CA00D13CD0 /* NSBundle+MJRefresh.m in Sources */,
@@ -4694,6 +4741,7 @@
 				F9AC229C1FFF607D00A91023 /* TLAttributedLink.m in Sources */,
 				F9B63065200336B500BED631 /* LXEmotion.m in Sources */,
 				F9E53B4E1FF611AB008A0B41 /* VideoController.m in Sources */,
+				F9B630772003637300BED631 /* ChatLocationCell.m in Sources */,
 				F9558D671FE399CA00D13CD0 /* MJRefreshBackFooter.m in Sources */,
 				F9558CC31FE35A6600D13CD0 /* OrgController.m in Sources */,
 				F98FDBA41FEB8DB200618C82 /* FMDatabasePool.m in Sources */,

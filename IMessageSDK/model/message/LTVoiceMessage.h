@@ -55,7 +55,7 @@
 @interface LTVoiceMessage : Message
 
 //duration
-@property (nonatomic, strong) NSString  *duration;  /**语音时长**/
+//@property (nonatomic, strong) NSString  *duration;  /**语音时长**/
 
 
 

@@ -133,13 +133,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LTSDK/manager/XMPPManager/LTXMPPManager+message.m"
-            timestampString = "537086619.409067"
+            filePath = "IMessageSDK/controller/chat/ChatController.m"
+            timestampString = "537095532.346688"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
-            landmarkName = "-sendVoiceWithSenderJID:otherJID:conversationName:conversationType:messageType:localPath:remotePath:duration:body:"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
+            landmarkName = "-dealData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

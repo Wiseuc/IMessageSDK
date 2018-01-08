@@ -258,7 +258,7 @@
     msg.to = dict[@"to"];
     msg.type = dict[@"type"];
     msg.UID = dict[@"UID"];
-    msg.SenderJID = dict[@"SenderJID"];
+    //msg.SenderJID = dict[@"SenderJID"];
     [msg jh_saveOrUpdate];
     // [self refreshData];
 }

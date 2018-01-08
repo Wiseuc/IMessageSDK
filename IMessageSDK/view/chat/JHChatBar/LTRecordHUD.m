@@ -133,7 +133,7 @@
         [_recordAnimationView setImage:[UIImage imageNamed:@"chatBar_volume9"]];
     }
     
-    NSLog(@"chatBar_volume7b变化");
+    //NSLog(@"chatBar_volume7b变化");
 }
 
 

@@ -13,26 +13,26 @@
 typedef void(^MessageDBChangeBlock)(void);
 @interface Message : NSObject
 
-
 @property (nonatomic, strong) NSString  *currentMyJID;       /**当前登录我的JID:用于区分不同登录用户**/
-@property (nonatomic, strong) NSString  *currentOtherJID;    /**当前对方的JID:搜索和同一用户的所有聊天信息**/
-
+@property (nonatomic, strong) NSString  *currentOtherJID;    /**当前对方的JID（有可能是群JID）:搜索和同一用户的所有聊天信息**/
 
 @property (nonatomic, strong) NSString  *stamp;              /**时间:只有群组消息才有，延迟发送 **/
 @property (nonatomic, strong) NSString  *bodyType;           /**text:文本   voice:声音**/
-/**文本：如果是文本则为文本
- 为语音：[语音]
- 为视频：[视频]
- 为文件：[文件]
-  为图片：[图片]
-  为位置：[位置]
-  为SOS：[SOS]
+/**
+ text:文本
+ voice:声音
+ 
  **/
+
 @property (nonatomic, strong) NSString  *body;
-
-
-
-
+/**文本：如果是文本则为文本
+ 为语音：58569565985.mp3
+ 为视频：687687678687.mp4
+ 为文件：9878967896789.txt
+ 为图片：5897856656875.png
+ 为位置：{name:  longitude:  latitude:  address:}
+ 为SOS：^SOS
+ **/
 
 
 
@@ -42,34 +42,31 @@ typedef void(^MessageDBChangeBlock)(void);
 //xmlns
 @property (nonatomic, strong) NSString *UID;         /**message的唯一标识**/
 
-
-
 //第二组
 //id
 @property (nonatomic, strong) NSString *to;
 
-
-
 //第三组
-@property (nonatomic, strong) NSString *conversationName;   /**会话室name,唯一标识  单聊：对方名  群聊：群名 **/
-@property (nonatomic, strong) NSString *SenderJID;          /**群组：发送者JID**/
-
+@property (nonatomic, strong) NSString *conversationName;   /**会话室name,在聊天List有用，唯一标识  单聊：对方名  群聊：群名 **/
 
 
 //第四组
 /**
+ 真正发送者：通过from判断是谁发送的这条消息
  from="萧凡宇@duowin-server/AndroidIM"
  from="fd3f752ffdfe4c5cbb26e818c6ca6f4c@conference.duowin-server/萧凡宇"
  **/
 @property (nonatomic, strong) NSString *from;
 /**
- chat:单聊  groupchat:群聊  chatRoom:讨论组   attributeGroupChat:xxx群聊
+ conversionType:  chat:单聊  groupchat:群聊  chatRoom:讨论组   attributeGroupChat:xxx群聊
  **/
 @property (nonatomic, strong) NSString *type;
 
 
 
 
+//voice语音信息
+@property (nonatomic, strong) NSString  *duration;  /**语音时长**/
 
 
 

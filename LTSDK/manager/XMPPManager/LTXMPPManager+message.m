@@ -98,7 +98,6 @@ void runCategoryForFramework42(){}
     }
     [msg addAttributeWithName:@"UID"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
     [body setStringValue:aBody];
-    //[self.aXMPPStream sendElement:msg];
     [self sendTextMessageXML:msg];
     
     
@@ -115,15 +114,20 @@ void runCategoryForFramework42(){}
     return @{
              @"currentMyJID":aSenderJID,
              @"currentOtherJID":aOtherJID,
-             @"conversationName":aConversationName,
              @"stamp":[self getTimestamp],
-             @"body":aBody,
-
              @"bodyType":@"text",
-             @"from":[aSenderJID stringByAppendingString:@"/IphoneIM"],
-             @"to":aOtherJID,
-             @"type":conversationType,
+             @"body":aBody,
+             
+             
+             //1
              @"UID":[self get_32Bytes_UUID],
+             //2
+             @"to":aOtherJID,
+             //3
+             @"conversationName":aConversationName,
+             //4
+             @"from":[aSenderJID stringByAppendingString:@"/IphoneIM"],
+             @"type":conversationType,
              };
 }
 
@@ -168,8 +172,6 @@ void runCategoryForFramework42(){}
     [msg addChild:body];
     [msg addChild:voice];
     [msg addChild:duration];
-    
-    
     [msg addAttributeWithName:@"id"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
     [msg addAttributeWithName:@"to"  stringValue:aOtherJID];
     
@@ -206,16 +208,21 @@ void runCategoryForFramework42(){}
     return @{
              @"currentMyJID":aSenderJID,
              @"currentOtherJID":aOtherJID,
-             @"conversationName":aConversationName,
              @"stamp":[self getTimestamp],
-             @"body":aBody,
-             @"duration":aDuration,
-             
              @"bodyType":@"voice",
-             @"from":[aSenderJID stringByAppendingString:@"/IphoneIM"],
-             @"to":aOtherJID,
-             @"type":conversationType,
+             @"body":aBody,
+             
+             //1
              @"UID":[self get_32Bytes_UUID],
+             //2
+             @"to":aOtherJID,
+             //3
+             @"conversationName":aConversationName,
+             //4
+             @"from":[aSenderJID stringByAppendingString:@"/IphoneIM"],
+             @"type":conversationType,
+             //voice
+             @"duration":aDuration,
              };
 }
 
