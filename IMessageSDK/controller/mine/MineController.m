@@ -63,7 +63,7 @@ UITableViewDelegate
     
     UILabel *jhLAB02 = [[UILabel alloc] init];
     jhLAB02.frame = CGRectMake((kScreenWidth-200)/2, kScreenHeight-20-49, 200, 20);
-    jhLAB02.text = @"Editor：江海   TEL:18823780407";
+    jhLAB02.text = @"Author：江海   TEL:18823780407";
     jhLAB02.textColor = [UIColor lightGrayColor];
     jhLAB02.font = [UIFont boldSystemFontOfSize:10.0];
     [self.view addSubview:jhLAB02];

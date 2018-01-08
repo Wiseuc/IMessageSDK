@@ -151,7 +151,8 @@
             //附件
             NSTextAttachment *attach1 = [[NSTextAttachment alloc] init];
             //设置图片
-            attach1.image = [UIImage imageNamed:faceName];
+            NSString *path = [NSBundle.mainBundle pathForResource:faceName ofType:nil];
+            attach1.image = [UIImage imageWithContentsOfFile:path];// [UIImage imageNamed:faceName];
             //调整图片位置
             attach1.bounds = CGRectMake(0, 0, 20, 20);
             [attrString appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach1]];

@@ -51,34 +51,6 @@ typedef void(^LTMessage_queryMessageBlock)(NSDictionary *dict,LTError *error);
 
 /*!
  @method
- @abstract 发送文本消息:单聊
- @discussion null
- @param aSenderJID 我的jid
- @param aOtherJID 对方jid
- @param aBody 信息
- @result  返回信息字典用于保存在本地，显示
- */
--(NSDictionary *)sendMessageWithSenderJID:(NSString *)aSenderJID
-                                 otherJID:(NSString *)aOtherJID
-                                     body:(NSString *)aBody;
-
-/*!
- @method
- @abstract 发送文本消息:单聊
- @param aSenderJID 我的jid
- @param aConferenceJID 对方jid
- @param aConferenceName 对方name
- @param aBody 信息
- @result  返回信息字典用于保存在本地，显示
- */
--(NSDictionary *)sendConferenceMessageWithSenderJID:(NSString *)aSenderJID
-                                      conferenceJID:(NSString *)aConferenceJID
-                                     conferenceName:(NSString *)aConferenceName
-                                               body:(NSString *)aBody;
-
-
-/*!
- @method
  @abstract 发送Text信息
  @discussion 备注
  @param aSenderJID 发送者JID
@@ -89,6 +61,7 @@ typedef void(^LTMessage_queryMessageBlock)(NSDictionary *dict,LTError *error);
  */
 -(NSDictionary *)sendTextWithSenderJID:(NSString *)aSenderJID
                               otherJID:(NSString *)aOtherJID
+                      conversationName:(NSString *)aConversationName
                       conversationType:(LTConversationType)aConversationType
                            messageType:(LTMessageType)aMessageType
                                   body:(NSString *)aBody;
@@ -97,7 +70,26 @@ typedef void(^LTMessage_queryMessageBlock)(NSDictionary *dict,LTError *error);
 
 
 
-
+/*!
+ @method
+ @abstract 发送Voice信息
+ @discussion <#备注#>
+ @param aSenderJID 发送者JID
+ @param aOtherJID 接收者JID
+ @param aConversationType 会话类型
+ @param aMessageType 信息类型（voice）
+ @param aDuration voice时长
+ @param aBody voice信息名字：例如45485454456456456.mp3
+ @result  返回消息字典Dict
+ */
+-(NSDictionary *)sendVoiceWithSenderJID:(NSString *)aSenderJID
+                               otherJID:(NSString *)aOtherJID
+                       conversationName:(NSString *)aConversationName
+                       conversationType:(LTConversationType)aConversationType
+                            messageType:(LTMessageType)aMessageType
+                              localPath:(NSString *)aLocalPath
+                               duration:(NSString *)aDuration
+                                   body:(NSString *)aBody;
 
 
 

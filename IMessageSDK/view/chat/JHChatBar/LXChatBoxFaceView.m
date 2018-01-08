@@ -16,11 +16,11 @@
 #define bottomViewH 36.0
 
 @interface LXChatBoxFaceView()<LXChatBoxMenuDelegate>
-@property(nonatomic,weak)LXEmotionListView *showingListView;
-@property(nonatomic,strong)LXEmotionListView *emojiListView;
-@property(nonatomic,strong)LXEmotionListView *customListView;
+@property(nonatomic,weak)  LXEmotionListView *showingListView;
+@property(nonatomic,strong)LXEmotionListView *emojiListView;  /**系统表情**/
+@property(nonatomic,strong)LXEmotionListView *customListView; /**自定义表情**/
 @property(nonatomic,strong)LXEmotionListView *gifListView;
-@property(nonatomic,strong)LXChatBoxMenuView *menuView;
+@property(nonatomic,strong)LXChatBoxMenuView *menuView;   /**菜单**/
 @end
 @implementation LXChatBoxFaceView
 
@@ -42,7 +42,27 @@
     }
     return self;
 }
-#pragma mark - ICChatBoxMenuDelegate
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    self.menuView.width = self.width;
+    self.menuView.height = bottomViewH;
+    self.menuView.x = 0;
+    self.menuView.y = self.height - self.menuView.height;
+    
+    self.showingListView.x = self.showingListView.y = 0;
+    self.showingListView.width = self.width;
+    self.showingListView.height = self.menuView.y;
+    
+}
+
+
+
+
+
+
+
+
+#pragma mark - 代理：ICChatBoxMenuDelegate
 
 - (void)emotionMenu:(LXChatBoxMenuView *)menu didSelectButton:(LXEmotionMenuButtonType)buttonType
 {
@@ -64,18 +84,30 @@
     [self setNeedsLayout];
 }
 
--(void)layoutSubviews{
-    [super layoutSubviews];
-    self.menuView.width = self.width;
-    self.menuView.height = bottomViewH;
-    self.menuView.x = 0;
-    self.menuView.y = self.height - self.menuView.height;
-    
-    self.showingListView.x = self.showingListView.y = 0;
-    self.showingListView.width = self.width;
-    self.showingListView.height = self.menuView.y;
-    
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - Init
+
 -(LXEmotionListView *)emojiListView{
     if (!_emojiListView) {
         _emojiListView =[[LXEmotionListView alloc]init];

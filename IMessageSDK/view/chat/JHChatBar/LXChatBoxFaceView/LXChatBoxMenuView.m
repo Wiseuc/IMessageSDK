@@ -22,7 +22,7 @@
     if (self) {
         NSString *emj = @"0x1f603";
         [self setupBtn:[emj emoji] buttonType:LXEmotionMenuButtonTypeEmoji];
-        [self setupBtn:@"Custom" buttonType:LXEmotionMenuButtonTypeCuston];
+        //[self setupBtn:@"Custom" buttonType:LXEmotionMenuButtonTypeCuston];
     }
     return self;
 }

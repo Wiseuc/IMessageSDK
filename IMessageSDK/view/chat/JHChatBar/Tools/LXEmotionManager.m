@@ -15,6 +15,7 @@
 #define LXBundle [NSBundle mainBundle]
 @implementation LXEmotionManager
 static NSArray *_emojiEmotions, *_custumEmotions,*gifEmotions;
+
 +(NSArray *)emojiEmotion{
     NSString *path  = [LXBundle pathForResource:@"emoji.plist" ofType:nil];
     _emojiEmotions  = [LXEmotion mj_objectArrayWithKeyValuesArray:[NSArray arrayWithContentsOfFile:path]];
@@ -32,6 +33,12 @@ static NSArray *_emojiEmotions, *_custumEmotions,*gifEmotions;
 {
     return nil;
 }
+
+
+
+
+
+
 + (NSMutableAttributedString *)transferMessageString:(NSString *)message
                                                 font:(UIFont *)font
                                           lineHeight:(CGFloat)lineHeight

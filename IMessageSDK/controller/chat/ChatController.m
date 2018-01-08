@@ -247,33 +247,69 @@ LTChatBoxDelegate
     
 }
 
--(void)sendMessage:(NSString *)content {
+
+/*!
+ @method
+ @abstract 发送文本信息
+ @discussion <#备注#>
+ @param content <#描述1#>
+ */
+-(void)sendTextMessage:(NSString *)content {
     
     NSDictionary *userDict = [LTUser.share queryUser];
     NSString *myJID =userDict[@"JID"];
-    if ([self.currentOtherJID isEqualToString:@"conference"])
+    //会话类型
+    LTConversationType type = LTConversationTypeChat;
+    
+    if ([self.currentOtherJID containsString:@"conference"])
     {
-        NSDictionary *dict02 =
-        [LTMessage.share sendMessageWithSenderJID:myJID
-                                         otherJID:self.currentOtherJID
-                                             body:content];
-        [self dealData:dict02];
+        type = LTConversationTypeGroupChat;
     }
-    else
-    {
-        NSDictionary *dict03 =
-        [LTMessage.share sendConferenceMessageWithSenderJID:myJID
-                                              conferenceJID:self.currentOtherJID
-                                                      conferenceName:self.conversationName
-                                                       body:content];
-        [self dealData:dict03];
-    }
-    
-    
-    
-    
-    
+    NSDictionary *dict =
+    [LTMessage.share sendTextWithSenderJID:myJID
+                                  otherJID:self.currentOtherJID
+                          conversationName:self.conversationName
+                          conversationType:(type)
+                               messageType:(LTMessageType_Text)
+                                      body:content];
+    [self dealData:dict];
 }
+
+/*!
+ @method
+ @abstract 发送语音信息
+ @discussion
+ @param voiceLocalPath  /var/mobile/Containers/Data/Application/D713BC89-59C4-428B-BA05-A64C280D0084/Documents/wiseuc/Voice/151539219460275.mp3
+ @param aDuration 语音时长
+ */
+-(void)sendVoiceMessageWithVoiceLocalPath:(NSString *)voiceLocalPath
+                                 duration:(NSString *)aDuration {
+ 
+    NSDictionary *userDict = [LTUser.share queryUser];
+    NSString *myJID =userDict[@"JID"];
+    //会话类型
+    LTConversationType type = LTConversationTypeChat;
+    if ([self.currentOtherJID containsString:@"conference"]) {
+        type = LTConversationTypeGroupChat;
+    }
+    
+    //151539219460275.mp3
+    NSString *aBody = [voiceLocalPath lastPathComponent];
+    NSDictionary *dict =
+    [LTMessage.share sendVoiceWithSenderJID:myJID
+                                   otherJID:self.currentOtherJID
+                           conversationName:self.conversationName
+                           conversationType:(type)
+                                messageType:(LTMessageType_Voice)
+                                  localPath:voiceLocalPath
+                                   duration:aDuration
+                                       body:aBody];
+    [self dealData:dict];
+}
+
+
+
+
 -(void)dealData:(NSDictionary *)dict {
     Message *msg = [[Message alloc] init];
     msg.currentMyJID = dict[@"currentMyJID"];
@@ -332,36 +368,15 @@ LTChatBoxDelegate
     // <i@12.gif会影响长度计算>
     body = [body stringByReplacingOccurrencesOfString:@"<i@" withString:@""];
     body = [body stringByReplacingOccurrencesOfString:@".gif>" withString:@""];
-    NSLog(@"width0== %li", body.length);
-    
     CGSize size = [body sizeWithFontSize:17.0 maxSize:CGSizeMake(kScreenWidth-120, MAXFLOAT)];
-    
-    
-    
-    NSLog(@"width0== %f   height0 == %f", size.width,size.height );
+    //NSLog(@"width0== %f   height0 == %f", size.width,size.height );
     
     //行数
     int row = size.height/20.28;
-    NSLog(@"行数：%i",row);
-    
+    //NSLog(@"行数：%i",row);
     
     //20.28为一行高度(font = 17)
     size = CGSizeMake(kScreenWidth, 40 + 30 + 20.28 * (row-1));
-    
-//    if (size.height < 30)
-//    {
-//        //70 = 头像40 + 底部间距 + 顶部间距30
-//        size = CGSizeMake(kScreenWidth, 40 + 30 + 20.28 * row);
-//    }
-//    //40.57为2行高度
-//    else
-//    {
-//        size = CGSizeMake(kScreenWidth, size.height + 40);
-//    }
-    
-    
-    
-//    NSLog(@"width1== %f   height1 == %f", size.width,size.height );
     return size;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
@@ -409,6 +424,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
 
 #pragma mark - 代理 ChatBox
+
 -(void)changeStatusChat:(CGFloat)chatBoxY{
     
     self.collectionview.frame = CGRectMake(0, 64, kScreenWidth, chatBoxY - 64);
@@ -459,7 +475,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
                                        font:[UIFont systemFontOfSize:16.0]
                                  lineHeight:[UIFont systemFontOfSize:16.0].lineHeight];
     NSLog(@"=== %@",attribute);
-    [self sendMessage:text];
+    [self sendTextMessage:text];
     if (self.datasource.count > 0) {
         [self.collectionview scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.datasource.count-1 inSection:0]
                                     atScrollPosition:(UICollectionViewScrollPositionBottom)
@@ -470,13 +486,11 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 /**发送音频voice**/
 -(void)chatBox:(LXChatBox *)chatBox
      sendVoice:(NSString *)voiceLocalPath
-       seconds:(NSTimeInterval)duration{
+       seconds:(NSInteger)duration{
     
-    
-    
-    
-    
-    
+    NSString *aDuration = [NSString stringWithFormat:@"%li",duration];
+    [self sendVoiceMessageWithVoiceLocalPath:voiceLocalPath
+                                    duration:aDuration];
 }
 
 

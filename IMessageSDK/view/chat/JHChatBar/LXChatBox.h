@@ -106,7 +106,7 @@ typedef NS_ENUM(NSInteger, LTChatBoxStatus) {
  */
 - (void)chatBox:(LXChatBox *)chatBox
       sendVoice:(NSString *)voiceLocalPath
-        seconds:(NSTimeInterval)duration;
+        seconds:(NSInteger)duration;
 
 
 

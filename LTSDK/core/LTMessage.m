@@ -40,63 +40,93 @@
 }
 
 
-
-/**
- 文本消息：
- SEND:
- <message
- id="EFF5B5BD14524B75ABB0A8ED25828F9E"
- to="萧凡宇@duowin-server"
- from="江海@duowin-server/IphoneIM"
- type="chat"
- UID="4F9E3310D1B34BE190DCD36FA8A01B0A">
- <body>得得得</body>
- </message>
- **/
-
--(NSDictionary *)sendMessageWithSenderJID:(NSString *)aSenderJID
-                                 otherJID:(NSString *)aOtherJID
-                                     body:(NSString *)aBody
-{
-    return [LTXMPPManager.share sendMessageWithSenderJID:aSenderJID
-                                                otherJID:aOtherJID
-                                                    body:aBody];
+/*!
+ @method
+ @abstract
+ @discussion 获取上传文件的远程地址
+ @param aMessageType 根据信息的类型（Image、Voice、File）
+ @result  上传地址
+ */
+- (NSString *)queryUploadFileRemotePathWithMessageType:(LTMessageType)aMessageType {
+    NSDictionary *loginDict = [LTLogin.share queryLastLoginUser];
+    NSString *aIP = loginDict[@"aIP"];
     
+    NSString *remotePath = nil;
+    NSString *serverIP = aIP;
+    NSString *port = @"14131";
+    switch ( aMessageType ) {
+        case LTMessageType_Image:
+            remotePath = [NSString stringWithFormat:@"http://%@:%@/uppicture.php",serverIP,port];
+            break;
+            
+        case LTMessageType_Voice:
+            remotePath = [NSString stringWithFormat:@"http://%@:%@/upvoice.php",serverIP,port];
+            break;
+            
+        case LTMessageType_File:
+            remotePath = [NSString stringWithFormat:@"http://%@:%@/uploadOfflineFile.php",serverIP,port];
+            break;
+            
+        default:
+            break;
+    }
+    return remotePath;
 }
 
-/**
- 群组消息：
- 
- SEND:
- <message
- id="427C3A02801A44A79A4082FF091E1E33"
- to="fd3f752ffdfe4c5cbb26e818c6ca6f4c@conference.duowin-server"
- SenderJID="江海@duowin-server"
- type="groupchat"
- UID="4197AA42F8FF4536ABA34BFB31F13426">
- <body>得到</body>
- </message>
- **/
 
--(NSDictionary *)sendConferenceMessageWithSenderJID:(NSString *)aSenderJID
-                                      conferenceJID:(NSString *)aConferenceJID
-                                     conferenceName:(NSString *)aConferenceName
-                                               body:(NSString *)aBody
+/*!
+ @method
+ @abstract 获取文件的下载地址
+ @discussion 根据信息的类型和文件名字
+ @param aMessageType 信息类型
+ @param aFileName 文件名
+ @result  下载地址
+ */
+- (NSString *)queryDownloadRemotePathWithMessageType:(LTMessageType)aMessageType
+                                            fileName:(NSString *)aFileName
 {
-    return [LTXMPPManager.share sendConferenceMessageWithSenderJID:aSenderJID
-                                                     conferenceJID:aConferenceJID
-                                                    conferenceName:aConferenceName
-                                                              body:aBody];
+    NSDictionary *loginDict = [LTLogin.share queryLastLoginUser];
+    NSString *aIP = loginDict[@"aIP"];
+    
+    NSString *remotePath = nil;
+    NSString *serverIP = aIP;
+    NSString *port = @"14131";
+    NSString *fileName = aFileName;
+    switch ( aMessageType ) {
+        case LTMessageType_Image:
+            remotePath = [NSString stringWithFormat:@"http://%@:%@/roompicture/%@",serverIP,port,fileName];
+            break;
+            
+        case LTMessageType_Voice:
+            remotePath = [NSString stringWithFormat:@"http://%@:%@/roomvoice/%@",serverIP,port,fileName];
+            break;
+            
+        case LTMessageType_File:
+            //为应对外网是由内网映射的情况，将下载路径改为相对路径
+            //remotePath = [NSString stringWithFormat:@"http://%@:%@/offlinefile/%@",serverIP,port,fileName];
+            remotePath = [NSString stringWithFormat:@"offlinefile/%@",fileName];
+            break;
+            
+        default:
+            break;
+    }
+    return remotePath;
 }
+
+
+
+
 
 
 -(NSDictionary *)sendTextWithSenderJID:(NSString *)aSenderJID
                               otherJID:(NSString *)aOtherJID
+                      conversationName:(NSString *)aConversationName
                       conversationType:(LTConversationType)aConversationType
                            messageType:(LTMessageType)aMessageType
                                   body:(NSString *)aBody {
     return [LTXMPPManager.share sendTextWithSenderJID:aSenderJID
                                              otherJID:aOtherJID
+                                     conversationName:(NSString *)aConversationName
                                      conversationType:aConversationType
                                           messageType:aMessageType
                                                  body:aBody];
@@ -105,7 +135,39 @@
 
 
 
-
+/*!
+ @method
+ @abstract 发送Voice信息
+ @discussion <#备注#>
+ @param aSenderJID 发送者JID
+ @param aOtherJID 接收者JID
+ @param aConversationType 会话类型
+ @param aMessageType 信息类型（voice）
+ @param aLocalPath voice本地路径
+ @param aDuration voice时长
+ @param aBody 信息
+ @result  返回消息字典Dict
+ */
+-(NSDictionary *)sendVoiceWithSenderJID:(NSString *)aSenderJID
+                               otherJID:(NSString *)aOtherJID
+                       conversationName:(NSString *)aConversationName
+                       conversationType:(LTConversationType)aConversationType
+                            messageType:(LTMessageType)aMessageType
+                              localPath:(NSString *)aLocalPath
+                               duration:(NSString *)aDuration
+                                   body:(NSString *)aBody {
+    //voice远程路径
+    NSString *aRemotePath = [self queryUploadFileRemotePathWithMessageType:aMessageType];
+    return [LTXMPPManager.share sendVoiceWithSenderJID:aSenderJID
+                                              otherJID:aOtherJID
+                                      conversationName:aConversationName
+                                      conversationType:aConversationType
+                                           messageType:aMessageType
+                                             localPath:aLocalPath
+                                            remotePath:aRemotePath
+                                              duration:aDuration
+                                                  body:aBody];
+}
 
 
 

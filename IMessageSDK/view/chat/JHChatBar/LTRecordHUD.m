@@ -44,7 +44,7 @@
 #pragma mark - UI
 
 - (void)settingUI {
-    self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+//    self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
     [[UIApplication sharedApplication].delegate.window addSubview:self];
     
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-49)];
@@ -62,7 +62,7 @@
     //小块容器
     _backView = [[UIView alloc] initWithFrame:CGRectMake((WIDTH-160)/2,(HEIGHT-160)/2,160,160)];
     _backView.layer.cornerRadius = 4.0f;
-    _backView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.5];
+    _backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     [_voiceRecordBackView addSubview:_backView];
     
     

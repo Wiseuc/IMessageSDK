@@ -116,11 +116,7 @@ typedef NS_ENUM(NSInteger, EMAudioSession){
 - (void)asyncStartRecordingWithFileName:(NSString *)fileName
                              completion:(void(^)(NSError *error))completion{
     NSError *error = nil;
-    
     // 判断当前是否是录音状态
-    
-    //NSLog(@"%@",error);
-    
     if ([self isRecording]) {
         if (completion) {
             error = [NSError errorWithDomain:@"Record voice is not over yet"
@@ -141,31 +137,30 @@ typedef NS_ENUM(NSInteger, EMAudioSession){
     }
     
     BOOL isNeedSetActive = YES;
-    if ([self isRecording])
-    {
+    if ([self isRecording]) {
         [EMAudioRecorderUtil cancelCurrentRecording];
         isNeedSetActive = NO;
     }
-    
-    [self setupAudioSessionCategory:EM_AUDIORECORDER
-                           isActive:YES];
-    
+    [self setupAudioSessionCategory:EM_AUDIORECORDER isActive:YES];
     _recorderStartDate = [NSDate date];
     
     NSString *recordPath = kVoiceFilePath;
     recordPath = [NSString stringWithFormat:@"%@/%@",recordPath,fileName];
     NSLog(@"%@",recordPath);
+    
     NSFileManager *fm = [NSFileManager defaultManager];
-    if(![fm fileExistsAtPath:[recordPath stringByDeletingLastPathComponent]]){
+    if(![fm fileExistsAtPath:[recordPath stringByDeletingLastPathComponent]])
+    {
         [fm createDirectoryAtPath:[recordPath stringByDeletingLastPathComponent]
       withIntermediateDirectories:YES
                        attributes:nil
                             error:nil];
     }
-    
     [EMAudioRecorderUtil asyncStartRecordingWithPreparePath:recordPath
                                                  completion:completion];
 }
+
+
 
 // 停止录音
 -(void)asyncStopRecordingWithCompletion:(void(^)(NSString *recordPath,
