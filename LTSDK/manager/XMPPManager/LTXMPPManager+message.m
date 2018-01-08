@@ -7,6 +7,8 @@
 //
 
 #import "LTXMPPManager+message.h"
+#import "LTHttpTool.h"
+
 void runCategoryForFramework42(){}
 
 
@@ -96,8 +98,8 @@ void runCategoryForFramework42(){}
     }
     [msg addAttributeWithName:@"UID"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
     [body setStringValue:aBody];
-    [self.aXMPPStream sendElement:msg];
-    
+    //[self.aXMPPStream sendElement:msg];
+    [self sendTextMessageXML:msg];
     
     
     
@@ -185,7 +187,9 @@ void runCategoryForFramework42(){}
     [body setStringValue:aBody];
     [voice setStringValue:aBody];
     [duration setStringValue:aDuration];
-    [self.aXMPPStream sendElement:msg];
+    [self sendVoiceMessageXML:msg
+                    localPath:aLocalPath
+                   remotePath:aRemotePath];
     
     
     
@@ -218,6 +222,27 @@ void runCategoryForFramework42(){}
 
 
 
+
+
+
+#pragma mark - 执行发送信息
+
+-(void)sendTextMessageXML:(NSXMLElement * )xml {
+    [self.aXMPPStream sendElement:xml];
+}
+-(void)sendVoiceMessageXML:(NSXMLElement * )xml
+                 localPath:(NSString *)aLocalPath
+                remotePath:(NSString *)aRemotePath {
+    
+    HttpTool * tool = [[HttpTool alloc] init];
+    [tool FORM_UploadFile:aLocalPath
+          targetServerURL:aRemotePath
+        requireEncryption:NO
+            progressBlock:nil
+               completion:^(id data, NSError *error) {
+                   [self.aXMPPStream sendElement:xml];
+               }];
+}
 
 
 
