@@ -26,6 +26,7 @@
 #import "ChatCommandCell.h"
 
 #import "InformationController.h"
+#import "EMCDDeviceManager.h"
 
 
 
@@ -158,7 +159,8 @@ LTChatBoxDelegate
     
     NSMutableArray *arrTemp = [NSMutableArray array];
     for (Message *message in arr) {
-        if (message.body != nil && message.body.length > 0 && ![message.type isEqualToString:@"NewFriend"]) {
+        if (message.body != nil && message.body.length > 0
+            && ![message.type isEqualToString:@"NewFriend"]) {
             [arrTemp addObject:message];
         }
     }
@@ -175,11 +177,11 @@ LTChatBoxDelegate
     
     __weak typeof(self) weakself = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        
         [weakself.collectionview.mj_header endRefreshing];
         [weakself.collectionview reloadData];
         
-        NSIndexPath *indexpath = [NSIndexPath indexPathForItem:self.datasource.count-1 inSection:0];
+        NSIndexPath *indexpath =
+        [NSIndexPath indexPathForItem:self.datasource.count-1 inSection:0];
         [weakself.collectionview scrollToItemAtIndexPath:indexpath
                                         atScrollPosition:(UICollectionViewScrollPositionBottom)
                                                 animated:NO];
@@ -344,8 +346,11 @@ LTChatBoxDelegate
     
     //voice
     msg.duration = dict[@"duration"]; //为空，则为nil
+    msg.voiceLocalPath = dict[@"voiceLocalPath"];
+    msg.voiceRemotePath = dict[@"voiceRemotePath"];
     
     //file
+    //xxx
     
     [msg jh_saveOrUpdate];
 }
@@ -417,6 +422,17 @@ LTChatBoxDelegate
         ChatVoiceCell *cell01 =
         [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifier forIndexPath:indexPath];
         cell01.model = model;
+        
+        //tapG点击手势
+        [cell01 settingChatVoiceCellTapBlock:^(Message *model) {
+            [EMCDDeviceManager.sharedInstance asyncPlayingWithPath:model.voiceLocalPath
+                                                        completion:^(NSError *error) {
+           
+                                                        }];
+        }];
+        
+        //longG长按手势
+        
         return cell01;
     }
     else if ([model.bodyType isEqualToString:@"image"]){
@@ -470,8 +486,7 @@ LTChatBoxDelegate
 
     return cell;
 }
-- (void)collectionView:(UICollectionView *)collectionView
-didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
 }
 //- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView

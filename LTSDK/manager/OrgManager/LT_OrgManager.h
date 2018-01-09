@@ -21,11 +21,9 @@ typedef void(^OrgVisibleRangeBlock)(BOOL hasOrgVisible, NSArray *visibleRangeArr
 + (void)getOrgVisibleRange:(OrgVisibleRangeBlock)orgVisibleRangeBlock;
 
 
-
 /**下载组织架构**/
 + (void)downloadOrgWithlocalVersion:(BOOL)isNeedLocalVersion
                           completed:(LT_OrgManagerDownloadBlock)aDownloadBlock;
-
 
 
 //清理组织架构文件

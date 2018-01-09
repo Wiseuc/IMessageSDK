@@ -81,7 +81,7 @@
 
 
 
-#pragma mark -================= 服务器返回的用户真实信息
+#pragma mark - 服务器返回的用户真实信息
 
 -(void)updateUserWithPID:(NSString *)PID
                AccountID:(NSString *)AccountID
@@ -152,8 +152,7 @@
 
 
 
-
-#pragma mark -================= signature
+#pragma mark - signature
 
 -(void)updateUserWithSignature:(NSString *)Signature
 {
@@ -184,6 +183,7 @@
 
 
 #pragma mark - public
+
 - (void)sendRequestPidWithJid:(NSString *)aJID completed:(LTUser_queryPIDBlock)aBlock {
     [LTXMPPManager.share sendRequestPidWithJid:aJID
                                      completed:^(NSDictionary *dict, LTError *error) {

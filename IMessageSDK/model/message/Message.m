@@ -11,6 +11,8 @@
 @interface Message ()
 
 @property (nonatomic, strong) MessageDBChangeBlock aMessageDBChangeBlock;
+
+
 @end
 
 

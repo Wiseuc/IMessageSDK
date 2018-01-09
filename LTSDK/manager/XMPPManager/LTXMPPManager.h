@@ -105,10 +105,9 @@ typedef void(^LTXMPPManager_presence_addFriendPresenceObserverBlock)(NSDictionar
  */
 + (instancetype)share;
 
-+(void)xmppmanagerDealloc;
-    
-    
-    
+
+//+(void)xmppmanagerDealloc;
+
     
 /*!
  @method
@@ -125,8 +124,6 @@ typedef void(^LTXMPPManager_presence_addFriendPresenceObserverBlock)(NSDictionar
             password:(NSString *)aPassword
           enableLDAP:(BOOL)aEnableLDAP
            completed:(LTXMPPManagerLoginBlock)aXMPPManagerLoginBlock;
-
-
 
 /*!
  @method

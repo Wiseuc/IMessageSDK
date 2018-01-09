@@ -23,6 +23,7 @@
 //#import "VideoController.h"
 #import "AppDelegate+apns.h"
 #import "AppDelegate+voip.h"
+#import "HttpTool.h"
 
 
 
@@ -195,7 +196,7 @@
 
 
 
-#pragma mark - observer message
+#pragma mark - 监听 message
 
 /*!
  @method
@@ -250,18 +251,56 @@
     Message *msg = [[Message alloc] init];
     msg.currentMyJID = dict[@"currentMyJID"];
     msg.currentOtherJID = dict[@"currentOtherJID"];
-    msg.conversationName = dict[@"conversationName"];
-    msg.stamp = dict[@"stamp"];
     msg.body = dict[@"body"];
     msg.bodyType = dict[@"bodyType"];
-    msg.from = dict[@"from"];
-    msg.to = dict[@"to"];
-    msg.type = dict[@"type"];
+    msg.stamp = dict[@"stamp"];
+    
+    //一
     msg.UID = dict[@"UID"];
+    
+    //二
+    msg.to = dict[@"to"];
+    
+    //三
+    msg.conversationName = dict[@"conversationName"];
     //msg.SenderJID = dict[@"SenderJID"];
+    
+    //四
+    msg.from = dict[@"from"];
+    msg.type = dict[@"type"];
+    
+    
+    if ([dict[@"bodyType"] isEqualToString:@"voice"]) {
+        //voice
+        msg.duration = dict[@"duration"];
+        msg.voiceLocalPath = [NSString stringWithFormat:@"%@/%@",kVoiceFilePath,msg.body];
+        msg.voiceRemotePath = dict[@"voiceRemotePath"];
+        [self downloadVocieWithRemotePath:msg.voiceRemotePath localPath:msg.voiceLocalPath];
+    }
+    else if ([dict[@"bodyType"] isEqualToString:@"location"]){
+        
+    }
+    else if ([dict[@"bodyType"] isEqualToString:@"file"]){
+        
+    }
+    
+    
+    else if ([dict[@"bodyType"] isEqualToString:@"image"]){
+        
+    }
+    else if ([dict[@"bodyType"] isEqualToString:@"vibrate"]){
+        
+    }
+    else if ([dict[@"bodyType"] isEqualToString:@"text"]){
+        
+    }
+    else if ([dict[@"bodyType"] isEqualToString:@"video"]){
+        
+    }
     [msg jh_saveOrUpdate];
-    // [self refreshData];
 }
+
+
 /**处理错误**/
 -(void)dealError:(LTError *)error {
     switch (error.code) {
@@ -284,7 +323,8 @@
 
 
 
-#pragma mark - observer roster
+#pragma mark - 监听 roster
+
 /**添加好友行为（添加好友，删除好友等）监测**/
 -(void)addFriendBehaviorObserver {
 
@@ -316,6 +356,70 @@
     message.type = @"NewRoster";
     [message jh_saveOrUpdate];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - 下载文件
+/*!
+ @method
+ @abstract 下载voice
+ @discussion <#备注#>
+ @param aRemotePath 远程地址
+ @param aLocalPath 本地地址
+ */
+-(void)downloadVocieWithRemotePath:(NSString *)aRemotePath
+                         localPath:(NSString *)aLocalPath{
+    
+    HttpTool *tool = [[HttpTool alloc] init];
+    [tool downLoadFromURL:[NSURL URLWithString:aRemotePath]
+                 savePath:aLocalPath
+            progressBlock:nil
+               completion:nil];
+}
+/*!
+ @method
+ @abstract 下载file
+ @discussion <#备注#>
+ @param remotePath 远程地址
+ */
+-(void)downloadFileWithRemotePath:(NSString *)remotePath{
+    
+    
+}
+
+/*!
+ @method
+ @abstract 下载image
+ @discussion <#备注#>
+ @param remotePath 远程地址
+ */
+-(void)downloadImageWithRemotePath:(NSString *)remotePath{
+    
+}
+
+/*!
+ @method
+ @abstract 下载video
+ @discussion <#备注#>
+ @param remotePath 远程地址
+ */
+-(void)downloadVideoWithRemotePath:(NSString *)remotePath{
+    
+}
+
+
+
+
+
 
 
 

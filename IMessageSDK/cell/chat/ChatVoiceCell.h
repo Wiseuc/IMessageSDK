@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "Message.h"
+typedef void(^ChatVoiceCellTapBlock)(Message *model);
+
+
 @interface ChatVoiceCell : UICollectionViewCell
+
 @property (nonatomic, strong) Message *model;
+
+//tapG点击手势
+-(void)settingChatVoiceCellTapBlock:(ChatVoiceCellTapBlock)aBlock;
+
+//longG长按手势
 
 @end

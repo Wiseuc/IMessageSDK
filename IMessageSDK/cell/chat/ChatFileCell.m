@@ -9,5 +9,14 @@
 #import "ChatFileCell.h"
 
 @implementation ChatFileCell
+-(void)setModel:(Message *)model {
+    _model = model;
+    
+    
+    
+    
+    
+    
+}
 
 @end

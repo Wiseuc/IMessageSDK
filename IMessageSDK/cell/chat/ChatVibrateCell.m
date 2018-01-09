@@ -9,5 +9,14 @@
 #import "ChatVibrateCell.h"
 
 @implementation ChatVibrateCell
+-(void)setModel:(Message *)model {
+    _model = model;
+    
+    
+    
+    
+    
+    
+}
 
 @end

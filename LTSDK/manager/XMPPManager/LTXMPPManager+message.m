@@ -221,8 +221,12 @@ void runCategoryForFramework42(){}
              //4
              @"from":[aSenderJID stringByAppendingString:@"/IphoneIM"],
              @"type":conversationType,
+             
              //voice
              @"duration":aDuration,
+             @"voiceLocalPath":aLocalPath,
+             @"voiceRemotePath":aRemotePath,
+             
              };
 }
 

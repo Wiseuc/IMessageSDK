@@ -9,5 +9,14 @@
 #import "ChatLocationCell.h"
 
 @implementation ChatLocationCell
+-(void)setModel:(Message *)model {
+    _model = model;
+    
+    
+    
+    
+    
+    
+}
 
 @end

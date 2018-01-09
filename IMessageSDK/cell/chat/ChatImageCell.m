@@ -9,5 +9,14 @@
 #import "ChatImageCell.h"
 
 @implementation ChatImageCell
+-(void)setModel:(Message *)model {
+    _model = model;
+    
+    
+    
+    
+    
+    
+}
 
 @end

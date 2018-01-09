@@ -27,18 +27,136 @@
 }
 
 
-
+/*!
+ @method
+ @abstract 请求服务器消息
+ @discussion 监听服务器消息，回调返回消息
+ */
 -(void)queryMesageCompleted:(LTMessage_queryMessageBlock)aBlock {
     _queryMessageBlock = aBlock;
     
     __weak typeof(self) weakself = self;
     [LTXMPPManager.share sendRequestMessageCompleted:^(NSDictionary *dict, LTError *error) {
+        
+        NSMutableDictionary *dictM = [dict mutableCopy];
+        //根据信息类型（语音、文件、图片），赋予不同的远程下载地址，和本地地址
+        NSString *bodyType = dict[@"bodyType"];
+        NSString *body = dict[@"body"];
+        
+        if ([bodyType isEqualToString:@"text"])
+        {
+            
+        }
+        else if ([bodyType isEqualToString:@"voice"])
+        {
+            NSString *voiceRemotePath =
+            [weakself queryDownloadRemotePathWithMessageType:(LTMessageType_Voice) fileName:body];
+            [dictM setObject:voiceRemotePath forKey:@"voiceRemotePath"];
+            //传过来的语音没有本地地址
+            //[dictM setObject:nil forKey:@"voiceLocalPath"];
+        }
+        else if ([bodyType isEqualToString:@"file"])
+        {
+            
+        }
+        
+        else if ([bodyType isEqualToString:@"image"])
+        {
+            
+        }
+        else if ([bodyType isEqualToString:@"vibrate"])
+        {
+            
+        }
+        else if ([bodyType isEqualToString:@"video"])
+        {
+            
+        }
+        else if ([bodyType isEqualToString:@"location"])
+        {
+            
+        }
         if (weakself.queryMessageBlock) {
-            weakself.queryMessageBlock(dict, error);
+            weakself.queryMessageBlock(dictM, error);
         }
     }];
 }
 
+
+
+
+
+
+
+
+
+
+
+
+-(NSDictionary *)sendTextWithSenderJID:(NSString *)aSenderJID
+                              otherJID:(NSString *)aOtherJID
+                      conversationName:(NSString *)aConversationName
+                      conversationType:(LTConversationType)aConversationType
+                           messageType:(LTMessageType)aMessageType
+                                  body:(NSString *)aBody {
+    return [LTXMPPManager.share sendTextWithSenderJID:aSenderJID
+                                             otherJID:aOtherJID
+                                     conversationName:(NSString *)aConversationName
+                                     conversationType:aConversationType
+                                          messageType:aMessageType
+                                                 body:aBody];
+}
+
+
+
+
+/*!
+ @method
+ @abstract 发送Voice信息
+ @discussion <#备注#>
+ @param aSenderJID 发送者JID
+ @param aOtherJID 接收者JID
+ @param aConversationType 会话类型
+ @param aMessageType 信息类型（voice）
+ @param aLocalPath voice本地路径
+ @param aDuration voice时长
+ @param aBody 信息
+ @result  返回消息字典Dict
+ */
+-(NSDictionary *)sendVoiceWithSenderJID:(NSString *)aSenderJID
+                               otherJID:(NSString *)aOtherJID
+                       conversationName:(NSString *)aConversationName
+                       conversationType:(LTConversationType)aConversationType
+                            messageType:(LTMessageType)aMessageType
+                              localPath:(NSString *)aLocalPath
+                               duration:(NSString *)aDuration
+                                   body:(NSString *)aBody {
+    //voice远程路径
+    NSString *aRemotePath = [self queryUploadFileRemotePathWithMessageType:aMessageType];
+    return [LTXMPPManager.share sendVoiceWithSenderJID:aSenderJID
+                                              otherJID:aOtherJID
+                                      conversationName:aConversationName
+                                      conversationType:aConversationType
+                                           messageType:aMessageType
+                                             localPath:aLocalPath
+                                            remotePath:aRemotePath
+                                              duration:aDuration
+                                                  body:aBody];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - Private
 
 /*!
  @method
@@ -112,68 +230,6 @@
     }
     return remotePath;
 }
-
-
-
-
-
-
--(NSDictionary *)sendTextWithSenderJID:(NSString *)aSenderJID
-                              otherJID:(NSString *)aOtherJID
-                      conversationName:(NSString *)aConversationName
-                      conversationType:(LTConversationType)aConversationType
-                           messageType:(LTMessageType)aMessageType
-                                  body:(NSString *)aBody {
-    return [LTXMPPManager.share sendTextWithSenderJID:aSenderJID
-                                             otherJID:aOtherJID
-                                     conversationName:(NSString *)aConversationName
-                                     conversationType:aConversationType
-                                          messageType:aMessageType
-                                                 body:aBody];
-}
-
-
-
-
-/*!
- @method
- @abstract 发送Voice信息
- @discussion <#备注#>
- @param aSenderJID 发送者JID
- @param aOtherJID 接收者JID
- @param aConversationType 会话类型
- @param aMessageType 信息类型（voice）
- @param aLocalPath voice本地路径
- @param aDuration voice时长
- @param aBody 信息
- @result  返回消息字典Dict
- */
--(NSDictionary *)sendVoiceWithSenderJID:(NSString *)aSenderJID
-                               otherJID:(NSString *)aOtherJID
-                       conversationName:(NSString *)aConversationName
-                       conversationType:(LTConversationType)aConversationType
-                            messageType:(LTMessageType)aMessageType
-                              localPath:(NSString *)aLocalPath
-                               duration:(NSString *)aDuration
-                                   body:(NSString *)aBody {
-    //voice远程路径
-    NSString *aRemotePath = [self queryUploadFileRemotePathWithMessageType:aMessageType];
-    return [LTXMPPManager.share sendVoiceWithSenderJID:aSenderJID
-                                              otherJID:aOtherJID
-                                      conversationName:aConversationName
-                                      conversationType:aConversationType
-                                           messageType:aMessageType
-                                             localPath:aLocalPath
-                                            remotePath:aRemotePath
-                                              duration:aDuration
-                                                  body:aBody];
-}
-
-
-
-
-
-
 
 
 @end

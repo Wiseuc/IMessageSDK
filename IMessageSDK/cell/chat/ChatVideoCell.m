@@ -9,5 +9,14 @@
 #import "ChatVideoCell.h"
 
 @implementation ChatVideoCell
+-(void)setModel:(Message *)model {
+    _model = model;
+    
+    
+    
+    
+    
+    
+}
 
 @end
