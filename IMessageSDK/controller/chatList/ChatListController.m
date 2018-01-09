@@ -49,7 +49,7 @@ UITableViewDelegate
         /**会话名**/
         NSString *currentOtherJID = msg.currentOtherJID;        
         NSArray *arr02 = [Message jh_queryByCurrentOtherJID:currentOtherJID currentMyJID:myJID];
-        NSLog(@"%li",arr02.count);
+        //NSLog(@"%li",arr02.count);
         
         Message *message =arr02.lastObject;
         if (message == nil) {

@@ -49,20 +49,24 @@
         }
         else if ([bodyType isEqualToString:@"voice"])
         {
-            NSString *voiceRemotePath =
+            NSString *remotePath =
             [weakself queryDownloadRemotePathWithMessageType:(LTMessageType_Voice) fileName:body];
-            [dictM setObject:voiceRemotePath forKey:@"voiceRemotePath"];
+            [dictM setObject:remotePath forKey:@"remotePath"];
             //传过来的语音没有本地地址
-            //[dictM setObject:nil forKey:@"voiceLocalPath"];
+            //[dictM setObject:nil forKey:@"localPath"];
         }
         else if ([bodyType isEqualToString:@"file"])
         {
-            
+
         }
         
         else if ([bodyType isEqualToString:@"image"])
         {
-            
+            NSString *remotePath =
+            [weakself queryDownloadRemotePathWithMessageType:(LTMessageType_Image) fileName:body];
+            [dictM setObject:remotePath forKey:@"remotePath"];
+            //传过来的图片没有本地地址
+            //[dictM setObject:nil forKey:@"localPath"];
         }
         else if ([bodyType isEqualToString:@"vibrate"])
         {

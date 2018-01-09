@@ -273,9 +273,10 @@
     if ([dict[@"bodyType"] isEqualToString:@"voice"]) {
         //voice
         msg.duration = dict[@"duration"];
-        msg.voiceLocalPath = [NSString stringWithFormat:@"%@/%@",kVoiceFilePath,msg.body];
-        msg.voiceRemotePath = dict[@"voiceRemotePath"];
-        [self downloadVocieWithRemotePath:msg.voiceRemotePath localPath:msg.voiceLocalPath];
+        msg.localPath = [NSString stringWithFormat:@"%@/%@",kVoiceFilePath,msg.body];
+        msg.remotePath = dict[@"remotePath"];
+        [self downloadVocieWithRemotePath:msg.remotePath
+                                localPath:msg.localPath];
     }
     else if ([dict[@"bodyType"] isEqualToString:@"location"]){
         
@@ -286,7 +287,12 @@
     
     
     else if ([dict[@"bodyType"] isEqualToString:@"image"]){
-        
+        //voice
+        msg.duration = dict[@"duration"];
+        msg.localPath = [NSString stringWithFormat:@"%@/%@",kVoiceFilePath,msg.body];
+        msg.remotePath = dict[@"remotePath"];
+        [self downloadImageWithRemotePath:msg.remotePath
+                                localPath:msg.localPath];
     }
     else if ([dict[@"bodyType"] isEqualToString:@"vibrate"]){
         
@@ -402,8 +408,13 @@
  @discussion <#备注#>
  @param remotePath 远程地址
  */
--(void)downloadImageWithRemotePath:(NSString *)remotePath{
-    
+-(void)downloadImageWithRemotePath:(NSString *)aRemotePath
+                         localPath:(NSString *)aLocalPath{
+    HttpTool *tool = [[HttpTool alloc] init];
+    [tool downLoadFromURL:[NSURL URLWithString:aRemotePath]
+                 savePath:aLocalPath
+            progressBlock:nil
+               completion:nil];
 }
 
 /*!

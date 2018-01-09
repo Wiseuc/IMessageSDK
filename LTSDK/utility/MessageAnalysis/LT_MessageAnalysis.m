@@ -106,7 +106,20 @@
         //图片
         if ([body hasPrefix:@"<i@"] && [body hasSuffix:@">"] && ![body hasSuffix:@"gif>"])
         {
+            //如果picture不为空，则用picture代替body
+            NSString *picture = [xmlMessage elementForName:@"body"].stringValue;
+            if (picture != nil && ![picture isEqualToString:@""])
+            {
+                picture = [picture stringByReplacingOccurrencesOfString:@"<i@" withString:@""];
+                picture = [picture stringByReplacingOccurrencesOfString:@">" withString:@""];
+                [dict setObject:picture forKey:@"body"];
+            }else{
+                body = [body stringByReplacingOccurrencesOfString:@"<i@" withString:@""];
+                body = [body stringByReplacingOccurrencesOfString:@">" withString:@""];
+                [dict setObject:body forKey:@"body"];
+            }
             [dict setObject:@"image" forKey:@"bodyType"];
+            //图片地址，由xxx+body拼接而成
         }
         //震动^SOS
         else if ([body containsString:@"^SOS"])
@@ -116,6 +129,9 @@
         //普通文本和表情😊（在XMFaceManager中有方法将文本转face）
         else
         {
+            if (body == nil || [body isEqualToString:@""]){
+                return nil;
+            }
             [dict setObject:@"text" forKey:@"bodyType"];
         }
     }

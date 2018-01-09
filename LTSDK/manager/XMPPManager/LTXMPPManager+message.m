@@ -224,8 +224,8 @@ void runCategoryForFramework42(){}
              
              //voice
              @"duration":aDuration,
-             @"voiceLocalPath":aLocalPath,
-             @"voiceRemotePath":aRemotePath,
+             @"localPath":aLocalPath,
+             @"remotePath":aRemotePath,
              
              };
 }
@@ -292,7 +292,7 @@ void runCategoryForFramework42(){}
              @"currentMyJID":aSenderJID,
              @"currentOtherJID":aOtherJID,
              @"stamp":[self getTimestamp],
-             @"bodyType":@"voice",
+             @"bodyType":@"image",
              @"body":aBody,
 
              //1
@@ -306,8 +306,8 @@ void runCategoryForFramework42(){}
              @"type":conversationType,
 
              //image
-             @"voiceLocalPath":aLocalPath,
-             @"voiceRemotePath":aRemotePath,
+             @"localPath":aLocalPath,
+             @"remotePath":aRemotePath,
 
              };
     return @{};

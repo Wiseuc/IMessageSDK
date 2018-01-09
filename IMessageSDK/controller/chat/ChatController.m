@@ -299,7 +299,7 @@ HMImagePickerControllerDelegate
  @method
  @abstract 发送语音信息
  @discussion null
- @param voiceLocalPath  /var/mobile/Containers/Data/Application/D713BC89-59C4-428B-BA05-A64C280D0084/Documents/wiseuc/Voice/151539219460275.mp3
+ @param localPath  /var/mobile/Containers/Data/Application/D713BC89-59C4-428B-BA05-A64C280D0084/Documents/wiseuc/Voice/151539219460275.mp3
  @param aDuration 语音时长
  */
 -(void)sendVoiceMessageWithVoiceLocalPath:(NSString *)voiceLocalPath
@@ -327,6 +327,43 @@ HMImagePickerControllerDelegate
     [self dealData:dict];
 }
 
+/*!
+ @method
+ @abstract 发送图片信息
+ @discussion <#备注#>
+ @param aImage 图片
+ */
+-(void)sendImageMessageWithImage:(UIImage *)aImage {
+    //保存图片到沙盒本地
+    //内部进行压缩处理
+    [LTPictureMessage saveImageToLocal:aImage
+                         isCompression:YES
+                              complete:^(BOOL finished, NSString *localPath) {
+                                  
+                                  if (finished)
+                                  {
+                                      NSDictionary *userDict = [LTUser.share queryUser];
+                                      NSString *myJID =userDict[@"JID"];
+                                      //会话类型
+                                      LTConversationType type = LTConversationTypeChat;
+                                      if ([self.currentOtherJID containsString:@"conference"]) {
+                                          type = LTConversationTypeGroupChat;
+                                      }
+                                      
+                                      //151539219460275.jpg
+                                      NSString *aBody = [localPath lastPathComponent];
+                                      NSDictionary *dict = [LTMessage.share sendImageWithSenderJID:myJID
+                                                                     otherJID:self.currentOtherJID
+                                                             conversationName:self.conversationName
+                                                             conversationType:(type)
+                                                                  messageType:LTMessageType_Image
+                                                                    localPath:localPath
+                                                                         body:aBody];
+                                      [self dealData:dict];
+                                  }
+                              }];
+}
+
 -(void)dealData:(NSDictionary *)dict {
     Message *msg = [[Message alloc] init];
     msg.currentMyJID = dict[@"currentMyJID"];
@@ -351,8 +388,8 @@ HMImagePickerControllerDelegate
     
     //voice
     msg.duration = dict[@"duration"]; //为空，则为nil
-    msg.voiceLocalPath = dict[@"voiceLocalPath"];
-    msg.voiceRemotePath = dict[@"voiceRemotePath"];
+    msg.localPath = dict[@"localPath"];
+    msg.remotePath = dict[@"remotePath"];
     
     //file
     //xxx
@@ -360,41 +397,6 @@ HMImagePickerControllerDelegate
     [msg jh_saveOrUpdate];
 }
 
-/*!
- @method
- @abstract 发送图片信息
- @discussion <#备注#>
- @param aImage 图片
- */
--(void)sendImageMessageWithImage:(UIImage *)aImage {
-    //保存图片到沙盒本地
-    //内部进行压缩处理
-     [LTPictureMessage saveImageToLocal:aImage
-                          isCompression:YES
-                               complete:^(BOOL finished, NSString *localPath) {
-                                   
-                                   if (finished)
-                                   {
-                                       NSDictionary *userDict = [LTUser.share queryUser];
-                                       NSString *myJID =userDict[@"JID"];
-                                       //会话类型
-                                       LTConversationType type = LTConversationTypeChat;
-                                       if ([self.currentOtherJID containsString:@"conference"]) {
-                                           type = LTConversationTypeGroupChat;
-                                       }
-                                       
-                                       //151539219460275.jpg
-                                       NSString *aBody = [localPath lastPathComponent];
-                                       [LTMessage.share sendImageWithSenderJID:myJID
-                                                                      otherJID:self.currentOtherJID
-                                                              conversationName:self.conversationName
-                                                              conversationType:(type)
-                                                                   messageType:LTMessageType_Image
-                                                                     localPath:localPath
-                                                                          body:aBody];
-                                   }
-                               }];
-}
 
 
 
@@ -427,19 +429,38 @@ HMImagePickerControllerDelegate
     Message *model = self.datasource[indexPath.item];
     NSString *body = model.body;
     
-    // <i@12.gif会影响长度计算>
-    body = [body stringByReplacingOccurrencesOfString:@"<i@" withString:@""];
-    body = [body stringByReplacingOccurrencesOfString:@".gif>" withString:@""];
-    CGSize size = [body sizeWithFontSize:17.0 maxSize:CGSizeMake(kScreenWidth-120, MAXFLOAT)];
-    //NSLog(@"width0== %f   height0 == %f", size.width,size.height );
-    
-    //行数
-    int row = size.height/20.28;
-    //NSLog(@"行数：%i",row);
-    
-    //20.28为一行高度(font = 17)
-    size = CGSizeMake(kScreenWidth, 40 + 30 + 20.28 * (row-1));
-    return size;
+    if ([model.bodyType isEqualToString:@"text"]){
+        // <i@12.gif会影响长度计算>
+        body = [body stringByReplacingOccurrencesOfString:@"<i@" withString:@""];
+        body = [body stringByReplacingOccurrencesOfString:@".gif>" withString:@""];
+        CGSize size = [body sizeWithFontSize:17.0 maxSize:CGSizeMake(kScreenWidth-120, MAXFLOAT)];
+        //NSLog(@"width0== %f   height0 == %f", size.width,size.height );
+        
+        //行数
+        int row = size.height/20.28;
+        //NSLog(@"行数：%i",row);
+        
+        //20.28为一行高度(font = 17)
+        size = CGSizeMake(kScreenWidth, 40 + 30 + 20.28 * (row-1));
+        return size;
+    }
+    else if ([model.bodyType isEqualToString:@"voice"]){
+        return CGSizeMake(kScreenWidth, 40 + 30);
+    }
+    else if ([model.bodyType isEqualToString:@"image"]){
+        return CGSizeMake(kScreenWidth, 30 + 150);
+    }
+    else if ([model.bodyType isEqualToString:@"file"]){
+    }
+    else if ([model.bodyType isEqualToString:@"video"]){
+    }
+    else if ([model.bodyType isEqualToString:@"command"]){
+    }
+    else if ([model.bodyType isEqualToString:@"vibrate"]){
+    }
+    else if ([model.bodyType isEqualToString:@"location"]){
+    }
+    return CGSizeMake(kScreenWidth, 40 + 30);
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -464,7 +485,7 @@ HMImagePickerControllerDelegate
         
         //tapG点击手势
         [cell01 settingChatVoiceCellTapBlock:^(Message *model) {
-            [EMCDDeviceManager.sharedInstance asyncPlayingWithPath:model.voiceLocalPath
+            [EMCDDeviceManager.sharedInstance asyncPlayingWithPath:model.localPath
                                                         completion:^(NSError *error) {
            
                                                         }];

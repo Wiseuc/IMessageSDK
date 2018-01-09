@@ -64,15 +64,18 @@ typedef void(^MessageDBChangeBlock)(void);
 
 
 
+//资源路径
+@property (nonatomic, strong) NSString  *localPath;   /**本地路径**/
+@property (nonatomic, strong) NSString  *remotePath;  /**远程路径**/
 
 //voice语音信息
 @property (nonatomic, strong) NSString  *duration;         /**语音时长**/
-@property (nonatomic, strong) NSString  *voiceLocalPath;   /**语音本地路径**/
-@property (nonatomic, strong) NSString  *voiceRemotePath;  /**语音远程路径**/
 
 
+//image信息
 
 
+//
 
 
 
