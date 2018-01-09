@@ -134,7 +134,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LTSDK/utility/MessageAnalysis/LT_MessageAnalysis.m"
-            timestampString = "537184718.062861"
+            timestampString = "537188207.395334"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "123"
@@ -150,7 +150,7 @@
                   moduleName = "IMessageSDK"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JHMac/Documents/%E5%8A%B1%E6%8B%93%E8%BD%AF%E4%BB%B62/9%E3%80%81GitLab/IMessageSDK/LTSDK/utility/MessageAnalysis/LT_MessageAnalysis.m"
-                  timestampString = "537184718.354473"
+                  timestampString = "537188207.629971"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "123"
@@ -165,7 +165,7 @@
                   moduleName = "IMessageSDK"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JHMac/Documents/%E5%8A%B1%E6%8B%93%E8%BD%AF%E4%BB%B62/9%E3%80%81GitLab/IMessageSDK/LTSDK/utility/MessageAnalysis/LT_MessageAnalysis.m"
-                  timestampString = "537184718.358918"
+                  timestampString = "537188207.6327209"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "123"
@@ -182,7 +182,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LTSDK/core/LTMessage.m"
-            timestampString = "537184718.062994"
+            timestampString = "537188207.39543"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
@@ -198,7 +198,7 @@
                   moduleName = "IMessageSDK"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JHMac/Documents/%E5%8A%B1%E6%8B%93%E8%BD%AF%E4%BB%B62/9%E3%80%81GitLab/IMessageSDK/LTSDK/core/LTMessage.m"
-                  timestampString = "537184718.367291"
+                  timestampString = "537188207.639582"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "70"
@@ -213,7 +213,7 @@
                   moduleName = "IMessageSDK"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JHMac/Documents/%E5%8A%B1%E6%8B%93%E8%BD%AF%E4%BB%B62/9%E3%80%81GitLab/IMessageSDK/LTSDK/core/LTMessage.m"
-                  timestampString = "537184718.371186"
+                  timestampString = "537188207.642092"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "70"
@@ -230,12 +230,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMessageSDK/base/MainController.m"
-            timestampString = "537184718.063131"
+            timestampString = "537188207.395512"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "294"
             endingLineNumber = "294"
             landmarkName = "-dealData:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IMessageSDK/controller/chat/ChatController.m"
+            timestampString = "537188207.395595"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "792"
+            endingLineNumber = "792"
+            landmarkName = "-image:didFinishSavingWithError:contextInfo:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IMessageSDK/controller/chat/ChatController.m"
+            timestampString = "537188207.396083"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "797"
+            endingLineNumber = "797"
+            landmarkName = "-video:didFinishSavingWithError:contextInfo:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

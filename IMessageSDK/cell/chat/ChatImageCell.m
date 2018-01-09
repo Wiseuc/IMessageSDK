@@ -102,14 +102,14 @@
     if ([model.from containsString:model.currentMyJID])
     {
         self.iconIMGV.frame = CGRectMake(KWIDTH-10-40, 20, 40, 40);
-        self.backgroundIMGV.frame = CGRectMake(KWIDTH-10-40-10-100, 20, 100, 150);
-        self.contentIMGV.frame = CGRectMake(KWIDTH-10-40-10-100, 20, 100, 150);
+        self.backgroundIMGV.frame = CGRectMake(KWIDTH-10-40-10-80, 20, 80, 142.3); //1334 * 750
+        self.contentIMGV.frame = CGRectMake(KWIDTH-10-40-10-80, 20, 80, 142.3);
     }
     else
     {
         self.iconIMGV.frame = CGRectMake(10, 20, 40, 40);
-        self.backgroundIMGV.frame = CGRectMake(60, 20, 100, 130);
-        self.contentIMGV.frame = CGRectMake(60, 20, 100, 130);
+        self.backgroundIMGV.frame = CGRectMake(60, 20, 80, 142.3);
+        self.contentIMGV.frame = CGRectMake(60, 20, 80, 142.3);
     }
     self.contentIMGV.image = [UIImage imageWithContentsOfFile:model.localPath];
 }

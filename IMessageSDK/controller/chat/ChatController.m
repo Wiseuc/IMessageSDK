@@ -31,6 +31,10 @@
 #import "LTPictureMessage.h"
 
 
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
+
 
 
 @interface ChatController ()
@@ -39,8 +43,8 @@ CHTCollectionViewDelegateWaterfallLayout,
 UICollectionViewDataSource,
 UICollectionViewDelegate,
 LTChatBoxDelegate,
-//UIImagePickerControllerDelegate,
-//UINavigationControllerDelegate,
+UIImagePickerControllerDelegate,
+UINavigationControllerDelegate,
 HMImagePickerControllerDelegate
 >
 @property (nonatomic, strong) CHTCollectionViewWaterfallLayout *chLayout;
@@ -52,6 +56,8 @@ HMImagePickerControllerDelegate
 
 @property (nonatomic) NSArray *selectImages;   // 选中照片数组
 //@property (nonatomic) NSMutableArray *selectedAssets; // 选中资源素材数组，用于定位已经选择的照片
+
+@property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @end
 
 
@@ -448,7 +454,7 @@ HMImagePickerControllerDelegate
         return CGSizeMake(kScreenWidth, 40 + 30);
     }
     else if ([model.bodyType isEqualToString:@"image"]){
-        return CGSizeMake(kScreenWidth, 30 + 150);
+        return CGSizeMake(kScreenWidth, 30+ 142.3);
     }
     else if ([model.bodyType isEqualToString:@"file"]){
     }
@@ -600,19 +606,11 @@ HMImagePickerControllerDelegate
         {
             NSLog(@"LXChatBoxItemAlbum");
             // 显示相册
-//            UIImagePickerController *pickerC = [[UIImagePickerController alloc] init];
-//            pickerC.delegate = self;
-//            [self presentViewController:pickerC
-//                               animated:YES
-//                             completion:nil];
-            
-//            [self.selectImages removeAllObjects];
-//            [self.selectedAssets removeAllObjects];
             HMImagePickerController *picker =
             [[HMImagePickerController alloc] initWithSelectedAssets:nil];
-            picker.pickerDelegate = self;            // 设置图像选择代理
-            picker.targetSize = CGSizeMake(600, 600);// 设置目标图片尺寸
-            picker.maxPickerCount = 9;               // 设置最大选择照片数量
+            picker.pickerDelegate = self;
+            picker.targetSize = CGSizeMake(600, 600);
+            picker.maxPickerCount = 9;
             [self presentViewController:picker animated:YES completion:nil];
         }
             break;
@@ -632,6 +630,7 @@ HMImagePickerControllerDelegate
         case LXChatBoxItemCamera:
         {
             NSLog(@"LXChatBoxItemCamera");
+            [self selectImageFromCamera];
         }
             break;
         default:
@@ -704,6 +703,103 @@ HMImagePickerControllerDelegate
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+
+
+
+
+
+
+
+
+
+#pragma mark - 代理：UIImagePicker
+//从摄像头获取图片或视频
+- (void)selectImageFromCamera
+{
+    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    //录制视频时长，默认10s
+    self.imagePickerController.videoMaximumDuration = 15;
+    
+    //相机类型（拍照、录像...）字符串需要做相应的类型转换
+    self.imagePickerController.mediaTypes = @[(NSString *)kUTTypeMovie,(NSString *)kUTTypeImage];
+    
+    //视频上传质量
+    //UIImagePickerControllerQualityTypeHigh高清
+    //UIImagePickerControllerQualityTypeMedium中等质量
+    //UIImagePickerControllerQualityTypeLow低质量
+    //UIImagePickerControllerQualityType640x480
+    self.imagePickerController.videoQuality = UIImagePickerControllerQualityTypeHigh;
+    
+    //设置摄像头模式（拍照，录制视频）为录像模式
+    self.imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
+    [self presentViewController:self.imagePickerController animated:YES completion:nil];
+}
+//从相册获取图片或视频
+- (void)selectImageFromAlbum {
+    //NSLog(@"相册");
+    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:self.imagePickerController animated:YES completion:nil];
+}
+
+//该代理方法仅适用于只选取图片时
+- (void)imagePickerController:(UIImagePickerController *)picker
+        didFinishPickingImage:(UIImage *)image
+                  editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo {
+    NSLog(@"选择完毕----image:%@-----info:%@",image,editingInfo);
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self sendImageMessageWithImage:image];
+}
+
+//适用获取所有媒体资源，只需判断资源类型
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+//    NSString *mediaType=[info objectForKey:UIImagePickerControllerMediaType];
+//    //判断资源类型
+//    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]){
+//        //如果是图片
+//        self.imageView.image = info[UIImagePickerControllerEditedImage];
+//        //压缩图片
+//        NSData *fileData = UIImageJPEGRepresentation(self.imageView.image, 1.0);
+//        //保存图片至相册
+//        UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+//        //上传图片
+//        //[self uploadImageWithData:fileData];
+//
+//    }else{
+//        //如果是视频
+//        NSURL *url = info[UIImagePickerControllerMediaURL];
+//        //播放视频
+//        _moviePlayer.contentURL = url;
+//        [_moviePlayer play];
+//        //保存视频至相册（异步线程）
+//        NSString *urlStr = [url path];
+//
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(urlStr)) {
+//
+//                UISaveVideoAtPathToSavedPhotosAlbum(urlStr, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+//            }
+//        });
+//        NSData *videoData = [NSData dataWithContentsOfURL:url];
+//        //视频上传
+//       // [self uploadVideoWithData:videoData];
+//    }
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
+
+//图片保存完毕的回调
+- (void) image: (UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo: (void *)contextInf{
+    
+}
+
+//视频保存完毕的回调
+- (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInf{
+    if (error) {
+        NSLog(@"保存视频过程中发生错误，错误信息:%@",error.localizedDescription);
+    }else{
+        NSLog(@"视频保存成功.");
+    }
+}
 
 
 
@@ -818,6 +914,15 @@ HMImagePickerControllerDelegate
 //    return _selectedAssets;
 //}
 
+-(UIImagePickerController *)imagePickerController {
+    if (!_imagePickerController) {
+        _imagePickerController = [[UIImagePickerController alloc] init];
+        _imagePickerController.delegate = self;
+        _imagePickerController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        _imagePickerController.allowsEditing = NO;
+    }
+    return _imagePickerController;
+}
 
 
 
