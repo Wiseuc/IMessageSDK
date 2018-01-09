@@ -43,6 +43,62 @@
 
 #import "LTPictureMessage.h"
 
+#import "UIConfig.h"
+#import "AppUtility.h"
+
 @implementation LTPictureMessage
+
+
+
+
+#pragma mark - public
+
++ (void)saveImageToLocal:(UIImage *)aImage
+                complete:(void(^)(BOOL finished,NSString *localPath))complete {
+    NSString *imageName = [AppUtility get_32Bytes_UUID];
+    NSString *imageType = @"jpg";
+    NSString *imagePath = [NSString stringWithFormat:@"%@/%@.%@",kPictureFilePath,imageName,imageType];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (  ![fileManager fileExistsAtPath:kPictureFilePath] ) {
+        [fileManager createDirectoryAtPath:kPictureFilePath
+               withIntermediateDirectories:YES
+                                attributes:nil
+                                     error:nil];
+    }
+    __weak __typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //FIXME: 压缩图片尺寸
+        CGFloat targetWidth = 540;
+        UIImage *zigImage = [weakSelf imageCompressForWidth:aImage targetWidth:targetWidth];
+        
+        // 图片保存到本地
+        NSData *data = UIImageJPEGRepresentation(zigImage, 0.7f);
+        // [data writeToFile:imagePath atomically:YES];
+        BOOL zigResult = [fileManager createFileAtPath:imagePath contents:data attributes:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (zigResult) {
+                complete(zigResult,imagePath);
+            }
+        });
+    });
+}
+
+// 给定目标宽度按比例压缩图片
++ (UIImage *) imageCompressForWidth:(UIImage *)sourceImage
+                        targetWidth:(CGFloat)defineWidth {
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    CGFloat targetWidth = defineWidth;
+    CGFloat targetHeight = (targetWidth / width) * height;
+    UIGraphicsBeginImageContext(CGSizeMake(targetWidth, targetHeight));
+    [sourceImage drawInRect:CGRectMake(0,0,targetWidth, targetHeight)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+
 
 @end

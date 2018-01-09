@@ -11,6 +11,18 @@
 		F90D3A791FF2035700BDB5DA /* NewFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F90D3A781FF2035700BDB5DA /* NewFriendCell.m */; };
 		F90D3A821FF2423D00BDB5DA /* NewRosterGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = F90D3A811FF2423D00BDB5DA /* NewRosterGroupController.m */; };
 		F90D3A851FF2534900BDB5DA /* NewRosterMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F90D3A841FF2534900BDB5DA /* NewRosterMessage.m */; };
+		F90F99B52004920C0037DD8E /* HMAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = F90F999E2004920B0037DD8E /* HMAlbum.m */; };
+		F90F99B62004920C0037DD8E /* HMAlbumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F90F99A02004920B0037DD8E /* HMAlbumTableViewCell.m */; };
+		F90F99B72004920C0037DD8E /* HMAlbumTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F90F99A22004920B0037DD8E /* HMAlbumTableViewController.m */; };
+		F90F99B82004920C0037DD8E /* HMImageGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F90F99A42004920B0037DD8E /* HMImageGridCell.m */; };
+		F90F99B92004920C0037DD8E /* HMImageGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F90F99A62004920B0037DD8E /* HMImageGridViewController.m */; };
+		F90F99BA2004920C0037DD8E /* HMImageGridViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F90F99A82004920B0037DD8E /* HMImageGridViewLayout.m */; };
+		F90F99BB2004920C0037DD8E /* HMImagePicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F90F99A92004920B0037DD8E /* HMImagePicker.bundle */; };
+		F90F99BC2004920C0037DD8E /* HMImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F90F99AB2004920B0037DD8E /* HMImagePickerController.m */; };
+		F90F99BD2004920C0037DD8E /* HMImageSelectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F90F99AE2004920B0037DD8E /* HMImageSelectButton.m */; };
+		F90F99BE2004920C0037DD8E /* HMPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F90F99B02004920B0037DD8E /* HMPreviewViewController.m */; };
+		F90F99BF2004920C0037DD8E /* HMSelectCounterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F90F99B22004920B0037DD8E /* HMSelectCounterButton.m */; };
+		F90F99C02004920C0037DD8E /* HMViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F90F99B42004920B0037DD8E /* HMViewerViewController.m */; };
 		F9121C511FF4D2BA004B14B8 /* ApnsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9121C501FF4D2BA004B14B8 /* ApnsManager.m */; };
 		F9121C551FF4D566004B14B8 /* VoipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9121C541FF4D566004B14B8 /* VoipManager.m */; };
 		F91761B41FE0B3FA00906CBB /* AppUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = F91761B31FE0B3FA00906CBB /* AppUtility.m */; };
@@ -614,6 +626,30 @@
 		F90D3A811FF2423D00BDB5DA /* NewRosterGroupController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewRosterGroupController.m; sourceTree = "<group>"; };
 		F90D3A831FF2534900BDB5DA /* NewRosterMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewRosterMessage.h; sourceTree = "<group>"; };
 		F90D3A841FF2534900BDB5DA /* NewRosterMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewRosterMessage.m; sourceTree = "<group>"; };
+		F90F999D2004920B0037DD8E /* HMAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMAlbum.h; sourceTree = "<group>"; };
+		F90F999E2004920B0037DD8E /* HMAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMAlbum.m; sourceTree = "<group>"; };
+		F90F999F2004920B0037DD8E /* HMAlbumTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMAlbumTableViewCell.h; sourceTree = "<group>"; };
+		F90F99A02004920B0037DD8E /* HMAlbumTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMAlbumTableViewCell.m; sourceTree = "<group>"; };
+		F90F99A12004920B0037DD8E /* HMAlbumTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMAlbumTableViewController.h; sourceTree = "<group>"; };
+		F90F99A22004920B0037DD8E /* HMAlbumTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMAlbumTableViewController.m; sourceTree = "<group>"; };
+		F90F99A32004920B0037DD8E /* HMImageGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMImageGridCell.h; sourceTree = "<group>"; };
+		F90F99A42004920B0037DD8E /* HMImageGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMImageGridCell.m; sourceTree = "<group>"; };
+		F90F99A52004920B0037DD8E /* HMImageGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMImageGridViewController.h; sourceTree = "<group>"; };
+		F90F99A62004920B0037DD8E /* HMImageGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMImageGridViewController.m; sourceTree = "<group>"; };
+		F90F99A72004920B0037DD8E /* HMImageGridViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMImageGridViewLayout.h; sourceTree = "<group>"; };
+		F90F99A82004920B0037DD8E /* HMImageGridViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMImageGridViewLayout.m; sourceTree = "<group>"; };
+		F90F99A92004920B0037DD8E /* HMImagePicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HMImagePicker.bundle; sourceTree = "<group>"; };
+		F90F99AA2004920B0037DD8E /* HMImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMImagePickerController.h; sourceTree = "<group>"; };
+		F90F99AB2004920B0037DD8E /* HMImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMImagePickerController.m; sourceTree = "<group>"; };
+		F90F99AC2004920B0037DD8E /* HMImagePickerGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMImagePickerGlobal.h; sourceTree = "<group>"; };
+		F90F99AD2004920B0037DD8E /* HMImageSelectButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMImageSelectButton.h; sourceTree = "<group>"; };
+		F90F99AE2004920B0037DD8E /* HMImageSelectButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMImageSelectButton.m; sourceTree = "<group>"; };
+		F90F99AF2004920B0037DD8E /* HMPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMPreviewViewController.h; sourceTree = "<group>"; };
+		F90F99B02004920B0037DD8E /* HMPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMPreviewViewController.m; sourceTree = "<group>"; };
+		F90F99B12004920B0037DD8E /* HMSelectCounterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSelectCounterButton.h; sourceTree = "<group>"; };
+		F90F99B22004920B0037DD8E /* HMSelectCounterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSelectCounterButton.m; sourceTree = "<group>"; };
+		F90F99B32004920B0037DD8E /* HMViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMViewerViewController.h; sourceTree = "<group>"; };
+		F90F99B42004920B0037DD8E /* HMViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMViewerViewController.m; sourceTree = "<group>"; };
 		F9121C4F1FF4D2BA004B14B8 /* ApnsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApnsManager.h; sourceTree = "<group>"; };
 		F9121C501FF4D2BA004B14B8 /* ApnsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApnsManager.m; sourceTree = "<group>"; };
 		F9121C531FF4D566004B14B8 /* VoipManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoipManager.h; sourceTree = "<group>"; };
@@ -1620,6 +1656,37 @@
 			path = NewFriend;
 			sourceTree = "<group>";
 		};
+		F90F999C2004920B0037DD8E /* HMImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				F90F999D2004920B0037DD8E /* HMAlbum.h */,
+				F90F999E2004920B0037DD8E /* HMAlbum.m */,
+				F90F999F2004920B0037DD8E /* HMAlbumTableViewCell.h */,
+				F90F99A02004920B0037DD8E /* HMAlbumTableViewCell.m */,
+				F90F99A12004920B0037DD8E /* HMAlbumTableViewController.h */,
+				F90F99A22004920B0037DD8E /* HMAlbumTableViewController.m */,
+				F90F99A32004920B0037DD8E /* HMImageGridCell.h */,
+				F90F99A42004920B0037DD8E /* HMImageGridCell.m */,
+				F90F99A52004920B0037DD8E /* HMImageGridViewController.h */,
+				F90F99A62004920B0037DD8E /* HMImageGridViewController.m */,
+				F90F99A72004920B0037DD8E /* HMImageGridViewLayout.h */,
+				F90F99A82004920B0037DD8E /* HMImageGridViewLayout.m */,
+				F90F99A92004920B0037DD8E /* HMImagePicker.bundle */,
+				F90F99AA2004920B0037DD8E /* HMImagePickerController.h */,
+				F90F99AB2004920B0037DD8E /* HMImagePickerController.m */,
+				F90F99AC2004920B0037DD8E /* HMImagePickerGlobal.h */,
+				F90F99AD2004920B0037DD8E /* HMImageSelectButton.h */,
+				F90F99AE2004920B0037DD8E /* HMImageSelectButton.m */,
+				F90F99AF2004920B0037DD8E /* HMPreviewViewController.h */,
+				F90F99B02004920B0037DD8E /* HMPreviewViewController.m */,
+				F90F99B12004920B0037DD8E /* HMSelectCounterButton.h */,
+				F90F99B22004920B0037DD8E /* HMSelectCounterButton.m */,
+				F90F99B32004920B0037DD8E /* HMViewerViewController.h */,
+				F90F99B42004920B0037DD8E /* HMViewerViewController.m */,
+			);
+			path = HMImagePicker;
+			sourceTree = "<group>";
+		};
 		F9121C4E1FF4D2A9004B14B8 /* ApnsManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1795,6 +1862,7 @@
 		F9194CAB1FDFD39400CCFB32 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				F90F999C2004920B0037DD8E /* HMImagePicker */,
 				F9AC22821FFF607C00A91023 /* TLAttributedLabel */,
 				F91CD29E1FFCE3CF0011489B /* VoiceUtility */,
 				F91CD2421FFCC6C10011489B /* MJExtension */,
@@ -4499,6 +4567,7 @@
 				F9AC22611FFF28DE00A91023 /* f68.gif in Resources */,
 				F9AC22271FFF28DE00A91023 /* f15.gif in Resources */,
 				F9194C801FDFD2C400CCFB32 /* Assets.xcassets in Resources */,
+				F90F99BB2004920C0037DD8E /* HMImagePicker.bundle in Resources */,
 				F9AC222E1FFF28DE00A91023 /* f21.gif in Resources */,
 				F9AC22741FFF28DE00A91023 /* f85.gif in Resources */,
 				F9AC22641FFF28DE00A91023 /* f70.gif in Resources */,
@@ -4612,14 +4681,17 @@
 				F9558D691FE399CA00D13CD0 /* MJRefreshFooter.m in Sources */,
 				F93496E41FE8D2B400E8D8A3 /* OrgCell.m in Sources */,
 				F9558CCD1FE3622C00D13CD0 /* GroupController.m in Sources */,
+				F90F99BD2004920C0037DD8E /* HMImageSelectButton.m in Sources */,
 				F9B6306B2003614D00BED631 /* ChatTextCell.m in Sources */,
 				F93496DD1FE8BCE500E8D8A3 /* OrgModel.m in Sources */,
 				F91CD2611FFCC6C10011489B /* NSObject+MJKeyValue.m in Sources */,
 				F90D3A851FF2534900BDB5DA /* NewRosterMessage.m in Sources */,
 				F98FDBA11FEB8DB200618C82 /* NSObject+BGModel.m in Sources */,
+				F90F99B92004920C0037DD8E /* HMImageGridViewController.m in Sources */,
 				F91CD2C81FFCE3CF0011489B /* EMAudioPlayerUtil.m in Sources */,
 				F95B4AD71FFE261E00AFBEDE /* LTTextMessage.m in Sources */,
 				F959FC3F1FF372A7001D689F /* RABatchChangeEntity.m in Sources */,
+				F90F99B82004920C0037DD8E /* HMImageGridCell.m in Sources */,
 				F9B6306E2003616500BED631 /* ChatVoiceCell.m in Sources */,
 				F959FC451FF372A7001D689F /* RATreeNodeItem+Private.m in Sources */,
 				F98FDB7A1FEB8AF400618C82 /* ChatListController.m in Sources */,
@@ -4627,6 +4699,7 @@
 				F98FDB811FEB8BDD00618C82 /* Message.m in Sources */,
 				F9558D701FE399CA00D13CD0 /* MJRefreshBackStateFooter.m in Sources */,
 				F959FC421FF372A7001D689F /* RATreeNode.m in Sources */,
+				F90F99BA2004920C0037DD8E /* HMImageGridViewLayout.m in Sources */,
 				F9558D8E1FE3ABF600D13CD0 /* CompanyController.m in Sources */,
 				F98FDB9D1FEB8DB200618C82 /* BGDB.m in Sources */,
 				F9194CB91FDFD64D00CCFB32 /* TabbarController.m in Sources */,
@@ -4646,6 +4719,7 @@
 				F9AC229D1FFF607D00A91023 /* UIImageView+GIF.m in Sources */,
 				F9F7C09E1FEBC6EE00F56A23 /* InputView.m in Sources */,
 				F9B630742003635D00BED631 /* ChatImageCell.m in Sources */,
+				F90F99B72004920C0037DD8E /* HMAlbumTableViewController.m in Sources */,
 				F93496F21FE901D600E8D8A3 /* MineCell01.m in Sources */,
 				F9558D841FE399CA00D13CD0 /* UIView+MJExtension.m in Sources */,
 				F91CD25D1FFCC6C10011489B /* MJPropertyKey.m in Sources */,
@@ -4681,7 +4755,9 @@
 				F91CD2CC1FFCE3CF0011489B /* EMCDDeviceManager+ProximitySensor.m in Sources */,
 				F9558D831FE399CA00D13CD0 /* UIScrollView+MJRefresh.m in Sources */,
 				F95B4ADD1FFE271500AFBEDE /* LTFileMessage.m in Sources */,
+				F90F99BE2004920C0037DD8E /* HMPreviewViewController.m in Sources */,
 				F93496EE1FE8E8B800E8D8A3 /* LTStack.m in Sources */,
+				F90F99B62004920C0037DD8E /* HMAlbumTableViewCell.m in Sources */,
 				F959FC431FF372A7001D689F /* RATreeNodeCollectionController.m in Sources */,
 				F959FC611FF39942001D689F /* UIImage+ScaleToSize.m in Sources */,
 				F98FDBA01FEB8DB200618C82 /* NSCache+BGCache.m in Sources */,
@@ -4708,6 +4784,7 @@
 				F93496F91FE90DE800E8D8A3 /* InformationController.m in Sources */,
 				F959FC4A1FF372A7001D689F /* RATreeView+TableViewDataSource.m in Sources */,
 				F98FDBA21FEB8DB200618C82 /* FMDatabase.m in Sources */,
+				F90F99C02004920C0037DD8E /* HMViewerViewController.m in Sources */,
 				F9AC22991FFF607D00A91023 /* TLAttributedImage.m in Sources */,
 				F9558D6A1FE399CA00D13CD0 /* MJRefreshHeader.m in Sources */,
 				F91CD2C91FFCE3CF0011489B /* EMAudioRecorderUtil.m in Sources */,
@@ -4716,6 +4793,7 @@
 				F9AC22981FFF607D00A91023 /* NSMutableAttributedString+Picture.m in Sources */,
 				F9194C781FDFD2C300CCFB32 /* AppDelegate.m in Sources */,
 				F91CD2CB1FFCE3CF0011489B /* EMCDDeviceManager+Microphone.m in Sources */,
+				F90F99B52004920C0037DD8E /* HMAlbum.m in Sources */,
 				F9B63057200336B500BED631 /* NSString+JHExtension.m in Sources */,
 				F9558D711FE399CA00D13CD0 /* MJRefreshGifHeader.m in Sources */,
 				F9558D681FE399CA00D13CD0 /* MJRefreshComponent.m in Sources */,
@@ -4733,7 +4811,9 @@
 				F959FC501FF3786A001D689F /* SelectRosterModel.m in Sources */,
 				F98FDB9F1FEB8DB200618C82 /* BGTool.m in Sources */,
 				F959FC4B1FF372A7001D689F /* RATreeView+TableViewDelegate.m in Sources */,
+				F90F99BF2004920C0037DD8E /* HMSelectCounterButton.m in Sources */,
 				F9558CD11FE3655000D13CD0 /* RosterController.m in Sources */,
+				F90F99BC2004920C0037DD8E /* HMImagePickerController.m in Sources */,
 				F9558D8A1FE39F8400D13CD0 /* RosterReuseableHeader.m in Sources */,
 				F91CD2631FFCC6C10011489B /* NSString+MJExtension.m in Sources */,
 				F90D3A821FF2423D00BDB5DA /* NewRosterGroupController.m in Sources */,

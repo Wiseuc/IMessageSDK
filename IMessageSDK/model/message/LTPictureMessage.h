@@ -7,7 +7,19 @@
 //
 
 #import "Message.h"
+#import <UIKit/UIKit.h>
 
 @interface LTPictureMessage : Message
+
+
+/*!
+ @method
+ @abstract 将图片写入本地沙盒
+ @discussion <#备注#>
+ @param aImage 图片
+ @param complete 完成回调
+ */
++ (void)saveImageToLocal:(UIImage *)aImage
+                complete:(void(^)(BOOL finished,NSString *localPath))complete;
 
 @end

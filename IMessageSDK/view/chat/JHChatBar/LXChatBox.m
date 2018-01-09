@@ -160,33 +160,6 @@ LXChatBoxMoreViewDelegate
 
 
 
-#pragma mark - private
-
--(void)voiceButtonDown:(UIButton *)button{
-    
-    button.selected = !button.selected;
-    if (button.selected) {
-        self.status = LTChatBoxStatusShowKeyboard;
-    }else{
-        self.status = LTChatBoxStatusShowVoLXe;
-    }
-}
--(void)faceButtonDown:(UIButton *)button{
-    button.selected = !button.selected;
-    if (button.selected) {
-        self.status = LTChatBoxStatusShowFace;
-    }else{
-        self.status = LTChatBoxStatusShowKeyboard;
-    }
-}
--(void)moreButtonDown:(UIButton *)button{
-    button.selected = !button.selected;
-    if (button.selected) {
-        self.status = LTChatBoxStatusShowMore;
-    }else{
-        self.status = LTChatBoxStatusShowKeyboard;
-    }
-}
 
 
 
@@ -199,26 +172,6 @@ LXChatBoxMoreViewDelegate
 
 
 
-
-#pragma mark - 触发：talkBTN
-- (void)talkButtonDown:(UIButton *)sender
-{
-}
-- (void)talkButtonUpInside:(UIButton *)sender
-{
-}
-- (void)talkButtonUpOutside:(UIButton *)sender
-{
-}
-- (void)talkButtonDragOutside:(UIButton *)sender
-{
-}
-- (void)talkButtonDragInside:(UIButton *)sender
-{
-}
-- (void)talkButtonTouchCancel:(UIButton *)sender
-{
-}
 
 #pragma mark - 触发：talkBTN2
 
@@ -342,6 +295,51 @@ LXChatBoxMoreViewDelegate
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - ButtonClick
+
+-(void)voiceButtonDown:(UIButton *)button{
+    
+    button.selected = !button.selected;
+    if (button.selected) {
+        self.status = LTChatBoxStatusShowKeyboard;
+    }else{
+        self.status = LTChatBoxStatusShowVoLXe;
+    }
+}
+-(void)faceButtonDown:(UIButton *)button{
+    button.selected = !button.selected;
+    if (button.selected) {
+        self.status = LTChatBoxStatusShowFace;
+    }else{
+        self.status = LTChatBoxStatusShowKeyboard;
+    }
+}
+-(void)moreButtonDown:(UIButton *)button{
+    button.selected = !button.selected;
+    if (button.selected) {
+        self.status = LTChatBoxStatusShowMore;
+    }else{
+        self.status = LTChatBoxStatusShowKeyboard;
+    }
+}
+
+
+
+#pragma mark - Private
 
 -(void)setStatus:(LTChatBoxStatus)status{
     if (_status == status) {

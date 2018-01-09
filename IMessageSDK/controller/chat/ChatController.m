@@ -27,6 +27,9 @@
 
 #import "InformationController.h"
 #import "EMCDDeviceManager.h"
+#import "HMImagePickerController.h"
+#import "LTPictureMessage.h"
+
 
 
 
@@ -35,7 +38,10 @@
 CHTCollectionViewDelegateWaterfallLayout,
 UICollectionViewDataSource,
 UICollectionViewDelegate,
-LTChatBoxDelegate
+LTChatBoxDelegate,
+//UIImagePickerControllerDelegate,
+//UINavigationControllerDelegate,
+HMImagePickerControllerDelegate
 >
 @property (nonatomic, strong) CHTCollectionViewWaterfallLayout *chLayout;
 @property (nonatomic, strong) UICollectionView *collectionview;
@@ -43,6 +49,9 @@ LTChatBoxDelegate
 @property (nonatomic, strong) NSString *currentOtherJID;  /**对方jid**/
 @property (nonatomic, strong) NSString *conversationName; /**对方name**/
 @property (nonatomic, strong) LXChatBox *chatBox;  /**输入框**/
+
+@property (nonatomic) NSArray *selectImages;   // 选中照片数组
+//@property (nonatomic) NSMutableArray *selectedAssets; // 选中资源素材数组，用于定位已经选择的照片
 @end
 
 
@@ -260,7 +269,6 @@ LTChatBoxDelegate
     
 }
 
-
 /*!
  @method
  @abstract 发送文本信息
@@ -319,9 +327,6 @@ LTChatBoxDelegate
     [self dealData:dict];
 }
 
-
-
-
 -(void)dealData:(NSDictionary *)dict {
     Message *msg = [[Message alloc] init];
     msg.currentMyJID = dict[@"currentMyJID"];
@@ -355,10 +360,46 @@ LTChatBoxDelegate
     [msg jh_saveOrUpdate];
 }
 
-
-
-
-
+/*!
+ @method
+ @abstract 发送图片信息
+ @discussion <#备注#>
+ @param aImage 图片
+ */
+-(void)sendImageMessageWithImage:(UIImage *)aImage {
+    //保存图片到沙盒本地
+    [LTPictureMessage saveImageToLocal:aImage
+                              complete:^(BOOL finished, NSString *localPath) {
+                                 
+                                  
+                                  
+                              }];
+}
+/**发送图片Picture**/
+//- (void)chatBar:(XMChatBar *)chatBar sendPictures:(NSArray *)pictures
+//{
+//    XMImageMessage *imageMessage = [[XMImageMessage alloc] init];
+//    imageMessage.bodyType = eMessageBodyType_Image;
+//    [imageMessage writeImageToLocal:pictures[0] complete:^(BOOL finished, NSString *localPath) {
+//        if (finished)
+//        {
+//            // 上传路径
+//            imageMessage.localPath = localPath;
+//            imageMessage.remotePath = [imageMessage uploadRemotePath];
+//            imageMessage.thumbnailRemoteURL = [NSString stringWithFormat:@"loading_wait"];
+//
+//            BOOL isBurn = chatBar.barType == XMBarType_Burn ? YES : NO;
+//            NSDictionary *ext = @{@"burn":@(isBurn)};
+//            Message *tempMessage =
+//            [ChatSendHelper sendImageMessageWithImage:imageMessage
+//                                           toUsername:_chatter
+//                                          messageType:self.conversationType
+//                                    requireEncryption:NO
+//                                                  ext:ext];
+//            [self addMessage:tempMessage];
+//        }
+//    }];
+//}
 
 
 
@@ -539,6 +580,21 @@ LTChatBoxDelegate
         case LXChatBoxItemAlbum:
         {
             NSLog(@"LXChatBoxItemAlbum");
+            // 显示相册
+//            UIImagePickerController *pickerC = [[UIImagePickerController alloc] init];
+//            pickerC.delegate = self;
+//            [self presentViewController:pickerC
+//                               animated:YES
+//                             completion:nil];
+            
+//            [self.selectImages removeAllObjects];
+//            [self.selectedAssets removeAllObjects];
+            HMImagePickerController *picker =
+            [[HMImagePickerController alloc] initWithSelectedAssets:nil];
+            picker.pickerDelegate = self;            // 设置图像选择代理
+            picker.targetSize = CGSizeMake(600, 600);// 设置目标图片尺寸
+            picker.maxPickerCount = 9;               // 设置最大选择照片数量
+            [self presentViewController:picker animated:YES completion:nil];
         }
             break;
             
@@ -564,7 +620,6 @@ LTChatBoxDelegate
     }
 }
 
-
 /**发送文本text**/
 -(void)chatBox:(LXChatBox *)chatBox sendText:(NSString *)text {
     NSAttributedString *attribute =
@@ -589,6 +644,51 @@ LTChatBoxDelegate
     [self sendVoiceMessageWithVoiceLocalPath:voiceLocalPath
                                     duration:aDuration];
 }
+
+
+
+
+
+
+
+
+
+#pragma mark - HMImagePicker
+
+- (void)imagePickerController:(HMImagePickerController *)picker
+      didFinishSelectedImages:(NSArray<UIImage *> *)images
+               selectedAssets:(NSArray<PHAsset *> *)selectedAssets {
+    
+    UIAlertController *alertController =
+    [UIAlertController alertControllerWithTitle:nil
+                                        message:@"发送原图会消耗大量流量，是否发送压缩图？"
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *cancelAction =
+    [UIAlertAction actionWithTitle:@"发送原图"
+                             style:UIAlertActionStyleCancel
+                           handler:nil];
+    UIAlertAction *okAction =
+    [UIAlertAction actionWithTitle:@"确定"
+                             style:UIAlertActionStyleDefault
+                           handler:nil];
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    self.selectImages = images; // 记录图像，方便在 CollectionView 显示
+//    self.selectedAssets = [selectedAssets mutableCopy]; // 记录选中资源集合，方便再次选择照片定位
+    
+    for (id image in self.selectImages) {
+        [self sendImageMessageWithImage:image];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+
+
 
 
 
@@ -685,6 +785,23 @@ LTChatBoxDelegate
     }
     return _chatBox;
 }
+
+//-(NSMutableArray *)selectImages{
+//    if (!_selectImages) {
+//        _selectImages = [NSMutableArray array];
+//    }
+//    return _selectImages;
+//}
+//-(NSMutableArray *)selectedAssets{
+//    if (!_selectedAssets) {
+//        _selectedAssets = [NSMutableArray array];
+//    }
+//    return _selectedAssets;
+//}
+
+
+
+
 /*!
  @method
  @abstract 根据消息类型取不同的cell
