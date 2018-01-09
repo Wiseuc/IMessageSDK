@@ -36,7 +36,6 @@ void runCategoryForFramework42();
                                   body:(NSString *)aBody;
 
 
-
 /*!
  @method
  @abstract 发送Voice信息
@@ -60,7 +59,25 @@ void runCategoryForFramework42();
                                    body:(NSString *)aBody;
 
 
-
+/*!
+ @method
+ @abstract 发送image信息
+ @discussion <#备注#>
+ @param aSenderJID 发送者JID
+ @param aOtherJID 接收者JID
+ @param aConversationType 会话类型
+ @param aMessageType 信息类型（voice）
+ @param aBody 信息
+ @result  返回消息字典Dict
+ */
+-(NSDictionary *)sendImageWithSenderJID:(NSString *)aSenderJID
+                               otherJID:(NSString *)aOtherJID
+                       conversationName:(NSString *)aConversationName
+                       conversationType:(LTConversationType)aConversationType
+                            messageType:(LTMessageType)aMessageType
+                              localPath:(NSString *)aLocalPath
+                             remotePath:(NSString *)aRemotePath
+                                   body:(NSString *)aBody;
 
 
 

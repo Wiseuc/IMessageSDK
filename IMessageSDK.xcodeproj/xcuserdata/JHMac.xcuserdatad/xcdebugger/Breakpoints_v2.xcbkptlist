@@ -133,13 +133,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "IMessageSDK/controller/chat/ChatController.m"
-            timestampString = "537173262.838325"
+            filePath = "LTSDK/core/LTMessage.m"
+            timestampString = "537178728.276811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "-sendImageWithSenderJID:otherJID:conversationName:conversationType:messageType:localPath:body:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IMessageSDK/controller/chat/ChatController.m"
+            timestampString = "537178728.276904"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
             landmarkName = "-sendImageMessageWithImage:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LTSDK/manager/XMPPManager/LTXMPPManager+message.m"
+            timestampString = "537178728.276978"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
+            landmarkName = "-sendImageMessageXML:localPath:remotePath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

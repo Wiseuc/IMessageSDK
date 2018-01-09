@@ -368,38 +368,36 @@ HMImagePickerControllerDelegate
  */
 -(void)sendImageMessageWithImage:(UIImage *)aImage {
     //保存图片到沙盒本地
-    [LTPictureMessage saveImageToLocal:aImage
-                              complete:^(BOOL finished, NSString *localPath) {
-                                 
-                                  
-                                  
-                              }];
+    //内部进行压缩处理
+     [LTPictureMessage saveImageToLocal:aImage
+                          isCompression:YES
+                               complete:^(BOOL finished, NSString *localPath) {
+                                   
+                                   if (finished)
+                                   {
+                                       NSDictionary *userDict = [LTUser.share queryUser];
+                                       NSString *myJID =userDict[@"JID"];
+                                       //会话类型
+                                       LTConversationType type = LTConversationTypeChat;
+                                       if ([self.currentOtherJID containsString:@"conference"]) {
+                                           type = LTConversationTypeGroupChat;
+                                       }
+                                       
+                                       //151539219460275.jpg
+                                       NSString *aBody = [localPath lastPathComponent];
+                                       [LTMessage.share sendImageWithSenderJID:myJID
+                                                                      otherJID:self.currentOtherJID
+                                                              conversationName:self.conversationName
+                                                              conversationType:(type)
+                                                                   messageType:LTMessageType_Image
+                                                                     localPath:localPath
+                                                                          body:aBody];
+                                   }
+                               }];
 }
-/**发送图片Picture**/
-//- (void)chatBar:(XMChatBar *)chatBar sendPictures:(NSArray *)pictures
-//{
-//    XMImageMessage *imageMessage = [[XMImageMessage alloc] init];
-//    imageMessage.bodyType = eMessageBodyType_Image;
-//    [imageMessage writeImageToLocal:pictures[0] complete:^(BOOL finished, NSString *localPath) {
-//        if (finished)
-//        {
-//            // 上传路径
-//            imageMessage.localPath = localPath;
-//            imageMessage.remotePath = [imageMessage uploadRemotePath];
-//            imageMessage.thumbnailRemoteURL = [NSString stringWithFormat:@"loading_wait"];
-//
-//            BOOL isBurn = chatBar.barType == XMBarType_Burn ? YES : NO;
-//            NSDictionary *ext = @{@"burn":@(isBurn)};
-//            Message *tempMessage =
-//            [ChatSendHelper sendImageMessageWithImage:imageMessage
-//                                           toUsername:_chatter
-//                                          messageType:self.conversationType
-//                                    requireEncryption:NO
-//                                                  ext:ext];
-//            [self addMessage:tempMessage];
-//        }
-//    }];
-//}
+
+
+
 
 
 

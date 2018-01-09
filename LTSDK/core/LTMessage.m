@@ -92,7 +92,16 @@
 
 
 
-
+/*!
+ @method
+ @abstract 发送Text信息
+ @discussion 备注
+ @param aSenderJID 发送者JID
+ @param aOtherJID 接收者JID
+ @param aConversationType 会话类型
+ @param aMessageType 信息类型（Text）
+ @result  返回消息字典Dict
+ */
 -(NSDictionary *)sendTextWithSenderJID:(NSString *)aSenderJID
                               otherJID:(NSString *)aOtherJID
                       conversationName:(NSString *)aConversationName
@@ -145,6 +154,35 @@
 }
 
 
+/*!
+ @method
+ @abstract 发送image信息
+ @discussion <#备注#>
+ @param aSenderJID 发送者JID
+ @param aOtherJID 接收者JID
+ @param aConversationType 会话类型
+ @param aMessageType 信息类型（voice）
+ @param aBody image信息名字：例如45485454456456456.png
+ @result  返回消息字典Dict
+ */
+-(NSDictionary *)sendImageWithSenderJID:(NSString *)aSenderJID
+                               otherJID:(NSString *)aOtherJID
+                       conversationName:(NSString *)aConversationName
+                       conversationType:(LTConversationType)aConversationType
+                            messageType:(LTMessageType)aMessageType
+                              localPath:(NSString *)aLocalPath
+                                   body:(NSString *)aBody {
+    //voice远程路径
+    NSString *aRemotePath = [self queryUploadFileRemotePathWithMessageType:aMessageType];
+    return [LTXMPPManager.share sendImageWithSenderJID:aSenderJID
+                                              otherJID:aOtherJID
+                                      conversationName:aConversationName
+                                      conversationType:aConversationType
+                                           messageType:aMessageType
+                                             localPath:aLocalPath
+                                            remotePath:aRemotePath
+                                                  body:aBody];
+}
 
 
 

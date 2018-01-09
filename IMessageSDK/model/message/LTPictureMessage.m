@@ -54,10 +54,12 @@
 #pragma mark - public
 
 + (void)saveImageToLocal:(UIImage *)aImage
+           isCompression:(BOOL)isCompression
                 complete:(void(^)(BOOL finished,NSString *localPath))complete {
     NSString *imageName = [AppUtility get_32Bytes_UUID];
     NSString *imageType = @"jpg";
-    NSString *imagePath = [NSString stringWithFormat:@"%@/%@.%@",kPictureFilePath,imageName,imageType];
+    NSString *imagePath =
+    [NSString stringWithFormat:@"%@/%@.%@",kPictureFilePath,imageName,imageType];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (  ![fileManager fileExistsAtPath:kPictureFilePath] ) {
@@ -70,7 +72,12 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //FIXME: 压缩图片尺寸
         CGFloat targetWidth = 540;
-        UIImage *zigImage = [weakSelf imageCompressForWidth:aImage targetWidth:targetWidth];
+        UIImage *zigImage = nil;
+        if (isCompression) {
+            zigImage = [weakSelf imageCompressForWidth:aImage targetWidth:targetWidth];
+        }else{
+            zigImage = aImage;
+        }
         
         // 图片保存到本地
         NSData *data = UIImageJPEGRepresentation(zigImage, 0.7f);
