@@ -99,6 +99,27 @@
     //文件
     else if ( [xmlMessage elementForName:@"offlinedir"] )
     {
+        
+        NSString *offlinedir = [xmlMessage elementForName:@"offlinedir"].stringValue;
+        NSString *offlinefilename = [xmlMessage elementForName:@"offlinefilename"].stringValue;
+        NSString *offlinefilesize = [xmlMessage elementForName:@"offlinefilesize"].stringValue;
+
+        NSString *from = [xmlMessage attributeForName:@"from"].stringValue;
+        if ([from.lowercaseString containsString:@"android"]){
+            [dict setObject:@"android" forKey:@"resource"];
+        }
+        else if ([from.lowercaseString containsString:@"iphone"]){
+            [dict setObject:@"iphone" forKey:@"resource"];
+        }
+        else if ([from.lowercaseString containsString:@"window"]){
+            [dict setObject:@"window" forKey:@"resource"];
+        }
+        
+        
+        
+        [dict setObject:offlinedir forKey:@"remotePath"];
+        [dict setObject:offlinefilesize forKey:@"size"];
+        [dict setObject:offlinefilename forKey:@"body"];
         [dict setObject:@"file" forKey:@"bodyType"];
     }
     else

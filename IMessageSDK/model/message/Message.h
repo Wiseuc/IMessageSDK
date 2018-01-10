@@ -47,7 +47,8 @@ typedef void(^MessageDBChangeBlock)(void);
 @property (nonatomic, strong) NSString *to;
 
 //第三组
-@property (nonatomic, strong) NSString *conversationName;   /**会话室name,在聊天List有用，唯一标识  单聊：对方名  群聊：群名 **/
+@property (nonatomic, strong) NSString *conversationName;/**会话室name,在聊天List有用，唯一标识  单聊：对方名  群聊：群名 **/
+
 
 
 //第四组
@@ -57,11 +58,14 @@ typedef void(^MessageDBChangeBlock)(void);
  from="fd3f752ffdfe4c5cbb26e818c6ca6f4c@conference.duowin-server/萧凡宇"
  **/
 @property (nonatomic, strong) NSString *from;
-/**
- conversionType:  chat:单聊  groupchat:群聊  chatRoom:讨论组   attributeGroupChat:xxx群聊
- **/
 @property (nonatomic, strong) NSString *type;
-
+/**
+ 会话类型：conversionType:
+ chat:单聊
+ groupchat:群聊
+ chatRoom:讨论组
+ attributeGroupChat:xxx群聊
+ **/
 
 
 //资源路径
@@ -75,9 +79,19 @@ typedef void(^MessageDBChangeBlock)(void);
 //image信息
 
 
-//
 
-
+//file信息
+@property (nonatomic, strong) NSString  *size;         /**文件大小**/
+@property (nonatomic, strong) NSString  *resource;     /**对方客户端版本 ：汇讯iphone版**/
+@property (nonatomic, strong) NSString  *filetype;
+/**
+ 文件类型
+ LTFileType_NoFound = -1,
+ LTFileType_Default,
+ LTFileType_Text,
+ LTFileType_Picture,
+ LTFileType_Audio,
+ **/
 
 
 

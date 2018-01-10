@@ -269,38 +269,49 @@
     msg.from = dict[@"from"];
     msg.type = dict[@"type"];
     
-    
-    if ([dict[@"bodyType"] isEqualToString:@"voice"]) {
-        //voice
+    //声音
+    if ([dict[@"bodyType"] isEqualToString:@"voice"])
+    {
         msg.duration = dict[@"duration"];
         msg.localPath = [NSString stringWithFormat:@"%@/%@",kVoiceFilePath,msg.body];
         msg.remotePath = dict[@"remotePath"];
-        [self downloadVocieWithRemotePath:msg.remotePath
-                                localPath:msg.localPath];
+        [self downloadWithRemotePath:msg.remotePath localPath:msg.localPath];
     }
-    else if ([dict[@"bodyType"] isEqualToString:@"location"]){
+    //地址
+    else if ([dict[@"bodyType"] isEqualToString:@"location"])
+    {
         
     }
-    else if ([dict[@"bodyType"] isEqualToString:@"file"]){
-        
+    //文件
+    else if ([dict[@"bodyType"] isEqualToString:@"file"])
+    {
+        msg.localPath = [NSString stringWithFormat:@"%@/%@",kFilePath,msg.body];
+        msg.remotePath = dict[@"remotePath"];
+        msg.size = dict[@"size"];
+        msg.resource = dict[@"resource"];
+        [self downloadWithRemotePath:msg.remotePath localPath:msg.localPath];
     }
-    
-    
-    else if ([dict[@"bodyType"] isEqualToString:@"image"]){
-        //voice
+    //图片
+    else if ([dict[@"bodyType"] isEqualToString:@"image"])
+    {
         msg.duration = dict[@"duration"];
         msg.localPath = [NSString stringWithFormat:@"%@/%@",kVoiceFilePath,msg.body];
         msg.remotePath = dict[@"remotePath"];
-        [self downloadImageWithRemotePath:msg.remotePath
-                                localPath:msg.localPath];
+        [self downloadWithRemotePath:msg.remotePath localPath:msg.localPath];
     }
-    else if ([dict[@"bodyType"] isEqualToString:@"vibrate"]){
+    //SOS
+    else if ([dict[@"bodyType"] isEqualToString:@"vibrate"])
+    {
         
     }
-    else if ([dict[@"bodyType"] isEqualToString:@"text"]){
+    //文本
+    else if ([dict[@"bodyType"] isEqualToString:@"text"])
+    {
         
     }
-    else if ([dict[@"bodyType"] isEqualToString:@"video"]){
+    //视频
+    else if ([dict[@"bodyType"] isEqualToString:@"video"])
+    {
         
     }
     [msg jh_saveOrUpdate];
@@ -374,61 +385,6 @@
 
 
 
-#pragma mark - 下载文件
-/*!
- @method
- @abstract 下载voice
- @discussion <#备注#>
- @param aRemotePath 远程地址
- @param aLocalPath 本地地址
- */
--(void)downloadVocieWithRemotePath:(NSString *)aRemotePath
-                         localPath:(NSString *)aLocalPath{
-    
-    HttpTool *tool = [[HttpTool alloc] init];
-    [tool downLoadFromURL:[NSURL URLWithString:aRemotePath]
-                 savePath:aLocalPath
-            progressBlock:nil
-               completion:nil];
-}
-/*!
- @method
- @abstract 下载file
- @discussion <#备注#>
- @param remotePath 远程地址
- */
--(void)downloadFileWithRemotePath:(NSString *)remotePath{
-    
-    
-}
-
-/*!
- @method
- @abstract 下载image
- @discussion <#备注#>
- @param remotePath 远程地址
- */
--(void)downloadImageWithRemotePath:(NSString *)aRemotePath
-                         localPath:(NSString *)aLocalPath{
-    HttpTool *tool = [[HttpTool alloc] init];
-    [tool downLoadFromURL:[NSURL URLWithString:aRemotePath]
-                 savePath:aLocalPath
-            progressBlock:nil
-               completion:nil];
-}
-
-/*!
- @method
- @abstract 下载video
- @discussion <#备注#>
- @param remotePath 远程地址
- */
--(void)downloadVideoWithRemotePath:(NSString *)remotePath{
-    
-}
-
-
-
 
 
 
@@ -442,6 +398,23 @@
 
 
 #pragma mark - Private
+
+/*!
+ @method
+ @abstract 下载服务器资源
+ @discussion <#备注#>
+ @param aRemotePath 远程地址
+ @param aLocalPath 本地地址
+ */
+-(void)downloadWithRemotePath:(NSString *)aRemotePath
+                    localPath:(NSString *)aLocalPath{
+    HttpTool *tool = [[HttpTool alloc] init];
+    [tool downLoadFromURL:[NSURL URLWithString:aRemotePath]
+                 savePath:aLocalPath
+            progressBlock:nil
+               completion:nil];
+}
+
 
 -(void)settingApnsToken
 {

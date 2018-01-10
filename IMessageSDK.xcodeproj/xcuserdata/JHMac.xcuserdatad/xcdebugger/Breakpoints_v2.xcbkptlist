@@ -130,49 +130,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LTSDK/utility/MessageAnalysis/LT_MessageAnalysis.m"
-            timestampString = "537188207.395334"
+            filePath = "LTSDK/core/LTMessage.m"
+            timestampString = "537273915.12563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "+analysisXMPPMessage:"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "-queryMesageCompleted:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "+[LT_MessageAnalysis analysisXMPPMessage:]"
-                  moduleName = "IMessageSDK"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/JHMac/Documents/%E5%8A%B1%E6%8B%93%E8%BD%AF%E4%BB%B62/9%E3%80%81GitLab/IMessageSDK/LTSDK/utility/MessageAnalysis/LT_MessageAnalysis.m"
-                  timestampString = "537244588.76241"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "123"
-                  endingLineNumber = "123"
-                  offsetFromSymbolStart = "3064">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "+[LT_MessageAnalysis analysisXMPPMessage:]"
-                  moduleName = "IMessageSDK"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/JHMac/Documents/%E5%8A%B1%E6%8B%93%E8%BD%AF%E4%BB%B62/9%E3%80%81GitLab/IMessageSDK/LTSDK/utility/MessageAnalysis/LT_MessageAnalysis.m"
-                  timestampString = "537244588.766324"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "123"
-                  endingLineNumber = "123"
-                  offsetFromSymbolStart = "3076">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -181,46 +149,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LTSDK/core/LTMessage.m"
-            timestampString = "537188207.39543"
+            filePath = "LTSDK/utility/MessageAnalysis/LT_MessageAnalysis.m"
+            timestampString = "537269762.35405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "-queryMesageCompleted:"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "+analysisXMPPMessage:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__34-[LTMessage queryMesageCompleted:]_block_invoke"
-                  moduleName = "IMessageSDK"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/JHMac/Documents/%E5%8A%B1%E6%8B%93%E8%BD%AF%E4%BB%B62/9%E3%80%81GitLab/IMessageSDK/LTSDK/core/LTMessage.m"
-                  timestampString = "537244588.774004"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "616">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__34-[LTMessage queryMesageCompleted:]_block_invoke"
-                  moduleName = "IMessageSDK"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/JHMac/Documents/%E5%8A%B1%E6%8B%93%E8%BD%AF%E4%BB%B62/9%E3%80%81GitLab/IMessageSDK/LTSDK/core/LTMessage.m"
-                  timestampString = "537244588.777434"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "628">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -230,44 +166,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMessageSDK/base/MainController.m"
-            timestampString = "537188207.395512"
+            timestampString = "537269762.354152"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
             landmarkName = "-dealData:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IMessageSDK/controller/chat/ChatController.m"
-            timestampString = "537244588.433183"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "797"
-            endingLineNumber = "797"
-            landmarkName = "ChatController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IMessageSDK/controller/chat/ChatController.m"
-            timestampString = "537244588.43329"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "802"
-            endingLineNumber = "802"
-            landmarkName = "-image:didFinishSavingWithError:contextInfo:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

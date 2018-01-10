@@ -558,6 +558,9 @@
 		F9B6308020036E3600BED631 /* ChatCommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B6307F20036E3600BED631 /* ChatCommandCell.m */; };
 		F9B9E7341FFB530000EAE150 /* AppDelegate+apns.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9E7331FFB530000EAE150 /* AppDelegate+apns.m */; };
 		F9B9E7371FFB539A00EAE150 /* AppDelegate+voip.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9E7361FFB539A00EAE150 /* AppDelegate+voip.m */; };
+		F9C1A2862005BEBF0052969B /* FileController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C1A2852005BEBF0052969B /* FileController.m */; };
+		F9C1A28A2005C49C0052969B /* FileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C1A2892005C49C0052969B /* FileCell.m */; };
+		F9C1A28E2005E25C0052969B /* CommonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C1A28D2005E25B0052969B /* CommonHelper.m */; };
 		F9C557F31FE20D5200539EAB /* LTXMPPManager+iq.h in Headers */ = {isa = PBXBuildFile; fileRef = F9C557F11FE20D5200539EAB /* LTXMPPManager+iq.h */; };
 		F9C557F41FE20D5200539EAB /* LTXMPPManager+iq.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C557F21FE20D5200539EAB /* LTXMPPManager+iq.m */; };
 		F9C557F81FE2128A00539EAB /* LTUser.h in Headers */ = {isa = PBXBuildFile; fileRef = F9C557F61FE2128900539EAB /* LTUser.h */; };
@@ -1584,6 +1587,12 @@
 		F9B9E7331FFB530000EAE150 /* AppDelegate+apns.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+apns.m"; sourceTree = "<group>"; };
 		F9B9E7351FFB539A00EAE150 /* AppDelegate+voip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+voip.h"; sourceTree = "<group>"; };
 		F9B9E7361FFB539A00EAE150 /* AppDelegate+voip.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+voip.m"; sourceTree = "<group>"; };
+		F9C1A2842005BEBF0052969B /* FileController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileController.h; sourceTree = "<group>"; };
+		F9C1A2852005BEBF0052969B /* FileController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileController.m; sourceTree = "<group>"; };
+		F9C1A2882005C49C0052969B /* FileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileCell.h; sourceTree = "<group>"; };
+		F9C1A2892005C49C0052969B /* FileCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileCell.m; sourceTree = "<group>"; };
+		F9C1A28C2005E25B0052969B /* CommonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHelper.h; sourceTree = "<group>"; };
+		F9C1A28D2005E25B0052969B /* CommonHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonHelper.m; sourceTree = "<group>"; };
 		F9C557F11FE20D5200539EAB /* LTXMPPManager+iq.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LTXMPPManager+iq.h"; sourceTree = "<group>"; };
 		F9C557F21FE20D5200539EAB /* LTXMPPManager+iq.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LTXMPPManager+iq.m"; sourceTree = "<group>"; };
 		F9C557F61FE2128900539EAB /* LTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTUser.h; sourceTree = "<group>"; };
@@ -1878,6 +1887,7 @@
 		F9194CAC1FDFD39400CCFB32 /* utility */ = {
 			isa = PBXGroup;
 			children = (
+				F9C1A28B2005E25B0052969B /* Common */,
 				F9886D9E2004565F00E69221 /* HttpTool */,
 				F91761B11FE0B3E400906CBB /* AppUtility */,
 			);
@@ -3556,6 +3566,7 @@
 		F9558D861FE39F2000D13CD0 /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				F9C1A2872005C4860052969B /* file */,
 				F959FC0D1FF34998001D689F /* createGroup */,
 				F959FBFC1FF33A2F001D689F /* addRosterGroup */,
 				F9F7C0911FEBAF7C00F56A23 /* chat */,
@@ -3811,6 +3822,7 @@
 		F963FD661FE257040073D490 /* chat */ = {
 			isa = PBXGroup;
 			children = (
+				F9C1A2832005BEA80052969B /* file */,
 				F963FD6C1FE257570073D490 /* ChatController.h */,
 				F963FD6D1FE257570073D490 /* ChatController.m */,
 			);
@@ -4297,6 +4309,33 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
+		F9C1A2832005BEA80052969B /* file */ = {
+			isa = PBXGroup;
+			children = (
+				F9C1A2842005BEBF0052969B /* FileController.h */,
+				F9C1A2852005BEBF0052969B /* FileController.m */,
+			);
+			path = file;
+			sourceTree = "<group>";
+		};
+		F9C1A2872005C4860052969B /* file */ = {
+			isa = PBXGroup;
+			children = (
+				F9C1A2882005C49C0052969B /* FileCell.h */,
+				F9C1A2892005C49C0052969B /* FileCell.m */,
+			);
+			path = file;
+			sourceTree = "<group>";
+		};
+		F9C1A28B2005E25B0052969B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F9C1A28C2005E25B0052969B /* CommonHelper.h */,
+				F9C1A28D2005E25B0052969B /* CommonHelper.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		F9C557F51FE2122800539EAB /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -4710,6 +4749,7 @@
 				F9B63068200336B500BED631 /* LXEmotionManager.m in Sources */,
 				F95B4ADA1FFE26CD00AFBEDE /* LTVoiceMessage.m in Sources */,
 				F9194C861FDFD2C400CCFB32 /* main.m in Sources */,
+				F9C1A2862005BEBF0052969B /* FileController.m in Sources */,
 				F959FC491FF372A7001D689F /* RATreeView+RATreeNodeCollectionControllerDataSource.m in Sources */,
 				F9B63062200336B500BED631 /* LXChatBoxFaceView.m in Sources */,
 				F959FC171FF36199001D689F /* UITextView+ZWPlaceHolder.m in Sources */,
@@ -4760,6 +4800,7 @@
 				F90F99B62004920C0037DD8E /* HMAlbumTableViewCell.m in Sources */,
 				F959FC431FF372A7001D689F /* RATreeNodeCollectionController.m in Sources */,
 				F959FC611FF39942001D689F /* UIImage+ScaleToSize.m in Sources */,
+				F9C1A28E2005E25C0052969B /* CommonHelper.m in Sources */,
 				F98FDBA01FEB8DB200618C82 /* NSCache+BGCache.m in Sources */,
 				F91CD2CD1FFCE3CF0011489B /* EMCDDeviceManager+Remind.m in Sources */,
 				F959FC471FF372A7001D689F /* RATreeView+Enums.m in Sources */,
@@ -4779,6 +4820,7 @@
 				F98FDBA31FEB8DB200618C82 /* FMDatabaseAdditions.m in Sources */,
 				F9F7C09B1FEBBD3C00F56A23 /* JHLabel.m in Sources */,
 				F93496EB1FE8E52000E8D8A3 /* StackView.m in Sources */,
+				F9C1A28A2005C49C0052969B /* FileCell.m in Sources */,
 				F91CD25F1FFCC6C10011489B /* NSObject+MJClass.m in Sources */,
 				F959FC0C1FF3464B001D689F /* CreateGroupController.m in Sources */,
 				F93496F91FE90DE800E8D8A3 /* InformationController.m in Sources */,

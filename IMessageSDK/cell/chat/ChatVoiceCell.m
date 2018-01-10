@@ -198,8 +198,8 @@
     
     //
     self.playStateIMGV.animationImages = films;
-    self.playStateIMGV.animationDuration = _model.duration.floatValue/2;
-    self.playStateIMGV.animationRepeatCount  = _model.duration.floatValue/1.5;
+    self.playStateIMGV.animationDuration = 1.5;
+    self.playStateIMGV.animationRepeatCount  = _model.duration.floatValue/1.5 + 1;
     [self.playStateIMGV startAnimating];
 }
 

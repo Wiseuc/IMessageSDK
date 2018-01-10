@@ -48,3 +48,31 @@ typedef NS_ENUM(NSInteger, LTMessageType) {
     LTMessageType_Vibrate
 };
 
+
+
+
+
+
+/*!
+ @enum
+ @brief 文件类型
+ @constant LTFileType_NoFound    // 文件找不到
+ @constant LTFileType_Default    // 其他类型
+ @constant LTFileType_Text       // 文本
+ @constant LTFileType_Picture    // 图片
+ @constant LTFileType_Audio      // 影音
+ */
+typedef NS_ENUM(NSInteger, LTFileType) {
+    LTFileType_NoFound = -1,
+    LTFileType_Default,
+    LTFileType_Text,
+    LTFileType_Picture,
+    LTFileType_Audio,
+};
+
+
+
+
+
+
+

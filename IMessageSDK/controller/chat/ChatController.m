@@ -36,6 +36,8 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 
+#import "FileController.h"
+
 
 @interface ChatController ()
 <
@@ -305,7 +307,7 @@ HMImagePickerControllerDelegate
  @method
  @abstract 发送语音信息
  @discussion null
- @param localPath  /var/mobile/Containers/Data/Application/D713BC89-59C4-428B-BA05-A64C280D0084/Documents/wiseuc/Voice/151539219460275.mp3
+ @param voiceLocalPath  /var/mobile/Containers/Data/Application/D713BC89-59C4-428B-BA05-A64C280D0084/Documents/wiseuc/Voice/151539219460275.mp3
  @param aDuration 语音时长
  */
 -(void)sendVoiceMessageWithVoiceLocalPath:(NSString *)voiceLocalPath
@@ -370,6 +372,44 @@ HMImagePickerControllerDelegate
                               }];
 }
 
+/*!
+ @method
+ @abstract 发送文件信息
+ @discussion <#备注#>
+ @param aLocalPath 本地路径
+ @param aSize 大小
+ @param aFileName 文件名
+ */
+-(void)sendFileMessageWithLocalPath:(NSString *)aLocalPath
+                               size:(NSString *)aSize
+                               body:(NSString *)aBody {
+
+    NSDictionary *userDict = [LTUser.share queryUser];
+    NSString *myJID =userDict[@"JID"];
+    //会话类型
+    LTConversationType type = LTConversationTypeChat;
+    if ([self.currentOtherJID containsString:@"conference"]) {
+        type = LTConversationTypeGroupChat;
+    }
+    
+    //151539219460275.mp3
+    NSDictionary *dict =
+    [LTMessage.share sendFileWithSenderJID:myJID
+                                  otherJID:self.currentOtherJID
+                          conversationName:self.conversationName
+                          conversationType:type
+                               messageType:(LTMessageType_File)
+                                 localPath:aLocalPath
+                                      size:aSize
+                                      body:aBody];
+    
+    [self dealData:dict];
+}
+
+
+
+
+
 -(void)dealData:(NSDictionary *)dict {
     Message *msg = [[Message alloc] init];
     msg.currentMyJID = dict[@"currentMyJID"];
@@ -398,7 +438,8 @@ HMImagePickerControllerDelegate
     msg.remotePath = dict[@"remotePath"];
     
     //file
-    //xxx
+    msg.size = dict[@"size"];
+    msg.resource = dict[@"resource"];
     
     [msg jh_saveOrUpdate];
 }
@@ -457,6 +498,7 @@ HMImagePickerControllerDelegate
         return CGSizeMake(kScreenWidth, 30+ 142.3);
     }
     else if ([model.bodyType isEqualToString:@"file"]){
+        return CGSizeMake(kScreenWidth, 30+ 100);
     }
     else if ([model.bodyType isEqualToString:@"video"]){
     }
@@ -609,6 +651,7 @@ HMImagePickerControllerDelegate
             
         case LXChatBoxItemDoc:
             NSLog(@"LXChatBoxItemDoc");
+            [self FilePickerSelect];
             break;
             
         case LXChatBoxItemVideo:
@@ -809,6 +852,28 @@ HMImagePickerControllerDelegate
 
 
 
+
+
+
+
+
+
+
+#pragma mark - 代理：FilePicker
+
+//文件选择器
+- (void)FilePickerSelect {
+    // 显示相册
+    FileController *filer = [[FileController alloc] init];
+    [self.navigationController pushViewController:filer animated:YES ];
+    __weak typeof(self) weakself = self;
+    [filer settingFileControllerSelect:^(Message *model) {
+        //发送消息
+        [weakself sendFileMessageWithLocalPath:model.localPath
+                                          size:model.size
+                                          body:model.body];
+    }];
+}
 
 
 

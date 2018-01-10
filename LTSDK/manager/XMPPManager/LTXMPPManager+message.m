@@ -310,8 +310,147 @@ void runCategoryForFramework42(){}
              @"remotePath":aRemotePath,
 
              };
-    return @{};
 }
+
+/*!
+ @method
+ @abstract 发送file信息
+ @discussion <#备注#>
+ @param aSenderJID 发送者JID
+ @param aOtherJID 接收者JID
+ @param aConversationType 会话类型
+ @param aMessageType 信息类型（file）
+ @param aBody file信息名字：例如45485454456456456.rar
+ @result  返回消息字典Dict
+ */
+-(NSDictionary *)sendFileWithSenderJID:(NSString *)aSenderJID
+                              otherJID:(NSString *)aOtherJID
+                      conversationName:(NSString *)aConversationName
+                      conversationType:(LTConversationType)aConversationType
+                           messageType:(LTMessageType)aMessageType
+                             localPath:(NSString *)aLocalPath
+                            remotePath:(NSString *)aRemotePath
+                                  size:(NSString *)aSize
+                                  body:(NSString *)aBody {
+    
+    NSXMLElement *msg = [NSXMLElement elementWithName:@"message"];
+    
+    NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
+    NSXMLElement *wiseucoffline = [NSXMLElement elementWithName:@"wiseucoffline"];
+    NSXMLElement *offlinedir = [NSXMLElement elementWithName:@"offlinedir"];
+    NSXMLElement *offlinefilename = [NSXMLElement elementWithName:@"offlinefilename"];
+    NSXMLElement *offlinefilesize = [NSXMLElement elementWithName:@"offlinefilesize"];
+    NSXMLElement *offlinefullurl = [NSXMLElement elementWithName:@"offlinefullurl"];
+    
+    
+    
+    [body setStringValue:aBody];
+    //[wiseucoffline setStringValue:aBody];
+    [offlinedir setStringValue:aRemotePath];
+    [offlinefilename setStringValue:aBody];
+    [offlinefilesize setStringValue:aSize];
+    [offlinefullurl setStringValue:aRemotePath];
+    
+    
+    
+    
+    [msg addChild:body];
+//    [msg addChild:wiseucoffline];
+    [msg addChild:offlinedir];
+    [msg addChild:offlinefilename];
+    [msg addChild:offlinefilesize];
+    
+    
+    
+//    [wiseucoffline addAttributeWithName:@"type" stringValue:@"http"];
+//    [wiseucoffline addChild:offlinedir];
+//    [wiseucoffline addChild:offlinefilename];
+//    [wiseucoffline addChild:offlinefilesize];
+//    [wiseucoffline addChild:offlinefullurl];
+    
+    
+    
+    
+    [msg addAttributeWithName:@"id"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
+    [msg addAttributeWithName:@"to"  stringValue:aOtherJID];
+    
+    if (aConversationType == LTConversationTypeChat)
+    {
+        [msg addAttributeWithName:@"type"  stringValue:@"chat"];
+        [msg addAttributeWithName:@"from" stringValue: [aSenderJID stringByAppendingString:@"/IphoneIM"]];
+    }
+    else if (aConversationType == LTConversationTypeGroupChat)
+    {
+        [msg addAttributeWithName:@"type"  stringValue:@"groupchat"];
+        [msg addAttributeWithName:@"SenderJID"  stringValue:aSenderJID];
+    }
+    [msg addAttributeWithName:@"successed"  stringValue:@"success"];
+    [msg addAttributeWithName:@"UID"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
+    
+    
+    [self sendImageMessageXML:msg
+                    localPath:aLocalPath
+                   remotePath:aRemotePath];
+    
+    
+    
+    NSString *conversationType = nil;
+    if (aConversationType == LTConversationTypeChat)
+    {
+        conversationType = @"chat";
+    }
+    else if (aConversationType == LTConversationTypeGroupChat)
+    {
+        conversationType = @"groupchat";
+    }
+    
+    NSString *aResource = @"iphone";
+    if ([aSenderJID.lowercaseString containsString:@"android"])
+    {
+        aResource = @"android";
+    }
+    else if ([aSenderJID.lowercaseString containsString:@"window"])
+    {
+         aResource = @"window";
+    }
+    
+    
+    
+    return @{
+             @"currentMyJID":aSenderJID,
+             @"currentOtherJID":aOtherJID,
+             @"stamp":[self getTimestamp],
+             @"bodyType":@"file",
+             @"body":aBody,
+             
+             //1
+             @"UID":[self get_32Bytes_UUID],
+             //2
+             @"to":aOtherJID,
+             //3
+             @"conversationName":aConversationName,
+             //4
+             @"from":[aSenderJID stringByAppendingString:@"/IphoneIM"],
+             @"type":conversationType,
+             
+             //image
+             @"localPath":aLocalPath,
+             @"remotePath":aRemotePath,
+             @"size":aSize,
+             @"resource":aResource,
+             };
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
