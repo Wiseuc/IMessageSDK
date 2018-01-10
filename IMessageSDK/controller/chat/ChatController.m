@@ -492,9 +492,7 @@ HMImagePickerControllerDelegate
         //tapG点击手势
         [cell01 settingChatVoiceCellTapBlock:^(Message *model) {
             [EMCDDeviceManager.sharedInstance asyncPlayingWithPath:model.localPath
-                                                        completion:^(NSError *error) {
-           
-                                                        }];
+                                                        completion:nil];
         }];
         
         //longG长按手势
@@ -592,7 +590,9 @@ HMImagePickerControllerDelegate
     
     self.collectionview.frame = CGRectMake(0, 64, kScreenWidth, chatBoxY - 64);
     if (self.datasource.count > 0) {
-        [self.collectionview scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.datasource.count-1 inSection:0]
+        NSIndexPath *indexpath =
+        [NSIndexPath indexPathForRow:self.datasource.count-1 inSection:0];
+        [self.collectionview scrollToItemAtIndexPath:indexpath
                                     atScrollPosition:(UICollectionViewScrollPositionBottom)
                                             animated:YES];
     }
@@ -603,36 +603,23 @@ HMImagePickerControllerDelegate
     
     switch (itemType) {
         case LXChatBoxItemAlbum:
-        {
             NSLog(@"LXChatBoxItemAlbum");
-            // 显示相册
-            HMImagePickerController *picker =
-            [[HMImagePickerController alloc] initWithSelectedAssets:nil];
-            picker.pickerDelegate = self;
-            picker.targetSize = CGSizeMake(600, 600);
-            picker.maxPickerCount = 9;
-            [self presentViewController:picker animated:YES completion:nil];
-        }
+            [self HMImagePickerSelectImageFromAlbum];
             break;
             
         case LXChatBoxItemDoc:
-        {
             NSLog(@"LXChatBoxItemDoc");
-        }
             break;
             
         case LXChatBoxItemVideo:
-        {
             NSLog(@"LXChatBoxItemVideo");
-        }
             break;
             
         case LXChatBoxItemCamera:
-        {
             NSLog(@"LXChatBoxItemCamera");
-            [self selectImageFromCamera];
-        }
+            [self imagePickerSelectImageFromCamera];
             break;
+            
         default:
             break;
     }
@@ -647,7 +634,9 @@ HMImagePickerControllerDelegate
     NSLog(@"=== %@",attribute);
     [self sendTextMessage:text];
     if (self.datasource.count > 0) {
-        [self.collectionview scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.datasource.count-1 inSection:0]
+        NSIndexPath *indexpath =
+        [NSIndexPath indexPathForRow:self.datasource.count-1 inSection:0];
+        [self.collectionview scrollToItemAtIndexPath:indexpath
                                     atScrollPosition:(UICollectionViewScrollPositionBottom)
                                             animated:YES];
     }
@@ -656,7 +645,7 @@ HMImagePickerControllerDelegate
 /**发送音频voice**/
 -(void)chatBox:(LXChatBox *)chatBox
      sendVoice:(NSString *)voiceLocalPath
-       seconds:(NSInteger)duration{
+       seconds:(NSInteger)duration {
     
     NSString *aDuration = [NSString stringWithFormat:@"%li",duration];
     [self sendVoiceMessageWithVoiceLocalPath:voiceLocalPath
@@ -671,8 +660,17 @@ HMImagePickerControllerDelegate
 
 
 
-#pragma mark - HMImagePicker
-
+#pragma mark - 代理：HMImagePicker
+//从相册获取图片或视频
+- (void)HMImagePickerSelectImageFromAlbum {
+    // 显示相册
+    HMImagePickerController *picker =
+    [[HMImagePickerController alloc] initWithSelectedAssets:nil];
+    picker.pickerDelegate = self;
+    picker.targetSize = CGSizeMake(600, 600);
+    picker.maxPickerCount = 9;
+    [self presentViewController:picker animated:YES completion:nil];
+}
 - (void)imagePickerController:(HMImagePickerController *)picker
       didFinishSelectedImages:(NSArray<UIImage *> *)images
                selectedAssets:(NSArray<PHAsset *> *)selectedAssets {
@@ -696,7 +694,6 @@ HMImagePickerControllerDelegate
     
     self.selectImages = images; // 记录图像，方便在 CollectionView 显示
 //    self.selectedAssets = [selectedAssets mutableCopy]; // 记录选中资源集合，方便再次选择照片定位
-    
     for (id image in self.selectImages) {
         [self sendImageMessageWithImage:image];
     }
@@ -715,33 +712,41 @@ HMImagePickerControllerDelegate
 
 #pragma mark - 代理：UIImagePicker
 //从摄像头获取图片或视频
-- (void)selectImageFromCamera
+- (void)imagePickerSelectImageFromCamera
 {
-    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.imagePickerController.sourceType
+    = UIImagePickerControllerSourceTypeCamera;
     //录制视频时长，默认10s
     self.imagePickerController.videoMaximumDuration = 15;
     
     //相机类型（拍照、录像...）字符串需要做相应的类型转换
-    self.imagePickerController.mediaTypes = @[(NSString *)kUTTypeMovie,(NSString *)kUTTypeImage];
+    self.imagePickerController.mediaTypes
+    = @[(NSString *)kUTTypeMovie,(NSString *)kUTTypeImage];
     
     //视频上传质量
     //UIImagePickerControllerQualityTypeHigh高清
     //UIImagePickerControllerQualityTypeMedium中等质量
     //UIImagePickerControllerQualityTypeLow低质量
     //UIImagePickerControllerQualityType640x480
-    self.imagePickerController.videoQuality = UIImagePickerControllerQualityTypeHigh;
+    self.imagePickerController.videoQuality
+    = UIImagePickerControllerQualityTypeHigh;
     
     //设置摄像头模式（拍照，录制视频）为录像模式
-    self.imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
-    [self presentViewController:self.imagePickerController animated:YES completion:nil];
+    self.imagePickerController.cameraCaptureMode
+    = UIImagePickerControllerCameraCaptureModeVideo;
+    [self presentViewController:self.imagePickerController
+                       animated:YES
+                     completion:nil];
 }
 //从相册获取图片或视频
-- (void)selectImageFromAlbum {
+- (void)imagePickerSelectImageFromAlbum {
     //NSLog(@"相册");
-    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    [self presentViewController:self.imagePickerController animated:YES completion:nil];
+    self.imagePickerController.sourceType
+    = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:self.imagePickerController
+                       animated:YES
+                     completion:nil];
 }
-
 //该代理方法仅适用于只选取图片时
 - (void)imagePickerController:(UIImagePickerController *)picker
         didFinishPickingImage:(UIImage *)image

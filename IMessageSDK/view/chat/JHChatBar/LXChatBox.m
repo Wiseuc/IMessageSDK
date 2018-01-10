@@ -597,13 +597,14 @@ LXChatBoxMoreViewDelegate
         _moreView.hidden = YES;
         _moreView.delegate = self;
         // 创建Item
-        LXChatBoxMoreViewItem *photosItem = [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"照片"
-                                                                                        imageName:@"sharemore_pic"];
-        LXChatBoxMoreViewItem *takePictureItem = [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"拍摄"
-                                                                                             imageName:@"sharemore_video"];
-        LXChatBoxMoreViewItem *videoItem = [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"小视频"
-                                                                                       imageName:@"sharemore_sight"];
-        LXChatBoxMoreViewItem *docItem   = [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"文件" imageName:@"sharemore_wallet"];
+        LXChatBoxMoreViewItem *photosItem =
+        [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"照片" imageName:@"sharemore_pic"];
+        LXChatBoxMoreViewItem *takePictureItem =
+        [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"拍摄" imageName:@"sharemore_video"];
+        LXChatBoxMoreViewItem *videoItem =
+        [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"小视频" imageName:@"sharemore_sight"];
+        LXChatBoxMoreViewItem *docItem =
+        [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"文件" imageName:@"sharemore_wallet"];
         
         NSMutableArray *arr =
         [[NSMutableArray alloc] initWithObjects:
@@ -627,12 +628,15 @@ LXChatBoxMoreViewDelegate
 }
 -(UIButton *)voiceButton{
     if (!_voiceButton) {
-        _voiceButton =[[UIButton alloc]initWithFrame:CGRectMake(0, (HEIGHT_TABBAR - CHATBOX_BUTTON_WIDTH)/2, CHATBOX_BUTTON_WIDTH, CHATBOX_BUTTON_WIDTH)];
-        [_voiceButton setImage:[UIImage imageNamed:@"ToolViewInputVoice"] forState:UIControlStateSelected];
-
-         [_voiceButton setImage:[UIImage imageNamed:@"ToolViewKeyboard"] forState:UIControlStateNormal];
-        
-        [_voiceButton addTarget:self action:@selector(voiceButtonDown:) forControlEvents:UIControlEventTouchUpInside];
+        _voiceButton = [[UIButton alloc]initWithFrame:CGRectMake(0, (HEIGHT_TABBAR - CHATBOX_BUTTON_WIDTH)/2, CHATBOX_BUTTON_WIDTH, CHATBOX_BUTTON_WIDTH)];
+        [_voiceButton setImage:[UIImage imageNamed:@"ToolViewInputVoice"]
+         
+                      forState:UIControlStateSelected];
+         [_voiceButton setImage:[UIImage imageNamed:@"ToolViewKeyboard"]
+          
+                       forState:UIControlStateNormal];
+        [_voiceButton addTarget:self action:@selector(voiceButtonDown:)
+               forControlEvents:UIControlEventTouchUpInside];
     }
     return _voiceButton;
 }
