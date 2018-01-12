@@ -175,17 +175,9 @@ UITableViewDelegate
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Message *model = self.dataSource[indexPath.row];
     
-    if ([model.type isEqualToString:@"NewFriend"])
-    {
-        NewFriendController *newFriendvc = [[NewFriendController alloc] init];
-        [self.navigationController pushViewController:newFriendvc animated:YES];
-    }
-    else
-    {
+
         ChatController *chatvc = [[ChatController alloc] initWithCurrentOtherJID:model.currentOtherJID conversationName:model.conversationName];
         [self.navigationController pushViewController:chatvc animated:YES];
-    }
-    
 }
 
 //- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -205,13 +197,7 @@ UITableViewDelegate
 -(NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     Message *message = self.dataSource[indexPath.row];
-    if ([message.type isEqualToString:@"NewFriend"] )
-    {
-        return nil;
-        
-    }
-    else
-    {
+
         UITableViewRowAction *action01 =
         [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleDestructive)
                                            title:@"删除"
@@ -221,7 +207,6 @@ UITableViewDelegate
         NSArray *arr = @[action01];
         return arr;
         
-    }
     return nil;
 }
 

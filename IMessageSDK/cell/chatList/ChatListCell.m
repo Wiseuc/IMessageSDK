@@ -83,35 +83,48 @@
 //    CGFloat KHEIGHT = self.frame.size.height;
     
     self.nameLAB.text = model.conversationName;
-    self.messageLAB.text = model.body;
     self.timeLAB.text = model.stamp;
     
-    if ([model.type isEqualToString:@"NewFriend"])
-    {
-        self.iconIMGV.image = [UIImage imageNamed:@"NewFriend"];
-        self.timeLAB.text = nil;
+    
+    NSString *body = nil;
+    
+    if ([model.bodyType isEqualToString:@"text"]){
         
-        
-//        UIButton *acceptBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
-//        [self.contentView addSubview:acceptBTN];
-//        acceptBTN.frame = CGRectMake(KWIDTH - 110, 10, 50, 30);
-//        [acceptBTN setTitle:@"接受" forState:(UIControlStateNormal)];
-//        [acceptBTN setBackgroundColor:[UIColor greenColor]];
-//
-//
-//        UIButton *refuseBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
-//        [self.contentView addSubview:refuseBTN];
-//        refuseBTN.frame = CGRectMake(KWIDTH - 60, 10, 50, 30);
-//        [refuseBTN setTitle:@"拒绝" forState:(UIControlStateNormal)];
-//         [refuseBTN setBackgroundColor:[UIColor redColor]];
-    }
-    else
-    {
-        if ([model.currentOtherJID containsString:@"conference"]) {
-            self.iconIMGV.image = [UIImage imageNamed:@"group"];
-        }else {
-            self.iconIMGV.image = [UIImage imageNamed:@"icon_40pt"];
+        body = model.body;
+        if ([body containsString:@"<i@"]) {
+            body = @"[表情]";
         }
+    }
+    else if ([model.bodyType isEqualToString:@"voice"]){
+        body = @"[语音]";
+    }
+    else if ([model.bodyType isEqualToString:@"image"]){
+        body = @"[图片]";
+    }
+    else if ([model.bodyType isEqualToString:@"file"]){
+        body = @"[文件]";
+    }
+    else if ([model.bodyType isEqualToString:@"video"]){
+        body = @"[视频]";
+    }
+    else if ([model.bodyType isEqualToString:@"command"]){
+        body = @"[控制]";
+    }
+    else if ([model.bodyType isEqualToString:@"vibrate"]){
+        body = @"[抖动]";
+    }
+    else if ([model.bodyType isEqualToString:@"location"]){
+        body = @"[位置]";
+    }
+    self.messageLAB.text = body;
+    
+    
+    
+
+    if ([model.currentOtherJID containsString:@"conference"]) {
+        self.iconIMGV.image = [UIImage imageNamed:@"group"];
+    }else {
+        self.iconIMGV.image = [UIImage imageNamed:@"icon_40pt"];
     }
     
 

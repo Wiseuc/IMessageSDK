@@ -194,6 +194,7 @@ HMImagePickerControllerDelegate
         return;
     }
     
+    //过滤“新的好友”信息
     NSMutableArray *arrTemp = [NSMutableArray array];
     for (Message *message in arr) {
         if (message.body != nil && message.body.length > 0
