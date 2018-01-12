@@ -39,6 +39,9 @@
 #import "FileController.h"
 #import <QuartzCore/QuartzCore.h>
 
+#import "KSPhotoBrowser.h"
+#import "YYWebImage.h"
+
 
 @interface ChatController ()
 <
@@ -289,6 +292,42 @@ HMImagePickerControllerDelegate
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)toPhotoPreviewController:(Message *)model{
+    
+    //对象下标
+    __block NSUInteger index = 0;
+    [self.datasource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj == model) {
+            index = idx;
+        }
+    }];
+    
+    
+    //对象视图imageview
+    NSString *identifier = [self cellIndetifyForMessageType:(LTMessageType_Image)];
+    NSIndexPath *indexpath = [NSIndexPath indexPathForRow:index inSection:0];
+    ChatImageCell *cell01 =
+    [self.collectionview dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexpath];
+    
+    
+    
+    NSMutableArray *items = @[].mutableCopy;
+    for (Message *message in self.datasource)
+    {
+         if ([message.bodyType isEqualToString:@"image"]) {
+             UIImage *img = [UIImage imageWithContentsOfFile:message.localPath];
+             if (img == nil) {
+                 img = [UIImage imageNamed:@"icon_empty_file"];
+             }
+             KSPhotoItem *item = [KSPhotoItem itemWithSourceView:cell01.contentIMGV image:img];
+             [items addObject:item];
+         }
+    }
+    KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:items selectedIndex:index];
+    [browser showFromViewController:self];
+}
+
+
 
 
 
@@ -596,9 +635,7 @@ HMImagePickerControllerDelegate
             [EMCDDeviceManager.sharedInstance asyncPlayingWithPath:model.localPath
                                                         completion:nil];
         }];
-        
         //longG长按手势
-        
         return cell01;
     }
     else if ([model.bodyType isEqualToString:@"image"]){
@@ -607,6 +644,10 @@ HMImagePickerControllerDelegate
         ChatImageCell *cell01 =
         [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifier forIndexPath:indexPath];
         cell01.model = model;
+        [cell01 settingChatImageCellTapBlock:^(Message *model) {
+            [self toPhotoPreviewController:model];
+        }];
+        
         return cell01;
     }
     else if ([model.bodyType isEqualToString:@"file"]){
@@ -653,6 +694,31 @@ HMImagePickerControllerDelegate
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+//    NSMutableArray *items = @[].mutableCopy;
+//    for (int i = 0; i < self.datasource.count; i++) {
+//        ChatImageCell *cell = (ChatImageCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+//        NSString *url = [self.datasource[i] stringByReplacingOccurrencesOfString:@"bmiddle" withString:@"large"];
+//
+//        KSPhotoItem *item = [KSPhotoItem itemWithSourceView:cell.contentIMGV imageUrl:[NSURL URLWithString:url]];
+//        [items addObject:item];
+//    }
+//
+//
+//
+//
+//    KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:items selectedIndex:indexPath.row];
+//    browser.delegate = self;
+//    browser.dismissalStyle = _dismissalStyle;
+//    browser.backgroundStyle = _backgroundStyle;
+//    browser.loadingStyle = _loadingStyle;
+//    browser.pageindicatorStyle = _pageindicatorStyle;
+//    browser.bounces = _bounces;
+//    [browser showFromViewController:self];
+    
+
+    
     
 }
 //- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView

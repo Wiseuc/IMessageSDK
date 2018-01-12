@@ -12,13 +12,20 @@
 @interface ChatImageCell ()
 @property (nonatomic, strong) UIImageView *iconIMGV;  /**头像**/
 @property (nonatomic, strong) UIImageView *backgroundIMGV;  /**背景**/
-@property (nonatomic, strong) UIImageView *contentIMGV;  /**背景**/
+//@property (nonatomic, strong) UIImageView *contentIMGV;  /**背景**/
 @property (nonatomic, strong) UILabel *timeLAB;  /**时间**/
+
+@property (nonatomic, strong) ChatImageCellTapBlock aChatImageCellTapBlock;
 @end
 
 
 
 @implementation ChatImageCell
+
+
+-(void)settingChatImageCellTapBlock:(ChatImageCellTapBlock)aBlock{
+    self.aChatImageCellTapBlock = aBlock;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -64,10 +71,10 @@
         
         
         //点击手势
-//        self.messageLAB.userInteractionEnabled = YES;
-//        UITapGestureRecognizer *tapG =
-//        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGClick:)];
-//        [self.messageLAB addGestureRecognizer:tapG];
+        self.contentIMGV.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tapG =
+        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGClick:)];
+        [self.contentIMGV addGestureRecognizer:tapG];
         
         //长按手势
         //        UILongPressGestureRecognizer *longPress =
@@ -91,7 +98,11 @@
 
 
 
-
+-(void)tapGClick:(UITapGestureRecognizer *)gesture {
+    if (self.aChatImageCellTapBlock) {
+        self.aChatImageCellTapBlock(_model);
+    }
+}
 -(void)setModel:(Message *)model {
     _model = model;
     CGFloat KWIDTH  = self.frame.size.width;
