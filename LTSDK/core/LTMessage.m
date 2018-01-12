@@ -122,6 +122,33 @@
                                                  body:aBody];
 }
 
+/*!
+ @method
+ @abstract 发送Text信息
+ @discussion 备注
+ @param aSenderJID 发送者JID
+ @param aOtherJID 接收者JID
+ @param aConversationType 会话类型
+ @param aMessageType 信息类型（Text）
+ @result  返回消息字典Dict
+ */
+-(NSDictionary *)sendVibrateWithSenderJID:(NSString *)aSenderJID
+                              otherJID:(NSString *)aOtherJID
+                      conversationName:(NSString *)aConversationName
+                      conversationType:(LTConversationType)aConversationType
+                           messageType:(LTMessageType)aMessageType
+                                  body:(NSString *)aBody {
+    
+    return [LTXMPPManager.share sendVibrateWithSenderJID:aSenderJID
+                                             otherJID:aOtherJID
+                                     conversationName:(NSString *)aConversationName
+                                     conversationType:aConversationType
+                                          messageType:aMessageType
+                                                 body:aBody];
+}
+
+
+
 
 
 

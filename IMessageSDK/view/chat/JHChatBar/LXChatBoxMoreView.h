@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "LXChatBoxMoreViewItem.h"
 typedef NS_ENUM(NSInteger, LXChatBoxItem){
-    LXChatBoxItemAlbum = 0,   // Album
-    LXChatBoxItemCamera,      // Camera
-    LXChatBoxItemVideo,       // Video
-    LXChatBoxItemDoc          // pdf
+    LXChatBoxItemPicture = 0,   // picture
+    LXChatBoxItemCamera,      // camera
+    LXChatBoxItemVibrate,      // vibrate
+    LXChatBoxItemFile,         // file
+    LXChatBoxItemVideo,       // video
 };
 
 @class LXChatBoxMoreView;

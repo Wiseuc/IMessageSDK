@@ -37,6 +37,7 @@
 
 
 #import "FileController.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface ChatController ()
@@ -150,6 +151,25 @@ HMImagePickerControllerDelegate
     self.chatBox.status = LTChatBoxStatusNothing;
 }
 
+-(void)loadShakeAnimationForView:(UIView*)view
+{
+    CALayer *lbl = [view layer];
+    CGPoint posLbl = [lbl position];
+    CGPoint y = CGPointMake(posLbl.x-10, posLbl.y);
+    CGPoint x = CGPointMake(posLbl.x+10, posLbl.y);
+    CABasicAnimation * animation = [CABasicAnimation animationWithKeyPath:@"position"];
+    [animation setTimingFunction:[CAMediaTimingFunction
+                                  functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [animation setFromValue:[NSValue valueWithCGPoint:x]];
+    [animation setToValue:[NSValue valueWithCGPoint:y]];
+    [animation setAutoreverses:YES];
+    [animation setDuration:0.08];
+    [animation setRepeatCount:3];
+    [lbl addAnimation:animation forKey:nil];
+}
+
+
+
 
 
 
@@ -191,6 +211,12 @@ HMImagePickerControllerDelegate
     
 }
 -(void)refreshData {
+    
+    //如果最后一条信息为SOS，则执行抖动操作
+    Message *msg = self.datasource.lastObject;
+    if ([msg.bodyType isEqualToString:@"vibrate"]) {
+        [self loadShakeAnimationForView:self.view];
+    }
     
     __weak typeof(self) weakself = self;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -302,6 +328,36 @@ HMImagePickerControllerDelegate
                                       body:content];
     [self dealData:dict];
 }
+/*!
+ @method
+ @abstract 发送SOS信息
+ @discussion <#备注#>
+ */
+-(void)sendVibrateMessage {
+    
+    NSString *content = @"^SOS";
+    NSDictionary *userDict = [LTUser.share queryUser];
+    NSString *myJID =userDict[@"JID"];
+    //会话类型
+    LTConversationType type = LTConversationTypeChat;
+    
+    //会议不发SOS
+    if ([self.currentOtherJID containsString:@"conference"]) {
+        type = LTConversationTypeGroupChat;
+        return;
+    }
+    //抖动
+    [self loadShakeAnimationForView:self.view];
+    
+    NSDictionary *dict =
+    [LTMessage.share sendVibrateWithSenderJID:myJID
+                                     otherJID:self.currentOtherJID
+                             conversationName:self.conversationName
+                             conversationType:(type)
+                                  messageType:LTMessageType_Vibrate
+                                         body:content];
+    [self dealData:dict];
+}
 
 /*!
  @method
@@ -410,6 +466,8 @@ HMImagePickerControllerDelegate
 
 
 
+
+
 -(void)dealData:(NSDictionary *)dict {
     Message *msg = [[Message alloc] init];
     msg.currentMyJID = dict[@"currentMyJID"];
@@ -505,6 +563,7 @@ HMImagePickerControllerDelegate
     else if ([model.bodyType isEqualToString:@"command"]){
     }
     else if ([model.bodyType isEqualToString:@"vibrate"]){
+        return CGSizeMake(kScreenWidth, 40 + 30);
     }
     else if ([model.bodyType isEqualToString:@"location"]){
     }
@@ -568,7 +627,7 @@ HMImagePickerControllerDelegate
     else if ([model.bodyType isEqualToString:@"command"]){
         LTMessageType type = LTMessageType_Command;
         NSString *cellIndentifier = [self cellIndetifyForMessageType:type];
-        ChatTextCell *cell01 =
+        ChatCommandCell *cell01 =
         [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifier forIndexPath:indexPath];
         cell01.model = model;
         return cell01;
@@ -644,18 +703,23 @@ HMImagePickerControllerDelegate
 -(void)chatBox:(LXChatBox *)chatBox didSelectItem:(LXChatBoxItem)itemType {
     
     switch (itemType) {
-        case LXChatBoxItemAlbum:
-            NSLog(@"LXChatBoxItemAlbum");
+        case LXChatBoxItemPicture:
+            NSLog(@"LXChatBoxItemPicture");
             [self HMImagePickerSelectImageFromAlbum];
             break;
             
-        case LXChatBoxItemDoc:
-            NSLog(@"LXChatBoxItemDoc");
+        case LXChatBoxItemFile:
+            NSLog(@"LXChatBoxItemFile");
             [self FilePickerSelect];
             break;
             
         case LXChatBoxItemVideo:
             NSLog(@"LXChatBoxItemVideo");
+            break;
+            
+        case LXChatBoxItemVibrate:
+            NSLog(@"LXChatBoxItemVibrate");
+            [self sendVibrateMessage];
             break;
             
         case LXChatBoxItemCamera:

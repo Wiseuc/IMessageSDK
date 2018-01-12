@@ -143,7 +143,7 @@
             //图片地址，由xxx+body拼接而成
         }
         //震动^SOS
-        else if ([body containsString:@"^SOS"])
+        else if ([body.lowercaseString containsString:@"^sos"])
         {
              [dict setObject:@"vibrate" forKey:@"bodyType"];
         }

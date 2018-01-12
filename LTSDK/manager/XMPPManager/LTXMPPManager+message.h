@@ -38,6 +38,25 @@ void runCategoryForFramework42();
 
 /*!
  @method
+ @abstract 发送Vibrate信息
+ @discussion <#备注#>
+ @param aSenderJID 发送者JID
+ @param aOtherJID 接收者JID
+ @param aConversationType 会话类型
+ @param aMessageType 信息类型（Vibrate）
+ @result  返回消息字典Dict
+ */
+-(NSDictionary *)sendVibrateWithSenderJID:(NSString *)aSenderJID
+                                 otherJID:(NSString *)aOtherJID
+                         conversationName:(NSString *)aConversationName
+                         conversationType:(LTConversationType)aConversationType
+                              messageType:(LTMessageType)aMessageType
+                                     body:(NSString *)aBody;
+
+
+
+/*!
+ @method
  @abstract 发送Voice信息
  @discussion <#备注#>
  @param aSenderJID 发送者JID

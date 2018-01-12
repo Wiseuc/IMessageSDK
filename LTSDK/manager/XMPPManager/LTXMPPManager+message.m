@@ -136,6 +136,79 @@ void runCategoryForFramework42(){}
 
 
 
+/*!
+ @method
+ @abstract 发送Vibrate信息
+ @discussion <#备注#>
+ @param aSenderJID 发送者JID
+ @param aOtherJID 接收者JID
+ @param aConversationType 会话类型
+ @param aMessageType 信息类型（Vibrate）
+ @result  返回消息字典Dict
+ */
+-(NSDictionary *)sendVibrateWithSenderJID:(NSString *)aSenderJID
+                                 otherJID:(NSString *)aOtherJID
+                         conversationName:(NSString *)aConversationName
+                         conversationType:(LTConversationType)aConversationType
+                              messageType:(LTMessageType)aMessageType
+                                     body:(NSString *)aBody {
+    
+    
+    NSXMLElement *msg = [NSXMLElement elementWithName:@"message"];
+    NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
+    [msg addChild:body];
+    [msg addAttributeWithName:@"id"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
+    [msg addAttributeWithName:@"to"  stringValue:aOtherJID];
+    
+    if (aConversationType == LTConversationTypeChat)
+    {
+        [msg addAttributeWithName:@"type"  stringValue:@"chat"];
+        [msg addAttributeWithName:@"from" stringValue: [aSenderJID stringByAppendingString:@"/IphoneIM"]];
+    }
+    else if (aConversationType == LTConversationTypeGroupChat)
+    {
+        [msg addAttributeWithName:@"type"  stringValue:@"groupchat"];
+        [msg addAttributeWithName:@"SenderJID"  stringValue:aSenderJID];
+    }
+    [msg addAttributeWithName:@"UID"  stringValue:[LTXMPPManager.share get_32Bytes_UUID]];
+    [body setStringValue:aBody];
+    [self sendTextMessageXML:msg];
+    
+    
+    
+    NSString *conversationType = nil;
+    if (aConversationType == LTConversationTypeChat)
+    {
+        conversationType = @"chat";
+    }
+    else if (aConversationType == LTConversationTypeGroupChat)
+    {
+        conversationType = @"groupchat";
+    }
+    return @{
+             @"currentMyJID":aSenderJID,
+             @"currentOtherJID":aOtherJID,
+             @"stamp":[self getTimestamp],
+             @"bodyType":@"vibrate",
+             @"body":aBody,
+             
+             
+             //1
+             @"UID":[self get_32Bytes_UUID],
+             //2
+             @"to":aOtherJID,
+             //3
+             @"conversationName":aConversationName,
+             //4
+             @"from":[aSenderJID stringByAppendingString:@"/IphoneIM"],
+             @"type":conversationType,
+             };
+    
+    
+    
+}
+
+
 
 
 /*!
