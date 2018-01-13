@@ -235,6 +235,8 @@ UICollectionViewDelegate
 
 
 
+
+
 #pragma mark - 代理：collectionview
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -277,8 +279,6 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
         [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"footer" forIndexPath:indexPath];
         
         __weak typeof(self) weakself = self;
-        
-        
         if ([self.jid containsString:@"conference"])
         {
             [LTGroup.share queryGroupsCompleted:^(NSMutableArray *groups, LTError *error) {

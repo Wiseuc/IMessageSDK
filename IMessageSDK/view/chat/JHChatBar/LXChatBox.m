@@ -598,20 +598,24 @@ LXChatBoxMoreViewDelegate
         _moreView.delegate = self;
         // 创建Item
         LXChatBoxMoreViewItem *pictureItem =
-        [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"照片" imageName:@"sharemore_pic"];
+        [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"照片" imageName:@"sharemore_picture"];
         LXChatBoxMoreViewItem *camaraItem =
-        [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"拍摄" imageName:@"sharemore_video"];
+        [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"拍摄" imageName:@"sharemore_carama"];
+        
         LXChatBoxMoreViewItem *vibrateItem =
         [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"抖一抖" imageName:@"sharemore_sight"];
         LXChatBoxMoreViewItem *fileItem =
-        [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"文件" imageName:@"sharemore_wallet"];
+        [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"文件" imageName:@"sharemore_file"];
         
+        LXChatBoxMoreViewItem *localtionItem =
+        [LXChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"位置" imageName:@"sharemore_location"];
         NSMutableArray *arr =
         [[NSMutableArray alloc] initWithObjects:
          pictureItem,
          camaraItem,
          vibrateItem,
          fileItem,
+         localtionItem,
          nil];
         [_moreView setItems:arr];
 //        _moreView.backgroundColor =[UIColor purpleColor];

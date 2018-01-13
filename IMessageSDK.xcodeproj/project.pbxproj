@@ -428,6 +428,7 @@
 		F97E34221FE11D98001CBFA8 /* LTXMPPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F97E34201FE11D98001CBFA8 /* LTXMPPManager.m */; };
 		F97E34241FE121CC001CBFA8 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E34231FE121CC001CBFA8 /* libresolv.tbd */; };
 		F97E34261FE121D5001CBFA8 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E34251FE121D5001CBFA8 /* libxml2.tbd */; };
+		F98274672009AE1500695FD7 /* ChatLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F98274662009AE1500695FD7 /* ChatLocationController.m */; };
 		F9886DA32004565F00E69221 /* HttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F9886DA02004565F00E69221 /* HttpTool.m */; };
 		F9886DA42004565F00E69221 /* UploadFile2.m in Sources */ = {isa = PBXBuildFile; fileRef = F9886DA22004565F00E69221 /* UploadFile2.m */; };
 		F98FDB7A1FEB8AF400618C82 /* ChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB791FEB8AF300618C82 /* ChatListController.m */; };
@@ -1444,6 +1445,8 @@
 		F97E34201FE11D98001CBFA8 /* LTXMPPManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LTXMPPManager.m; sourceTree = "<group>"; };
 		F97E34231FE121CC001CBFA8 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		F97E34251FE121D5001CBFA8 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		F98274652009AE1500695FD7 /* ChatLocationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatLocationController.h; sourceTree = "<group>"; };
+		F98274662009AE1500695FD7 /* ChatLocationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatLocationController.m; sourceTree = "<group>"; };
 		F9886D9F2004565F00E69221 /* HttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpTool.h; sourceTree = "<group>"; };
 		F9886DA02004565F00E69221 /* HttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpTool.m; sourceTree = "<group>"; };
 		F9886DA12004565F00E69221 /* UploadFile2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadFile2.h; sourceTree = "<group>"; };
@@ -3895,6 +3898,7 @@
 		F963FD661FE257040073D490 /* chat */ = {
 			isa = PBXGroup;
 			children = (
+				F98274612009AD3C00695FD7 /* location */,
 				F9C1A2832005BEA80052969B /* file */,
 				F963FD6C1FE257570073D490 /* ChatController.h */,
 				F963FD6D1FE257570073D490 /* ChatController.m */,
@@ -4134,6 +4138,15 @@
 				F97D69271FEA0BD400E19477 /* LTXMPPManager+message.m */,
 			);
 			path = XMPPManager;
+			sourceTree = "<group>";
+		};
+		F98274612009AD3C00695FD7 /* location */ = {
+			isa = PBXGroup;
+			children = (
+				F98274652009AE1500695FD7 /* ChatLocationController.h */,
+				F98274662009AE1500695FD7 /* ChatLocationController.m */,
+			);
+			path = location;
 			sourceTree = "<group>";
 		};
 		F9886D9E2004565F00E69221 /* HttpTool */ = {
@@ -4913,6 +4926,7 @@
 				F9194CB91FDFD64D00CCFB32 /* TabbarController.m in Sources */,
 				F9558D941FE3AF9C00D13CD0 /* RosterHeaderButton.m in Sources */,
 				F9B6307D2003639B00BED631 /* ChatVibrateCell.m in Sources */,
+				F98274672009AE1500695FD7 /* ChatLocationController.m in Sources */,
 				F96DE29D20089ED800AE034C /* KSProgressLayer.m in Sources */,
 				F9B6307A2003638800BED631 /* ChatVideoCell.m in Sources */,
 				F9B9E7341FFB530000EAE150 /* AppDelegate+apns.m in Sources */,

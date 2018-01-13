@@ -295,7 +295,7 @@
     else if ([dict[@"bodyType"] isEqualToString:@"image"])
     {
         msg.duration = dict[@"duration"];
-        msg.localPath = [NSString stringWithFormat:@"%@/%@",kVoiceFilePath,msg.body];
+        msg.localPath = [NSString stringWithFormat:@"%@/%@",kPictureFilePath,msg.body];
         msg.remotePath = dict[@"remotePath"];
         [self downloadWithRemotePath:msg.remotePath localPath:msg.localPath];
     }
@@ -408,11 +408,12 @@
  */
 -(void)downloadWithRemotePath:(NSString *)aRemotePath
                     localPath:(NSString *)aLocalPath{
-    HttpTool *tool = [[HttpTool alloc] init];
-    [tool downLoadFromURL:[NSURL URLWithString:aRemotePath]
-                 savePath:aLocalPath
-            progressBlock:nil
-               completion:nil];
+    
+        HttpTool *tool = [[HttpTool alloc] init];
+        [tool downLoadFromURL:[NSURL URLWithString:aRemotePath]
+                     savePath:aLocalPath
+                progressBlock:nil
+                   completion:nil];
 }
 
 

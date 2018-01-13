@@ -8,6 +8,7 @@
 
 #import "ChatImageCell.h"
 #import "UIConfig.h"
+#import "HttpTool.h"
 
 @interface ChatImageCell ()
 @property (nonatomic, strong) UIImageView *iconIMGV;  /**头像**/
@@ -122,7 +123,11 @@
         self.backgroundIMGV.frame = CGRectMake(60, 20, 80, 142.3);
         self.contentIMGV.frame = CGRectMake(60, 20, 80, 142.3);
     }
-    self.contentIMGV.image = [UIImage imageWithContentsOfFile:model.localPath];
+    
+    UIImage *img = [UIImage imageWithContentsOfFile:model.localPath];
+    self.contentIMGV.image = img;
+    
 }
+
 
 @end

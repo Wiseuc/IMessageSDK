@@ -155,6 +155,8 @@ UICollectionViewDelegate
     // Do any additional setup after loading the view.
     //self.view.backgroundColor = [UIColor whiteColor];//kBackgroundColor;
     
+    self.title = @"文件";
+    
     [self settingUI];
     
     [self settingData];

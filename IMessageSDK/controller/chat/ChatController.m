@@ -41,6 +41,7 @@
 
 #import "KSPhotoBrowser.h"
 #import "YYWebImage.h"
+#import "ChatLocationController.h"
 
 
 @interface ChatController ()
@@ -170,8 +171,11 @@ HMImagePickerControllerDelegate
     [animation setRepeatCount:3];
     [lbl addAnimation:animation forKey:nil];
 }
-
-
+/**to地图**/
+-(void)toLocationController{
+    ChatLocationController *vc = [[ChatLocationController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 
@@ -294,7 +298,7 @@ HMImagePickerControllerDelegate
 }
 -(void)toPhotoPreviewController:(Message *)model{
     
-    //对象下标
+    //collectionview对象下标
     __block NSUInteger index = 0;
     [self.datasource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj == model) {
@@ -303,7 +307,7 @@ HMImagePickerControllerDelegate
     }];
     
     
-    //对象视图imageview
+    //cell中对象视图imageview
     NSString *identifier = [self cellIndetifyForMessageType:(LTMessageType_Image)];
     NSIndexPath *indexpath = [NSIndexPath indexPathForRow:index inSection:0];
     ChatImageCell *cell01 =
@@ -312,10 +316,20 @@ HMImagePickerControllerDelegate
     
     
     NSMutableArray *items = @[].mutableCopy;
+    NSMutableArray *imageMessages = [NSMutableArray array];
     for (Message *message in self.datasource)
     {
-         if ([message.bodyType isEqualToString:@"image"]) {
+         if ([message.bodyType isEqualToString:@"image"])
+         {
+             //所有imgs
+             [imageMessages addObject:message];
+             
              UIImage *img = [UIImage imageWithContentsOfFile:message.localPath];
+//             if (img == nil) {
+//                 NSData *data =
+//                 [NSData dataWithContentsOfURL:[NSURL URLWithString:message.remotePath]];
+//                 img = [UIImage imageWithData:data];
+//             }             
              if (img == nil) {
                  img = [UIImage imageNamed:@"icon_empty_file"];
              }
@@ -323,7 +337,18 @@ HMImagePickerControllerDelegate
              [items addObject:item];
          }
     }
-    KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:items selectedIndex:index];
+    
+    
+    //imgs对象下标
+    __block NSUInteger imgIndex = 0;
+    [imageMessages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj == model) {
+            imgIndex = idx;
+        }
+    }];
+    
+    
+    KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:items selectedIndex:imgIndex];
     [browser showFromViewController:self];
 }
 
@@ -774,26 +799,30 @@ HMImagePickerControllerDelegate
             NSLog(@"LXChatBoxItemPicture");
             [self HMImagePickerSelectImageFromAlbum];
             break;
-            
-        case LXChatBoxItemFile:
-            NSLog(@"LXChatBoxItemFile");
-            [self FilePickerSelect];
-            break;
-            
-        case LXChatBoxItemVideo:
-            NSLog(@"LXChatBoxItemVideo");
-            break;
-            
-        case LXChatBoxItemVibrate:
-            NSLog(@"LXChatBoxItemVibrate");
-            [self sendVibrateMessage];
-            break;
-            
         case LXChatBoxItemCamera:
             NSLog(@"LXChatBoxItemCamera");
             [self imagePickerSelectImageFromCamera];
             break;
             
+            
+            
+        case LXChatBoxItemVibrate:
+            NSLog(@"LXChatBoxItemVibrate");
+            [self sendVibrateMessage];
+            break;
+        case LXChatBoxItemFile:
+            NSLog(@"LXChatBoxItemFile");
+            [self FilePickerSelect];
+            break;
+            
+            
+            
+        case LXChatBoxItemLocation:
+            NSLog(@"LXChatBoxItemLocation");
+            [self toLocationController];
+            break;
+            
+
         default:
             break;
     }
