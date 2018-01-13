@@ -429,6 +429,29 @@
 		F97E34241FE121CC001CBFA8 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E34231FE121CC001CBFA8 /* libresolv.tbd */; };
 		F97E34261FE121D5001CBFA8 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E34251FE121D5001CBFA8 /* libxml2.tbd */; };
 		F98274672009AE1500695FD7 /* ChatLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F98274662009AE1500695FD7 /* ChatLocationController.m */; };
+		F98274752009B0E800695FD7 /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98274712009B0E700695FD7 /* AMapFoundationKit.framework */; };
+		F98274762009B0E800695FD7 /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98274722009B0E700695FD7 /* AMapLocationKit.framework */; };
+		F98274772009B0E800695FD7 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98274732009B0E700695FD7 /* AMapSearchKit.framework */; };
+		F98274782009B0E800695FD7 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98274742009B0E700695FD7 /* MAMapKit.framework */; };
+		F982747A2009B12900695FD7 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F98274792009B12900695FD7 /* AMap.bundle */; };
+		F982747C2009B19900695FD7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F982747B2009B19900695FD7 /* libz.tbd */; };
+		F982747E2009B1A400695FD7 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F982747D2009B1A400695FD7 /* libstdc++.6.0.9.tbd */; };
+		F98274802009B1AD00695FD7 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F982747F2009B1AD00695FD7 /* libc++.tbd */; };
+		F98274822009B1C000695FD7 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98274812009B1B500695FD7 /* JavaScriptCore.framework */; };
+		F98274842009B1D000695FD7 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98274832009B1CB00695FD7 /* GLKit.framework */; };
+		F98274862009B1DE00695FD7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98274852009B1DA00695FD7 /* CFNetwork.framework */; };
+		F98274882009B1E900695FD7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98274872009B1E500695FD7 /* AdSupport.framework */; };
+		F982748A2009B1FB00695FD7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98274892009B1F700695FD7 /* Security.framework */; };
+		F982748C2009B20900695FD7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F982748B2009B20400695FD7 /* SystemConfiguration.framework */; };
+		F982748E2009B21500695FD7 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F982748D2009B21000695FD7 /* CoreTelephony.framework */; };
+		F98274902009B22800695FD7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F982748F2009B22100695FD7 /* CoreLocation.framework */; };
+		F98274922009B23500695FD7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98274912009B23100695FD7 /* QuartzCore.framework */; };
+		F98274942009B24300695FD7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98274932009B23D00695FD7 /* CoreGraphics.framework */; };
+		F98274962009B24E00695FD7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98274952009B24C00695FD7 /* Foundation.framework */; };
+		F98274982009B25A00695FD7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98274972009B25600695FD7 /* UIKit.framework */; };
+		F982749A2009B26A00695FD7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98274992009B26500695FD7 /* OpenGLES.framework */; };
+		F982749F2009E43500695FD7 /* ChatLocationCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = F982749E2009E43500695FD7 /* ChatLocationCell2.m */; };
+		F98274A92009E6EC00695FD7 /* ChatLocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F98274A82009E6EC00695FD7 /* ChatLocationModel.m */; };
 		F9886DA32004565F00E69221 /* HttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F9886DA02004565F00E69221 /* HttpTool.m */; };
 		F9886DA42004565F00E69221 /* UploadFile2.m in Sources */ = {isa = PBXBuildFile; fileRef = F9886DA22004565F00E69221 /* UploadFile2.m */; };
 		F98FDB7A1FEB8AF400618C82 /* ChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F98FDB791FEB8AF300618C82 /* ChatListController.m */; };
@@ -1447,6 +1470,34 @@
 		F97E34251FE121D5001CBFA8 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		F98274652009AE1500695FD7 /* ChatLocationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatLocationController.h; sourceTree = "<group>"; };
 		F98274662009AE1500695FD7 /* ChatLocationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatLocationController.m; sourceTree = "<group>"; };
+		F98274682009AFCD00695FD7 /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapFoundationKit.framework; path = AMap/AMapFoundationKit.framework; sourceTree = "<group>"; };
+		F98274692009AFCD00695FD7 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = AMap/AMapSearchKit.framework; sourceTree = "<group>"; };
+		F982746A2009AFCD00695FD7 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = AMap/MAMapKit.framework; sourceTree = "<group>"; };
+		F98274712009B0E700695FD7 /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapFoundationKit.framework; sourceTree = "<group>"; };
+		F98274722009B0E700695FD7 /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapLocationKit.framework; sourceTree = "<group>"; };
+		F98274732009B0E700695FD7 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
+		F98274742009B0E700695FD7 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
+		F98274792009B12900695FD7 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = IMessageSDK/3rd/AMap/AMap.bundle; sourceTree = "<group>"; };
+		F982747B2009B19900695FD7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		F982747D2009B1A400695FD7 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		F982747F2009B1AD00695FD7 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		F98274812009B1B500695FD7 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F98274832009B1CB00695FD7 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		F98274852009B1DA00695FD7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		F98274872009B1E500695FD7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		F98274892009B1F700695FD7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F982748B2009B20400695FD7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F982748D2009B21000695FD7 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		F982748F2009B22100695FD7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F98274912009B23100695FD7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F98274932009B23D00695FD7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F98274952009B24C00695FD7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F98274972009B25600695FD7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F98274992009B26500695FD7 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		F982749D2009E43500695FD7 /* ChatLocationCell2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatLocationCell2.h; sourceTree = "<group>"; };
+		F982749E2009E43500695FD7 /* ChatLocationCell2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatLocationCell2.m; sourceTree = "<group>"; };
+		F98274A72009E6EC00695FD7 /* ChatLocationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatLocationModel.h; sourceTree = "<group>"; };
+		F98274A82009E6EC00695FD7 /* ChatLocationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatLocationModel.m; sourceTree = "<group>"; };
 		F9886D9F2004565F00E69221 /* HttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpTool.h; sourceTree = "<group>"; };
 		F9886DA02004565F00E69221 /* HttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpTool.m; sourceTree = "<group>"; };
 		F9886DA12004565F00E69221 /* UploadFile2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadFile2.h; sourceTree = "<group>"; };
@@ -1694,9 +1745,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F982749A2009B26A00695FD7 /* OpenGLES.framework in Frameworks */,
+				F98274982009B25A00695FD7 /* UIKit.framework in Frameworks */,
+				F98274962009B24E00695FD7 /* Foundation.framework in Frameworks */,
+				F98274942009B24300695FD7 /* CoreGraphics.framework in Frameworks */,
+				F98274922009B23500695FD7 /* QuartzCore.framework in Frameworks */,
+				F98274902009B22800695FD7 /* CoreLocation.framework in Frameworks */,
+				F982748E2009B21500695FD7 /* CoreTelephony.framework in Frameworks */,
+				F982748C2009B20900695FD7 /* SystemConfiguration.framework in Frameworks */,
+				F982748A2009B1FB00695FD7 /* Security.framework in Frameworks */,
+				F98274882009B1E900695FD7 /* AdSupport.framework in Frameworks */,
+				F98274862009B1DE00695FD7 /* CFNetwork.framework in Frameworks */,
+				F98274842009B1D000695FD7 /* GLKit.framework in Frameworks */,
+				F98274822009B1C000695FD7 /* JavaScriptCore.framework in Frameworks */,
+				F98274772009B0E800695FD7 /* AMapSearchKit.framework in Frameworks */,
 				F97E34261FE121D5001CBFA8 /* libxml2.tbd in Frameworks */,
+				F98274762009B0E800695FD7 /* AMapLocationKit.framework in Frameworks */,
+				F98274752009B0E800695FD7 /* AMapFoundationKit.framework in Frameworks */,
+				F982747C2009B19900695FD7 /* libz.tbd in Frameworks */,
+				F982747E2009B1A400695FD7 /* libstdc++.6.0.9.tbd in Frameworks */,
+				F98274802009B1AD00695FD7 /* libc++.tbd in Frameworks */,
 				F97E33DB1FE1042E001CBFA8 /* libLTSDK.a in Frameworks */,
 				F91CD2D41FFCE3CF0011489B /* libopencore-amrwb.a in Frameworks */,
+				F98274782009B0E800695FD7 /* MAMapKit.framework in Frameworks */,
 				F97E33DA1FE1042B001CBFA8 /* libstdc++.tbd in Frameworks */,
 				F91CD2CF1FFCE3CF0011489B /* libmp3lame.a in Frameworks */,
 				F91CD2D31FFCE3CF0011489B /* libopencore-amrnb.a in Frameworks */,
@@ -1791,6 +1862,25 @@
 		F91761AF1FE0B2C100906CBB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F98274992009B26500695FD7 /* OpenGLES.framework */,
+				F98274972009B25600695FD7 /* UIKit.framework */,
+				F98274952009B24C00695FD7 /* Foundation.framework */,
+				F98274932009B23D00695FD7 /* CoreGraphics.framework */,
+				F98274912009B23100695FD7 /* QuartzCore.framework */,
+				F982748F2009B22100695FD7 /* CoreLocation.framework */,
+				F982748D2009B21000695FD7 /* CoreTelephony.framework */,
+				F982748B2009B20400695FD7 /* SystemConfiguration.framework */,
+				F98274892009B1F700695FD7 /* Security.framework */,
+				F98274872009B1E500695FD7 /* AdSupport.framework */,
+				F98274852009B1DA00695FD7 /* CFNetwork.framework */,
+				F98274832009B1CB00695FD7 /* GLKit.framework */,
+				F98274812009B1B500695FD7 /* JavaScriptCore.framework */,
+				F982747F2009B1AD00695FD7 /* libc++.tbd */,
+				F982747D2009B1A400695FD7 /* libstdc++.6.0.9.tbd */,
+				F982747B2009B19900695FD7 /* libz.tbd */,
+				F98274682009AFCD00695FD7 /* AMapFoundationKit.framework */,
+				F98274692009AFCD00695FD7 /* AMapSearchKit.framework */,
+				F982746A2009AFCD00695FD7 /* MAMapKit.framework */,
 				F97E34251FE121D5001CBFA8 /* libxml2.tbd */,
 				F97E34231FE121CC001CBFA8 /* libresolv.tbd */,
 				F97E33D81FE1039B001CBFA8 /* libstdc++.6.tbd */,
@@ -1833,6 +1923,7 @@
 		F9194C6A1FDFD2C300CCFB32 = {
 			isa = PBXGroup;
 			children = (
+				F98274792009B12900695FD7 /* AMap.bundle */,
 				F9194C751FDFD2C300CCFB32 /* IMessageSDK */,
 				F9194C8E1FDFD2C400CCFB32 /* IMessageSDKTests */,
 				F9194C991FDFD2C400CCFB32 /* IMessageSDKUITests */,
@@ -1945,6 +2036,7 @@
 		F9194CAB1FDFD39400CCFB32 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				F98274702009B0E700695FD7 /* AMap */,
 				F96DE29F20089EF200AE034C /* YYWebImage */,
 				F96DE28E20089ED700AE034C /* KSPhotoBrowser */,
 				F90F999C2004920B0037DD8E /* HMImagePicker */,
@@ -4085,6 +4177,7 @@
 		F97D69201FEA03C700E19477 /* chat */ = {
 			isa = PBXGroup;
 			children = (
+				F982749B2009E3E500695FD7 /* location */,
 				F9B6302C200336B500BED631 /* JHChatBar */,
 				F9F7C09C1FEBC6EE00F56A23 /* InputView.h */,
 				F9F7C09D1FEBC6EE00F56A23 /* InputView.m */,
@@ -4095,6 +4188,7 @@
 		F97D69211FEA03E400E19477 /* chat */ = {
 			isa = PBXGroup;
 			children = (
+				F98274A02009E5E500695FD7 /* location */,
 			);
 			path = chat;
 			sourceTree = "<group>";
@@ -4145,6 +4239,42 @@
 			children = (
 				F98274652009AE1500695FD7 /* ChatLocationController.h */,
 				F98274662009AE1500695FD7 /* ChatLocationController.m */,
+			);
+			path = location;
+			sourceTree = "<group>";
+		};
+		F98274702009B0E700695FD7 /* AMap */ = {
+			isa = PBXGroup;
+			children = (
+				F98274712009B0E700695FD7 /* AMapFoundationKit.framework */,
+				F98274722009B0E700695FD7 /* AMapLocationKit.framework */,
+				F98274732009B0E700695FD7 /* AMapSearchKit.framework */,
+				F98274742009B0E700695FD7 /* MAMapKit.framework */,
+			);
+			path = AMap;
+			sourceTree = "<group>";
+		};
+		F982749B2009E3E500695FD7 /* location */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = location;
+			sourceTree = "<group>";
+		};
+		F982749C2009E3FF00695FD7 /* location */ = {
+			isa = PBXGroup;
+			children = (
+				F982749D2009E43500695FD7 /* ChatLocationCell2.h */,
+				F982749E2009E43500695FD7 /* ChatLocationCell2.m */,
+			);
+			path = location;
+			sourceTree = "<group>";
+		};
+		F98274A02009E5E500695FD7 /* location */ = {
+			isa = PBXGroup;
+			children = (
+				F98274A72009E6EC00695FD7 /* ChatLocationModel.h */,
+				F98274A82009E6EC00695FD7 /* ChatLocationModel.m */,
 			);
 			path = location;
 			sourceTree = "<group>";
@@ -4537,6 +4667,7 @@
 		F9F7C0911FEBAF7C00F56A23 /* chat */ = {
 			isa = PBXGroup;
 			children = (
+				F982749C2009E3FF00695FD7 /* location */,
 				F9F7C0921FEBAF9900F56A23 /* ChatCell.h */,
 				F9F7C0931FEBAF9900F56A23 /* ChatCell.m */,
 				F9F7C0991FEBBD3C00F56A23 /* JHLabel.h */,
@@ -4752,6 +4883,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F982747A2009B12900695FD7 /* AMap.bundle in Resources */,
 				F9AC22401FFF28DE00A91023 /* f38.gif in Resources */,
 				F9AC22441FFF28DE00A91023 /* f41.gif in Resources */,
 				F9AC223E1FFF28DE00A91023 /* f36.gif in Resources */,
@@ -5051,6 +5183,7 @@
 				F9558D8A1FE39F8400D13CD0 /* RosterReuseableHeader.m in Sources */,
 				F91CD2631FFCC6C10011489B /* NSString+MJExtension.m in Sources */,
 				F90D3A821FF2423D00BDB5DA /* NewRosterGroupController.m in Sources */,
+				F98274A92009E6EC00695FD7 /* ChatLocationModel.m in Sources */,
 				F9558CCA1FE35BF900D13CD0 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				F96DE2CB20089EF200AE034C /* YYMemoryCache.m in Sources */,
 				F9B63059200336B500BED631 /* UIView+JHFrame.m in Sources */,
@@ -5063,6 +5196,7 @@
 				F99AADB41FE3C74C00D87B35 /* GroupCell.m in Sources */,
 				F96DE2D420089EF200AE034C /* YYImage.m in Sources */,
 				F90D3A761FF2017100BDB5DA /* NewFriendController.m in Sources */,
+				F982749F2009E43500695FD7 /* ChatLocationCell2.m in Sources */,
 				F96DE2D220089EF200AE034C /* YYAnimatedImageView.m in Sources */,
 				F98FDBA61FEB8DB200618C82 /* FMResultSet.m in Sources */,
 				F9B6305E200336B500BED631 /* LXEmotionButton.m in Sources */,
@@ -5485,6 +5619,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VG9DJHT235;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AMap",
+					"$(PROJECT_DIR)/IMessageSDK/3rd/AMap",
+				);
 				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = IMessageSDK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -5511,6 +5650,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VG9DJHT235;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AMap",
+					"$(PROJECT_DIR)/IMessageSDK/3rd/AMap",
+				);
 				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = IMessageSDK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

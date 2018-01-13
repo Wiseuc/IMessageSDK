@@ -92,8 +92,25 @@
         
     }
     //位置
+    /**
+     "latitude" : "22.553977",
+     "longitude" : "113.946263",
+     "name" : "位置分享",
+     "address" : "清华信息港B栋10层"
+     **/
     else if ([xmlMessage elementForName:@"location"])
     {
+        NSString *bodyJSONStr = [xmlMessage elementForName:@"body"].stringValue;
+        NSDictionary *bodyDict = [self dictionaryWithJsonString:bodyJSONStr];
+        NSString *latitude = bodyDict[@"latitude"];
+        NSString *longitude = bodyDict[@"longitude"];
+        NSString *address = bodyDict[@"address"];
+        
+        [dict setObject:latitude forKey:@"latitude"];
+        [dict setObject:longitude forKey:@"longitude"];
+        [dict setObject:address forKey:@"address"];
+        
+        [dict setObject:address forKey:@"body"];
         [dict setObject:@"location" forKey:@"bodyType"];
     }
     //文件
@@ -157,9 +174,6 @@
         }
     }
     
-    
-    
-    
     // 如果是离线消息，那么需要加上时间，以防止系统自已生成时间
     /**时间戳**/
 //    DDXMLElement *_x = [xmlMessage elementForName:@"x"];
@@ -186,7 +200,47 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #pragma mark - Private
+
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
+    if (jsonString == nil) {
+        return nil;
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic =
+    [NSJSONSerialization JSONObjectWithData:jsonData
+                                    options:NSJSONReadingMutableContainers
+                                      error:&err];
+    
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
++ (NSString*)dictionaryToJson:(NSDictionary *)dic{
+    NSError *parseError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
 
 // 离线消息时间：20160522T13:34:36
 + (long long)formatOfflineTimeStampWithTimeString:(NSString *)timeString{

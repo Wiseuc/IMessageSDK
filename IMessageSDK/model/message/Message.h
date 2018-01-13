@@ -94,6 +94,16 @@ typedef void(^MessageDBChangeBlock)(void);
  **/
 
 
+//location
+@property (nonatomic, strong) NSString  *latitude;
+@property (nonatomic, strong) NSString  *longitude;
+@property (nonatomic, strong) NSString  *address;
+/**
+ "latitude" : "22.553977",
+ "longitude" : "113.946263",
+ "name" : "位置分享",
+ "address" : "清华信息港B栋10层"
+ **/
 
 
 

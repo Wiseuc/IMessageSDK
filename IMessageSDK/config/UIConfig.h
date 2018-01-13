@@ -129,3 +129,9 @@
 #pragma  mark  --消息漫游文件
 #define kRoamingMsgCacheFile   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingString:@"/wiseuc/RoamingMsgCacheFile/RoamingMsgCacheFile.plist"]
 
+
+
+/**高德地图key**/
+#define kAMapApiKey   @"d95147698196a82f4d89d71277513bac"
+
+

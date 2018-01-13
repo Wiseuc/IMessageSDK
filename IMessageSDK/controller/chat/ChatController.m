@@ -57,6 +57,7 @@ HMImagePickerControllerDelegate
 @property (nonatomic, strong) CHTCollectionViewWaterfallLayout *chLayout;
 @property (nonatomic, strong) UICollectionView *collectionview;
 @property (nonatomic, strong) NSMutableArray *datasource;
+
 @property (nonatomic, strong) NSString *currentOtherJID;  /**对方jid**/
 @property (nonatomic, strong) NSString *conversationName; /**对方name**/
 @property (nonatomic, strong) LXChatBox *chatBox;  /**输入框**/
@@ -175,6 +176,10 @@ HMImagePickerControllerDelegate
 -(void)toLocationController{
     ChatLocationController *vc = [[ChatLocationController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+    __weak typeof(self) weakself = self;
+    [vc setAChatLocationControllerBlock:^(ChatLocationModel *model) {
+        [weakself sendLocationMessage:model];
+    }];
 }
 
 
@@ -528,6 +533,63 @@ HMImagePickerControllerDelegate
 }
 
 
+/*!
+ @method
+ @abstract 发送地址信息（高德地图）
+ @discussion <#备注#>
+ @param content <#描述1#>
+ */
+-(void)sendLocationMessage:(ChatLocationModel *)model {
+    
+    NSDictionary *userDict = [LTUser.share queryUser];
+    NSString *myJID =userDict[@"JID"];
+    //会话类型
+    LTConversationType type = LTConversationTypeChat;
+    
+    if ([self.currentOtherJID containsString:@"conference"]) {
+        type = LTConversationTypeGroupChat;
+    }
+    
+    NSString *latitude = [NSString stringWithFormat:@"%f",model.coordinate.latitude];
+    NSString *longitude = [NSString stringWithFormat:@"%f",model.coordinate.longitude];
+
+    NSDictionary *dict =
+    [LTMessage.share sendLocationWithSenderJID:myJID
+                                      otherJID:self.currentOtherJID
+                              conversationName:self.conversationName
+                              conversationType:type
+                                   messageType:(LTMessageType_Location)
+                                          body:model.title
+                                      latitude:latitude
+                                     longitude:longitude
+                                       address:model.subtitle];
+    [self dealData:dict];
+}
+
+
+
+
+
+/**
+ SEND:
+ <message
+ id="89DB0AF0BCC04A4CB77A16C26917636C"
+ to="江海@duowin-server"
+ from="测试2@duowin-server/IphoneIM"
+ type="chat"
+ UID="11A7DED7BBFD420084D8DA1076BBAA55">
+ <body>
+ {
+ "latitude" : "22.553977",
+ "longitude" : "113.946263",
+ "name" : "位置分享",
+ "address" : "清华信息港B栋10层"
+ }
+ </body>
+ <location>113.946263,22.553977</location>
+ </message>
+ **/
+
 
 
 
@@ -563,6 +625,12 @@ HMImagePickerControllerDelegate
     //file
     msg.size = dict[@"size"];
     msg.resource = dict[@"resource"];
+    
+    
+    //location
+    msg.latitude = dict[@"latitude"];
+    msg.longitude = dict[@"longitude"];
+    msg.address = dict[@"address"];
     
     [msg jh_saveOrUpdate];
 }
@@ -631,6 +699,7 @@ HMImagePickerControllerDelegate
         return CGSizeMake(kScreenWidth, 40 + 30);
     }
     else if ([model.bodyType isEqualToString:@"location"]){
+        return CGSizeMake(kScreenWidth, 30+ 100);
     }
     return CGSizeMake(kScreenWidth, 40 + 30);
 }

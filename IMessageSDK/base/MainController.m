@@ -280,7 +280,9 @@
     //地址
     else if ([dict[@"bodyType"] isEqualToString:@"location"])
     {
-        
+        msg.latitude = dict[@"latitude"];
+        msg.longitude = dict[@"longitude"];
+        msg.address = dict[@"address"];
     }
     //文件
     else if ([dict[@"bodyType"] isEqualToString:@"file"])

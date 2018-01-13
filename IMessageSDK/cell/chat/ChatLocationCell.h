@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Message.h"
+
+
 @interface ChatLocationCell : UICollectionViewCell
 @property (nonatomic, strong) Message *model;
 

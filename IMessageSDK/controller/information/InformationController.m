@@ -236,7 +236,6 @@ UICollectionViewDelegate
 
 
 
-
 #pragma mark - 代理：collectionview
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{

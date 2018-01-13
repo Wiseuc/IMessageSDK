@@ -127,7 +127,29 @@ void runCategoryForFramework42();
 
 
 
-
+/*!
+ @method
+ @abstract 发送地址信息
+ @discussion 备注
+ @param aSenderJID 发送者JID
+ @param aOtherJID 接收者JID
+ @param aConversationType 会话类型
+ @param aMessageType 信息类型（location）
+ @param aBody 信息
+ @param aLatitude 纬度
+ @param aLongitude 经度
+ @param aAddress 地址
+ @result  返回消息字典Dict
+ */
+-(NSDictionary *)sendLocationWithSenderJID:(NSString *)aSenderJID
+                                  otherJID:(NSString *)aOtherJID
+                          conversationName:(NSString *)aConversationName
+                          conversationType:(LTConversationType)aConversationType
+                               messageType:(LTMessageType)aMessageType
+                                      body:(NSString *)aBody
+                                  latitude:(NSString *)aLatitude
+                                 longitude:(NSString *)aLongitude
+                                   address:(NSString *)aAddress;
 
 
 
