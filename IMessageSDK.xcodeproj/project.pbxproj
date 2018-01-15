@@ -269,9 +269,12 @@
 		F92ACA92200C327300F34C02 /* ChatLocationPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACA91200C327300F34C02 /* ChatLocationPreviewController.m */; };
 		F92ACA95200C3C9D00F34C02 /* ChatFilePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACA94200C3C9D00F34C02 /* ChatFilePreviewController.m */; };
 		F92ACA99200C593200F34C02 /* AddRosterController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACA98200C593200F34C02 /* AddRosterController.m */; };
-		F92ACA9F200C597C00F34C02 /* CreateGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACA9C200C597C00F34C02 /* CreateGroupController.m */; };
-		F92ACAA0200C597C00F34C02 /* SelectGroupMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACA9E200C597C00F34C02 /* SelectGroupMemberController.m */; };
 		F92ACAA4200C6E2600F34C02 /* AddRosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACAA3200C6E2600F34C02 /* AddRosterCell.m */; };
+		F92ACAAA200C8EFC00F34C02 /* CreateGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACAA7200C8EFC00F34C02 /* CreateGroupController.m */; };
+		F92ACAAB200C8EFC00F34C02 /* SelectGroupMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACAA9200C8EFC00F34C02 /* SelectGroupMemberController.m */; };
+		F92ACAAF200C8F4200F34C02 /* AddRGContactController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACAAE200C8F4200F34C02 /* AddRGContactController.m */; };
+		F92ACAB6200C976500F34C02 /* AddRGContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACAB5200C976500F34C02 /* AddRGContactCell.m */; };
+		F92ACAB9200C97DA00F34C02 /* AddRGContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACAB8200C97DA00F34C02 /* AddRGContactModel.m */; };
 		F93496D91FE8AE4B00E8D8A3 /* LT_OrgModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F93496D71FE8AE4B00E8D8A3 /* LT_OrgModel.h */; };
 		F93496DA1FE8AE4B00E8D8A3 /* LT_OrgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F93496D81FE8AE4B00E8D8A3 /* LT_OrgModel.m */; };
 		F93496DD1FE8BCE500E8D8A3 /* OrgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F93496DC1FE8BCE500E8D8A3 /* OrgModel.m */; };
@@ -1228,12 +1231,18 @@
 		F92ACA94200C3C9D00F34C02 /* ChatFilePreviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatFilePreviewController.m; sourceTree = "<group>"; };
 		F92ACA97200C593200F34C02 /* AddRosterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRosterController.h; sourceTree = "<group>"; };
 		F92ACA98200C593200F34C02 /* AddRosterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRosterController.m; sourceTree = "<group>"; };
-		F92ACA9B200C597C00F34C02 /* CreateGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGroupController.h; sourceTree = "<group>"; };
-		F92ACA9C200C597C00F34C02 /* CreateGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGroupController.m; sourceTree = "<group>"; };
-		F92ACA9D200C597C00F34C02 /* SelectGroupMemberController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectGroupMemberController.h; sourceTree = "<group>"; };
-		F92ACA9E200C597C00F34C02 /* SelectGroupMemberController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectGroupMemberController.m; sourceTree = "<group>"; };
 		F92ACAA2200C6E2600F34C02 /* AddRosterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRosterCell.h; sourceTree = "<group>"; };
 		F92ACAA3200C6E2600F34C02 /* AddRosterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRosterCell.m; sourceTree = "<group>"; };
+		F92ACAA6200C8EFC00F34C02 /* CreateGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGroupController.h; sourceTree = "<group>"; };
+		F92ACAA7200C8EFC00F34C02 /* CreateGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGroupController.m; sourceTree = "<group>"; };
+		F92ACAA8200C8EFC00F34C02 /* SelectGroupMemberController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectGroupMemberController.h; sourceTree = "<group>"; };
+		F92ACAA9200C8EFC00F34C02 /* SelectGroupMemberController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectGroupMemberController.m; sourceTree = "<group>"; };
+		F92ACAAD200C8F4200F34C02 /* AddRGContactController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRGContactController.h; sourceTree = "<group>"; };
+		F92ACAAE200C8F4200F34C02 /* AddRGContactController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRGContactController.m; sourceTree = "<group>"; };
+		F92ACAB4200C976500F34C02 /* AddRGContactCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRGContactCell.h; sourceTree = "<group>"; };
+		F92ACAB5200C976500F34C02 /* AddRGContactCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRGContactCell.m; sourceTree = "<group>"; };
+		F92ACAB7200C97DA00F34C02 /* AddRGContactModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRGContactModel.h; sourceTree = "<group>"; };
+		F92ACAB8200C97DA00F34C02 /* AddRGContactModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRGContactModel.m; sourceTree = "<group>"; };
 		F93496D71FE8AE4B00E8D8A3 /* LT_OrgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LT_OrgModel.h; sourceTree = "<group>"; };
 		F93496D81FE8AE4B00E8D8A3 /* LT_OrgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LT_OrgModel.m; sourceTree = "<group>"; };
 		F93496DB1FE8BCE500E8D8A3 /* OrgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgModel.h; sourceTree = "<group>"; };
@@ -2002,6 +2011,7 @@
 		F9194CA81FDFD37B00CCFB32 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				F92ACAB0200C943400F34C02 /* addRosterGroup */,
 				F959FC511FF378B7001D689F /* SelectGroupMember */,
 				F959FC4D1FF37856001D689F /* selectRoster */,
 				F98FDB7B1FEB8BB400618C82 /* message */,
@@ -2018,6 +2028,7 @@
 		F9194CA91FDFD37B00CCFB32 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				F92ACABA200CA32D00F34C02 /* addRosterGroup */,
 				F97D69201FEA03C700E19477 /* chat */,
 				F93496E81FE8E50C00E8D8A3 /* org */,
 				F9558D851FE39F0700D13CD0 /* roster */,
@@ -3564,18 +3575,6 @@
 			path = addRoster;
 			sourceTree = "<group>";
 		};
-		F92ACA9A200C597C00F34C02 /* addGroup */ = {
-			isa = PBXGroup;
-			children = (
-				F92ACA9B200C597C00F34C02 /* CreateGroupController.h */,
-				F92ACA9C200C597C00F34C02 /* CreateGroupController.m */,
-				F92ACA9D200C597C00F34C02 /* SelectGroupMemberController.h */,
-				F92ACA9E200C597C00F34C02 /* SelectGroupMemberController.m */,
-			);
-			name = addGroup;
-			path = IMessageSDK/controller/addRosterGroup/addGroup;
-			sourceTree = SOURCE_ROOT;
-		};
 		F92ACAA1200C6E0F00F34C02 /* addRoster */ = {
 			isa = PBXGroup;
 			children = (
@@ -3583,6 +3582,42 @@
 				F92ACAA3200C6E2600F34C02 /* AddRosterCell.m */,
 			);
 			path = addRoster;
+			sourceTree = "<group>";
+		};
+		F92ACAA5200C8EFC00F34C02 /* addGroup */ = {
+			isa = PBXGroup;
+			children = (
+				F92ACAA6200C8EFC00F34C02 /* CreateGroupController.h */,
+				F92ACAA7200C8EFC00F34C02 /* CreateGroupController.m */,
+				F92ACAA8200C8EFC00F34C02 /* SelectGroupMemberController.h */,
+				F92ACAA9200C8EFC00F34C02 /* SelectGroupMemberController.m */,
+			);
+			path = addGroup;
+			sourceTree = "<group>";
+		};
+		F92ACAAC200C8F1F00F34C02 /* contacts */ = {
+			isa = PBXGroup;
+			children = (
+				F92ACAAD200C8F4200F34C02 /* AddRGContactController.h */,
+				F92ACAAE200C8F4200F34C02 /* AddRGContactController.m */,
+			);
+			path = contacts;
+			sourceTree = "<group>";
+		};
+		F92ACAB0200C943400F34C02 /* addRosterGroup */ = {
+			isa = PBXGroup;
+			children = (
+				F92ACAB7200C97DA00F34C02 /* AddRGContactModel.h */,
+				F92ACAB8200C97DA00F34C02 /* AddRGContactModel.m */,
+			);
+			path = addRosterGroup;
+			sourceTree = "<group>";
+		};
+		F92ACABA200CA32D00F34C02 /* addRosterGroup */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = addRosterGroup;
 			sourceTree = "<group>";
 		};
 		F93496D61FE8AD1500E8D8A3 /* OrgModel */ = {
@@ -3635,7 +3670,7 @@
 		F9558CBF1FE359C900D13CD0 /* group */ = {
 			isa = PBXGroup;
 			children = (
-				F92ACA9A200C597C00F34C02 /* addGroup */,
+				F92ACAA5200C8EFC00F34C02 /* addGroup */,
 				F9558CCB1FE3622C00D13CD0 /* GroupController.h */,
 				F9558CCC1FE3622C00D13CD0 /* GroupController.m */,
 			);
@@ -3828,6 +3863,7 @@
 		F959FBF81FF33361001D689F /* addRosterGroup */ = {
 			isa = PBXGroup;
 			children = (
+				F92ACAAC200C8F1F00F34C02 /* contacts */,
 				F959FBF91FF3339C001D689F /* AddRosterGroupController.h */,
 				F959FBFA1FF3339C001D689F /* AddRosterGroupController.m */,
 			);
@@ -3841,6 +3877,8 @@
 				F959FC011FF33A78001D689F /* AddRosterGroupHeader.m */,
 				F959FC061FF33BF1001D689F /* AddRosterGroupCell.h */,
 				F959FC071FF33BF1001D689F /* AddRosterGroupCell.m */,
+				F92ACAB4200C976500F34C02 /* AddRGContactCell.h */,
+				F92ACAB5200C976500F34C02 /* AddRGContactCell.m */,
 			);
 			path = addRosterGroup;
 			sourceTree = "<group>";
@@ -5052,7 +5090,6 @@
 				F959FC401FF372A7001D689F /* RABatchChanges.m in Sources */,
 				F9121C511FF4D2BA004B14B8 /* ApnsManager.m in Sources */,
 				F92ACA99200C593200F34C02 /* AddRosterController.m in Sources */,
-				F92ACAA0200C597C00F34C02 /* SelectGroupMemberController.m in Sources */,
 				F96DE2D020089EF200AE034C /* UIImage+YYWebImage.m in Sources */,
 				F9558D731FE399CA00D13CD0 /* MJRefreshStateHeader.m in Sources */,
 				F96DE2CD20089EF200AE034C /* CALayer+YYWebImage.m in Sources */,
@@ -5133,10 +5170,12 @@
 				F91CD2D01FFCE3CF0011489B /* amrFileCodec.mm in Sources */,
 				F9B63058200336B500BED631 /* UIImage+JHExtension.m in Sources */,
 				F959FC571FF37E7F001D689F /* SelectGroupMemberCell.m in Sources */,
+				F92ACAAF200C8F4200F34C02 /* AddRGContactController.m in Sources */,
 				F9B6305C200336B500BED631 /* LXChatBox.m in Sources */,
 				F91CD2D21FFCE3CF0011489B /* EMVoiceConverter.mm in Sources */,
 				F9B63063200336B500BED631 /* LXChatBoxMoreViewItem.m in Sources */,
 				F91761B41FE0B3FA00906CBB /* AppUtility.m in Sources */,
+				F92ACAAB200C8EFC00F34C02 /* SelectGroupMemberController.m in Sources */,
 				F91CD25C1FFCC6C10011489B /* MJProperty.m in Sources */,
 				F963FD6B1FE2574B0073D490 /* MineController.m in Sources */,
 				F9558D6B1FE399CA00D13CD0 /* MJRefreshAutoGifFooter.m in Sources */,
@@ -5183,10 +5222,10 @@
 				F9F7C09B1FEBBD3C00F56A23 /* JHLabel.m in Sources */,
 				F93496EB1FE8E52000E8D8A3 /* StackView.m in Sources */,
 				F96DE29B20089ED800AE034C /* KSPhotoItem.m in Sources */,
+				F92ACAAA200C8EFC00F34C02 /* CreateGroupController.m in Sources */,
 				F9C1A28A2005C49C0052969B /* FileCell.m in Sources */,
 				F91CD25F1FFCC6C10011489B /* NSObject+MJClass.m in Sources */,
 				F93496F91FE90DE800E8D8A3 /* InformationController.m in Sources */,
-				F92ACA9F200C597C00F34C02 /* CreateGroupController.m in Sources */,
 				F96DE2CC20089EF200AE034C /* _YYWebImageSetter.m in Sources */,
 				F959FC4A1FF372A7001D689F /* RATreeView+TableViewDataSource.m in Sources */,
 				F98FDBA21FEB8DB200618C82 /* FMDatabase.m in Sources */,
@@ -5230,8 +5269,10 @@
 				F9B63059200336B500BED631 /* UIView+JHFrame.m in Sources */,
 				F97D69181FE9F09C00E19477 /* InformationCell.m in Sources */,
 				F9886DA32004565F00E69221 /* HttpTool.m in Sources */,
+				F92ACAB9200C97DA00F34C02 /* AddRGContactModel.m in Sources */,
 				F98FDB9E1FEB8DB200618C82 /* BGModelInfo.m in Sources */,
 				F959FC101FF349AF001D689F /* CreateGroupCell.m in Sources */,
+				F92ACAB6200C976500F34C02 /* AddRGContactCell.m in Sources */,
 				F9AC22961FFF607D00A91023 /* NSMutableAttributedString+CTFrameRef.m in Sources */,
 				F99AADB41FE3C74C00D87B35 /* GroupCell.m in Sources */,
 				F96DE2D420089EF200AE034C /* YYImage.m in Sources */,

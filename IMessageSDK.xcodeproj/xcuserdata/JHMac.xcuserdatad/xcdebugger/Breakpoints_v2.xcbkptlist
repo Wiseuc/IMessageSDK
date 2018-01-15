@@ -134,12 +134,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMessageSDK/base/MainController.m"
-            timestampString = "537693557.400601"
+            timestampString = "537702235.385298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "286"
             endingLineNumber = "286"
             landmarkName = "-dealData:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IMessageSDK/controller/addRosterGroup/contacts/AddRGContactController.m"
+            timestampString = "537702235.385398"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "-requestAuthorizationForAddressBook"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

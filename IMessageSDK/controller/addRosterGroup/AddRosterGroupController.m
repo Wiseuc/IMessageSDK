@@ -14,6 +14,7 @@
 #import "CreateGroupController.h"
 #import "AddRosterController.h"
 #import "AddRosterController.h"
+#import "AddRGContactController.h"
 
 
 @interface AddRosterGroupController ()
@@ -192,7 +193,8 @@ UICollectionViewDelegate
             
         case 3:
         {
-            
+            AddRGContactController *vc = [[AddRGContactController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         default:
