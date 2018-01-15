@@ -267,6 +267,11 @@
 		F91D28D41FF64E7B0040D87A /* LT_HttpRequestManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F91D28D21FF64E7A0040D87A /* LT_HttpRequestManager.h */; };
 		F91D28D51FF64E7B0040D87A /* LT_HttpRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F91D28D31FF64E7A0040D87A /* LT_HttpRequestManager.m */; };
 		F92ACA92200C327300F34C02 /* ChatLocationPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACA91200C327300F34C02 /* ChatLocationPreviewController.m */; };
+		F92ACA95200C3C9D00F34C02 /* ChatFilePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACA94200C3C9D00F34C02 /* ChatFilePreviewController.m */; };
+		F92ACA99200C593200F34C02 /* AddRosterController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACA98200C593200F34C02 /* AddRosterController.m */; };
+		F92ACA9F200C597C00F34C02 /* CreateGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACA9C200C597C00F34C02 /* CreateGroupController.m */; };
+		F92ACAA0200C597C00F34C02 /* SelectGroupMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACA9E200C597C00F34C02 /* SelectGroupMemberController.m */; };
+		F92ACAA4200C6E2600F34C02 /* AddRosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACAA3200C6E2600F34C02 /* AddRosterCell.m */; };
 		F93496D91FE8AE4B00E8D8A3 /* LT_OrgModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F93496D71FE8AE4B00E8D8A3 /* LT_OrgModel.h */; };
 		F93496DA1FE8AE4B00E8D8A3 /* LT_OrgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F93496D81FE8AE4B00E8D8A3 /* LT_OrgModel.m */; };
 		F93496DD1FE8BCE500E8D8A3 /* OrgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F93496DC1FE8BCE500E8D8A3 /* OrgModel.m */; };
@@ -325,11 +330,9 @@
 		F959FBFB1FF3339C001D689F /* AddRosterGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = F959FBFA1FF3339C001D689F /* AddRosterGroupController.m */; };
 		F959FC021FF33A78001D689F /* AddRosterGroupHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = F959FC011FF33A78001D689F /* AddRosterGroupHeader.m */; };
 		F959FC081FF33BF1001D689F /* AddRosterGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F959FC071FF33BF1001D689F /* AddRosterGroupCell.m */; };
-		F959FC0C1FF3464B001D689F /* CreateGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = F959FC0B1FF3464B001D689F /* CreateGroupController.m */; };
 		F959FC101FF349AF001D689F /* CreateGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F959FC0F1FF349AF001D689F /* CreateGroupCell.m */; };
 		F959FC171FF36199001D689F /* UITextView+ZWPlaceHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = F959FC161FF36199001D689F /* UITextView+ZWPlaceHolder.m */; };
 		F959FC1A1FF36239001D689F /* UITextView+ZWLimitCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = F959FC181FF36238001D689F /* UITextView+ZWLimitCounter.m */; };
-		F959FC1D1FF36484001D689F /* SelectGroupMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = F959FC1C1FF36484001D689F /* SelectGroupMemberController.m */; };
 		F959FC3F1FF372A7001D689F /* RABatchChangeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = F959FC211FF372A6001D689F /* RABatchChangeEntity.m */; };
 		F959FC401FF372A7001D689F /* RABatchChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = F959FC231FF372A6001D689F /* RABatchChanges.m */; };
 		F959FC411FF372A7001D689F /* RATableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F959FC251FF372A6001D689F /* RATableView.m */; };
@@ -606,7 +609,7 @@
 		F9B6308020036E3600BED631 /* ChatCommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B6307F20036E3600BED631 /* ChatCommandCell.m */; };
 		F9B9E7341FFB530000EAE150 /* AppDelegate+apns.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9E7331FFB530000EAE150 /* AppDelegate+apns.m */; };
 		F9B9E7371FFB539A00EAE150 /* AppDelegate+voip.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9E7361FFB539A00EAE150 /* AppDelegate+voip.m */; };
-		F9C1A2862005BEBF0052969B /* FileController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C1A2852005BEBF0052969B /* FileController.m */; };
+		F9C1A2862005BEBF0052969B /* ChatFileController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C1A2852005BEBF0052969B /* ChatFileController.m */; };
 		F9C1A28A2005C49C0052969B /* FileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C1A2892005C49C0052969B /* FileCell.m */; };
 		F9C1A28E2005E25C0052969B /* CommonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C1A28D2005E25B0052969B /* CommonHelper.m */; };
 		F9C557F31FE20D5200539EAB /* LTXMPPManager+iq.h in Headers */ = {isa = PBXBuildFile; fileRef = F9C557F11FE20D5200539EAB /* LTXMPPManager+iq.h */; };
@@ -1221,6 +1224,16 @@
 		F91D28D31FF64E7A0040D87A /* LT_HttpRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LT_HttpRequestManager.m; sourceTree = "<group>"; };
 		F92ACA90200C327300F34C02 /* ChatLocationPreviewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatLocationPreviewController.h; sourceTree = "<group>"; };
 		F92ACA91200C327300F34C02 /* ChatLocationPreviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatLocationPreviewController.m; sourceTree = "<group>"; };
+		F92ACA93200C3C9D00F34C02 /* ChatFilePreviewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatFilePreviewController.h; sourceTree = "<group>"; };
+		F92ACA94200C3C9D00F34C02 /* ChatFilePreviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatFilePreviewController.m; sourceTree = "<group>"; };
+		F92ACA97200C593200F34C02 /* AddRosterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRosterController.h; sourceTree = "<group>"; };
+		F92ACA98200C593200F34C02 /* AddRosterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRosterController.m; sourceTree = "<group>"; };
+		F92ACA9B200C597C00F34C02 /* CreateGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGroupController.h; sourceTree = "<group>"; };
+		F92ACA9C200C597C00F34C02 /* CreateGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGroupController.m; sourceTree = "<group>"; };
+		F92ACA9D200C597C00F34C02 /* SelectGroupMemberController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectGroupMemberController.h; sourceTree = "<group>"; };
+		F92ACA9E200C597C00F34C02 /* SelectGroupMemberController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectGroupMemberController.m; sourceTree = "<group>"; };
+		F92ACAA2200C6E2600F34C02 /* AddRosterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRosterCell.h; sourceTree = "<group>"; };
+		F92ACAA3200C6E2600F34C02 /* AddRosterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRosterCell.m; sourceTree = "<group>"; };
 		F93496D71FE8AE4B00E8D8A3 /* LT_OrgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LT_OrgModel.h; sourceTree = "<group>"; };
 		F93496D81FE8AE4B00E8D8A3 /* LT_OrgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LT_OrgModel.m; sourceTree = "<group>"; };
 		F93496DB1FE8BCE500E8D8A3 /* OrgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgModel.h; sourceTree = "<group>"; };
@@ -1307,16 +1320,12 @@
 		F959FC011FF33A78001D689F /* AddRosterGroupHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRosterGroupHeader.m; sourceTree = "<group>"; };
 		F959FC061FF33BF1001D689F /* AddRosterGroupCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRosterGroupCell.h; sourceTree = "<group>"; };
 		F959FC071FF33BF1001D689F /* AddRosterGroupCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRosterGroupCell.m; sourceTree = "<group>"; };
-		F959FC0A1FF3464B001D689F /* CreateGroupController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateGroupController.h; sourceTree = "<group>"; };
-		F959FC0B1FF3464B001D689F /* CreateGroupController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateGroupController.m; sourceTree = "<group>"; };
 		F959FC0E1FF349AF001D689F /* CreateGroupCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateGroupCell.h; sourceTree = "<group>"; };
 		F959FC0F1FF349AF001D689F /* CreateGroupCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateGroupCell.m; sourceTree = "<group>"; };
 		F959FC151FF36198001D689F /* UITextView+ZWPlaceHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+ZWPlaceHolder.h"; sourceTree = "<group>"; };
 		F959FC161FF36199001D689F /* UITextView+ZWPlaceHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+ZWPlaceHolder.m"; sourceTree = "<group>"; };
 		F959FC181FF36238001D689F /* UITextView+ZWLimitCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+ZWLimitCounter.m"; sourceTree = "<group>"; };
 		F959FC191FF36238001D689F /* UITextView+ZWLimitCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+ZWLimitCounter.h"; sourceTree = "<group>"; };
-		F959FC1B1FF36484001D689F /* SelectGroupMemberController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectGroupMemberController.h; sourceTree = "<group>"; };
-		F959FC1C1FF36484001D689F /* SelectGroupMemberController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectGroupMemberController.m; sourceTree = "<group>"; };
 		F959FC201FF372A6001D689F /* RABatchChangeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RABatchChangeEntity.h; sourceTree = "<group>"; };
 		F959FC211FF372A6001D689F /* RABatchChangeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RABatchChangeEntity.m; sourceTree = "<group>"; };
 		F959FC221FF372A6001D689F /* RABatchChanges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RABatchChanges.h; sourceTree = "<group>"; };
@@ -1715,8 +1724,8 @@
 		F9B9E7331FFB530000EAE150 /* AppDelegate+apns.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+apns.m"; sourceTree = "<group>"; };
 		F9B9E7351FFB539A00EAE150 /* AppDelegate+voip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+voip.h"; sourceTree = "<group>"; };
 		F9B9E7361FFB539A00EAE150 /* AppDelegate+voip.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+voip.m"; sourceTree = "<group>"; };
-		F9C1A2842005BEBF0052969B /* FileController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileController.h; sourceTree = "<group>"; };
-		F9C1A2852005BEBF0052969B /* FileController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileController.m; sourceTree = "<group>"; };
+		F9C1A2842005BEBF0052969B /* ChatFileController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatFileController.h; sourceTree = "<group>"; };
+		F9C1A2852005BEBF0052969B /* ChatFileController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatFileController.m; sourceTree = "<group>"; };
 		F9C1A2882005C49C0052969B /* FileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileCell.h; sourceTree = "<group>"; };
 		F9C1A2892005C49C0052969B /* FileCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileCell.m; sourceTree = "<group>"; };
 		F9C1A28C2005E25B0052969B /* CommonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHelper.h; sourceTree = "<group>"; };
@@ -2020,7 +2029,6 @@
 			isa = PBXGroup;
 			children = (
 				F9E53B4B1FF611AA008A0B41 /* video */,
-				F959FC091FF34634001D689F /* createGroup */,
 				F959FBF81FF33361001D689F /* addRosterGroup */,
 				F93496F61FE90DCA00E8D8A3 /* information */,
 				F9558D8B1FE3ABE700D13CD0 /* company */,
@@ -3547,6 +3555,36 @@
 			path = SIPTool;
 			sourceTree = "<group>";
 		};
+		F92ACA96200C592100F34C02 /* addRoster */ = {
+			isa = PBXGroup;
+			children = (
+				F92ACA97200C593200F34C02 /* AddRosterController.h */,
+				F92ACA98200C593200F34C02 /* AddRosterController.m */,
+			);
+			path = addRoster;
+			sourceTree = "<group>";
+		};
+		F92ACA9A200C597C00F34C02 /* addGroup */ = {
+			isa = PBXGroup;
+			children = (
+				F92ACA9B200C597C00F34C02 /* CreateGroupController.h */,
+				F92ACA9C200C597C00F34C02 /* CreateGroupController.m */,
+				F92ACA9D200C597C00F34C02 /* SelectGroupMemberController.h */,
+				F92ACA9E200C597C00F34C02 /* SelectGroupMemberController.m */,
+			);
+			name = addGroup;
+			path = IMessageSDK/controller/addRosterGroup/addGroup;
+			sourceTree = SOURCE_ROOT;
+		};
+		F92ACAA1200C6E0F00F34C02 /* addRoster */ = {
+			isa = PBXGroup;
+			children = (
+				F92ACAA2200C6E2600F34C02 /* AddRosterCell.h */,
+				F92ACAA3200C6E2600F34C02 /* AddRosterCell.m */,
+			);
+			path = addRoster;
+			sourceTree = "<group>";
+		};
 		F93496D61FE8AD1500E8D8A3 /* OrgModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -3597,6 +3635,7 @@
 		F9558CBF1FE359C900D13CD0 /* group */ = {
 			isa = PBXGroup;
 			children = (
+				F92ACA9A200C597C00F34C02 /* addGroup */,
 				F9558CCB1FE3622C00D13CD0 /* GroupController.h */,
 				F9558CCC1FE3622C00D13CD0 /* GroupController.m */,
 			);
@@ -3624,6 +3663,7 @@
 		F9558CCE1FE3654600D13CD0 /* roster */ = {
 			isa = PBXGroup;
 			children = (
+				F92ACA96200C592100F34C02 /* addRoster */,
 				F9558CCF1FE3655000D13CD0 /* RosterController.h */,
 				F9558CD01FE3655000D13CD0 /* RosterController.m */,
 				F90D3A801FF2423D00BDB5DA /* NewRosterGroupController.h */,
@@ -3754,6 +3794,7 @@
 		F9558D871FE39F2E00D13CD0 /* roster */ = {
 			isa = PBXGroup;
 			children = (
+				F92ACAA1200C6E0F00F34C02 /* addRoster */,
 				F9558D881FE39F8400D13CD0 /* RosterReuseableHeader.h */,
 				F9558D891FE39F8400D13CD0 /* RosterReuseableHeader.m */,
 				F9558D8F1FE3ADAD00D13CD0 /* RosterCell.h */,
@@ -3802,17 +3843,6 @@
 				F959FC071FF33BF1001D689F /* AddRosterGroupCell.m */,
 			);
 			path = addRosterGroup;
-			sourceTree = "<group>";
-		};
-		F959FC091FF34634001D689F /* createGroup */ = {
-			isa = PBXGroup;
-			children = (
-				F959FC0A1FF3464B001D689F /* CreateGroupController.h */,
-				F959FC0B1FF3464B001D689F /* CreateGroupController.m */,
-				F959FC1B1FF36484001D689F /* SelectGroupMemberController.h */,
-				F959FC1C1FF36484001D689F /* SelectGroupMemberController.m */,
-			);
-			path = createGroup;
 			sourceTree = "<group>";
 		};
 		F959FC0D1FF34998001D689F /* createGroup */ = {
@@ -4619,8 +4649,10 @@
 		F9C1A2832005BEA80052969B /* file */ = {
 			isa = PBXGroup;
 			children = (
-				F9C1A2842005BEBF0052969B /* FileController.h */,
-				F9C1A2852005BEBF0052969B /* FileController.m */,
+				F9C1A2842005BEBF0052969B /* ChatFileController.h */,
+				F9C1A2852005BEBF0052969B /* ChatFileController.m */,
+				F92ACA93200C3C9D00F34C02 /* ChatFilePreviewController.h */,
+				F92ACA94200C3C9D00F34C02 /* ChatFilePreviewController.m */,
 			);
 			path = file;
 			sourceTree = "<group>";
@@ -5019,6 +5051,8 @@
 				F9B6305A200336B500BED631 /* LXChatBoxConst.m in Sources */,
 				F959FC401FF372A7001D689F /* RABatchChanges.m in Sources */,
 				F9121C511FF4D2BA004B14B8 /* ApnsManager.m in Sources */,
+				F92ACA99200C593200F34C02 /* AddRosterController.m in Sources */,
+				F92ACAA0200C597C00F34C02 /* SelectGroupMemberController.m in Sources */,
 				F96DE2D020089EF200AE034C /* UIImage+YYWebImage.m in Sources */,
 				F9558D731FE399CA00D13CD0 /* MJRefreshStateHeader.m in Sources */,
 				F96DE2CD20089EF200AE034C /* CALayer+YYWebImage.m in Sources */,
@@ -5070,7 +5104,7 @@
 				F9B63068200336B500BED631 /* LXEmotionManager.m in Sources */,
 				F95B4ADA1FFE26CD00AFBEDE /* LTVoiceMessage.m in Sources */,
 				F9194C861FDFD2C400CCFB32 /* main.m in Sources */,
-				F9C1A2862005BEBF0052969B /* FileController.m in Sources */,
+				F9C1A2862005BEBF0052969B /* ChatFileController.m in Sources */,
 				F959FC491FF372A7001D689F /* RATreeView+RATreeNodeCollectionControllerDataSource.m in Sources */,
 				F9B63062200336B500BED631 /* LXChatBoxFaceView.m in Sources */,
 				F959FC171FF36199001D689F /* UITextView+ZWPlaceHolder.m in Sources */,
@@ -5094,6 +5128,7 @@
 				F97D69B51FEA6FEE00E19477 /* ChatListCell.m in Sources */,
 				F90D3A791FF2035700BDB5DA /* NewFriendCell.m in Sources */,
 				F9B9E7371FFB539A00EAE150 /* AppDelegate+voip.m in Sources */,
+				F92ACAA4200C6E2600F34C02 /* AddRosterCell.m in Sources */,
 				F9558D821FE399CA00D13CD0 /* UIScrollView+MJExtension.m in Sources */,
 				F91CD2D01FFCE3CF0011489B /* amrFileCodec.mm in Sources */,
 				F9B63058200336B500BED631 /* UIImage+JHExtension.m in Sources */,
@@ -5150,8 +5185,8 @@
 				F96DE29B20089ED800AE034C /* KSPhotoItem.m in Sources */,
 				F9C1A28A2005C49C0052969B /* FileCell.m in Sources */,
 				F91CD25F1FFCC6C10011489B /* NSObject+MJClass.m in Sources */,
-				F959FC0C1FF3464B001D689F /* CreateGroupController.m in Sources */,
 				F93496F91FE90DE800E8D8A3 /* InformationController.m in Sources */,
+				F92ACA9F200C597C00F34C02 /* CreateGroupController.m in Sources */,
 				F96DE2CC20089EF200AE034C /* _YYWebImageSetter.m in Sources */,
 				F959FC4A1FF372A7001D689F /* RATreeView+TableViewDataSource.m in Sources */,
 				F98FDBA21FEB8DB200618C82 /* FMDatabase.m in Sources */,
@@ -5196,7 +5231,6 @@
 				F97D69181FE9F09C00E19477 /* InformationCell.m in Sources */,
 				F9886DA32004565F00E69221 /* HttpTool.m in Sources */,
 				F98FDB9E1FEB8DB200618C82 /* BGModelInfo.m in Sources */,
-				F959FC1D1FF36484001D689F /* SelectGroupMemberController.m in Sources */,
 				F959FC101FF349AF001D689F /* CreateGroupCell.m in Sources */,
 				F9AC22961FFF607D00A91023 /* NSMutableAttributedString+CTFrameRef.m in Sources */,
 				F99AADB41FE3C74C00D87B35 /* GroupCell.m in Sources */,
@@ -5213,6 +5247,7 @@
 				F9558D721FE399CA00D13CD0 /* MJRefreshNormalHeader.m in Sources */,
 				F9558CDC1FE3800100D13CD0 /* RosterModel.m in Sources */,
 				F9AC21BE1FFF218F00A91023 /* LTVibrateMessage.m in Sources */,
+				F92ACA95200C3C9D00F34C02 /* ChatFilePreviewController.m in Sources */,
 				F9F7C0941FEBAF9900F56A23 /* ChatCell.m in Sources */,
 				F9558D801FE399CA00D13CD0 /* MJRefreshConst.m in Sources */,
 				F9AC229C1FFF607D00A91023 /* TLAttributedLink.m in Sources */,

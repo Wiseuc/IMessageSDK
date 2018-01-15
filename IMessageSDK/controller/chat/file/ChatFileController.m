@@ -1,19 +1,19 @@
 //
-//  FileController.m
+//  ChatFileController
 //  IMessageSDK
 //
 //  Created by JH on 2018/1/10.
 //  Copyright © 2018年 JiangHai. All rights reserved.
 //
 
-#import "FileController.h"
+#import "ChatFileController.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "UIConfig.h"
 #import "FileCell.h"
 #import "LTSDKFull.h"
 #import "CommonHelper.h"
 #import "Message.h"
-@interface FileController ()
+@interface ChatFileController ()
 <
 CHTCollectionViewDelegateWaterfallLayout,
 UICollectionViewDataSource,
@@ -23,7 +23,7 @@ UICollectionViewDelegate
 @property (nonatomic, strong) UICollectionView *collectionview;
 @property (nonatomic, strong) NSMutableArray *datasource;
 
-@property (nonatomic, strong) FileControllerSelectBlock aFileControllerSelectBlock;
+@property (nonatomic, strong) ChatFileControllerSelectBlock aChatFileControllerSelectBlock;
 @end
 
 
@@ -35,7 +35,7 @@ UICollectionViewDelegate
 
 
 
-@implementation FileController
+@implementation ChatFileController
 
 #pragma mark - UI
 
@@ -217,8 +217,8 @@ UICollectionViewDelegate
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     Message *mdoel =self.datasource[indexPath.item];
-    if (self.aFileControllerSelectBlock) {
-        self.aFileControllerSelectBlock(mdoel);
+    if (self.aChatFileControllerSelectBlock) {
+        self.aChatFileControllerSelectBlock(mdoel);
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -235,8 +235,8 @@ UICollectionViewDelegate
 
 #pragma mark - Init
 
--(void)settingFileControllerSelect:(FileControllerSelectBlock)aBlock{
-    self.aFileControllerSelectBlock = aBlock;
+-(void)settingChatFileControllerSelect:(ChatFileControllerSelectBlock)aBlock{
+    self.aChatFileControllerSelectBlock = aBlock;
 }
 -(NSMutableArray *)datasource {
     if (!_datasource) {

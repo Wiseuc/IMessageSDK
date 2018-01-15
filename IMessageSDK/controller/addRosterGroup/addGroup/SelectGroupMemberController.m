@@ -74,9 +74,37 @@ RATreeViewDelegate
     [self.treeView reloadData];
     
 }
+
+/**第二层到最后一层数据**/
+- (void)findModelInModel:(OrgModel *)model {
+    
+    //SUBGROUP
+    if ([model.ITEMTYPE isEqualToString:@"1"])
+    {
+        model.children = [self parseOrgWith:model];
+        
+        for (OrgModel *orgModel in model.children)
+        {
+            orgModel.lever = model.lever + 1;
+            
+            orgModel.parent = @[model];
+            
+            [self findModelInModel:orgModel];
+        }
+        [self.datasource addObject:model];
+    }
+    //JID
+    else if ([model.ITEMTYPE isEqualToString:@"2"])
+    {
+        
+    }
+}
+
 /**解析组织架构**/
 - (NSArray *)parseOrgWith:(OrgModel *)model {
+    
     NSArray *datas = nil;
+    
     if ( model == nil || [model.ID isEqualToString:@"0"] )
     {
         datas = [DocManager.share queryNextOrgData:nil];
@@ -85,28 +113,6 @@ RATreeViewDelegate
     }
     return datas;
 }
-
-/**第二层到最后一层数据**/
-- (void)findModelInModel:(OrgModel *)model {
-    
-    if ([model.ITEMTYPE isEqualToString:@"1"])
-    {
-        model.children = [self parseOrgWith:model];
-        for (OrgModel *orgModel in model.children)
-        {
-            orgModel.lever = model.lever + 1;
-            orgModel.parent = @[model];
-            [self findModelInModel:orgModel];
-        }
-        [self.datasource addObject:model];
-    }
-    else if ([model.ITEMTYPE isEqualToString:@"2"])
-    {
-        
-        
-    }
-}
-
 
 
 

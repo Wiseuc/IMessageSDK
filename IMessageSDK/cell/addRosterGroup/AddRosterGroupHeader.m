@@ -8,8 +8,7 @@
 
 #import "AddRosterGroupHeader.h"
 @interface AddRosterGroupHeader ()
-
-@property (nonatomic, strong) UITextField *searchTF;
+@property (nonatomic, strong) UIButton *inputBTN;
 @end
 
 
@@ -23,21 +22,16 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        //self.backgroundColor = [UIColor orangeColor];
-        
-        self.searchTF = [[UITextField alloc] init];
-        [self addSubview:self.searchTF];
-        self.searchTF.placeholder = @"搜索联系人：张三／zhangsan";
-        self.searchTF.backgroundColor = [UIColor whiteColor];
-        self.searchTF.leftViewMode = UITextFieldViewModeAlways;
-        self.searchTF.enabled = NO;
-        
-        
-        UIImageView *imagev = [[UIImageView alloc] init];
-        imagev.image = [UIImage imageNamed:@"searchBarIcon"];
-        imagev.frame = CGRectMake(0, 0, 30, 30);
-        self.searchTF.leftView = imagev;
-        
+        self.inputBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
+        [self addSubview:self.inputBTN];
+        [self.inputBTN setTitle:@"搜索联系人：张三／zhangsan / zs"
+                       forState:(UIControlStateNormal)];
+        [self.inputBTN setImage:[UIImage imageNamed:@"searchBarIcon"]
+                       forState:(UIControlStateNormal)];
+        [self.inputBTN addTarget:self action:@selector(buttonClick:)
+                forControlEvents:(UIControlEventTouchUpInside)];
+        [self.inputBTN setBackgroundColor:[UIColor whiteColor]];
+        [self.inputBTN setTintColor:[UIColor lightGrayColor]];
         
     }
     return self;
@@ -47,16 +41,17 @@
 
 -(void)layoutSubviews {
     [super layoutSubviews];
-    
     CGFloat KWIDTH  = self.frame.size.width;
     CGFloat KHEIGHT = self.frame.size.height;
-    
-    self.searchTF.frame = CGRectMake(0, 20, KWIDTH, 50);
-    
-
-    
+    self.inputBTN.frame = CGRectMake(0, 20, KWIDTH, 50);
 }
 
-
-
+-(void)setAAddRosterGroupHeaderBlock:(AddRosterGroupHeaderBlock)aAddRosterGroupHeaderBlock{
+    _aAddRosterGroupHeaderBlock = aAddRosterGroupHeaderBlock;
+}
+-(void)buttonClick:(UIButton *)sender{
+    if (self.aAddRosterGroupHeaderBlock) {
+        self.aAddRosterGroupHeaderBlock();
+    }
+}
 @end

@@ -12,6 +12,9 @@
 #import "AddRosterGroupHeader.h"
 #import "AddRosterGroupCell.h"
 #import "CreateGroupController.h"
+#import "AddRosterController.h"
+#import "AddRosterController.h"
+
 
 @interface AddRosterGroupController ()
 <
@@ -127,7 +130,10 @@ UICollectionViewDelegate
 {
    // [kMainVC showTbaBar];
 }
-
+-(void)toAddRosterController{
+    AddRosterController *vc =  [[AddRosterController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 
@@ -166,7 +172,8 @@ UICollectionViewDelegate
     switch (indexPath.item) {
         case 0:
         {
-            
+            AddRosterController *vc = [[AddRosterController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
             
@@ -191,10 +198,6 @@ UICollectionViewDelegate
         default:
             break;
     }
-    
-    
-    
-    
 }
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
            viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
@@ -203,8 +206,16 @@ UICollectionViewDelegate
     if (kind == CHTCollectionElementKindSectionHeader)
     {
         AddRosterGroupHeader *aAddRosterGroupHeader =
-        [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"AddRosterGroupHeader" forIndexPath:indexPath];
+        [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                           withReuseIdentifier:@"AddRosterGroupHeader"
+                                                  forIndexPath:indexPath];
         reuseableView = aAddRosterGroupHeader;
+        
+        [aAddRosterGroupHeader setAAddRosterGroupHeaderBlock:^{
+            
+            [self setEditing:NO animated:YES];
+            [self toAddRosterController];
+        }];
     }
     return reuseableView;
 }

@@ -72,20 +72,14 @@
  */
 - (NSDictionary *)queryDocumentDescribe;
 
-
-
-
-
-
 /**向下查询**/
 - (NSArray *)queryNextOrgData:(OrgModel *)model;
 
+/**查询所有JID**/
+- (NSArray<OrgModel *> *)queryAllJID;
 
-
-
-
-
-
+/**查询所有SUBGROUP**/
+- (NSArray<OrgModel *> *)queryAllSUBGROUP;
 
 
 

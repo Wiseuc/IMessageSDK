@@ -100,6 +100,8 @@ UICollectionViewDelegate
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.title = @"位置";
+    
     self.view.backgroundColor = kBackgroundColor;
     
     [self settingUI];

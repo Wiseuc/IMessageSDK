@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void(^AddRosterGroupHeaderBlock)(void);
+
 
 @interface AddRosterGroupHeader : UICollectionReusableView
+
+
+@property (nonatomic, strong) AddRosterGroupHeaderBlock aAddRosterGroupHeaderBlock;
 
 @end

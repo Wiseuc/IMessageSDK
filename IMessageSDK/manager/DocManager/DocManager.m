@@ -116,6 +116,95 @@
 
 
 
+/**查询所有JID**/
+- (NSArray<OrgModel *> *)queryAllJID {
+    
+    GDataXMLDocument *doc = [self queryDocument];
+    
+    //匹配所有JID，不管它们位置
+    NSString *xpathString = [NSString stringWithFormat:@"//JID"];
+    
+    NSArray *eles = [doc nodesForXPath:xpathString error:nil];
+    
+    NSMutableArray *mArray = [NSMutableArray array];
+    
+    if ( eles.count > 0 )
+    {
+        for ( GDataXMLElement *element in eles )
+        {
+            OrgModel *model   = [[OrgModel alloc] init];
+            model.ITEMTYPE    = [[element attributeForName:@"ITEMTYPE"] stringValue];
+            model.ID          = [[element attributeForName:@"ID"] stringValue];
+            model.NAME        = [[element attributeForName:@"NAME"] stringValue];
+            model.PID         = [[element attributeForName:@"PID"] stringValue];
+            model.indexs      = [[element attributeForName:@"indexs"] stringValue];
+            model.NAME_PINYIN = [self transformToPinyin:model.NAME];
+            
+            if ( [[[element attributeForName:@"ITEMTYPE"] stringValue] isEqualToString:@"2"] )
+            {
+                model.JID     = [[element attributeForName:@"JID"] stringValue];
+                model.NICK    = [[element attributeForName:@"NICK"] stringValue];
+                model.MOBILE  = [[element attributeForName:@"MOBILE"] stringValue];
+                model.TELE    = [[element attributeForName:@"TELE"] stringValue];
+                model.TelExt  = [[element attributeForName:@"TelExt"] stringValue];
+                model.MOBEXT  = [[element attributeForName:@"MOBEXT"] stringValue];
+                
+                model.EMAIL   = [[element attributeForName:@"EMAIL"] stringValue];
+                model.title   = [[element attributeForName:@"title"] stringValue];
+                model.sex     = [[element attributeForName:@"sex"] stringValue];
+                model.leader  = [[element attributeForName:@"leader"] stringValue];
+            }
+            [mArray addObject:model];
+        }
+    }
+    return mArray;
+}
+
+
+/**查询所有SUBGROUP**/
+- (NSArray<OrgModel *> *)queryAllSUBGROUP {
+    
+    GDataXMLDocument *doc = [self queryDocument];
+    
+    //匹配所有JID，不管它们位置
+    NSString *xpathString = [NSString stringWithFormat:@"//SUBGROUP"];
+    
+    NSArray *eles = [doc nodesForXPath:xpathString error:nil];
+    
+    NSMutableArray *mArray = [NSMutableArray array];
+    
+    if ( eles.count > 0 )
+    {
+        for ( GDataXMLElement *element in eles )
+        {
+            OrgModel *model   = [[OrgModel alloc] init];
+            model.ITEMTYPE    = [[element attributeForName:@"ITEMTYPE"] stringValue];
+            model.ID          = [[element attributeForName:@"ID"] stringValue];
+            model.NAME        = [[element attributeForName:@"NAME"] stringValue];
+            model.PID         = [[element attributeForName:@"PID"] stringValue];
+            model.indexs      = [[element attributeForName:@"indexs"] stringValue];
+            model.NAME_PINYIN = [self transformToPinyin:model.NAME];
+            
+            /**1:SUBGROUP  2:JID **/
+            if ( [[[element attributeForName:@"ITEMTYPE"] stringValue] isEqualToString:@"1"] )
+            {
+                model.time     = [[element attributeForName:@"time"] stringValue];
+                model.info     = [[element attributeForName:@"info"] stringValue];
+                model.parentid = [[element attributeForName:@"parentid"] stringValue];
+            }
+            [mArray addObject:model];
+        }
+    }
+    return mArray;
+}
+
+
+
+
+
+
+
+
 
 /**向下查询**/ 
 - (NSArray<OrgModel *> *)queryNextOrgData:(OrgModel *)model{
@@ -130,6 +219,8 @@
     }
     return [self queryOrgDataWithElement:ele orgModel:model];;
 }
+
+
 
 
 

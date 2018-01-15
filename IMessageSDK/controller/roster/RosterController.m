@@ -153,6 +153,8 @@ UICollectionViewDelegate
     [super viewDidDisappear:animated];
     
     [self unsettingDBOberser];
+    
+//    [kMainVC hiddenTbaBar];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

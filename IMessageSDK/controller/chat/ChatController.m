@@ -36,7 +36,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 
-#import "FileController.h"
+#import "ChatFileController.h"
 #import <QuartzCore/QuartzCore.h>
 
 #import "KSPhotoBrowser.h"
@@ -45,6 +45,7 @@
 
 
 #import "ChatLocationPreviewController.h"
+#import "ChatFilePreviewController.h"
 
 
 @interface ChatController ()
@@ -174,15 +175,6 @@ HMImagePickerControllerDelegate
     [animation setDuration:0.08];
     [animation setRepeatCount:3];
     [lbl addAnimation:animation forKey:nil];
-}
-/**to地图**/
--(void)toLocationController{
-    ChatLocationController *vc = [[ChatLocationController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-    __weak typeof(self) weakself = self;
-    [vc setAChatLocationControllerBlock:^(ChatLocationModel *model) {
-        [weakself sendLocationMessage:model];
-    }];
 }
 
 
@@ -362,6 +354,22 @@ HMImagePickerControllerDelegate
     = [[ChatLocationPreviewController alloc] initWithMessage:model];
     [self.navigationController pushViewController:vc animated:YES];
 }
+/**to地图**/
+-(void)toLocationController{
+    ChatLocationController *vc = [[ChatLocationController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    __weak typeof(self) weakself = self;
+    [vc setAChatLocationControllerBlock:^(ChatLocationModel *model) {
+        [weakself sendLocationMessage:model];
+    }];
+}
+/**文件预览**/
+-(void)toFilePreviewController:(Message *)model{
+    ChatFilePreviewController *vc
+    = [[ChatFilePreviewController alloc] initWithMessage:model];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 
 
@@ -576,6 +584,8 @@ HMImagePickerControllerDelegate
 
 
 /**
+ 信息保存到数据库
+ 
  SEND:
  <message
  id="89DB0AF0BCC04A4CB77A16C26917636C"
@@ -594,12 +604,6 @@ HMImagePickerControllerDelegate
  <location>113.946263,22.553977</location>
  </message>
  **/
-
-
-
-
-
-
 -(void)dealData:(NSDictionary *)dict {
     Message *msg = [[Message alloc] init];
     msg.currentMyJID = dict[@"currentMyJID"];
@@ -754,6 +758,10 @@ HMImagePickerControllerDelegate
         ChatFileCell *cell01 =
         [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifier forIndexPath:indexPath];
         cell01.model = model;
+        [cell01 setAChatFileCellTapBlock:^(Message *model) {
+            [self toFilePreviewController:model];
+        }];
+        
         return cell01;
     }
     else if ([model.bodyType isEqualToString:@"video"]){
@@ -1100,10 +1108,10 @@ HMImagePickerControllerDelegate
 //文件选择器
 - (void)FilePickerSelect {
     // 显示相册
-    FileController *filer = [[FileController alloc] init];
+    ChatFileController *filer = [[ChatFileController alloc] init];
     [self.navigationController pushViewController:filer animated:YES ];
     __weak typeof(self) weakself = self;
-    [filer settingFileControllerSelect:^(Message *model) {
+    [filer settingChatFileControllerSelect:^(Message *model) {
         //发送消息
         [weakself sendFileMessageWithLocalPath:model.localPath
                                           size:model.size

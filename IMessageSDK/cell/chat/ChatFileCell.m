@@ -136,10 +136,10 @@
         
         
         //点击手势
-//        self.messageLAB.userInteractionEnabled = YES;
-//        UITapGestureRecognizer *tapG =
-//        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGClick:)];
-//        [self.messageLAB addGestureRecognizer:tapG];
+        self.messageLAB.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tapG =
+        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGClick:)];
+        [self.messageLAB addGestureRecognizer:tapG];
         
         //长按手势
         //        UILongPressGestureRecognizer *longPress =
@@ -158,6 +158,11 @@
     //    self.messageLAB.frame = CGRectMake(60, 20, KWIDTH-120, KHEIGHT-30);
     //    self.timeLAB.frame = CGRectMake((KWIDTH-140)/2, 0, 140, 10);
     
+}
+-(void)tapGClick:(UITapGestureRecognizer *)gesture {
+    if (self.aChatFileCellTapBlock) {
+        self.aChatFileCellTapBlock(_model);
+    }
 }
 
 
