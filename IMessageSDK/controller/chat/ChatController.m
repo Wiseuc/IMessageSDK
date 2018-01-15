@@ -44,6 +44,9 @@
 #import "ChatLocationController.h"
 
 
+#import "ChatLocationPreviewController.h"
+
+
 @interface ChatController ()
 <
 CHTCollectionViewDelegateWaterfallLayout,
@@ -311,14 +314,11 @@ HMImagePickerControllerDelegate
         }
     }];
     
-    
     //cell中对象视图imageview
     NSString *identifier = [self cellIndetifyForMessageType:(LTMessageType_Image)];
     NSIndexPath *indexpath = [NSIndexPath indexPathForRow:index inSection:0];
     ChatImageCell *cell01 =
     [self.collectionview dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexpath];
-    
-    
     
     NSMutableArray *items = @[].mutableCopy;
     NSMutableArray *imageMessages = [NSMutableArray array];
@@ -356,7 +356,12 @@ HMImagePickerControllerDelegate
     KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:items selectedIndex:imgIndex];
     [browser showFromViewController:self];
 }
-
+/**跳转地图预览控制器**/
+-(void)toChatLocationPreviewController:(Message *)model{
+    ChatLocationPreviewController *vc
+    = [[ChatLocationPreviewController alloc] initWithMessage:model];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 
@@ -677,7 +682,6 @@ HMImagePickerControllerDelegate
         //行数
         int row = size.height/20.28;
         //NSLog(@"行数：%i",row);
-        
         //20.28为一行高度(font = 17)
         size = CGSizeMake(kScreenWidth, 40 + 30 + 20.28 * (row-1));
         return size;
@@ -782,6 +786,9 @@ HMImagePickerControllerDelegate
         ChatLocationCell *cell01 =
         [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifier forIndexPath:indexPath];
         cell01.model = model;
+        [cell01 setAChatLocationCellTapBlock:^(Message *model) {
+            [self toChatLocationPreviewController:model];
+        }];
         return cell01;
     }
 

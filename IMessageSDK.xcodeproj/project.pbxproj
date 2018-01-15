@@ -266,6 +266,7 @@
 		F91CD2D41FFCE3CF0011489B /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F91CD2C71FFCE3CF0011489B /* libopencore-amrwb.a */; };
 		F91D28D41FF64E7B0040D87A /* LT_HttpRequestManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F91D28D21FF64E7A0040D87A /* LT_HttpRequestManager.h */; };
 		F91D28D51FF64E7B0040D87A /* LT_HttpRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F91D28D31FF64E7A0040D87A /* LT_HttpRequestManager.m */; };
+		F92ACA92200C327300F34C02 /* ChatLocationPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACA91200C327300F34C02 /* ChatLocationPreviewController.m */; };
 		F93496D91FE8AE4B00E8D8A3 /* LT_OrgModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F93496D71FE8AE4B00E8D8A3 /* LT_OrgModel.h */; };
 		F93496DA1FE8AE4B00E8D8A3 /* LT_OrgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F93496D81FE8AE4B00E8D8A3 /* LT_OrgModel.m */; };
 		F93496DD1FE8BCE500E8D8A3 /* OrgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F93496DC1FE8BCE500E8D8A3 /* OrgModel.m */; };
@@ -1218,6 +1219,8 @@
 		F91CD2C71FFCE3CF0011489B /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
 		F91D28D21FF64E7A0040D87A /* LT_HttpRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LT_HttpRequestManager.h; sourceTree = "<group>"; };
 		F91D28D31FF64E7A0040D87A /* LT_HttpRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LT_HttpRequestManager.m; sourceTree = "<group>"; };
+		F92ACA90200C327300F34C02 /* ChatLocationPreviewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatLocationPreviewController.h; sourceTree = "<group>"; };
+		F92ACA91200C327300F34C02 /* ChatLocationPreviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatLocationPreviewController.m; sourceTree = "<group>"; };
 		F93496D71FE8AE4B00E8D8A3 /* LT_OrgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LT_OrgModel.h; sourceTree = "<group>"; };
 		F93496D81FE8AE4B00E8D8A3 /* LT_OrgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LT_OrgModel.m; sourceTree = "<group>"; };
 		F93496DB1FE8BCE500E8D8A3 /* OrgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgModel.h; sourceTree = "<group>"; };
@@ -4239,6 +4242,8 @@
 			children = (
 				F98274652009AE1500695FD7 /* ChatLocationController.h */,
 				F98274662009AE1500695FD7 /* ChatLocationController.m */,
+				F92ACA90200C327300F34C02 /* ChatLocationPreviewController.h */,
+				F92ACA91200C327300F34C02 /* ChatLocationPreviewController.m */,
 			);
 			path = location;
 			sourceTree = "<group>";
@@ -5071,6 +5076,7 @@
 				F959FC171FF36199001D689F /* UITextView+ZWPlaceHolder.m in Sources */,
 				F959FC411FF372A7001D689F /* RATableView.m in Sources */,
 				F96DE2D120089EF200AE034C /* UIImageView+YYWebImage.m in Sources */,
+				F92ACA92200C327300F34C02 /* ChatLocationPreviewController.m in Sources */,
 				F9B630712003632800BED631 /* ChatFileCell.m in Sources */,
 				F9B63061200336B500BED631 /* LXEmotionPageView.m in Sources */,
 				F9AC229D1FFF607D00A91023 /* UIImageView+GIF.m in Sources */,

@@ -120,10 +120,10 @@
         
         
         //点击手势
-        //        self.messageLAB.userInteractionEnabled = YES;
-        //        UITapGestureRecognizer *tapG =
-        //        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGClick:)];
-        //        [self.messageLAB addGestureRecognizer:tapG];
+        self.messageLAB.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tapG =
+        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGClick:)];
+        [self.messageLAB addGestureRecognizer:tapG];
         
         //长按手势
         //        UILongPressGestureRecognizer *longPress =
@@ -148,6 +148,27 @@
 
 
 
+
+
+
+-(void)tapGClick:(UITapGestureRecognizer *)gesture {
+    if (self.aChatLocationCellTapBlock) {
+        self.aChatLocationCellTapBlock(_model);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+-(void)setAChatLocationCellTapBlock:(ChatLocationCellTapBlock)aChatLocationCellTapBlock {
+    _aChatLocationCellTapBlock = aChatLocationCellTapBlock;
+}
 
 
 

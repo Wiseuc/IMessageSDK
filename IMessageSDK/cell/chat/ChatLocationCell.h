@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Message.h"
-
+typedef void(^ChatLocationCellTapBlock)(Message *model);
 
 @interface ChatLocationCell : UICollectionViewCell
+
 @property (nonatomic, strong) Message *model;
+
+
+@property (nonatomic, strong) ChatLocationCellTapBlock aChatLocationCellTapBlock;
+
 
 @end
