@@ -12,7 +12,7 @@
 #import "MineCell02.h"
 #import "LTSDKFull.h"
 #import "InformationController.h"
-#import "MineQRCodeController.h"
+#import "MineMakeQRCodeController.h"
 
 
 
@@ -210,7 +210,7 @@ UITableViewDelegate
         }
         //QRCode
         else if (row == 1) {
-            MineQRCodeController *vc = [[MineQRCodeController alloc] init];
+            MineMakeQRCodeController *vc = [[MineMakeQRCodeController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
         else if (row == 2) {

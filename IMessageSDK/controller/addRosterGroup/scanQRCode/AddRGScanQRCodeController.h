@@ -1,5 +1,5 @@
 //
-//  MineQRCodeController.h
+//  AddRGScanQRCodeController.h
 //  IMessageSDK
 //
 //  Created by JH on 2018/1/16.
@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MineQRCodeController : UIViewController
-
+@interface AddRGScanQRCodeController : UIViewController
 
 @end

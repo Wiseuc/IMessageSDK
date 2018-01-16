@@ -6,7 +6,7 @@
 //  Copyright © 2018年 JiangHai. All rights reserved.
 //
 
-#import "MineQRCodeController.h"
+#import "MineMakeQRCodeController.h"
 #import "ZXingObjC.h"
 #import "UIConfig.h"
 #import "LTSDKFull.h"
@@ -16,7 +16,7 @@
 
 
 
-@interface MineQRCodeController ()
+@interface MineMakeQRCodeController ()
 
 
 @property (nonatomic, strong) UIImageView *iconIMGV;  /**头像**/
@@ -35,7 +35,7 @@
 
 
 
-@implementation MineQRCodeController
+@implementation MineMakeQRCodeController
 
 #pragma mark - UI
 
@@ -122,7 +122,7 @@
     //手机号
     NSDictionary *orgdict = [LTOrg queryInformationByJid:JID];
     NSString *mobile = orgdict[@"MOBILE"];
-    self.addressLAB.text = [NSString stringWithFormat:@"手机: %@",mobile];;
+    self.addressLAB.text = [NSString stringWithFormat:@"手机号: %@",mobile];;
     
 }
 

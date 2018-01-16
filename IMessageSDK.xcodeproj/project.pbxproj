@@ -426,7 +426,7 @@
 		F97D69311FEA128F00E19477 /* LT_MessageAnalysis.h in Headers */ = {isa = PBXBuildFile; fileRef = F97D692F1FEA128F00E19477 /* LT_MessageAnalysis.h */; };
 		F97D69321FEA128F00E19477 /* LT_MessageAnalysis.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D69301FEA128F00E19477 /* LT_MessageAnalysis.m */; };
 		F97D69B51FEA6FEE00E19477 /* ChatListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D69B41FEA6FEE00E19477 /* ChatListCell.m */; };
-		F97D6DCD200DDBA100AF2A61 /* MineQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D6DCC200DDBA100AF2A61 /* MineQRCodeController.m */; };
+		F97D6DCD200DDBA100AF2A61 /* MineMakeQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D6DCC200DDBA100AF2A61 /* MineMakeQRCodeController.m */; };
 		F97D6DCF200DDBFB00AF2A61 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F97D6DCE200DDBF200AF2A61 /* AVFoundation.framework */; };
 		F97D6DD1200DDC1500AF2A61 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F97D6DD0200DDC0F00AF2A61 /* CoreMedia.framework */; };
 		F97D6DD3200DDC2500AF2A61 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F97D6DD2200DDC1F00AF2A61 /* CoreVideo.framework */; };
@@ -652,6 +652,7 @@
 		F97D709E200DDCF900AF2A61 /* ZXQRCodeWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D6FBE200DDCF700AF2A61 /* ZXQRCodeWriter.m */; };
 		F97D709F200DDCF900AF2A61 /* ZXMultiFormatReader.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D6FC1200DDCF700AF2A61 /* ZXMultiFormatReader.m */; };
 		F97D70A0200DDCF900AF2A61 /* ZXMultiFormatWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D6FC3200DDCF700AF2A61 /* ZXMultiFormatWriter.m */; };
+		F97D70A4200DF35D00AF2A61 /* AddRGScanQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D70A3200DF35D00AF2A61 /* AddRGScanQRCodeController.m */; };
 		F97E33D91FE10423001CBFA8 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E33D81FE1039B001CBFA8 /* libstdc++.6.tbd */; };
 		F97E33DA1FE1042B001CBFA8 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E33D71FE1038B001CBFA8 /* libstdc++.tbd */; };
 		F97E33DB1FE1042E001CBFA8 /* libLTSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9194CCC1FDFDCE500CCFB32 /* libLTSDK.a */; };
@@ -1707,8 +1708,8 @@
 		F97D69301FEA128F00E19477 /* LT_MessageAnalysis.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LT_MessageAnalysis.m; sourceTree = "<group>"; };
 		F97D69B31FEA6FEE00E19477 /* ChatListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatListCell.h; sourceTree = "<group>"; };
 		F97D69B41FEA6FEE00E19477 /* ChatListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatListCell.m; sourceTree = "<group>"; };
-		F97D6DCB200DDBA100AF2A61 /* MineQRCodeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineQRCodeController.h; sourceTree = "<group>"; };
-		F97D6DCC200DDBA100AF2A61 /* MineQRCodeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineQRCodeController.m; sourceTree = "<group>"; };
+		F97D6DCB200DDBA100AF2A61 /* MineMakeQRCodeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineMakeQRCodeController.h; sourceTree = "<group>"; };
+		F97D6DCC200DDBA100AF2A61 /* MineMakeQRCodeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineMakeQRCodeController.m; sourceTree = "<group>"; };
 		F97D6DCE200DDBF200AF2A61 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		F97D6DD0200DDC0F00AF2A61 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		F97D6DD2200DDC1F00AF2A61 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -2173,6 +2174,8 @@
 		F97D6FC1200DDCF700AF2A61 /* ZXMultiFormatReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXMultiFormatReader.m; sourceTree = "<group>"; };
 		F97D6FC2200DDCF700AF2A61 /* ZXMultiFormatWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXMultiFormatWriter.h; sourceTree = "<group>"; };
 		F97D6FC3200DDCF700AF2A61 /* ZXMultiFormatWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXMultiFormatWriter.m; sourceTree = "<group>"; };
+		F97D70A2200DF35D00AF2A61 /* AddRGScanQRCodeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRGScanQRCodeController.h; sourceTree = "<group>"; };
+		F97D70A3200DF35D00AF2A61 /* AddRGScanQRCodeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRGScanQRCodeController.m; sourceTree = "<group>"; };
 		F97E33D71FE1038B001CBFA8 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		F97E33D81FE1039B001CBFA8 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 		F97E34171FE11A81001CBFA8 /* XMPPStream+secure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XMPPStream+secure.h"; sourceTree = "<group>"; };
@@ -4565,6 +4568,7 @@
 		F959FBF81FF33361001D689F /* addRosterGroup */ = {
 			isa = PBXGroup;
 			children = (
+				F97D70A1200DF33000AF2A61 /* scanQRCode */,
 				F92ACAAC200C8F1F00F34C02 /* contacts */,
 				F959FBF91FF3339C001D689F /* AddRosterGroupController.h */,
 				F959FBFA1FF3339C001D689F /* AddRosterGroupController.m */,
@@ -4990,8 +4994,8 @@
 		F97D6DCA200DDB8F00AF2A61 /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
-				F97D6DCB200DDBA100AF2A61 /* MineQRCodeController.h */,
-				F97D6DCC200DDBA100AF2A61 /* MineQRCodeController.m */,
+				F97D6DCB200DDBA100AF2A61 /* MineMakeQRCodeController.h */,
+				F97D6DCC200DDBA100AF2A61 /* MineMakeQRCodeController.m */,
 			);
 			path = QRCode;
 			sourceTree = "<group>";
@@ -5716,6 +5720,15 @@
 				F97D6FB7200DDCF700AF2A61 /* ZXMultiFinderPatternFinder.m */,
 			);
 			path = detector;
+			sourceTree = "<group>";
+		};
+		F97D70A1200DF33000AF2A61 /* scanQRCode */ = {
+			isa = PBXGroup;
+			children = (
+				F97D70A2200DF35D00AF2A61 /* AddRGScanQRCodeController.h */,
+				F97D70A3200DF35D00AF2A61 /* AddRGScanQRCodeController.m */,
+			);
+			path = scanQRCode;
 			sourceTree = "<group>";
 		};
 		F97E33DC1FE10920001CBFA8 /* XMPPManager */ = {
@@ -6543,6 +6556,7 @@
 				F96DE2D820089EF300AE034C /* YYWebImageManager.m in Sources */,
 				F959FC541FF378C9001D689F /* SelectGroupMemberModel.m in Sources */,
 				F9558D6F1FE399CA00D13CD0 /* MJRefreshBackNormalFooter.m in Sources */,
+				F97D70A4200DF35D00AF2A61 /* AddRGScanQRCodeController.m in Sources */,
 				F97D7026200DDCF800AF2A61 /* ZXDataMatrixErrorCorrection.m in Sources */,
 				F97D7094200DDCF900AF2A61 /* ZXQRCodeFinderPatternInfo.m in Sources */,
 				F96DE2D620089EF300AE034C /* YYSpriteSheetImage.m in Sources */,
@@ -6830,7 +6844,7 @@
 				F91CD2CB1FFCE3CF0011489B /* EMCDDeviceManager+Microphone.m in Sources */,
 				F97D7069200DDCF900AF2A61 /* ZXUPCEANWriter.m in Sources */,
 				F90F99B52004920C0037DD8E /* HMAlbum.m in Sources */,
-				F97D6DCD200DDBA100AF2A61 /* MineQRCodeController.m in Sources */,
+				F97D6DCD200DDBA100AF2A61 /* MineMakeQRCodeController.m in Sources */,
 				F9B63057200336B500BED631 /* NSString+JHExtension.m in Sources */,
 				F97D7083200DDCF900AF2A61 /* ZXPDF417ResultMetadata.m in Sources */,
 				F97D6FC4200DDCF800AF2A61 /* ZXAztecDecoder.m in Sources */,

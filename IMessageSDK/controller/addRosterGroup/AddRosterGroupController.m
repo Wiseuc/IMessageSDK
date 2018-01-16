@@ -15,7 +15,7 @@
 #import "AddRosterController.h"
 #import "AddRosterController.h"
 #import "AddRGContactController.h"
-
+#import "AddRGScanQRCodeController.h"
 
 @interface AddRosterGroupController ()
 <
@@ -187,7 +187,8 @@ UICollectionViewDelegate
             
         case 2:
         {
-            
+            AddRGScanQRCodeController *vc = [[AddRGScanQRCodeController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
             
