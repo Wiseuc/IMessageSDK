@@ -48,6 +48,28 @@ typedef void(^LTOrg_downloadOrgBlock)(GDataXMLDocument *doc, LTError *error);
  @abstract 通过jid获取信息
  @discussion 查询本地组织架构
  @result  字典
+ 
+ <
+ JID ID="45"
+ LoginName="萧凡宇"
+ PID="10805"
+ ITEMTYPE="2"
+ NAME="萧凡宇"
+ 
+ JID="萧凡宇@duowin-server"
+ NICK="哈哈"
+ MOBILE="18617354209"
+ TELE="908"
+ TelExt=""
+ 
+ MOBEXT="0"
+ EMAIL="xiaofanyu@wiseuc.com"
+ title="iOS开发"
+ sex="男"
+ leader="0"
+ 
+ indexs="661
+ >
  */
 + (NSDictionary *)queryInformationByJid:(NSString *)aJID;
 

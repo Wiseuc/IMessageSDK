@@ -12,7 +12,7 @@
 #import "MineCell02.h"
 #import "LTSDKFull.h"
 #import "InformationController.h"
-
+#import "MineQRCodeController.h"
 
 
 
@@ -73,7 +73,8 @@ UITableViewDelegate
 - (void)setDatas
 {
     NSArray *titles = @[
-                        @"我的信息",
+                        @"我的详细资料",
+                        @"我的二维码",
                         @"软件设置",
                         @"关于"
                         ];
@@ -204,18 +205,20 @@ UITableViewDelegate
             //NSString *UserName = userDict[@"UserName"];
             NSString *JID = userDict[@"JID"];
             //NSString *IMPwd = userDict[@"IMPwd"];
-            InformationController *infovc = [[InformationController alloc] initWithJID:JID];
-            [self.navigationController pushViewController:infovc animated:YES];
+            InformationController *vc = [[InformationController alloc] initWithJID:JID];
+            [self.navigationController pushViewController:vc animated:YES];
         }
-        else if (row == 1)
-        {
+        //QRCode
+        else if (row == 1) {
+            MineQRCodeController *vc = [[MineQRCodeController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else if (row == 2) {
             
         }
-        else if (row == 2)
-        {
+        else if (row == 3) {
             
         }
-        
     }
 }
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath{

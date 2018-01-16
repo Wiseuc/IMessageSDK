@@ -1,0 +1,16 @@
+//
+//  IMessageSDK.pch
+//  IMessageSDK
+//
+//  Created by JH on 2018/1/16.
+//  Copyright © 2018年 JiangHai. All rights reserved.
+//
+
+#ifndef IMessageSDK_pch
+#define IMessageSDK_pch
+
+/**ZXObjC中很多缺少Foundation.h**/
+#import <Foundation/Foundation.h>
+
+#endif /* IMessageSDK_pch */
+
