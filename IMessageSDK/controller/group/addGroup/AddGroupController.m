@@ -1,21 +1,28 @@
 //
-//  AddRosterController.m
+//  AddGroupController.m
 //  IMessageSDK
 //
-//  Created by JH on 2018/1/15.
+//  Created by JH on 2018/1/16.
 //  Copyright © 2018年 JiangHai. All rights reserved.
 //
 
-#import "AddRosterController.h"
+#import "AddGroupController.h"
 #import "UIConfig.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "DocManager.h"
-#import "AddRosterCell.h"
+#import "AddGroupCell.h"
 #import "LTSDKFull.h"
 #import "SVProgressHUD.h"
+#import "GroupModel.h"
 
 
-@interface AddRosterController ()
+
+
+
+
+
+
+@interface AddGroupController ()
 <
 CHTCollectionViewDelegateWaterfallLayout,
 UICollectionViewDataSource,
@@ -37,7 +44,11 @@ UISearchBarDelegate
 
 
 
-@implementation AddRosterController
+
+
+
+@implementation AddGroupController
+
 
 #pragma mark - UI
 
@@ -46,12 +57,50 @@ UISearchBarDelegate
     [self.view addSubview:self.searchBar];
     
     [self.view addSubview:self.collectionview];
-
+    
 }
 
--(void)settingData{
+
+-(void)settingData {
     
-    
+    __weak typeof(self) weakself = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        /**
+         {
+         FN = "\U5927\U7897\U83dc-\U805a\U9910-20170519";
+         category = conference;
+         conferencetype = 1;
+         introduction = "";
+         jid = "d3e01480a5e24ae182d883ec29329216@conference.duowin-server";
+         name = "\U5927\U7897\U83dc-\U805a\U9910-20170519";
+         owner = "\U5218\U816e\U5b9d@duowin-server";
+         password = 0;
+         subject = "\U805a\U9910";
+         type = public;
+         },
+         **/
+        
+        [LTGroup.share queryGroupsCompleted:^(NSMutableArray *groups, LTError *error) {
+            [weakself.datasource removeAllObjects];
+            NSDictionary *dict01 = groups[0];
+            for (NSDictionary *dict02 in dict01[@"item"])
+            {
+                GroupModel *model = [[GroupModel alloc] init];
+                model.FN = dict02[@"FN"];
+                model.category = dict02[@"category"];
+                model.conferencetype = dict02[@"conferencetype"];
+                model.introduction = dict02[@"introduction"];
+                model.jid = dict02[@"jid"];
+                
+                model.name = dict02[@"name"];
+                model.owner = dict02[@"owner"];
+                model.password = dict02[@"password"];
+                model.subject = dict02[@"subject"];
+                model.type = dict02[@"type"];
+                [self.datasource addObject:model];
+            }
+        }];
+    });
 }
 
 
@@ -71,7 +120,7 @@ UISearchBarDelegate
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"搜索好友";
+    self.title = @"搜索群组";
     
     self.view.backgroundColor = kBackgroundColor;
     
@@ -107,11 +156,11 @@ UISearchBarDelegate
 
 #pragma mark - Private
 
-/**添加好友**/
--(void)action_addFriend:(OrgModel *)model {
+/**添加群组**/
+-(void)action_addGroup:(GroupModel *)model {
     UIAlertController *alertvc =
     [UIAlertController alertControllerWithTitle:nil
-                                        message:@"确定添加好友吗"
+                                        message:@"确定添加群组吗"
                                  preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *ac1 = [UIAlertAction actionWithTitle:@"确定"
                                                   style:UIAlertActionStyleDestructive
@@ -123,9 +172,9 @@ UISearchBarDelegate
     [alertvc addAction:ac2];
     [self presentViewController:alertvc animated:YES completion:nil];
 }
--(void)addFriend:(OrgModel *)model {
-    [LTFriend.share sendRequestAddFriendWithFriendJid:model.JID
-                                           friendName:model.NAME
+-(void)addFriend:(GroupModel *)model {
+    [LTFriend.share sendRequestAddFriendWithFriendJid:model.jid
+                                           friendName:model.name
                                             completed:nil];
     [SVProgressHUD showInfoWithStatus:@"添加好友请求已经发送给对方，等待对方确认"];
 }
@@ -149,12 +198,12 @@ UISearchBarDelegate
     return CGSizeMake(kScreenWidth, 50);
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    AddRosterCell *cell =
-    [collectionView dequeueReusableCellWithReuseIdentifier:@"AddRosterCell" forIndexPath:indexPath];
-//    cell.contentView.backgroundColor = [UIColor lightGrayColor];
+    AddGroupCell *cell =
+    [collectionView dequeueReusableCellWithReuseIdentifier:@"AddGroupCell" forIndexPath:indexPath];
+    //    cell.contentView.backgroundColor = [UIColor lightGrayColor];
     cell.model = self.resultArrM[indexPath.item];
-    [cell setAAddRosterCellBlock:^(OrgModel *model) {
-        [self action_addFriend:model];
+    [cell setAAddGroupCellBlock:^(GroupModel *model) {
+        //[self action_addGroup:model];
     }];
     return cell;
 }
@@ -230,7 +279,7 @@ UISearchBarDelegate
 }
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     
-  
+    
 }
 //取消的响应事件
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
@@ -254,9 +303,9 @@ UISearchBarDelegate
     dispatch_async(globalQueue, ^{
         if (searchBar.text!=nil && searchBar.text.length>0) {
             
-            for (OrgModel *model in self.datasource)
+            for (GroupModel *model in self.datasource)
             {
-                NSString *name_pinyin = [self transformToPinyin:model.NAME];
+                NSString *name_pinyin = [self transformToPinyin:model.name];
                 
                 if ([name_pinyin rangeOfString:searchBar.text options:NSCaseInsensitiveSearch].length >0 ) {
                     NSLog(@"pinyin--%@",name_pinyin);
@@ -327,7 +376,7 @@ UISearchBarDelegate
 -(NSMutableArray *)datasource {
     if (!_datasource) {
         _datasource = [NSMutableArray array];
-        _datasource = [DocManager.share queryAllJID];
+//        _datasource = [DocManager.share queryAllSUBGROUP];
     }
     return _datasource;
 }
@@ -346,7 +395,7 @@ UISearchBarDelegate
         _chLayout.minimumColumnSpacing = 0;
         _chLayout.minimumInteritemSpacing = 2;
         
-//        _chLayout.headerHeight = 206+20 +10 +10;  /**页眉页脚高度：设置了之后必须实现，不然报错**/
+        //        _chLayout.headerHeight = 206+20 +10 +10;  /**页眉页脚高度：设置了之后必须实现，不然报错**/
         //_chLayout.footerHeight = 100; 206  154 + 20
     }
     return _chLayout;
@@ -359,8 +408,8 @@ UISearchBarDelegate
         _collectionview.backgroundColor =  [kBackgroundColor colorWithAlphaComponent:0.5];
         _collectionview.delegate = self;
         _collectionview.dataSource = self;
-        [_collectionview registerClass:[AddRosterCell class]
-            forCellWithReuseIdentifier:@"AddRosterCell"];
+        [_collectionview registerClass:[AddGroupCell class]
+            forCellWithReuseIdentifier:@"AddGroupCell"];
     }
     return _collectionview;
 }
@@ -378,6 +427,9 @@ UISearchBarDelegate
     }
     return _searchBar;
 }
+
+
+
 
 
 @end

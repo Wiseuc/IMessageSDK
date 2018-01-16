@@ -653,6 +653,8 @@
 		F97D709F200DDCF900AF2A61 /* ZXMultiFormatReader.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D6FC1200DDCF700AF2A61 /* ZXMultiFormatReader.m */; };
 		F97D70A0200DDCF900AF2A61 /* ZXMultiFormatWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D6FC3200DDCF700AF2A61 /* ZXMultiFormatWriter.m */; };
 		F97D70A4200DF35D00AF2A61 /* AddRGScanQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D70A3200DF35D00AF2A61 /* AddRGScanQRCodeController.m */; };
+		F97D70A8200DFDBA00AF2A61 /* AddGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D70A7200DFDBA00AF2A61 /* AddGroupController.m */; };
+		F97D70AC200E012800AF2A61 /* AddGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F97D70AB200E012800AF2A61 /* AddGroupCell.m */; };
 		F97E33D91FE10423001CBFA8 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E33D81FE1039B001CBFA8 /* libstdc++.6.tbd */; };
 		F97E33DA1FE1042B001CBFA8 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E33D71FE1038B001CBFA8 /* libstdc++.tbd */; };
 		F97E33DB1FE1042E001CBFA8 /* libLTSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9194CCC1FDFDCE500CCFB32 /* libLTSDK.a */; };
@@ -2176,6 +2178,10 @@
 		F97D6FC3200DDCF700AF2A61 /* ZXMultiFormatWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXMultiFormatWriter.m; sourceTree = "<group>"; };
 		F97D70A2200DF35D00AF2A61 /* AddRGScanQRCodeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRGScanQRCodeController.h; sourceTree = "<group>"; };
 		F97D70A3200DF35D00AF2A61 /* AddRGScanQRCodeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRGScanQRCodeController.m; sourceTree = "<group>"; };
+		F97D70A6200DFDBA00AF2A61 /* AddGroupController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddGroupController.h; sourceTree = "<group>"; };
+		F97D70A7200DFDBA00AF2A61 /* AddGroupController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddGroupController.m; sourceTree = "<group>"; };
+		F97D70AA200E012800AF2A61 /* AddGroupCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddGroupCell.h; sourceTree = "<group>"; };
+		F97D70AB200E012800AF2A61 /* AddGroupCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddGroupCell.m; sourceTree = "<group>"; };
 		F97E33D71FE1038B001CBFA8 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		F97E33D81FE1039B001CBFA8 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 		F97E34171FE11A81001CBFA8 /* XMPPStream+secure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XMPPStream+secure.h"; sourceTree = "<group>"; };
@@ -4289,7 +4295,7 @@
 			path = addRoster;
 			sourceTree = "<group>";
 		};
-		F92ACAA5200C8EFC00F34C02 /* addGroup */ = {
+		F92ACAA5200C8EFC00F34C02 /* createGroup */ = {
 			isa = PBXGroup;
 			children = (
 				F92ACAA6200C8EFC00F34C02 /* CreateGroupController.h */,
@@ -4297,7 +4303,7 @@
 				F92ACAA8200C8EFC00F34C02 /* SelectGroupMemberController.h */,
 				F92ACAA9200C8EFC00F34C02 /* SelectGroupMemberController.m */,
 			);
-			path = addGroup;
+			path = createGroup;
 			sourceTree = "<group>";
 		};
 		F92ACAAC200C8F1F00F34C02 /* contacts */ = {
@@ -4375,7 +4381,8 @@
 		F9558CBF1FE359C900D13CD0 /* group */ = {
 			isa = PBXGroup;
 			children = (
-				F92ACAA5200C8EFC00F34C02 /* addGroup */,
+				F97D70A5200DFDA700AF2A61 /* addGroup */,
+				F92ACAA5200C8EFC00F34C02 /* createGroup */,
 				F9558CCB1FE3622C00D13CD0 /* GroupController.h */,
 				F9558CCC1FE3622C00D13CD0 /* GroupController.m */,
 			);
@@ -4557,6 +4564,7 @@
 		F9558D951FE3B32300D13CD0 /* group */ = {
 			isa = PBXGroup;
 			children = (
+				F97D70A9200E010E00AF2A61 /* addGroup */,
 				F99AADB21FE3C74C00D87B35 /* GroupCell.h */,
 				F99AADB31FE3C74C00D87B35 /* GroupCell.m */,
 				F99AADB51FE3C85A00D87B35 /* GroupButton.h */,
@@ -5729,6 +5737,24 @@
 				F97D70A3200DF35D00AF2A61 /* AddRGScanQRCodeController.m */,
 			);
 			path = scanQRCode;
+			sourceTree = "<group>";
+		};
+		F97D70A5200DFDA700AF2A61 /* addGroup */ = {
+			isa = PBXGroup;
+			children = (
+				F97D70A6200DFDBA00AF2A61 /* AddGroupController.h */,
+				F97D70A7200DFDBA00AF2A61 /* AddGroupController.m */,
+			);
+			path = addGroup;
+			sourceTree = "<group>";
+		};
+		F97D70A9200E010E00AF2A61 /* addGroup */ = {
+			isa = PBXGroup;
+			children = (
+				F97D70AA200E012800AF2A61 /* AddGroupCell.h */,
+				F97D70AB200E012800AF2A61 /* AddGroupCell.m */,
+			);
+			path = addGroup;
 			sourceTree = "<group>";
 		};
 		F97E33DC1FE10920001CBFA8 /* XMPPManager */ = {
@@ -6941,6 +6967,7 @@
 				F91761C01FE0D48000906CBB /* SVProgressHUD.m in Sources */,
 				F963FD6E1FE257570073D490 /* ChatController.m in Sources */,
 				F9194CC71FDFDA1600CCFB32 /* UIViewController+child.m in Sources */,
+				F97D70A8200DFDBA00AF2A61 /* AddGroupController.m in Sources */,
 				F97D701F200DDCF800AF2A61 /* ZXDataMatrixDetector.m in Sources */,
 				F9558D721FE399CA00D13CD0 /* MJRefreshNormalHeader.m in Sources */,
 				F9558CDC1FE3800100D13CD0 /* RosterModel.m in Sources */,
@@ -6962,6 +6989,7 @@
 				F9B630772003637300BED631 /* ChatLocationCell.m in Sources */,
 				F9558D671FE399CA00D13CD0 /* MJRefreshBackFooter.m in Sources */,
 				F97D7012200DDCF800AF2A61 /* ZXEncodeHints.m in Sources */,
+				F97D70AC200E012800AF2A61 /* AddGroupCell.m in Sources */,
 				F97D6FC9200DDCF800AF2A61 /* ZXAztecHighLevelEncoder.m in Sources */,
 				F97D7065200DDCF900AF2A61 /* ZXUPCEANExtension2Support.m in Sources */,
 				F9558CC31FE35A6600D13CD0 /* OrgController.m in Sources */,

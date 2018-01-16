@@ -32,7 +32,7 @@
         self.friendBTN.tag = 1000;
         [self.friendBTN addTarget:self action:@selector(buttonClick:) forControlEvents:(UIControlEventTouchUpInside)];
         [self.friendBTN setImage:[[UIImage imageNamed:@"pinglun_dianji"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)] forState:(UIControlStateNormal)];
-        [self.friendBTN setTitle:@"新的朋友 / 群组" forState:(UIControlStateNormal)];
+        [self.friendBTN setTitle:@"新的朋友" forState:(UIControlStateNormal)];
         [self.friendBTN setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         
         
@@ -63,7 +63,7 @@
         self.companyBTN.tag = 1003;
         [self.companyBTN addTarget:self action:@selector(buttonClick:) forControlEvents:(UIControlEventTouchUpInside)];
         [self.companyBTN setImage:[[UIImage imageNamed:@"pinglun_dianji"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)] forState:(UIControlStateNormal)];
-        [self.companyBTN setTitle:@"企业号" forState:(UIControlStateNormal)];
+        [self.companyBTN setTitle:@"办公" forState:(UIControlStateNormal)];
         [self.companyBTN setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     }
     return self;

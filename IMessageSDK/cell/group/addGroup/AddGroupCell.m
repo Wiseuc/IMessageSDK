@@ -1,16 +1,14 @@
 //
-//  AddRosterCell.m
+//  AddGroupCell.m
 //  IMessageSDK
 //
-//  Created by JH on 2018/1/15.
+//  Created by JH on 2018/1/16.
 //  Copyright © 2018年 JiangHai. All rights reserved.
 //
 
-#import "AddRosterCell.h"
+#import "AddGroupCell.h"
 
-
-
-@interface AddRosterCell ()
+@interface AddGroupCell ()
 @property (nonatomic, strong) UIImageView *IMGV;
 @property (nonatomic, strong) UILabel *nameLAB;
 
@@ -23,9 +21,7 @@
 
 
 
-@implementation AddRosterCell
-
-
+@implementation AddGroupCell
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -58,7 +54,7 @@
 -(void)layoutSubviews {
     [super layoutSubviews];
     
-        CGFloat KWIDTH  = self.frame.size.width;
+    CGFloat KWIDTH  = self.frame.size.width;
     CGFloat KHEIGHT = self.frame.size.height;
     
     self.IMGV.frame = CGRectMake(20, (KHEIGHT-20)/2, 20, 20);
@@ -74,9 +70,8 @@
 
 
 -(void)buttonClick:(UIButton *)sender {
-    
-    if (self.aAddRosterCellBlock) {
-        self.aAddRosterCellBlock(self.model);
+    if (self.aAddGroupCellBlock) {
+        self.aAddGroupCellBlock(self.model);
     }
 }
 
@@ -84,14 +79,13 @@
 
 
 
--(void)setAAddRosterCellBlock:(AddRosterCellBlock)aAddRosterCellBlock {
-    _aAddRosterCellBlock = aAddRosterCellBlock;
+-(void)setAAddGroupCellBlock:(AddGroupCellBlock)aAddGroupCellBlock {
+    _aAddGroupCellBlock = aAddGroupCellBlock;
 }
 
--(void)setModel:(OrgModel *)model {
+-(void)setModel:(GroupModel *)model {
     _model = model;
-    self.nameLAB.text = model.NAME;
+    self.nameLAB.text = model.name;
 }
-
 
 @end

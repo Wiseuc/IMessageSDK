@@ -340,13 +340,24 @@
 //    NSLog(@"dispaly = %@",display);
     
     
-    // Vibrate
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    [self.capture stop];
+
     
-    index = index + 1;
-    InformationController *vc = [[InformationController alloc] initWithJID:result.text];
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([result.text containsString:@"wiseuc:"])
+    {
+        // Vibrate
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        [self.capture stop];
+        index = index + 1;
+        
+        //result.text : wiseuc:江海@duowin-server
+        NSString *jid = [result.text stringByReplacingOccurrencesOfString:@"wiseuc:" withString:@""];
+        InformationController *vc = [[InformationController alloc] initWithJID:jid];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else
+    {
+        [SVProgressHUD showInfoWithStatus:@"请注意，此二维码非汇讯客户端生成。"];
+    }
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
 //        [self.capture start];

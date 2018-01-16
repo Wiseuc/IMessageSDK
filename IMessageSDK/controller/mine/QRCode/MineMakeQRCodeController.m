@@ -114,16 +114,27 @@
     
     //名字
     NSDictionary *userdict = [LTUser.share queryUser];
-    NSString *JID = userdict[@"JID"];
+    NSString *JID = [NSString stringWithFormat:@"wiseuc:%@",userdict[@"JID"]];
     NSString *UserName = userdict[@"UserName"];
     [self settingQRCodeWithJID:JID username:UserName];
     self.nameLAB.text = UserName;
     
     //手机号
-    NSDictionary *orgdict = [LTOrg queryInformationByJid:JID];
-    NSString *mobile = orgdict[@"MOBILE"];
-    self.addressLAB.text = [NSString stringWithFormat:@"手机号: %@",mobile];;
+    NSDictionary *orgdict = [LTOrg queryInformationByJid:userdict[@"JID"]];
+    __block NSString *mobile = orgdict[@"MOBILE"];
+
     
+    if (mobile == nil || mobile.length < 7) {
+        __weak typeof(self) wealself = self;
+        [LTFriend.share queryRosterVCardByJID:userdict[@"JID"] completed:^(NSDictionary *dict) {
+            mobile = dict[@"CELL"];
+            if (mobile == nil || mobile.length < 7) {
+                mobile = @"暂无";
+            }
+            wealself.addressLAB.text = [NSString stringWithFormat:@"手机号: %@",mobile];
+        }];
+    }
+    self.addressLAB.text = [NSString stringWithFormat:@"手机号: %@",mobile];
 }
 
 -(void)settingQRCodeWithJID:(NSString *)aJID

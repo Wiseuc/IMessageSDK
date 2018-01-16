@@ -68,7 +68,7 @@ UITableViewDelegate
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"新的好友／群组";
+    self.title = @"新的好友请求";
     self.view.backgroundColor = kBackgroundColor;
     [self settingUI];
     [self settingData];
@@ -154,7 +154,7 @@ UITableViewDelegate
 #pragma mark - 代理：tableview
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50;
@@ -162,12 +162,12 @@ UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataSource.count;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 50.0f;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 1.0f;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return 50.0f;
+//}
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+//    return 1.0f;
+//}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewRosterGroupCell"];
     NSString *jid = self.dataSource[indexPath.row];
@@ -204,20 +204,21 @@ UITableViewDelegate
     return arr;
 }
 //自定义段头断尾视图
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    //按钮
-    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [button setBackgroundColor:[[UIColor grayColor] colorWithAlphaComponent:0.5]];
-    if (section == 0)
-    {
-        [button setTitle:@"新的好友" forState:UIControlStateNormal];
-    }else if (section == 1){
-        [button setTitle:@"新的群组" forState:UIControlStateNormal];
-    }
-    
-    return button;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    //按钮
+//    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
+//    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [button setBackgroundColor:[[UIColor grayColor] colorWithAlphaComponent:0.5]];
+//    if (section == 0)
+//    {
+//        [button setTitle:@"新的好友" forState:UIControlStateNormal];
+//    }
+////    else if (section == 1){
+////        [button setTitle:@"新的群组" forState:UIControlStateNormal];
+////    }
+//
+//    return button;
+//}
 
 
 

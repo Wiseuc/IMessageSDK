@@ -16,6 +16,7 @@
 #import "AddRosterController.h"
 #import "AddRGContactController.h"
 #import "AddRGScanQRCodeController.h"
+#import "AddGroupController.h"
 
 @interface AddRosterGroupController ()
 <
@@ -59,17 +60,20 @@ UICollectionViewDelegate
                         @"icon_40pt",
                         @"icon_40pt",
                         @"icon_40pt",
+                        @"icon_40pt",
                         ];
     
     NSArray *titles = @[
                         @"添加好友",
+                        @"添加群组",
                         @"创建群组",
                         @"扫一扫",
                         @"手机联系人",
                         ];
     
     NSArray *subtitles = @[
-                        @"添加组织架构中的好友",
+                        @"搜索组织架构中的好友并申请加为好友",
+                        @"搜索组织架构中的群组并申请加入",
                         @"选择组织架构中的好友创建群组",
                         @"扫描二维码名片",
                         @"浏览通讯录中的好友拨打电话",
@@ -177,22 +181,28 @@ UICollectionViewDelegate
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-            
         case 1:
         {
-            CreateGroupController *vc = [[CreateGroupController alloc] init];
+            AddGroupController *vc = [[AddGroupController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
             
         case 2:
         {
-            AddRGScanQRCodeController *vc = [[AddRGScanQRCodeController alloc] init];
+            CreateGroupController *vc = [[CreateGroupController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
             
         case 3:
+        {
+            AddRGScanQRCodeController *vc = [[AddRGScanQRCodeController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+            
+        case 4:
         {
             AddRGContactController *vc = [[AddRGContactController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
