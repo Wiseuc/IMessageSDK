@@ -44,7 +44,7 @@ UICollectionViewDelegate
 
 -(void)settingUI {
     self.view.backgroundColor = kBackgroundColor;
-    
+    self.title = @"关于汇讯";
     
     //
     UIImageView *iconIMGV = [[UIImageView alloc] init];
