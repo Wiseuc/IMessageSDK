@@ -224,28 +224,28 @@ UICollectionViewDelegate
             
             /**跳转**/
             switch (tag) {
-                case 1000:
+                case 1001:
                 {
                     NewRosterGroupController *newvc = [[NewRosterGroupController alloc] init];
                     [weakself.navigationController pushViewController:newvc animated:YES];
                 }
                     break;
                     
-                case 1001:
+                case 1002:
                 {
                     GroupController *groupvc = [[GroupController alloc] init];
                     [weakself.navigationController pushViewController:groupvc animated:YES];
                 }
                     break;
                     
-                case 1002:
+                case 1003:
                 {
                     OrgController *orgvc = [[OrgController alloc] init];
                     [weakself.navigationController pushViewController:orgvc animated:YES];
                 }
                     break;
                     
-                case 1003:
+                case 1004:
                 {
                     CompanyController *companyvc = [[CompanyController alloc] init];
                     [weakself.navigationController pushViewController:companyvc animated:YES];

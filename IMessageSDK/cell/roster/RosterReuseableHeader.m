@@ -29,7 +29,7 @@
         self.friendBTN = [RosterHeaderButton buttonWithType:(UIButtonTypeSystem)];
         [self.friendBTN setBackgroundColor:[UIColor whiteColor]];
         [self addSubview:self.friendBTN];
-        self.friendBTN.tag = 1000;
+        self.friendBTN.tag = 1001;
         [self.friendBTN addTarget:self action:@selector(buttonClick:) forControlEvents:(UIControlEventTouchUpInside)];
         [self.friendBTN setImage:[[UIImage imageNamed:@"pinglun_dianji"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)] forState:(UIControlStateNormal)];
         [self.friendBTN setTitle:@"新的朋友" forState:(UIControlStateNormal)];
@@ -40,7 +40,7 @@
         self.groupBTN = [RosterHeaderButton buttonWithType:(UIButtonTypeSystem)];
         [self.groupBTN setBackgroundColor:[UIColor whiteColor]];
         [self addSubview:self.groupBTN];
-        self.groupBTN.tag = 1001;
+        self.groupBTN.tag = 1002;
         [self.groupBTN addTarget:self action:@selector(buttonClick:) forControlEvents:(UIControlEventTouchUpInside)];
         [self.groupBTN setImage:[[UIImage imageNamed:@"pinglun_dianji"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)] forState:(UIControlStateNormal)];
         [self.groupBTN setTitle:@"群组" forState:(UIControlStateNormal)];
@@ -50,7 +50,7 @@
         self.OrgBTN = [RosterHeaderButton buttonWithType:(UIButtonTypeSystem)];
         [self.OrgBTN setBackgroundColor:[UIColor whiteColor]];
         [self addSubview:self.OrgBTN];
-        self.OrgBTN.tag = 1002;
+        self.OrgBTN.tag = 1003;
         [self.OrgBTN addTarget:self action:@selector(buttonClick:) forControlEvents:(UIControlEventTouchUpInside)];
         [self.OrgBTN setImage:[[UIImage imageNamed:@"pinglun_dianji"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)] forState:(UIControlStateNormal)];
         [self.OrgBTN setTitle:@"组织架构" forState:(UIControlStateNormal)];
@@ -60,7 +60,7 @@
         self.companyBTN = [RosterHeaderButton buttonWithType:(UIButtonTypeSystem)];
         [self.companyBTN setBackgroundColor:[UIColor whiteColor]];
         [self addSubview:self.companyBTN];
-        self.companyBTN.tag = 1003;
+        self.companyBTN.tag = 1004;
         [self.companyBTN addTarget:self action:@selector(buttonClick:) forControlEvents:(UIControlEventTouchUpInside)];
         [self.companyBTN setImage:[[UIImage imageNamed:@"pinglun_dianji"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)] forState:(UIControlStateNormal)];
         [self.companyBTN setTitle:@"办公" forState:(UIControlStateNormal)];

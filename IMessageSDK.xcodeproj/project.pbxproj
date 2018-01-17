@@ -275,6 +275,12 @@
 		F92ACAAF200C8F4200F34C02 /* AddRGContactController.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACAAE200C8F4200F34C02 /* AddRGContactController.m */; };
 		F92ACAB6200C976500F34C02 /* AddRGContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACAB5200C976500F34C02 /* AddRGContactCell.m */; };
 		F92ACAB9200C97DA00F34C02 /* AddRGContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F92ACAB8200C97DA00F34C02 /* AddRGContactModel.m */; };
+		F933BBDE200F1DD9009547FC /* MineABoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = F933BBDD200F1DD9009547FC /* MineABoutController.m */; };
+		F933BBE9200F1F42009547FC /* MinePreferenecController.m in Sources */ = {isa = PBXBuildFile; fileRef = F933BBE8200F1F42009547FC /* MinePreferenecController.m */; };
+		F933BBEC200F1F6C009547FC /* MineChatRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = F933BBEB200F1F6C009547FC /* MineChatRecordController.m */; };
+		F933BBF2200F22C8009547FC /* MineAboutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F933BBF1200F22C8009547FC /* MineAboutCell.m */; };
+		F933BBFB200F299E009547FC /* MineFuntionIntroController.m in Sources */ = {isa = PBXBuildFile; fileRef = F933BBFA200F299E009547FC /* MineFuntionIntroController.m */; };
+		F933BBFE200F2D27009547FC /* MineHelpController.m in Sources */ = {isa = PBXBuildFile; fileRef = F933BBFD200F2D27009547FC /* MineHelpController.m */; };
 		F93496D91FE8AE4B00E8D8A3 /* LT_OrgModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F93496D71FE8AE4B00E8D8A3 /* LT_OrgModel.h */; };
 		F93496DA1FE8AE4B00E8D8A3 /* LT_OrgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F93496D81FE8AE4B00E8D8A3 /* LT_OrgModel.m */; };
 		F93496DD1FE8BCE500E8D8A3 /* OrgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F93496DC1FE8BCE500E8D8A3 /* OrgModel.m */; };
@@ -1472,6 +1478,18 @@
 		F92ACAB5200C976500F34C02 /* AddRGContactCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRGContactCell.m; sourceTree = "<group>"; };
 		F92ACAB7200C97DA00F34C02 /* AddRGContactModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRGContactModel.h; sourceTree = "<group>"; };
 		F92ACAB8200C97DA00F34C02 /* AddRGContactModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRGContactModel.m; sourceTree = "<group>"; };
+		F933BBDC200F1DD9009547FC /* MineABoutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineABoutController.h; sourceTree = "<group>"; };
+		F933BBDD200F1DD9009547FC /* MineABoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineABoutController.m; sourceTree = "<group>"; };
+		F933BBE7200F1F42009547FC /* MinePreferenecController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MinePreferenecController.h; sourceTree = "<group>"; };
+		F933BBE8200F1F42009547FC /* MinePreferenecController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MinePreferenecController.m; sourceTree = "<group>"; };
+		F933BBEA200F1F6C009547FC /* MineChatRecordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineChatRecordController.h; sourceTree = "<group>"; };
+		F933BBEB200F1F6C009547FC /* MineChatRecordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineChatRecordController.m; sourceTree = "<group>"; };
+		F933BBF0200F22C8009547FC /* MineAboutCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineAboutCell.h; sourceTree = "<group>"; };
+		F933BBF1200F22C8009547FC /* MineAboutCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineAboutCell.m; sourceTree = "<group>"; };
+		F933BBF9200F299E009547FC /* MineFuntionIntroController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineFuntionIntroController.h; sourceTree = "<group>"; };
+		F933BBFA200F299E009547FC /* MineFuntionIntroController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineFuntionIntroController.m; sourceTree = "<group>"; };
+		F933BBFC200F2D27009547FC /* MineHelpController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineHelpController.h; sourceTree = "<group>"; };
+		F933BBFD200F2D27009547FC /* MineHelpController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineHelpController.m; sourceTree = "<group>"; };
 		F93496D71FE8AE4B00E8D8A3 /* LT_OrgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LT_OrgModel.h; sourceTree = "<group>"; };
 		F93496D81FE8AE4B00E8D8A3 /* LT_OrgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LT_OrgModel.m; sourceTree = "<group>"; };
 		F93496DB1FE8BCE500E8D8A3 /* OrgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgModel.h; sourceTree = "<group>"; };
@@ -4331,6 +4349,60 @@
 			path = addRosterGroup;
 			sourceTree = "<group>";
 		};
+		F933BBDB200F1DC3009547FC /* ABout */ = {
+			isa = PBXGroup;
+			children = (
+				F933BBDC200F1DD9009547FC /* MineABoutController.h */,
+				F933BBDD200F1DD9009547FC /* MineABoutController.m */,
+				F933BBF9200F299E009547FC /* MineFuntionIntroController.h */,
+				F933BBFA200F299E009547FC /* MineFuntionIntroController.m */,
+				F933BBFC200F2D27009547FC /* MineHelpController.h */,
+				F933BBFD200F2D27009547FC /* MineHelpController.m */,
+			);
+			path = ABout;
+			sourceTree = "<group>";
+		};
+		F933BBDF200F1E28009547FC /* ConversionRecord */ = {
+			isa = PBXGroup;
+			children = (
+				F933BBEA200F1F6C009547FC /* MineChatRecordController.h */,
+				F933BBEB200F1F6C009547FC /* MineChatRecordController.m */,
+			);
+			path = ConversionRecord;
+			sourceTree = "<group>";
+		};
+		F933BBE3200F1E6C009547FC /* Preference */ = {
+			isa = PBXGroup;
+			children = (
+				F933BBE7200F1F42009547FC /* MinePreferenecController.h */,
+				F933BBE8200F1F42009547FC /* MinePreferenecController.m */,
+			);
+			path = Preference;
+			sourceTree = "<group>";
+		};
+		F933BBED200F22AE009547FC /* chatRecord */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = chatRecord;
+			sourceTree = "<group>";
+		};
+		F933BBEE200F22AE009547FC /* preference */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = preference;
+			sourceTree = "<group>";
+		};
+		F933BBEF200F22AE009547FC /* about */ = {
+			isa = PBXGroup;
+			children = (
+				F933BBF0200F22C8009547FC /* MineAboutCell.h */,
+				F933BBF1200F22C8009547FC /* MineAboutCell.m */,
+			);
+			path = about;
+			sourceTree = "<group>";
+		};
 		F93496D61FE8AD1500E8D8A3 /* OrgModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -4361,6 +4433,9 @@
 		F93496EF1FE9016100E8D8A3 /* mine */ = {
 			isa = PBXGroup;
 			children = (
+				F933BBEF200F22AE009547FC /* about */,
+				F933BBED200F22AE009547FC /* chatRecord */,
+				F933BBEE200F22AE009547FC /* preference */,
 				F93496F01FE901D600E8D8A3 /* MineCell01.h */,
 				F93496F11FE901D600E8D8A3 /* MineCell01.m */,
 				F93496F31FE9041300E8D8A3 /* MineCell02.h */,
@@ -4786,6 +4861,9 @@
 		F963FD671FE2571F0073D490 /* mine */ = {
 			isa = PBXGroup;
 			children = (
+				F933BBE3200F1E6C009547FC /* Preference */,
+				F933BBDF200F1E28009547FC /* ConversionRecord */,
+				F933BBDB200F1DC3009547FC /* ABout */,
 				F97D6DCA200DDB8F00AF2A61 /* QRCode */,
 				F963FD691FE2574B0073D490 /* MineController.h */,
 				F963FD6A1FE2574B0073D490 /* MineController.m */,
@@ -6591,6 +6669,7 @@
 				F9558D691FE399CA00D13CD0 /* MJRefreshFooter.m in Sources */,
 				F97D709D200DDCF900AF2A61 /* ZXQRCodeReader.m in Sources */,
 				F97D7064200DDCF900AF2A61 /* ZXUPCAWriter.m in Sources */,
+				F933BBE9200F1F42009547FC /* MinePreferenecController.m in Sources */,
 				F97D7056200DDCF900AF2A61 /* ZXCode39Writer.m in Sources */,
 				F97D7041200DDCF800AF2A61 /* ZXRSSExpandedDecodedChar.m in Sources */,
 				F93496E41FE8D2B400E8D8A3 /* OrgCell.m in Sources */,
@@ -6610,6 +6689,7 @@
 				F96DE29C20089ED800AE034C /* KSPhotoView.m in Sources */,
 				F91CD2C81FFCE3CF0011489B /* EMAudioPlayerUtil.m in Sources */,
 				F97D6FF8200DDCF800AF2A61 /* ZXMonochromeRectangleDetector.m in Sources */,
+				F933BBEC200F1F6C009547FC /* MineChatRecordController.m in Sources */,
 				F97D7028200DDCF800AF2A61 /* ZXDataMatrixSymbolInfo.m in Sources */,
 				F95B4AD71FFE261E00AFBEDE /* LTTextMessage.m in Sources */,
 				F97D708D200DDCF900AF2A61 /* ZXQRCodeMode.m in Sources */,
@@ -6705,6 +6785,7 @@
 				F9B9E7371FFB539A00EAE150 /* AppDelegate+voip.m in Sources */,
 				F92ACAA4200C6E2600F34C02 /* AddRosterCell.m in Sources */,
 				F9558D821FE399CA00D13CD0 /* UIScrollView+MJExtension.m in Sources */,
+				F933BBFB200F299E009547FC /* MineFuntionIntroController.m in Sources */,
 				F91CD2D01FFCE3CF0011489B /* amrFileCodec.mm in Sources */,
 				F97D708F200DDCF900AF2A61 /* ZXQRCodeAlignmentPattern.m in Sources */,
 				F97D701A200DDCF800AF2A61 /* ZXDataMatrixBitMatrixParser.m in Sources */,
@@ -6818,6 +6899,7 @@
 				F97D7016200DDCF800AF2A61 /* ZXPlanarYUVLuminanceSource.m in Sources */,
 				F97D7080200DDCF900AF2A61 /* ZXPDF417HighLevelEncoder.m in Sources */,
 				F97D7091200DDCF900AF2A61 /* ZXQRCodeDetector.m in Sources */,
+				F933BBDE200F1DD9009547FC /* MineABoutController.m in Sources */,
 				F959FBFB1FF3339C001D689F /* AddRosterGroupController.m in Sources */,
 				F97D7036200DDCF800AF2A61 /* ZXAI01320xDecoder.m in Sources */,
 				F93496F51FE9041300E8D8A3 /* MineCell02.m in Sources */,
@@ -6851,6 +6933,7 @@
 				F90F99C02004920C0037DD8E /* HMViewerViewController.m in Sources */,
 				F97D702F200DDCF800AF2A61 /* ZXMaxiCodeDecodedBitStreamParser.m in Sources */,
 				F9AC22991FFF607D00A91023 /* TLAttributedImage.m in Sources */,
+				F933BBFE200F2D27009547FC /* MineHelpController.m in Sources */,
 				F97D704F200DDCF900AF2A61 /* ZXRSSPair.m in Sources */,
 				F97D7074200DDCF900AF2A61 /* ZXPDF417DecodedBitStreamParser.m in Sources */,
 				F97D7049200DDCF900AF2A61 /* ZXRSSExpandedReader.m in Sources */,
@@ -6943,6 +7026,7 @@
 				F92ACAB6200C976500F34C02 /* AddRGContactCell.m in Sources */,
 				F97D7098200DDCF900AF2A61 /* ZXQRCodeMaskUtil.m in Sources */,
 				F9AC22961FFF607D00A91023 /* NSMutableAttributedString+CTFrameRef.m in Sources */,
+				F933BBF2200F22C8009547FC /* MineAboutCell.m in Sources */,
 				F97D6FCA200DDCF800AF2A61 /* ZXAztecSimpleToken.m in Sources */,
 				F99AADB41FE3C74C00D87B35 /* GroupCell.m in Sources */,
 				F97D6FE8200DDCF800AF2A61 /* ZXTelParsedResult.m in Sources */,

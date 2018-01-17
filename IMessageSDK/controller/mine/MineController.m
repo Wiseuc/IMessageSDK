@@ -14,6 +14,10 @@
 #import "InformationController.h"
 #import "MineMakeQRCodeController.h"
 
+#import "MineABoutController.h"
+#import "MineChatRecordController.h"
+#import "MinePreferenecController.h"
+
 
 
 @interface MineController ()
@@ -53,30 +57,32 @@ UITableViewDelegate
     
     
     /*****不要动我代码***********不要动我代码*******不要动我代码***********不要动我代码********/
-    UILabel *jhLAB = [[UILabel alloc] init];
-    jhLAB.frame = CGRectMake((kScreenWidth-300)/2, kScreenHeight-40-49, 300, 20);
-    jhLAB.text = @"IMessageSDK版权由深圳市励拓软件有限公司所有，盗版必究";
-    jhLAB.textColor = [UIColor lightGrayColor];
-    jhLAB.font = [UIFont boldSystemFontOfSize:10.0];
-    [self.view addSubview:jhLAB];
-    jhLAB.textAlignment = NSTextAlignmentCenter;
-    
-    UILabel *jhLAB02 = [[UILabel alloc] init];
-    jhLAB02.frame = CGRectMake((kScreenWidth-200)/2, kScreenHeight-20-49, 200, 20);
-    jhLAB02.text = @"Author：江海   TEL:18823780407";
-    jhLAB02.textColor = [UIColor lightGrayColor];
-    jhLAB02.font = [UIFont boldSystemFontOfSize:10.0];
-    [self.view addSubview:jhLAB02];
-    jhLAB02.textAlignment = NSTextAlignmentCenter;
+//    UILabel *jhLAB = [[UILabel alloc] init];
+//    jhLAB.frame = CGRectMake((kScreenWidth-300)/2, kScreenHeight-40-49, 300, 20);
+//    jhLAB.text = @"IMessageSDK版权由深圳市励拓软件有限公司所有，盗版必究";
+//    jhLAB.textColor = [UIColor lightGrayColor];
+//    jhLAB.font = [UIFont boldSystemFontOfSize:10.0];
+//    [self.view addSubview:jhLAB];
+//    jhLAB.textAlignment = NSTextAlignmentCenter;
+//
+//    UILabel *jhLAB02 = [[UILabel alloc] init];
+//    jhLAB02.frame = CGRectMake((kScreenWidth-200)/2, kScreenHeight-20-49, 200, 20);
+//    jhLAB02.text = @"Author：江海   TEL:18823780407";
+//    jhLAB02.textColor = [UIColor lightGrayColor];
+//    jhLAB02.font = [UIFont boldSystemFontOfSize:10.0];
+//    [self.view addSubview:jhLAB02];
+//    jhLAB02.textAlignment = NSTextAlignmentCenter;
    /*****不要动我代码*******不要动我代码*********不要动我代码**************不要动我代码********/
 }
 - (void)setDatas
 {
     NSArray *titles = @[
-                        @"我的详细资料",
+                        @"我的资料",
                         @"我的二维码",
-                        @"软件设置",
-                        @"关于"
+                        
+                        @"聊天记录",
+                        @"偏好设置",
+                        @"关于汇讯"
                         ];
 //    NSArray *images = @[
 //                        @"wodexinxi",
@@ -112,6 +118,8 @@ UITableViewDelegate
     [super viewWillAppear:animated];
     
     [self setDatas];
+    
+    [kMainVC showTbaBar];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -199,6 +207,8 @@ UITableViewDelegate
     }else if (indexPath.section == 1){
         
         NSInteger row = indexPath.row;
+        
+        //我的资料
         if (row == 0)
         {
             NSDictionary  *userDict = [LTUser.share queryUser];
@@ -209,15 +219,29 @@ UITableViewDelegate
             [self.navigationController pushViewController:vc animated:YES];
         }
         //QRCode
-        else if (row == 1) {
+        else if (row == 1)
+        {
             MineMakeQRCodeController *vc = [[MineMakeQRCodeController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
-        else if (row == 2) {
-            
+        
+        //聊天记录
+        else if (row == 2)
+        {
+            MineChatRecordController *vc = [[MineChatRecordController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
-        else if (row == 3) {
-            
+        //偏好设置
+        else if (row == 3)
+        {
+            MinePreferenecController *vc = [[MinePreferenecController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        //关于汇讯
+        else if (row == 4)
+        {
+            MineABoutController *vc = [[MineABoutController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }

@@ -131,6 +131,24 @@
 
 
 
+
+
+
+
+
+#pragma mark - =================== 网站 ========================
+#define kMine_Web_OfficialWebsite @"http://www.wiseuc.com" //官网
+#define kMine_Web_ProductDescription @"http://www.wiseuc.com/product.php" //产品说明
+#define kMine_Web_FunctionIntro @"http://www.wiseuc.com/product_D.php" //功能介绍
+#define kMine_Web_Help @"http://www.wiseuc.com/helpcenter.php" //帮助
+
+
+
+
+
+
+
+
 /**高德地图key**/
 #define kAMapApiKey   @"d95147698196a82f4d89d71277513bac"
 
