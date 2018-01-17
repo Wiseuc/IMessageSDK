@@ -13,6 +13,8 @@
 #import "DocManager.h"
 
 @interface LoginController ()<UITextFieldDelegate>
+
+@property (nonatomic, strong) UIImageView *iconIMGV;
 @property (nonatomic, strong) UITextField *usernameTF;
 @property (nonatomic, strong) UITextField *passwordTF;
 @property (nonatomic, strong) UIButton *loginBTN;
@@ -28,36 +30,64 @@
 - (void)settingUI {
     self.view.backgroundColor = kBackgroundColor;
     
+    
+    
+    self.iconIMGV = [[UIImageView alloc] init];
+    [self.view addSubview:self.iconIMGV];
+    self.iconIMGV.frame = CGRectMake((kScreenWidth-80)/2, (200)/2, 80, 80);
+    self.iconIMGV.image = [UIImage imageNamed:@"icon_40pt"];
+    
+    
+    
+    
+    
+    
+    
     /**用户名**/
     self.usernameTF = [[UITextField alloc] init];
-    self.usernameTF.frame = CGRectMake(20, 200, kScreenWidth-40, 40);
+    self.usernameTF.frame = CGRectMake(20, 240, kScreenWidth-40, 40);
     [self.view addSubview:self.usernameTF];
     self.usernameTF.placeholder = @"username";
     self.usernameTF.text = @"江海";
     self.usernameTF.layer.borderWidth = 1.0;
+    self.usernameTF.layer.cornerRadius = 4;
     self.usernameTF.layer.borderColor =
     [[UIColor grayColor] colorWithAlphaComponent:0.8].CGColor;
     self.usernameTF.delegate = self;
+//    [self.yourTextField setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
+    [self.usernameTF setValue:[NSNumber numberWithInt:10] forKey:@"paddingLeft"];
+//    [self.yourTextField setValue:[NSNumber numberWithInt:5] forKey:@"paddingBottom"];
+//    [self.yourTextField setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
+    
     
     /**密码**/
     self.passwordTF = [[UITextField alloc] init];
-    self.passwordTF.frame = CGRectMake(20, 250, kScreenWidth-40, 40);
+    self.passwordTF.frame = CGRectMake(20, 290, kScreenWidth-40, 40);
     [self.view addSubview:self.passwordTF];
     self.passwordTF.placeholder = @"password";
     self.passwordTF.text = @"666666";
     self.passwordTF.layer.borderWidth = 1.0;
+    self.passwordTF.layer.cornerRadius = 4;
     self.passwordTF.secureTextEntry = YES;
     self.passwordTF.layer.borderColor =
     [[UIColor grayColor] colorWithAlphaComponent:0.8].CGColor;
     self.passwordTF.delegate = self;
+    //    [self.yourTextField setValue:[NSNumber numberWithInt:5] forKey:@"paddingTop"];
+    [self.passwordTF setValue:[NSNumber numberWithInt:10] forKey:@"paddingLeft"];
+    //    [self.yourTextField setValue:[NSNumber numberWithInt:5] forKey:@"paddingBottom"];
+    //    [self.yourTextField setValue:[NSNumber numberWithInt:5] forKey:@"paddingRight"];
+    
+    
+    
+    
     
     /**登录**/
     self.loginBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.loginBTN.frame = CGRectMake(20, 300, kScreenWidth-40, 40);
+    self.loginBTN.frame = CGRectMake(20, 340, kScreenWidth-40, 40);
     [self.view addSubview:self.loginBTN];
     [self.loginBTN setBackgroundColor: kDarkGreenColor];
-    [self.loginBTN setTitle:@"login" forState:(UIControlStateNormal)];
-    self.loginBTN.layer.cornerRadius = 20;
+    [self.loginBTN setTitle:@"登录" forState:(UIControlStateNormal)];
+    self.loginBTN.layer.cornerRadius = 4;
     self.loginBTN.layer.masksToBounds = YES;
     [self.loginBTN setTitleColor:[UIColor whiteColor]
                         forState:(UIControlStateNormal)];

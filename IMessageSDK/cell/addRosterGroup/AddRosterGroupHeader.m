@@ -24,7 +24,7 @@
     if (self) {
         self.inputBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
         [self addSubview:self.inputBTN];
-        [self.inputBTN setTitle:@"搜索联系人：张三／zhangsan / zs"
+        [self.inputBTN setTitle:@"搜索好友"
                        forState:(UIControlStateNormal)];
         [self.inputBTN setImage:[UIImage imageNamed:@"searchBarIcon"]
                        forState:(UIControlStateNormal)];

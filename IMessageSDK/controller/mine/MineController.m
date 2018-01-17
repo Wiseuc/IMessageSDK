@@ -41,7 +41,7 @@ UITableViewDelegate
     
     UIButton *logoutBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
     logoutBTN.frame = CGRectMake(0, 20, 300, 50);
-    [logoutBTN setTitle:@"Log Out" forState:(UIControlStateNormal)];
+    [logoutBTN setTitle:@"注销" forState:(UIControlStateNormal)];
     [logoutBTN setBackgroundColor:kDarkGreenColor];
     [logoutBTN setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     logoutBTN.layer.cornerRadius = 4;
