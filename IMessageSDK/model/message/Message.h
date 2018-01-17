@@ -122,6 +122,8 @@ typedef void(^MessageDBChangeBlock)(void);
 #pragma mark - delete
 /**通过UID删除信息**/
 //-(void)jh_deleteByUID:(NSString *)aUID;
+/**通过MyJID删除信息**/
++(void)jh_deleteByMyJID:(NSString *)aJID;
 /**通过对方JID删除信息**/
 +(void)jh_deleteByCurrentOtherJID:(NSString *)aJID;
 /**删除数据表所有信息**/

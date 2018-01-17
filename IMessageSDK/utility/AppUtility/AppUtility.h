@@ -14,6 +14,27 @@
 
 /*!
  @method
+ @abstract 清除cache缓存
+ @discussion <#备注#>
+ @result  <#描述4#>
+ */
++ (void)clearCacheAction:(void(^)(BOOL clearFinished))complete;
++ (CGFloat)cacheSize;
+
+
+/*!
+ @method
+ @abstract 清除document缓存
+ @discussion <#备注#>
+ @result  <#描述4#>
+ */
++ (void)clearDocumentAction:(void(^)(BOOL clearFinished))complete;
++ (CGFloat)documentSize;
+
+
+
+/*!
+ @method
  @abstract 是否第一次运行
  @discussion null
  */

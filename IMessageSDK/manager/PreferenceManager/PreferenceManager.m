@@ -9,7 +9,7 @@
 #import "PreferenceManager.h"
 #define kPreference_voice  @"kPreference_voice"
 #define kPreference_virate @"kPreference_virate"
-
+#define kPreference_roming @"kPreference_roming"
 
 
 
@@ -59,5 +59,24 @@
     return ret;
 }
 
+
+
+
+
+
+
+/**更新震动状态**/
+- (void)updatePreference_roming:(BOOL)ret {
+    [NSUserDefaults.standardUserDefaults
+     setBool:ret
+     forKey:kPreference_roming];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+- (BOOL)queryPreference_roming{
+    BOOL ret =
+    [NSUserDefaults.standardUserDefaults
+     boolForKey:kPreference_roming];
+    return ret;
+}
 
 @end

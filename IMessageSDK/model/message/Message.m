@@ -51,6 +51,12 @@
 
 
 #pragma mark - delete
++(void)jh_deleteByMyJID:(NSString *)aJID {
+    NSString* where = [NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"currentMyJID"),bg_sqlValue(aJID)];
+    [self bg_delete:kBG_TableName where:where];
+}
+
+
 +(void)jh_deleteByCurrentOtherJID:(NSString *)aJID {
     NSString* where = [NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"currentOtherJID"),bg_sqlValue(aJID)];
     [self bg_delete:kBG_TableName where:where];

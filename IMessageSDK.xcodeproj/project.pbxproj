@@ -283,6 +283,7 @@
 		F933BBFE200F2D27009547FC /* MineHelpController.m in Sources */ = {isa = PBXBuildFile; fileRef = F933BBFD200F2D27009547FC /* MineHelpController.m */; };
 		F933BC01200F31D9009547FC /* MinePreferenceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F933BC00200F31D9009547FC /* MinePreferenceCell.m */; };
 		F933BC05200F35EB009547FC /* PreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F933BC04200F35EB009547FC /* PreferenceManager.m */; };
+		F933BC08200F3BC5009547FC /* MineChatRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F933BC07200F3BC5009547FC /* MineChatRecordCell.m */; };
 		F93496D91FE8AE4B00E8D8A3 /* LT_OrgModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F93496D71FE8AE4B00E8D8A3 /* LT_OrgModel.h */; };
 		F93496DA1FE8AE4B00E8D8A3 /* LT_OrgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F93496D81FE8AE4B00E8D8A3 /* LT_OrgModel.m */; };
 		F93496DD1FE8BCE500E8D8A3 /* OrgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F93496DC1FE8BCE500E8D8A3 /* OrgModel.m */; };
@@ -1496,6 +1497,8 @@
 		F933BC00200F31D9009547FC /* MinePreferenceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MinePreferenceCell.m; sourceTree = "<group>"; };
 		F933BC03200F35EB009547FC /* PreferenceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreferenceManager.h; sourceTree = "<group>"; };
 		F933BC04200F35EB009547FC /* PreferenceManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreferenceManager.m; sourceTree = "<group>"; };
+		F933BC06200F3BC5009547FC /* MineChatRecordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineChatRecordCell.h; sourceTree = "<group>"; };
+		F933BC07200F3BC5009547FC /* MineChatRecordCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineChatRecordCell.m; sourceTree = "<group>"; };
 		F93496D71FE8AE4B00E8D8A3 /* LT_OrgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LT_OrgModel.h; sourceTree = "<group>"; };
 		F93496D81FE8AE4B00E8D8A3 /* LT_OrgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LT_OrgModel.m; sourceTree = "<group>"; };
 		F93496DB1FE8BCE500E8D8A3 /* OrgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgModel.h; sourceTree = "<group>"; };
@@ -4389,6 +4392,8 @@
 		F933BBED200F22AE009547FC /* chatRecord */ = {
 			isa = PBXGroup;
 			children = (
+				F933BC06200F3BC5009547FC /* MineChatRecordCell.h */,
+				F933BC07200F3BC5009547FC /* MineChatRecordCell.m */,
 			);
 			path = chatRecord;
 			sourceTree = "<group>";
@@ -6929,6 +6934,7 @@
 				F97D703B200DDCF800AF2A61 /* ZXAI01AndOtherAIs.m in Sources */,
 				F9F7C09B1FEBBD3C00F56A23 /* JHLabel.m in Sources */,
 				F97D705C200DDCF900AF2A61 /* ZXEANManufacturerOrgSupport.m in Sources */,
+				F933BC08200F3BC5009547FC /* MineChatRecordCell.m in Sources */,
 				F97D7006200DDCF800AF2A61 /* ZXDetectorResult.m in Sources */,
 				F97D706D200DDCF900AF2A61 /* ZXModulusPoly.m in Sources */,
 				F97D7014200DDCF800AF2A61 /* ZXInvertedLuminanceSource.m in Sources */,

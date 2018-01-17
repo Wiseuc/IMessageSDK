@@ -32,6 +32,9 @@
 
 
 
+
+
+
 /*!
  @method
  @abstract 更新震动状态
@@ -40,6 +43,22 @@
  */
 - (void)updatePreference_virate:(BOOL)ret;
 - (BOOL)queryPreference_virate;
+
+
+
+
+
+
+
+/*!
+ @method
+ @abstract 更新慢游状态
+ @discussion <#备注#>
+ @param ret 布尔值
+ */
+- (void)updatePreference_roming:(BOOL)ret;
+- (BOOL)queryPreference_roming;
+
     
     
 @end
