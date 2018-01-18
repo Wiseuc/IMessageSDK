@@ -122,7 +122,9 @@ UICollectionViewDelegate
     
     //    [kMainVC hiddenTbaBar];
 }
-
+-(void)dealloc{
+//    [SVProgressHUD dismiss];
+}
 
 
 

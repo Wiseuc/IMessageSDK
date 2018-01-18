@@ -10,7 +10,7 @@
 @interface StackView ()
 @property (nonatomic, strong) UIButton *backBTN;  /**上一层**/
 @property (nonatomic, strong) UILabel *contentLAB;
-
+@property (nonatomic, strong) UIButton *refreshBTN;  /**刷新组织架构按钮**/
 @property (nonatomic, strong) StackViewBackBlock aStackViewBackBlock;
 @end
 
@@ -35,6 +35,14 @@
         self.contentLAB.text = @"组织";
         self.contentLAB.backgroundColor = [UIColor lightGrayColor];
         self.contentLAB.textAlignment = NSTextAlignmentCenter;
+        
+        
+        
+        self.refreshBTN = [UIButton buttonWithType:(UIButtonTypeSystem)];
+        [self addSubview:self.refreshBTN];
+        [self.refreshBTN setImage:[UIImage imageNamed:@"org_refresh"] forState:(UIControlStateNormal)];
+        [self.refreshBTN addTarget:self action:@selector(action_refresh) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.refreshBTN setTintColor:[UIColor blackColor]];
     }
     return self;
 }
@@ -48,24 +56,34 @@
     
     self.backBTN.frame =CGRectMake(20, (KHEIGHT-20)/2, 20, 20);
     self.contentLAB.frame = CGRectMake(50, (KHEIGHT-20)/2, KWIDTH-100, 20);
+    self.refreshBTN.frame = CGRectMake(KWIDTH-40, (KHEIGHT-20)/2, 20, 20);
     
 }
+
+
+
+
+
 
 
 -(void)showContent:(NSString *)content {
     self.contentLAB.text = content;
 }
-
-
-
 -(void)setBackAction:(StackViewBackBlock)aStackViewBackBlock {
     _aStackViewBackBlock = aStackViewBackBlock;
 }
-
-
-
+-(void)setAStackViewRefreshBlock:(StackViewRefreshBlock)aStackViewRefreshBlock {
+    _aStackViewRefreshBlock = aStackViewRefreshBlock;
+}
 -(void)buttonClick:(UIButton *)sender {
-    self.aStackViewBackBlock();
+    if (self.aStackViewBackBlock) {
+        self.aStackViewBackBlock();
+    }
+}
+-(void)action_refresh{
+    if (self.aStackViewRefreshBlock) {
+        self.aStackViewRefreshBlock();
+    }
 }
 
 

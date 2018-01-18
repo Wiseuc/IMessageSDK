@@ -4371,13 +4371,13 @@
 			path = ABout;
 			sourceTree = "<group>";
 		};
-		F933BBDF200F1E28009547FC /* ConversionRecord */ = {
+		F933BBDF200F1E28009547FC /* ChatRecord */ = {
 			isa = PBXGroup;
 			children = (
 				F933BBEA200F1F6C009547FC /* MineChatRecordController.h */,
 				F933BBEB200F1F6C009547FC /* MineChatRecordController.m */,
 			);
-			path = ConversionRecord;
+			path = ChatRecord;
 			sourceTree = "<group>";
 		};
 		F933BBE3200F1E6C009547FC /* Preference */ = {
@@ -4885,7 +4885,7 @@
 			isa = PBXGroup;
 			children = (
 				F933BBE3200F1E6C009547FC /* Preference */,
-				F933BBDF200F1E28009547FC /* ConversionRecord */,
+				F933BBDF200F1E28009547FC /* ChatRecord */,
 				F933BBDB200F1DC3009547FC /* ABout */,
 				F97D6DCA200DDB8F00AF2A61 /* QRCode */,
 				F963FD691FE2574B0073D490 /* MineController.h */,

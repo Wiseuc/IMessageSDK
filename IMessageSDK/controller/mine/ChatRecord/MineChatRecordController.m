@@ -84,21 +84,26 @@ UICollectionViewDelegate
 }
 -(void)settingData {
     
-    NSArray *titles = @[
-                        @"清空所有聊天记录",
-                        ];
-    
-    self.datasource = [titles mutableCopy];
-    
-    CGFloat cacheSize = [AppUtility cacheSize];
-    //CGFloat documentSize = [AppUtility documentSize];
-    
-    NSString *cacheSizeStr = [NSString stringWithFormat:@"清空缓存数据（%0.2fKB)",cacheSize];
-    if (cacheSize > 1024/2) {
-        cacheSizeStr = [NSString stringWithFormat:@"清空缓存数据（%0.2fM)",cacheSize/1024];
-    }
-    [self.datasource addObject:cacheSizeStr];
-    [self.collectionview reloadData];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSArray *titles = @[
+                            @"清空所有聊天记录",
+                            ];
+        
+        self.datasource = [titles mutableCopy];
+        CGFloat cacheSize = [AppUtility cacheSize];
+        //CGFloat documentSize = [AppUtility documentSize];
+        NSString *cacheSizeStr = [NSString stringWithFormat:@"清空缓存数据（%0.2fKB)",cacheSize];
+        if (cacheSize > 1024/2) {
+            cacheSizeStr = [NSString stringWithFormat:@"清空缓存数据（%0.2fM)",cacheSize/1024];
+        }
+        [self.datasource addObject:cacheSizeStr];
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionview reloadData];
+        });
+    });
+
 }
 
 
@@ -192,8 +197,10 @@ UICollectionViewDelegate
             __weak typeof(self) weakself = self;
             [SVProgressHUD showWithStatus:@"正在清除缓存..."];
             [AppUtility clearCacheAction:^(BOOL clearFinished) {
-                [SVProgressHUD showSuccessWithStatus:@"缓存清除完成"];
-                [weakself settingData];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [SVProgressHUD showSuccessWithStatus:@"缓存清除完成"];
+                    [weakself settingData];
+                });
             }];
         }
             break;

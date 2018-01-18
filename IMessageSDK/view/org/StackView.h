@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 typedef void(^StackViewBackBlock)(void);
+typedef void(^StackViewRefreshBlock)(void);
+
 @interface StackView : UIView
 
 -(void)showContent:(NSString *)content;
 
 -(void)setBackAction:(StackViewBackBlock)aStackViewBackBlock;
+@property (nonatomic, strong) StackViewRefreshBlock aStackViewRefreshBlock;
 
 @end

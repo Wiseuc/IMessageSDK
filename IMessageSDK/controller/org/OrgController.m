@@ -15,7 +15,8 @@
 #import "StackView.h"
 #import "LTStack.h"
 #import "ChatController.h"
-
+#import "LTSDKFull.h"
+#import "SVProgressHUD.h"
 
 
 
@@ -50,10 +51,35 @@ UICollectionViewDelegate
         [weakself returnBeforeOrgData];
     }];
     
+    //重新下载组织架构
+    [self.stackView setAStackViewRefreshBlock:^{
+        
+        [SVProgressHUD showWithStatus:@"刷新组织架构..."];
+        
+        [LTOrg.share downloadOrg:^(GDataXMLDocument *doc, LTError *error) {
+            
+            if (error)
+            {
+                [SVProgressHUD showErrorWithStatus:@"刷新组织架构失败"];
+            }
+            else
+            {
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [SVProgressHUD showSuccessWithStatus:@"刷新完毕"];
+
+                    //                [SVProgressHUD dismiss];
+                    [weakself settingData];
+                });
+            }/**end if(error)**/
+        }];
+    }];
+    
     [self.view addSubview:self.collectionview];
 }
 
 -(void)refreshCollectionView {
+    
     [self.collectionview reloadData];
 }
 
